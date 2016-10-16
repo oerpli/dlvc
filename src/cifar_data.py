@@ -58,7 +58,7 @@ class ImageDataset:
         return dict(zip(unique, counts))
 
 
-    # To save images to file/display them
+    # To save images to file/display them. Maybe comment this out because libraries not supported on server
     def save(self,name,sid):
         from PIL import Image
         img = Image.fromarray(self.data[0], 'RGB')

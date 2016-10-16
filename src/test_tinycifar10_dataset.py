@@ -1,6 +1,7 @@
 import cifar_data as cd
 
-constructor = cd.TinyCifar10Dataset
+def constructor(name):
+   return cd.TinyCifar10Dataset("../data",name)
 
 # Definition of output functions
 def first(sets,name):
@@ -16,7 +17,8 @@ def second(sets,name):
     print('[{0}] {1} samples'.format(name,set.size()))
     for x in c.keys():
         print('  Class #{0}: {1} samples'.format(x,c[x]))
-
+    print()
+    
 def third(sets,name):
     set = cd.ImageDataset
     set = sets[name]
@@ -29,13 +31,13 @@ def third(sets,name):
 set_names = ['train','val','test']
 sets = dict()
 for name in set_names:
-    sets[name] = constructor("../data",name)
+    sets[name] = constructor(name)
 
 outputs = [first,second,third]
 
 for fun in outputs:
     for name in set_names:
         fun(sets,name)
-        print()
+    print()
 
 print() # only here to set breakpoint
