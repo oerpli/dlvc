@@ -4,6 +4,7 @@ import os
 import numpy as np
 from pathlib import Path
 
+
 class ImageDataset:
     # A dataset, consisting of multiple samples/images
     # and corresponding class labels.
@@ -52,10 +53,21 @@ class ImageDataset:
     def sampleclassname(self,sid):
         return self.classname(self.labels[sid])
         # Returns classname of a given sample
-
     def classcount(self):
         unique, counts = np.unique(self.labels, return_counts=True)
         return dict(zip(unique, counts))
+
+
+    # To save images to file/display them
+    def save(self,name,sid):
+        from PIL import Image
+        img = Image.fromarray(self.data[0], 'RGB')
+        img.save("imgs/{0}_{1}.png".format(name,sid))
+
+    def show(self,sid):
+        from matplotlib import pyplot as plt
+        plt.imshow(self.data[sid], interpolation='nearest')
+        plt.show()
 
 """
 CIFAR-10 Image classification dataset
