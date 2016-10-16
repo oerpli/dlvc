@@ -1,15 +1,13 @@
 #!/usr/bin/python3
 import _pickle as pickle
-import numpy as np
-import collections
-from pathlib import Path
-from numpy.core.multiarray import ndarray
 import os
+import numpy as np
+from pathlib import Path
 
 class ImageDataset:
     # A dataset, consisting of multiple samples/images
     # and corresponding class labels.
-    data = ndarray
+    data = np.ndarray
     labels = list
     label_names = list
 
@@ -30,9 +28,8 @@ class ImageDataset:
         s.data = s.data[indices]
         s.labels = s.labels[indices]
 
-
     def size(self):
-        return int(self.data.size / (32 * 32 * 3))
+        return len(self.data)
         # Returns the size of the dataset (number of images).
 
     def nclasses(self):
