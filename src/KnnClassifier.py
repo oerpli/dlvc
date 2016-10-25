@@ -15,10 +15,13 @@ class KnnClassifier:
         # use, namely `l1` (L1 distance) or `l2` (L2 distance).
         self.K = k
         self.ns = cmp
-        #if(cmp == 'l1'):
-        #    self.norm = normL1
-        #else:
-        #    self.norm = normL2
+        if(cmp == 'l1'):
+            self.ns = cmp
+        elif(cmp =='l2'):
+            self.ns = cmp
+        else:
+            print('{0} is not a valid norm. Using L2 instead'.format(cmp))
+            self.ns = cmp
 
     def train(self, dataset):
         # Train on a dataset (type FeatureVectorDataset).
