@@ -39,8 +39,10 @@ class KnnClassifier:
         for i in range(0,self.tdata.size()):
             s = self.tdata.sample(i)
             diff = norms[self.ns](fvec-s[0])
-            h.heappush(heap, (diff,s[1]))
+            #h.heappush(heap, (diff,s[1])) # don't use heappush but only append as heap property is not needed here. reduces runtime from nlogn to n
+            heap.append((diff,s[1]))
         votes = []
+        h.heapify(heap) # O(n) heap property
         for i in range(0,self.K): # remove K elements with smallest distance
             elem = h.heappop(heap) # remove element with lowest distance
             votes.append(elem[1]) # save class
