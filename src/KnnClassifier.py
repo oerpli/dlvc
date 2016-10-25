@@ -14,7 +14,6 @@ class KnnClassifier:
         # and cmp is a string specifying the distance measure to
         # use, namely `l1` (L1 distance) or `l2` (L2 distance).
         self.K = k
-        self.ns = cmp
         if(cmp == 'l1'):
             self.ns = cmp
         elif(cmp =='l2'):
@@ -32,7 +31,7 @@ class KnnClassifier:
             return fvec.sum()
 
         def normL2(fvec):
-            return fvec * fvec.sum()
+            return (fvec * fvec).sum()
         norms = dict()
         norms['l1'] = normL1
         norms['l2'] = normL2

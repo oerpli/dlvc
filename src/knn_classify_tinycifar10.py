@@ -8,7 +8,7 @@ test = cd.TinyCifar10Dataset("../data",'test')
 testset = f.ImageVectorizer(test)
 
 # initalize image classifier
-c = k.KnnClassifier(5,'l1')
+c = k.KnnClassifier(5,'l2')
 c.train(trainingset) # set trainingset
 
 s50 = testset.sample(50)  # get some sample
