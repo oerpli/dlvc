@@ -38,6 +38,9 @@
     <Compile Include="KnnClassifier.py" />
     <Compile Include="FeatureVectorDataset.py" />
     <Compile Include="knn_classify_tinycifar10.py" />
+    <Compile Include="x_test.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="test_image_vectorizer.py" />
     <Compile Include="test_tinycifar10_dataset.py" />
     <Compile Include="test_cifar10_dataset.py">
