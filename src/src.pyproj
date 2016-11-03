@@ -13,10 +13,9 @@
     <OutputPath>.</OutputPath>
     <Name>src</Name>
     <RootNamespace>test</RootNamespace>
-    <InterpreterId>
-    </InterpreterId>
-    <InterpreterVersion>
-    </InterpreterVersion>
+    <InterpreterId>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</InterpreterId>
+    <InterpreterVersion>3.5</InterpreterVersion>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,17 +26,29 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Cifar10Dataset.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ImageDataset.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ImageVectorizer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="KnnClassifier.py" />
     <Compile Include="FeatureVectorDataset.py" />
-    <Compile Include="cifar_data.py" />
     <Compile Include="knn_classify_tinycifar10.py" />
     <Compile Include="test_image_vectorizer.py" />
     <Compile Include="test_tinycifar10_dataset.py" />
     <Compile Include="test_cifar10_dataset.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TinyCifar10Dataset.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\3.5" />
     <InterpreterReference Include="{cab3f5fd-3059-48df-a236-58af139e8169}\3.4" />
   </ItemGroup>
   <PropertyGroup>

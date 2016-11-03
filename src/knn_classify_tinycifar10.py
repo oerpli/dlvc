@@ -1,11 +1,12 @@
-import cifar_data as cd
+from TinyCifar10Dataset import TinyCifar10Dataset
 import FeatureVectorDataset as f
 import KnnClassifier as k
+from ImageVectorizer import ImageVectorizer
 
-t = cd.TinyCifar10Dataset("../data",'train')
-trainingset = f.ImageVectorizer(t)
-test = cd.TinyCifar10Dataset("../data",'test')
-testset = f.ImageVectorizer(test)
+t = TinyCifar10Dataset("../data",'train')
+trainingset = ImageVectorizer(t)
+test = TinyCifar10Dataset("../data",'test')
+testset = ImageVectorizer(test)
 
 # initalize image classifier
 c = k.KnnClassifier(5,'l2')

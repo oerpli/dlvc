@@ -1,9 +1,9 @@
-import cifar_data as cd
-import FeatureVectorDataset as f
+from TinyCifar10Dataset import TinyCifar10Dataset
+from ImageVectorizer import ImageVectorizer
 import KnnClassifier as k
 
-t = cd.TinyCifar10Dataset("../data",'train')
-x = f.ImageVectorizer(t)
+t = TinyCifar10Dataset("../data",'train')
+x = ImageVectorizer(t)
 
 
 # Definition of output functions
