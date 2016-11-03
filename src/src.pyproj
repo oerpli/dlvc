@@ -29,6 +29,12 @@
     <Compile Include="Cifar10Dataset.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GridSearch.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HDF5FeatureVectorDataset.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ImageDataset.py">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +43,9 @@
     </Compile>
     <Compile Include="KnnClassifier.py" />
     <Compile Include="FeatureVectorDataset.py" />
+    <Compile Include="knn_classify_hog_tinycifar10.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="knn_classify_tinycifar10.py" />
     <Compile Include="x_test.py">
       <SubType>Code</SubType>
