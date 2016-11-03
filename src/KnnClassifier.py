@@ -32,6 +32,7 @@ class KnnClassifier:
 
         def normL2(fvec):
             return (fvec * fvec).sum()
+
         norms = dict()
         norms['l1'] = normL1
         norms['l2'] = normL2
