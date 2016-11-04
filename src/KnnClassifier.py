@@ -35,6 +35,9 @@ class KnnClassifier:
     def normL2(s,fvec):
         return ((fvec * fvec)).sum()
 
+    def most_common(s,lst):
+        return max(set(lst), key=lst.count)
+
     def predict(self, fvec):
         heap = [] # heap with all distances etc
         for i in range(0,self.tdata.size()):
@@ -58,9 +61,7 @@ class KnnClassifier:
         for i in range(0,self.K): # remove K elements with smallest distance
             elem = h.heappop(heap) # remove element with lowest distance
             votes.append(elem[1]) # save class
-        def most_common(lst):
-            return max(set(lst), key=lst.count)
-        return most_common(votes)
+        return self.most_common(votes)
         # Return the predicted class label for a given feature vector fvec.
         # If the label is ambiguous, any of those in question is returned.
 
