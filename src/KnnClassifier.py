@@ -15,6 +15,8 @@ class KnnClassifier:
         # and cmp is a string specifying the distance measure to
         # use, namely `l1` (L1 distance) or `l2` (L2 distance).
         self.K = k
+        if(self.K < 1):
+            print("Invalid k")
         if(cmp == 'l1'):
             self.ns = cmp
         elif(cmp == 'l2'):
@@ -31,22 +33,22 @@ class KnnClassifier:
         return np.absolute(fvec).sum()
 
     def normL2(s,fvec):
-        return np.absolute((fvec * fvec)).sum()
+        return ((fvec * fvec)).sum()
 
     def predict(self, fvec):
         heap = [] # heap with all distances etc
         for i in range(0,self.tdata.size()):
             s = self.tdata.sample(i)
-            dist = (fvec - s[0]).astype(np.float64, copy=False)
+            dist = (fvec - s[0])
             diff = 0.0
             if(self.ns == 'l1'):
-                diff = self.normL1(dist)
-                diff2 = np.linalg.norm((dist), ord=1)
-                print(str(diff-diff2))
-            elif(self.ns =='l2'):
-                diff = math.sqrt(self.normL2(dist))
-                diff2 = np.linalg.norm((dist), ord=2)
-                print(str(diff-diff2))
+                #diff2 = self.normL1(dist)
+                diff = np.linalg.norm((dist), ord=1)
+                #print(str(diff-diff2))
+            elif(self.ns == 'l2'):
+                #diff2 = math.sqrt(self.normL2(dist))
+                diff = np.linalg.norm((dist), ord=2)
+                #print(str(diff-diff2))
             #h.heappush(heap, (diff,s[1])) # don't use heappush but only append
             #as heap property is not needed here.  reduces runtime from nlogn
             #to n

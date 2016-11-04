@@ -4,15 +4,15 @@ from GridSearch import GridSearch
 
  # must match TinyCifar10Dataset
 cifar10_classnames = {  0: 'airplane',
-                        1: 'automobile', 
-                        2: 'bird', 
-                        3: 'cat', 
-                        4: 'deer', 
-                        5: 'dog', 
-                        6: 'frog', 
-                        7: 'horse', 
-                        8: 'ship', 
-                        9: 'truck'} 
+                        1: 'automobile',
+                        2: 'bird',
+                        3: 'cat',
+                        4: 'deer',
+                        5: 'dog',
+                        6: 'frog',
+                        7: 'horse',
+                        8: 'ship',
+                        9: 'truck'}
 
 print('Testing HOG features ...');
 trainSet = HDF5FeatureVectorDataset('features_tinycifar10_train.h5',cifar10_classnames)

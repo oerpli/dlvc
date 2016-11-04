@@ -19,6 +19,9 @@ def second(dataset):
     print('Sample #{0}: {1}, shape: {2}'.format(sid, dataset.classname(img[1]),img[0].shape))
     imgs = dataset.devectorize(img[0])
     print('Shape after devectorization: {0}'.format(imgs.shape))
+#    from matplotlib import pyplot as plt
+#    plt.imshow(imgs, interpolation='nearest')
+#    plt.show()
 
 first(x)
 second(x)
