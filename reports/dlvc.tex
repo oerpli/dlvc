@@ -11,6 +11,32 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+
+\definecolor{uvblue}{RGB}{0,105,170}
+\colorlet{btheme}{uvblue}
+\colorlet{bthemed}{black!40!uvblue}
+\colorlet{bthemel}{white!40!uvblue}
+
+
+\pgfplotsset{
+plotl/.style={bthemel,no marks,ultra thick,samples=500},
+plott/.style={btheme,no marks,ultra thick,samples=500},
+plotd/.style={bthemed,no marks,ultra thick,samples=500},
+%%
+plotA/.style={white!10!bthemel,ultra thick,mark=otimes*},
+plotB/.style={bthemel,ultra thick,mark=triangle*},
+plotC/.style={btheme,ultra thick,mark=diamond*},
+plotD/.style={bthemed,ultra thick,mark=square,mark=pentagon*},
+plotE/.style={black!40!bthemed,ultra thick,mark=square*},
+rPlots/.style={xmin=1,xmax=5,width=\textwidth,extra x ticks={2.267},grid=major,extra x tick labels={\dmcol{bthemed}{{$T_c$}}},xlabel={T},
+},
+%
+asdfas/.style={}
+}
+
 %commondefs
 %\sloppy
 %\allowdisplaybreaks[2]
