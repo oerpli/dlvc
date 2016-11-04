@@ -32,7 +32,7 @@ class KnnClassifier:
     def normL1(s,fvec):
         return np.absolute(fvec).sum()
 
-    def normL2(s,fvec):
+    def normL2(s,fvec): # L2 norm would be the square of this result.  same result here though
         return ((fvec * fvec)).sum()
 
     def most_common(s,lst):

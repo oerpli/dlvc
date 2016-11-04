@@ -19,4 +19,8 @@ trainSet = HDF5FeatureVectorDataset('features_tinycifar10_train.h5',cifar10_clas
 valSet = HDF5FeatureVectorDataset('features_tinycifar10_val.h5',cifar10_classnames)
 testSet = HDF5FeatureVectorDataset('features_tinycifar10_test.h5',cifar10_classnames)
 
-GridSearch().gridSearch(trainSet, valSet, testSet);
+k_range = range(1,40,4)
+cmp_range = ['l2','l1']
+GridSearch(k_range,cmp_range).gridSearch(trainSet, valSet, testSet)
+print() # only here to set breakpoint
+
