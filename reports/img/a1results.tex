@@ -1,10 +1,23 @@
 % !TeX root = ../dlvc.tex
 \begin{tikzpicture}
-\begin{axis}[height=350pt,xlabel={k},ylabel={Accuracy}, width=\textwidth,ymin=20,ymax=45, legend pos=south east]
+\begin{axis}[
+	height=300pt
+,	xlabel={$k$ Neighborhood size}
+,	ylabel={Accuracy (\%)}
+,	width=1.1\textwidth
+,	xtick={1,5,...,39}
+,	ticks=major
+,	xmajorgrids
+, 	major grid style={line width=0.1pt,draw=gray!30}
+,	ymin=20
+,	ymax=42
+,	legend pos=south east]
 %\addplot[plotA]{sin(x)};
-\addplot [plotB]table[x index=0,y index=2, meta index = 0] {./data/a1.txt};\addlegendentry{L1 norm on HOG data}
-\addplot [plotA]table[x index=0,y index=1, meta index = 0] {./data/a1.txt};\addlegendentry{L2 norm on HOG data}
-\addplot [plotD]table[x index=0,y index=4, meta index = 0] {./data/a1.txt};\addlegendentry{L1 norm on image data}
-\addplot [plotC]table[x index=0,y index=3, meta index = 0] {./data/a1.txt};\addlegendentry{L2 norm on image data}
+\addplot [plotE]table[x index=0,y index=2, meta index = 0] {./data/a1.txt};\addlegendentry{L1 norm, HOG vector }
+\addplot [plotD]table[x index=0,y index=1, meta index = 0] {./data/a1.txt};\addlegendentry{L2 norm, HOG vector }
+\addplot [plotC]table[x index=0,y index=4, meta index = 0] {./data/a1.txt};\addlegendentry{L1 norm, raw vector \ \ }
+\addplot [plotA]table[x index=0,y index=3, meta index = 0] {./data/a1.txt};\addlegendentry{L2 norm, raw vector \ \ }
+\addplot[black!30!red,mark=square,ultra thick,only marks,forget plot]table[x index=0,y index=1, meta index = 0] {./data/a1-test.txt};\label{plt:t1}
+\addplot[black!30!red,mark=pentagon*,thick,only marks,forget plot]table[x index=0,y index=2, meta index = 0] {./data/a1-test.txt};\label{plt:t2}
 \end{axis}
 \end{tikzpicture}

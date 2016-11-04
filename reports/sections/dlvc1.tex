@@ -23,10 +23,13 @@ This report is a summary of the work done for the first assignment of the course
 \clearpage
 \section{kNN Classification of CIFAR10} %Introduce the tiny version of CIFAR10. Describe what hyperparameter optimization is and why it is important. Explain your search strategy and visualize the results based on the output of knn_classify_tinycifar10.py.
 
+
+
 \begin{figure}[h!]
+\newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
 \input{./img/a1results.tex}
-\caption{Results of kNN classifier with different neighborhood sizes (k) and norms. Classification on HOG consistently outperforms classification on raw data and the L1 norm is almost always superior to classification with L2 norm}
+\caption{Accuracy of kNN classification with neighborhood sizes (k) and L1 and L2 norms on raw image and HOG vectors. Classification on HOG consistently outperforms class. on raw data and kNN with L1 norm is superior to kNN with L2 norm. Best parameters ($k=21, \text{L1 norm}$) on raw \plotref{t2} and HOG data \plotref{t1} tested with test set}
 
 \end{figure}
 

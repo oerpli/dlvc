@@ -6,7 +6,7 @@
 \usepackage[utf8x]{inputenc}
 \usepackage{graphicx}
 \usepackage[ruled,vlined]{algorithm2e}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{listings}             % Include the listings-package
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -16,23 +16,22 @@
 
 
 \definecolor{uvblue}{RGB}{0,105,170}
-\colorlet{btheme}{uvblue}
-\colorlet{bthemed}{black!40!uvblue}
-\colorlet{bthemel}{white!40!uvblue}
+\colorlet{uvblue}{uvblue}
+\colorlet{uvbluedark}{black!40!uvblue}
+\colorlet{uvbluelight}{white!40!uvblue}
 
 
 \pgfplotsset{
-plotl/.style={bthemel,no marks,ultra thick,samples=500},
-plott/.style={btheme,no marks,ultra thick,samples=500},
-plotd/.style={bthemed,no marks,ultra thick,samples=500},
+compat=1.14,
+plotl/.style={uvbluelight,no marks,ultra thick,samples=500},
+plott/.style={uvblue,no marks,ultra thick,samples=500},
+plotd/.style={uvbluedark,no marks,ultra thick,samples=500},
 %%
-plotA/.style={white!10!bthemel,ultra thick,mark=otimes*},
-plotB/.style={bthemel,ultra thick,mark=triangle*},
-plotC/.style={btheme,ultra thick,mark=diamond*},
-plotD/.style={bthemed,ultra thick,mark=square,mark=pentagon*},
-plotE/.style={black!40!bthemed,ultra thick,mark=square*},
-rPlots/.style={xmin=1,xmax=5,width=\textwidth,extra x ticks={2.267},grid=major,extra x tick labels={\dmcol{bthemed}{{$T_c$}}},xlabel={T},
-},
+plotA/.style={white!10!uvbluelight,ultra thick,mark=otimes*},
+plotB/.style={uvbluelight,ultra thick,mark=triangle*},
+plotC/.style={uvblue,ultra thick,mark=pentagon*},
+plotD/.style={uvbluedark,ultra thick,mark=diamond*},
+plotE/.style={black!40!uvbluedark,ultra thick,mark=square*},
 %
 asdfas/.style={}
 }
