@@ -57,5 +57,5 @@ class GridSearch:
         print("Testing best combination ({}, {}) on test set ...".format(bestK, bestNorm))
         print("  [test] {0} samples".format(testSet.size()))
         testAccuracy = self.classify(trainSet,testSet,KnnClassifier(bestK, bestNorm))
-        print("  Accuracy: {:02.1f}%".format(testAccuracy * 100));
+        print("\r  Accuracy: {:02.1f}%{:30s}".format(testAccuracy * 100,' '*30));
 
