@@ -3,8 +3,7 @@ from TinyCifar10Dataset import TinyCifar10Dataset
 from GridSearch import GridSearch
 
 # The actual script
-
-print('Testing raw image features ...');
+print('Testing raw image features ...')
 
 trainData = TinyCifar10Dataset("../data",'train')
 valData = TinyCifar10Dataset("../data",'val')
