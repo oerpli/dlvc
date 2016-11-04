@@ -2,6 +2,7 @@
 import heapq as h
 import numpy as np
 import FeatureVectorDataset as f
+import math
 
 class KnnClassifier:
     # k-nearest-neighbors classifier.
@@ -10,13 +11,13 @@ class KnnClassifier:
     tdata = f.FeatureVectorDataset
 
     def __init__(self, k, cmp):
-        # Ctor. k is the number of nearest neighbors to search for,
+        # Ctor.  k is the number of nearest neighbors to search for,
         # and cmp is a string specifying the distance measure to
         # use, namely `l1` (L1 distance) or `l2` (L2 distance).
         self.K = k
         if(cmp == 'l1'):
             self.ns = cmp
-        elif(cmp =='l2'):
+        elif(cmp == 'l2'):
             self.ns = cmp
         else:
             print('{0} is not a valid norm. Using L2 instead'.format(cmp))
@@ -26,23 +27,29 @@ class KnnClassifier:
         # Train on a dataset (type FeatureVectorDataset).
         self.tdata = dataset
 
+    def normL1(s,fvec):
+        return np.absolute(fvec).sum()
+
+    def normL2(s,fvec):
+        return np.absolute((fvec * fvec)).sum()
+
     def predict(self, fvec):
-        def normL1(fvec):
-            return fvec.sum()
-
-        def normL2(fvec):
-            return (fvec * fvec).sum()
-
-        norms = dict()
-        norms['l1'] = normL1
-        norms['l2'] = normL2
-
-
         heap = [] # heap with all distances etc
         for i in range(0,self.tdata.size()):
             s = self.tdata.sample(i)
-            diff = norms[self.ns](fvec-s[0])
-            #h.heappush(heap, (diff,s[1])) # don't use heappush but only append as heap property is not needed here. reduces runtime from nlogn to n
+            dist = (fvec - s[0]).astype(np.float64, copy=False)
+            diff = 0.0
+            if(self.ns == 'l1'):
+                diff = self.normL1(dist)
+                diff2 = np.linalg.norm((dist), ord=1)
+                print(str(diff-diff2))
+            elif(self.ns =='l2'):
+                diff = math.sqrt(self.normL2(dist))
+                diff2 = np.linalg.norm((dist), ord=2)
+                print(str(diff-diff2))
+            #h.heappush(heap, (diff,s[1])) # don't use heappush but only append
+            #as heap property is not needed here.  reduces runtime from nlogn
+            #to n
             heap.append((diff,s[1]))
         votes = []
         h.heapify(heap) # O(n) heap property
