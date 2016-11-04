@@ -14,5 +14,7 @@ valSet = ImageVectorizer(valData)
 testSet = ImageVectorizer(testData)
 
 
-GridSearch(range(1,40,3), ['l1','l2']).gridSearch(trainSet, valSet, testSet)
+k_range = range(1,40,3)
+cmp_range = ['l2','l1']
+GridSearch(k_range,cmp_range).gridSearch(trainSet, valSet, testSet)
 print() # only here to set breakpoint

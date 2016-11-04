@@ -39,21 +39,21 @@ class GridSearch:
             self.defaultValues(trainSet)
             self.defer_init = True
         print('Performing grid search ...');
-        print("[Train] {0} samples".format(trainSet.size()));
-        print("[Val] {0} samples".format(valSet.size()));
+        print("  [train] {0} samples".format(trainSet.size()));
+        print("  [val] {0} samples".format(valSet.size()));
 
         bestResult = (-1, 0, 0);
         for norm in self.norms:
             for k in self.K:
                 accuracy = self.classify(trainSet,valSet,KnnClassifier(k,norm));
-                print("k={:02d}; cmp={}, accuracy: {:02.1f}%".format(k, norm, accuracy * 100));
+                print("  k={:02d}; cmp={}, accuracy: {:02.1f}%".format(k, norm, accuracy * 100));
                 if (accuracy > bestResult[0]):
                     bestResult = (accuracy, k, norm);
 
         bestK = bestResult[1];
         bestNorm = bestResult[2];
         print("Testing best combination ({}, {}) on test set ...".format(bestK, bestNorm))
-        print("[Test] {0} samples".format(testSet.size()));
+        print("  [test] {0} samples".format(testSet.size()));
         testAccuracy = self.classify(trainSet,testSet,KnnClassifier(bestK, bestNorm));
-        print("Accuracy: {:02.1f}%".format(testAccuracy * 100));
+        print("  Accuracy: {:02.1f}%".format(testAccuracy * 100));
 
