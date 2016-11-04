@@ -3,6 +3,25 @@ from KnnClassifier import KnnClassifier
 
 
 class GridSearch:
+    norms = []
+    K = range(1,5)
+    defer_init = False
+
+    def defaultValues(self,trainSet): # default if no values provided
+        minK = 1; # 1-nn
+        maxK = min(50, max(5, round(trainSet.size() / 50))); # find a suitable maximal k value
+        maxSteps =  20;  # should not do more step than that
+        step = max(round(maxK/maxSteps-0.5),1); # skip some values if maxK too big
+        self.norms = ['l1','l2']
+        self.K = range(minK, maxK, step)
+
+    def __init__(self, k_range = -1 , cmp_range = -1):
+        if(k_range == -1):
+            self.defer_init = True
+        else:
+            self.norms = cmp_range
+            self.K = k_range
+
     def classify(self,trainSet, predictSet, classifier):
         classifier.train(trainSet) # set trainingset
         correctPredictions = 0;
@@ -16,21 +35,20 @@ class GridSearch:
         return accuracy
 
     def gridSearch(self,trainSet, valSet, testSet):
+        if(self.defer_init):
+            self.defaultValues(trainSet)
+            self.defer_init = True
         print('Performing grid search ...');
         print("[Train] {0} samples".format(trainSet.size()));
         print("[Val] {0} samples".format(valSet.size()));
-        minK = 1; # 1-nn
-        maxK = min(50, max(5, round(trainSet.size() / 50))); # find a suitable maximal k value
-        maxSteps =  20;  # should not do more step than that
-        step = max(round(maxK/maxSteps-0.5),1); # skip some values if maxK too big
-        norms = ['l1','l2']    
-        bestResult = [0, minK, norms[0]];
-        for norm in norms:             
-            for k in range(minK, maxK, step):
+
+        bestResult = (-1, 0, 0);
+        for norm in self.norms:
+            for k in self.K:
                 accuracy = self.classify(trainSet,valSet,KnnClassifier(k,norm));
                 print("k={:02d}; cmp={}, accuracy: {:02.1f}%".format(k, norm, accuracy * 100));
                 if (accuracy > bestResult[0]):
-                    bestResult = [accuracy, k, norm];
+                    bestResult = (accuracy, k, norm);
 
         bestK = bestResult[1];
         bestNorm = bestResult[2];
