@@ -28,10 +28,12 @@ class KnnClassifier:
 
     def predict(self, fvec):
         def normL1(fvec):
-            return fvec.sum()
+#            return fvec.sum()
+            return np.linalg.norm((fvec), ord=1)
 
         def normL2(fvec):
-            return (fvec * fvec).sum()
+    #        return (fvec * fvec).sum()
+            return np.linalg.norm((fvec), ord=2)
 
         norms = dict()
         norms['l1'] = normL1
