@@ -39,7 +39,7 @@ class KnnClassifier:
         heap = [] # heap with all distances etc
         for i in range(0,self.tdata.size()):
             s = self.tdata.sample(i)
-            dist = (fvec - s[0]).astype(np.float64, copy=False)
+            dist = (fvec - s[0])
             diff = 0.0
             if(self.ns == 'l1'):
                 #diff2 = self.normL1(dist)

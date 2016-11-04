@@ -22,7 +22,7 @@ class FeatureVectorDataset:
     def sample(self, sid):
         d = np.ndarray
         d = self.data.sample(sid);
-        return (d[0].reshape((3*32*32)),d[1])
+        return (d[0].reshape((3*32*32)).astype(np.float64, copy=False),d[1])
         # Returns the sid-th sample in the dataset, and the
         # corresponding class label. Depending of your language,
         # this can be a Matlab struct, Python tuple or dict, etc.
