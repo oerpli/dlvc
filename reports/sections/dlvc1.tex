@@ -1,14 +1,34 @@
-\newcommand{\ttitle}{Assignment 1: kNN and ???\TODO}
+% !TeX root = ../dlvc.tex
+\newcommand{\ttitle}{kNN Classification and Histograms of Oriented Gradients}
 \hyphenation{}
 \maketitle
 
-\keywords{kNN classifier, grid search, CIFAR10}
+\keywords{kNN classifier, grid search, CIFAR10, histograms of oriented gradients}
 
 
 \begin{abstract}
-This report is a summary of the work done for the first assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to implement some simple image classifiers and test them on a subset of the CIFAR10 dataset. \TODO
+This report is a summary of the work done for the first assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to implement a simple kNN classifier and tune the parameters with gridsearch on a subset of the CIFAR10 dataset.
 \end{abstract}
-\section{Tasks}
 
-\section{Results}
-\section{Discussion}
+
+
+\section{Image Classification} %Describe the image classification problem.
+
+\section{The CIFAR10 Dataset} % Describe the CIFAR10 dataset.
+
+\section{Training, Validation and Test Sets} %Describe the purpose of these sets, why they are required, and how you obtained a validation set in case of CIFAR10.
+
+\section{kNN Classifiers} %Describe how the kNN classifier works and how it can be used with images, which are not vectors. Explain what hyperparameters are in general and in case of kNN. How does parameter k generally influence the results?
+
+\clearpage
+\section{kNN Classification of CIFAR10} %Introduce the tiny version of CIFAR10. Describe what hyperparameter optimization is and why it is important. Explain your search strategy and visualize the results based on the output of knn_classify_tinycifar10.py.
+
+\begin{figure}[h!]
+\centering
+\input{./img/a1results.tex}
+\caption{Results of kNN classifier with different neighborhood sizes (k) and norms. Classification on HOG consistently outperforms classification on raw data and the L1 norm is almost always superior to classification with L2 norm}
+
+\end{figure}
+
+
+\section{The Importance of Features} %Think about reasons why performing kNN classification directly on the raw images does not work well. Describe what a feature is and why operating on features instead of raw images is beneficial in case of kNN. Briefly explain what HOG features are. Compare the results when using these features (knn_classify_hog_tinycifar10.py) to those obtained using raw images and discuss them. Even with HOG features, the performance is still much lower than that of CNNs (90\% accuracy and more on the whole dataset). Think of reasons for why this is the case.

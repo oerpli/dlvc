@@ -1,0 +1,10 @@
+% !TeX root = ../dlvc.tex
+\begin{tikzpicture}
+\begin{axis}[height=350pt,xlabel={k},ylabel={Accuracy}, width=\textwidth,ymin=20,ymax=45, legend pos=south east]
+%\addplot[plotA]{sin(x)};
+\addplot [plotB]table[x index=0,y index=2, meta index = 0] {./data/a1.txt};\addlegendentry{L1 norm on HOG data}
+\addplot [plotA]table[x index=0,y index=1, meta index = 0] {./data/a1.txt};\addlegendentry{L2 norm on HOG data}
+\addplot [plotD]table[x index=0,y index=4, meta index = 0] {./data/a1.txt};\addlegendentry{L1 norm on image data}
+\addplot [plotC]table[x index=0,y index=3, meta index = 0] {./data/a1.txt};\addlegendentry{L2 norm on image data}
+\end{axis}
+\end{tikzpicture}
