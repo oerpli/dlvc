@@ -3,7 +3,7 @@ from TinyCifar10Dataset import TinyCifar10Dataset
 from GridSearch import GridSearch
 
 # The actual script
-ratio = 0.1; #Default is 0.1
+ratio = 0.01; #Default is 0.1
 
 
 trainData = TinyCifar10Dataset("../data",'train',ratio)

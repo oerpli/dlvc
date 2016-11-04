@@ -23,7 +23,7 @@ class GridSearch:
         maxK = min(50, max(5, round(trainSet.size() / 50))); # find a suitable maximal k value
         maxSteps =  20;  # should not do more step than that
         step = max(round(maxK/maxSteps-0.5),1); # skip some values if maxK too big
-        norms = ['l2','l1']    
+        norms = ['l1','l2']    
         bestResult = [0, minK, norms[0]];
         for norm in norms:             
             for k in range(minK, maxK, step):
