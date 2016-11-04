@@ -6,6 +6,8 @@ from GridSearch import GridSearch
 ratio = 0.1; #Default is 0.1
 
 
+print('Testing raw image features ...');
+
 trainData = TinyCifar10Dataset("../data",'train',ratio)
 valData = TinyCifar10Dataset("../data",'val',ratio)
 testData = TinyCifar10Dataset("../data",'test',ratio)
