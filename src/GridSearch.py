@@ -16,7 +16,7 @@ class GridSearch:
         return accuracy
 
     def gridSearch(self,trainSet, valSet, testSet):
-        print('Performing random hyperparameter search ...');
+        print('Performing grid search ...');
         print("[Train] {0} samples".format(trainSet.size()));
         print("[Val] {0} samples".format(valSet.size()));
         minK = 1; # 1-nn
