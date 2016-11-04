@@ -1,0 +1,27 @@
+Testing HOG features ...
+Performing grid search ...
+  [train] 4000 samples
+  [val] 1000 samples
+  k=01; cmp=l2, accuracy: 30.8%
+  k=05; cmp=l2, accuracy: 33.4%
+  k=09; cmp=l2, accuracy: 33.7%
+  k=13; cmp=l2, accuracy: 34.0%
+  k=17; cmp=l2, accuracy: 33.6%
+  k=21; cmp=l2, accuracy: 32.7%
+  k=25; cmp=l2, accuracy: 31.6%
+  k=29; cmp=l2, accuracy: 32.2%
+  k=33; cmp=l2, accuracy: 33.2%
+  k=37; cmp=l2, accuracy: 33.1%
+  k=01; cmp=l1, accuracy: 34.9%
+  k=05; cmp=l1, accuracy: 37.4%
+  k=09; cmp=l1, accuracy: 38.1%
+  k=13; cmp=l1, accuracy: 40.5%
+  k=17; cmp=l1, accuracy: 40.9%
+  k=21; cmp=l1, accuracy: 41.0%
+  k=25; cmp=l1, accuracy: 40.1%
+  k=29; cmp=l1, accuracy: 39.6%
+  k=33; cmp=l1, accuracy: 38.8%
+  k=37; cmp=l1, accuracy: 38.3%
+Testing best combination (21, l1) on test set ...
+  [test] 1000 samples
+  Accuracy: 40.1%
