@@ -19,7 +19,7 @@ def second(sets,name):
     for x in c.keys():
         print('  Class #{0}: {1} samples'.format(x,c[x]))
     print()
-    
+
 def third(sets,name):
     set = ImageDataset
     set = sets[name]

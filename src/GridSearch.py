@@ -32,7 +32,8 @@ class GridSearch:
             prediction = classifier.predict(sample[0])
             if (prediction == sample[1]):
                 correctPredictions = correctPredictions + 1
-            #print('{2}: Predicted {0}, should be {1}'.format(prediction,sample[1],i))
+            #print('{2}: Predicted {0}, should be
+            #{1}'.format(prediction,sample[1],i))
         accuracy = correctPredictions / predictSet.size()
         return accuracy
 
@@ -57,5 +58,5 @@ class GridSearch:
         print("Testing best combination ({}, {}) on test set ...".format(bestK, bestNorm))
         print("  [test] {0} samples".format(testSet.size()))
         testAccuracy = self.classify(trainSet,testSet,KnnClassifier(bestK, bestNorm))
-        print("\r  Accuracy: {:02.1f}%{:30s}".format(testAccuracy * 100,' '*30));
+        print("\r  Accuracy: {:02.1f}%{:30s}".format(testAccuracy * 100,' ' * 30))
 

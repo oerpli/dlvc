@@ -45,7 +45,7 @@ class KnnClassifier:
                 #diff2 = self.normL1(dist)
                 diff = np.linalg.norm((dist), ord=1)
                 #print(str(diff-diff2))
-            elif(self.ns =='l2'):
+            elif(self.ns == 'l2'):
                 #diff2 = math.sqrt(self.normL2(dist))
                 diff = np.linalg.norm((dist), ord=2)
                 #print(str(diff-diff2))
