@@ -7,7 +7,7 @@
 
 
 \begin{abstract}
-This report is a summary of the work done for the first assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to implement a simple kNN classifier and tune the parameters with gridsearch on a subset of the CIFAR10 dataset.
+This report is a summary of the work done for the first assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to implement a simple kNN classifier and tune the parameters with gridsearch on a subset of the CIFAR10 dataset, for both the raw image data and the extracted HOG features
 \end{abstract}
 
 
@@ -16,9 +16,15 @@ This report is a summary of the work done for the first assignment of the course
 Image classification is one of the most basic tasks in visual computing. The goal is to have some decision procedure (an algorithm or a program usually) that is able to assign labels that should correspond to what a human would recognize on the image. The image is usually provided as a matrix of RGB values in some range, e.g. from 0 to 255 (8 bit per colour channel). The challenge is then, to associate concepts such as ``Skyscraper'' or ``Cat'' with this color information even though there exist a multitude of different skyscrapers and cats with varying colours and appearances.
 
 \section{The CIFAR10 Dataset} % Describe the CIFAR10 dataset.
-% https://www.cs.toronto.edu/~kriz/cifar.html
+The \bold{CIFAR-10} Dataset is a is one of the well kown benchmark problems for image classification for object recognition. It has 60000 relativly small RBG images (32 $\times$ 32 pixels) from 10 distinct categories, namely \emph{airplane, automobile, bird, cat, deer, dog, frog, horse, ship,} and \emph{truck}. It is a subset of the larger \bold{CIFAR-100} dataset (consisting of 80 million images) and due to it's limited size ideal for smaller scale projects like this homework assingment. It was created in 2009 by Alex Krizhevsky, Vinod Nair, and Geoffrey Hinton\cite{CIFAR10} \cite{Krizhevsky09learningmultiple}. The current best known performance is at 96.53\%, which is near human capabilities \cite{Graham14a}.
+
 
 \section{Training, Validation and Test Sets} %Describe the purpose of these sets, why they are required, and how you obtained a validation set in case of CIFAR10.
+For training a classifier, and testing the resulting model, a given dataset needs to be split into a training and a test set. Usually, around 80\% are used for training, and 20\% for testing. The classiefier is shown the training data including the labels, and the resulting model is then tested using the not yet shown testing data. This way, overfitting is prevented. In some cases, especially for small datasets, cross validation is used, but for image classification, this is usually too much effort. 
+
+If the classifier has hyper-parameters (like the k in the kNN Classifier) there is also a need for a validation set. The performance of different parameter are tested against the validation set, once the parameters are fixed, the final classifier is again tested against the so far unknown test set. The need for an extra set is again to prevent overfitting.
+
+In the \bold{CIFAR-10} Dataset, we are already given a training and a test test. To obtain a validation set, the original training set is split into a training (80\%) and validation (20\%) set. 
 
 \section{kNN Classifiers} %Describe how the kNN classifier works and how it can be used with images, which are not vectors. Explain what hyperparameters are in general and in case of kNN. How does parameter k generally influence the results?
 A kNN classifier is a memory based classification method that calculates a distance measure between the query point with unknown class and all samples in the training set. The $k$ samples from the training set that have the least distance to the query point (hence the name k Nearest Neighbor) are chosen and the classifier predicts that the unknown sample has the same class as the majority (with random tie breaker) of the samples in its neigborhood.
@@ -40,25 +46,33 @@ There are so called \textit{invariant metrics} for this kind of tasks that impro
 %
 \begin{minipage}{0.3\textwidth}
 \centering
-\includegraphics[width=0.57\textwidth]{./img/vorol1.png}
+
+\includegraphics[width=0.57\textwidth]{./img/voroL1.png}
 \captionof{figure}{L1 metric}
-\includegraphics[width=0.57\textwidth]{./img/vorol2.png}
+\includegraphics[width=0.57\textwidth]{./img/voroL2.png}
 \captionof{figure}{L2 metric}
 \end{minipage}
 
 \clearpage
 \section{kNN Classification of CIFAR10} %Introduce the tiny version of CIFAR10. Describe what hyperparameter optimization is and why it is important. Explain your search strategy and visualize the results based on the output of knn_classify_tinycifar10.py.
-
-
+For this assignment, we were allowed to use a subset of the \bold{CIFAR-10} dataset, which is called \emph{TinyCifar10} from now on. For that, we use only 10\% of the dataset for training, validation and testing. This allows to perform the tests in a much shorter timescale. The need for that came from the \emph{hyperparameter optimization} task.
+\subsection{Hyperparameter optimization}
+The parameter for k and the norms can be choosen arbitrarily. To obtain good results, different values and combinations needs to be tested. This process is called \emph{hyperparameter optimization}. In the lecture, two method were introduced: One is random search, were the parameter are taken at random for a fixed number of attempts. The other, that we implemented, is the grid search, where systematically a range of values is tested (possibly with gaps in between) and the best found combination is chosen. See figure \ref{figparam} for the results.
 
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
 \input{./img/a1results.tex}
 \caption{Accuracy of kNN classification with neighborhood sizes (k) and L1 and L2 norms on raw image and HOG vectors. Classification on HOG consistently outperforms class. on raw data and kNN with L1 norm is superior to kNN with L2 norm. Performance of best parameters ($k=21, \text{L1 norm}$) on test set with raw \plotref{t2} and HOG data \plotref{t1}. }
+\label{figparam}
 
 \end{figure}
 
 \input{./sections/dlvc1-6.tex}
 %% Ausgelagert ins File dlvc1-6.tex
 %\section{The Importance of Features} %Think about reasons why performing kNN classification directly on the raw images does not work well. Describe what a feature is and why operating on features instead of raw images is beneficial in case of kNN. Briefly explain what HOG features are. Compare the results when using these features (knn_classify_hog_tinycifar10.py) to those obtained using raw images and discuss them. Even with HOG features, the performance is still much lower than that of CNNs (90\% accuracy and more on the whole dataset). Think of reasons for why this is the case.
+
+\newpage
+
+\bibliographystyle{unsrt}
+\bibliography{references}
