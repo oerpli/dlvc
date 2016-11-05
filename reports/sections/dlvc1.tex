@@ -21,13 +21,37 @@ Image classification is one of the most basic tasks in visual computing. The goa
 \section{Training, Validation and Test Sets} %Describe the purpose of these sets, why they are required, and how you obtained a validation set in case of CIFAR10.
 
 \section{kNN Classifiers} %Describe how the kNN classifier works and how it can be used with images, which are not vectors. Explain what hyperparameters are in general and in case of kNN. How does parameter k generally influence the results?
+A kNN classifier is a memory based classification method that calculates a distance measure between the query point with unknown class and all samples in the training set. The $k$ samples from the training set that have the least distance to the query point (hence the name k Nearest Neighbor) are chosen and the classifier predicts that the unknown sample has the same class as the majority (with random tie breaker) of the samples in its neigborhood.
+
+The method can be used with any distance measure, for example the $L^p$-norms L1 (Manhattan distance) and L2 (Euclidean distance) are commonly used. These distance  measures work on vectors, therefore images are usually reshaped to vectors (${3 \times x \times y \to 3\cdot x \cdot y \times 1}$, the exact order doesn't matter as long as it's consistant), normalization (scaling and translating to $0$ mean, $1$ standard deviation) is usually not necessary in this case as all features have the same units. 
+
+kNN Classifiers have two hyperparameters -- the distance metric and the size of the neighborhood considered for each query point (the query point corresponds to the position the data vector points in the high dimensional space if it starts from the origin). A hyperparameter is a parameter of the model/classifier that tries to fit the underlying distribution/system (which may have ``normal'' parameters). As the parameters of the underlying system is usually not known it's necessary to find the best combination of hyperparameters to be able to predict the class of query points with the highest possible accurracy. 
+\subsection{k - Neighborhood Size}
+As the decision boundary gets rougher the smaller the value of $k$ is, it's usually recommended to choose higher values of $k$ as long as the accuracy for the prediction of the validation set does not suffer. This is the case because a higher parameter $k$ corresponds to a more parsimonious model, i.e. a model with less overfitting\footnote{AIC (Akaice information criterion) and BIC (Bayes information criterion) are more formal versions of this rule of thumb for e.g. linear regression models}. The ragged decision boundaries for kNN with $k =1$ correspond to the Voronoi diagram which is also unstable -- a behaviour that is not desired for a classifier as tiny perturbations in the input set could change the prediction for a query point. For this assignment we used values between $1$ and $40$ for $k$. 
+\subsection{Distance metric}
+%
+\begin{minipage}{0.8\textwidth}
+Different distance metrics result in different neighborhoods, for example in the figures on the right the Voronoi diagram of the same set of points was calculated once with L1 and once with L2 norm as distance metric (images from Wikipedia, created by user Balu.ertl).
+
+It's not obvious wether the L1 or the L2 norm is superior for image classification. The best choice of metric may depend on the kind of picture, for example OCR (optical character recognition) for handwritten text benefits from rotation invariance whereas for printed text this is not necessary.
+
+There are so called \textit{invariant metrics} for this kind of tasks that improve the accuracy with kNN classification significantly compared to simple L1/L2 norms by providing additional invariants such as rotational invariance (for example \textit{Transformation Distance}, Simard et al. 1993)
+\end{minipage}
+%
+\begin{minipage}{0.3\textwidth}
+\centering
+\includegraphics[width=0.57\textwidth]{./img/vorol1.png}
+\captionof{figure}{L1 metric}
+\includegraphics[width=0.57\textwidth]{./img/vorol2.png}
+\captionof{figure}{L2 metric}
+\end{minipage}
 
 \clearpage
 \section{kNN Classification of CIFAR10} %Introduce the tiny version of CIFAR10. Describe what hyperparameter optimization is and why it is important. Explain your search strategy and visualize the results based on the output of knn_classify_tinycifar10.py.
 
 
 
-\begin{figure}[h!]
+\begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
 \input{./img/a1results.tex}
