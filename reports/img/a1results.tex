@@ -4,13 +4,14 @@
 	height=300pt
 ,	xlabel={$k$ Neighborhood size}
 ,	ylabel={Accuracy (\%)}
-,	width=1.1\textwidth
+,	width=1\textwidth
 ,	xtick={1,5,...,39}
 ,	ticks=major
 ,	xmajorgrids
 , 	major grid style={line width=0.1pt,draw=gray!30}
 ,	ymin=20
 ,	ymax=42
+%,	xmin=1, xmax=37
 ,	legend pos=south east]
 %\addplot[plotA]{sin(x)};
 \addplot [plotE]table[x index=0,y index=2, meta index = 0] {./data/a1.txt};\addlegendentry{L1 norm, HOG vector }

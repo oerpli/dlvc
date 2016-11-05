@@ -13,8 +13,10 @@ This report is a summary of the work done for the first assignment of the course
 
 
 \section{Image Classification} %Describe the image classification problem.
+Image classification is one of the most basic tasks in visual computing. The goal is to have some decision procedure (an algorithm or a program usually) that is able to assign labels that should correspond to what a human would recognize on the image. The image is usually provided as a matrix of RGB values in some range, e.g. from 0 to 255 (8 bit per colour channel). The challenge is then, to associate concepts such as ``Skyscraper'' or ``Cat'' with this color information even though there exist a multitude of different skyscrapers and cats with varying colours and appearances.
 
 \section{The CIFAR10 Dataset} % Describe the CIFAR10 dataset.
+% https://www.cs.toronto.edu/~kriz/cifar.html
 
 \section{Training, Validation and Test Sets} %Describe the purpose of these sets, why they are required, and how you obtained a validation set in case of CIFAR10.
 
@@ -29,7 +31,7 @@ This report is a summary of the work done for the first assignment of the course
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
 \input{./img/a1results.tex}
-\caption{Accuracy of kNN classification with neighborhood sizes (k) and L1 and L2 norms on raw image and HOG vectors. Classification on HOG consistently outperforms class. on raw data and kNN with L1 norm is superior to kNN with L2 norm. Best parameters ($k=21, \text{L1 norm}$) on raw \plotref{t2} and HOG data \plotref{t1} tested with test set}
+\caption{Accuracy of kNN classification with neighborhood sizes (k) and L1 and L2 norms on raw image and HOG vectors. Classification on HOG consistently outperforms class. on raw data and kNN with L1 norm is superior to kNN with L2 norm. Performance of best parameters ($k=21, \text{L1 norm}$) on test set with raw \plotref{t2} and HOG data \plotref{t1}. }
 
 \end{figure}
 
