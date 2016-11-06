@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from ImageDataset import ImageDataset
 from TinyCifar10Dataset import TinyCifar10Dataset
 

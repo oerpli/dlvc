@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import _pickle as pickle
+import pickle as pickle
 import os
 import numpy as np
 from ImageDataset import ImageDataset
