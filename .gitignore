@@ -1,5 +1,5 @@
 # Datafiles
-
+/data/*
 /datasets/*
 /src/x_test.py
 # Byte-compiled / optimized / DLL files
