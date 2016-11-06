@@ -2,7 +2,7 @@ from Cifar10Dataset import Cifar10Dataset
 from ImageDataset import ImageDataset
 
 def constructor(name):
-   return Cifar10Dataset("../data",name)
+   return Cifar10Dataset("../datasets",name)
 
 # Definition of output functions
 def first(sets,name):

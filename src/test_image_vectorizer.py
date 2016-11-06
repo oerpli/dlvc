@@ -2,7 +2,7 @@ from TinyCifar10Dataset import TinyCifar10Dataset
 from ImageVectorizer import ImageVectorizer
 import KnnClassifier as k
 
-t = TinyCifar10Dataset("../data",'train')
+t = TinyCifar10Dataset("../datasets",'train')
 x = ImageVectorizer(t)
 
 
