@@ -77,7 +77,7 @@ Features are some properties of a given data instance. They can be very simple o
 \subsection{HOG features}
 The \emph{Histograms of Oriented Gradients for Human Detection} were introduced in  \cite{Dalal:2005:HOG:1068507.1069007}. It takes images as an input and extracts localized gradient orientations. The initial work was focused on pedestrian recognition, but it works well on identifying other objects as well. It is a process covering several steps, where gradients are computed, divided into local cells, and an histogram is computed. The results are combined and normalized and yield a much lower dimensional vector than the input image. In our case, the raw image was 3072-dimensional, while the HOG features are only 144-dimensional. 
 
-As seen in Fig. \ref{figparam} the HOF features outperform the raw data by more than 10\%, which is no surprise given above reasons. The computation was also a lot faster due to the reduced dimensionality.
+As seen in Fig. \ref{figparam} the HOF features outperform the raw data by more than 10\% (from 28.5\% to 40.1\%), which is no surprise given above reasons. The computation was also a lot faster due to the reduced dimensionality.
 
 But the HOG results are still far behind state-of-the-art methods like CNNs. The reason is, while the CNNs will also extract lower level features like edges and gradients, they can easily overcome problems like occlusion and displacement, because they define higher level feature. They are able to find human-like, or cat-like features by combining the lower lever features. 
 

@@ -16,16 +16,16 @@
 
 \usepackage{tikz}
 \usepackage{pgfplots}
-
+\usetikzlibrary{pgfplots.clickable}
 
 \definecolor{uvblue}{RGB}{0,105,170}
 \colorlet{uvblue}{uvblue}
 \colorlet{uvbluedark}{black!40!uvblue}
 \colorlet{uvbluelight}{white!40!uvblue}
 
-
+\pgfplotsset{/pgfplots/annot/printable=false}
+\pgfplotsset{compat=1.14}
 \pgfplotsset{
-compat=1.14,
 plotl/.style={uvbluelight,no marks,ultra thick,samples=500},
 plott/.style={uvblue,no marks,ultra thick,samples=500},
 plotd/.style={uvbluedark,no marks,ultra thick,samples=500},
