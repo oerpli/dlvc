@@ -5,9 +5,8 @@ from GridSearch import GridSearch
 # The actual script
 print('Testing raw image features ...')
 
-trainData = TinyCifar10Dataset("../datasets",'train')
-valData = TinyCifar10Dataset("../datasets",'val')
-testData = TinyCifar10Dataset("../datasets",'test')
+valData = TinyCifar10Dataset("../../../datasets/cifar10/cifar-10-batches-py",'val')
+testData = TinyCifar10Dataset("../../../datasets/cifar10/cifar-10-batches-py",'test')
 trainSet = ImageVectorizer(trainData)
 valSet = ImageVectorizer(valData)
 testSet = ImageVectorizer(testData)

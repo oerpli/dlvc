@@ -2,7 +2,7 @@ from ImageDataset import ImageDataset
 from TinyCifar10Dataset import TinyCifar10Dataset
 
 def constructor(name):
-   return TinyCifar10Dataset("../datasets",name, 0.1)
+   return TinyCifar10Dataset("../../../datasets/cifar10/cifar-10-batches-py",name, 0.1)
 
 # Definition of output functions
 def first(sets,name):

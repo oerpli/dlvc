@@ -12,7 +12,7 @@ class HDF5FeatureVectorDataset(FeatureVectorDataset):
         # class_names is a mapping from labels to
         # class names, for every label.
 
-        with h5py.File('../datasets/' + fpath,'r') as hf:
+        with h5py.File('../../../datasets/cifar10/tinycifar10-hog/' + fpath,'r') as hf:
             self.features = np.array(hf.get('features'))
             self.labels = np.array(hf.get('labels'))
         self.classNames = class_names
