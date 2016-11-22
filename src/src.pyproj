@@ -6,7 +6,7 @@
     <ProjectGuid>be0071fd-37cd-4ab2-bfd0-2f88d1b4ba6d</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>knn_classify_tinycifar10.py</StartupFile>
+    <StartupFile>x_test.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -29,10 +29,22 @@
     <Compile Include="Cifar10Dataset.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ClassificationDataset.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DivisionTransformation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FloatCastTransformation.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GridSearch.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HDF5FeatureVectorDataset.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IdentityTransformation.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ImageDataset.py">
@@ -47,6 +59,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="knn_classify_tinycifar10.py" />
+    <Compile Include="MiniBatchGenerator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SampleTransformation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SubtractionTransformation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransformationSequence.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="x_test.py">
       <SubType>Code</SubType>
     </Compile>

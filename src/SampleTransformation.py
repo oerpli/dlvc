@@ -3,3 +3,4 @@ class SampleTransformation:
 
     def apply(self, sample):
         # Apply the transformation and return the transformed version.
+        return
