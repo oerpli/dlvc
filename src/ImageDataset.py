@@ -4,7 +4,7 @@ import os
 import numpy as np
 
 
-class ImageDataset:
+class ImageDataset(ClassificationDataset):
     # A dataset, consisting of multiple samples/images
     # and corresponding class labels.
     data = np.ndarray

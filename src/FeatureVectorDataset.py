@@ -2,7 +2,7 @@
 import numpy as np
 from ImageDataset import ImageDataset
 
-class FeatureVectorDataset:
+class FeatureVectorDataset(ClassificationDataset):
     # A dataset, consisting of multiple feature vectors
     # and corresponding class labels.
     data = ImageDataset
