@@ -2,7 +2,7 @@
 import pickle as pickle
 import os
 import numpy as np
-
+from ClassificationDataset import ClassificationDataset
 
 class ImageDataset(ClassificationDataset):
     # A dataset, consisting of multiple samples/images

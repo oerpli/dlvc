@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import numpy as np
 from ImageDataset import ImageDataset
+from ClassificationDataset import ClassificationDataset
 
 class FeatureVectorDataset(ClassificationDataset):
     # A dataset, consisting of multiple feature vectors
