@@ -29,11 +29,11 @@ print ("Computing DivisionTransformation from TinyCifar10Dataset [{}] stdev  Val
 sample = dataSet.sample(0)[0];
 print ("First sample of TinyCifar10Dataset  [{}]: {}".format(dataSetName,formatSample(sample)))
 
-identityTransformedSample = IdentityTransformation().apply(sample);
-print ("After applying IdentityTransformation: {}".format(formatSample(identityTransformedSample)))
+transformedSample = IdentityTransformation().apply(sample);
+print ("After applying IdentityTransformation: {}".format(formatSample(transformedSample)))
 
-floatCastedSample = floatCastTransformation.apply(sample);
-print ("After applying IdentityTransformation: {}".format(formatSample(floatCastedSample)))
+transformedSample = floatCastTransformation.apply(sample);
+print ("After applying IdentityTransformation: {}".format(formatSample(transformedSample)))
 
 transformationSequence = TransformationSequence()
 transformationSequence.add_transformation(floatCastTransformation);
