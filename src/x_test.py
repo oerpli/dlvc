@@ -3,11 +3,12 @@ import numpy as np
 from TinyCifar10Dataset import TinyCifar10Dataset
 from SubtractionTransformation import SubtractionTransformation
 from DivisionTransformation import DivisionTransformation
+from TransformationSequence import TransformationSequence
 
 
-#a = np.array('1 2 3 4')
-#a = a-1
-#print('[{0}]'.format(a))
+a = []
+t1 = DivisionTransformation(1)
+a.append(t1)
 
 dataset = TinyCifar10Dataset("../../../datasets/cifar10/cifar-10-batches-py",'train')
 sample = dataset.sample(1)[0];
@@ -18,7 +19,12 @@ for i in range(0, dataset.size()):
 
 std = stdSum / dataset.size()
 
-sample2 = DivisionTransformation.from_dataset_stddev(dataset)
-sample3 = SubtractionTransformation.from_dataset_mean(dataset,sample2)
+t2 = DivisionTransformation.from_dataset_stddev(dataset)
+t3 = SubtractionTransformation.from_dataset_mean(dataset,t2)
 
+ts = TransformationSequence()
+ts.add_transformation(t2);
+ts.add_transformation(t3);
+
+sampleT = ts.apply(sample);
 print('x')

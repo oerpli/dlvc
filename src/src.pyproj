@@ -6,7 +6,7 @@
     <ProjectGuid>be0071fd-37cd-4ab2-bfd0-2f88d1b4ba6d</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>x_test.py</StartupFile>
+    <StartupFile>test_sample_transformations.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -66,6 +66,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SubtractionTransformation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_sample_transformations.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TransformationSequence.py">
