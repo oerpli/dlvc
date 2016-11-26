@@ -23,8 +23,8 @@ subtractionTransformation = SubtractionTransformation.from_dataset_mean(dataSet)
 floatCastTransformation = FloatCastTransformation()
 identityTransformation = IdentityTransformation()
 
-print ("Computing SubtractionTransformation from TinyCifar10Dataset [{}] mean  Value: {:02.2f}".format(dataSetName, subtractionTransformation.value))
-print ("Computing DivisionTransformation from TinyCifar10Dataset [{}] stdev  Value: {:02.2f}".format(dataSetName, divisionTransformation.value))
+print ("Computing SubtractionTransformation from TinyCifar10Dataset [{}] mean\n  Value: {:02.2f}".format(dataSetName, subtractionTransformation.value))
+print ("Computing DivisionTransformation from TinyCifar10Dataset [{}] stdev\n  Value: {:02.2f}".format(dataSetName, divisionTransformation.value))
 
 sample = dataSet.sample(0)[0];
 print ("First sample of TinyCifar10Dataset  [{}]: {}".format(dataSetName,formatSample(sample)))
