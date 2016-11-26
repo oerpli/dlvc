@@ -7,7 +7,7 @@ import numpy as np
 class MiniBatchGenerator:
     # Create minibatches of a given size from a dataset.
     # Preserves the original sample order unless shuffle() is used.
-    data =  cd.ClassificationDataset
+    data = cd.ClassificationDataset
     size = int
     transformation = st.SampleTransformation
     indices = list(range(0,1))
@@ -37,7 +37,7 @@ class MiniBatchGenerator:
     def shuffle(self):
         # Shuffle the dataset samples so that each
         # ends up at a random location in a random minibatch.
-        for i in range(len(self.indices)-1,0,-1):
+        for i in range(len(self.indices) - 1,0,-1):
             j = randint(0,i)
             self.indices[i],self.indices[j] = self.indices[j], self.indices[i]
 
@@ -47,14 +47,14 @@ class MiniBatchGenerator:
         ids = []
         # add first element outside of loop to determine shape of tensor
         i = bid * self.batchsize()
-        sample = self.data.sample(self.indices[i])
+        sample = self.transformation(self.data.sample(self.indices[i]))
         samples = np.expand_dims(sample[0],axis = 0)
         labels.append(sample[1])
         ids.append(self.indices[i])
         # add remaning bs - 1 elements
-        for i in range(bid * self.batchsize() +1 , (bid +1) * self.batchsize()):
+        for i in range(bid * self.batchsize() + 1 , (bid + 1) * self.batchsize()):
             if i < len(self.indices):
-                sample = self.data.sample(self.indices[i])
+                sample = self.transformation(self.data.sample(self.indices[i]))
                 samples = np.append(samples,np.expand_dims(sample[0],axis=0),axis= 0)
                 labels.append(sample[1])
                 ids.append(self.indices[i])
