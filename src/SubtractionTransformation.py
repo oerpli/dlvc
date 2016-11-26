@@ -1,4 +1,5 @@
 from SampleTransformation import SampleTransformation
+from IdentityTransformation import IdentityTransformation
 
 class SubtractionTransformation(SampleTransformation):
     # Subtract a scalar from all features.
@@ -8,14 +9,13 @@ class SubtractionTransformation(SampleTransformation):
     def from_dataset_mean(dataset, tform=None):
         # Return a transformation that will subtract by the global mean
         # over all samples and features in a dataset.
-        # tform is an optional SampleTransformation to apply before computation.
+        # tform is an optional SampleTransformation applied computation.
+        if tform == None:
+            tform = IdentityTransformation()
         meanSum = 0.0
         for i in range(0, dataset.size()):
-            sample = dataset.sample(i)[0]; 
-            if (tform != None):
-                sample = tform.apply(sample)
-            meanSum = meanSum + sample.mean();
-        mean = meanSum / dataset.size();
+            meanSum += tform.apply(dataset.sample(i)[0]).mean()
+        mean = meanSum / dataset.size()
         return SubtractionTransformation(mean)
 
     def __init__(self, value):

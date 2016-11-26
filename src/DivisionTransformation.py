@@ -1,4 +1,5 @@
 from SampleTransformation import SampleTransformation
+from IdentityTransformation import IdentityTransformation
 
 class DivisionTransformation(SampleTransformation):
     # Divide all features by a scalar.
@@ -6,24 +7,22 @@ class DivisionTransformation(SampleTransformation):
 
     @staticmethod
     def from_dataset_stddev(dataset, tform=None):
-        # Return a transformation that will divide by the global standard deviation
+        # Return a transformation that will divide by the global std
         # over all samples and features in a dataset.
-        # tform is an optional SampleTransformation to apply before computation.
+        # tform is an optional SampleTransformation applied before computation.
+        if(tform == None):
+            tform = IdentityTransformation()
         stdSum = 0.0
         for i in range(0, dataset.size()):
-            sample = dataset.sample(i)[0];
-            if (tform != None):
-                sample = tform.apply(sample)
-            stdSum = stdSum + sample.std();
-        std = stdSum / dataset.size();
+            stdSum += tform.apply(dataset.sample(i)[0]).std()
+        std = stdSum / dataset.size()
         return DivisionTransformation(std)
 
     def __init__(self, value):
         # Constructor.
         # value is a scalar divisor != 0.
         if(value == 0):
-            print("Division by 0 prevented")
-#            value = 1
+            print("Division by 0 is not allowed")
         self.value = value
 
     def apply(self, sample):

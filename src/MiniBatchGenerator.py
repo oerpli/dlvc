@@ -1,5 +1,6 @@
 import ClassificationDataset as cd
 import SampleTransformation as st
+from IdentityTransformation import IdentityTransformation
 from math import ceil
 from random import randint
 import numpy as np
@@ -22,6 +23,8 @@ class MiniBatchGenerator:
         # tform is an optional SampleTransformation.
         # If given, tform is applied to all samples returned in minibatches.
         self.transformation = tform
+        if(tform == None):
+            self.transformation = IdentityTransformation()
         self.indices = list(range(0,self.data.size()))
 
 
@@ -43,19 +46,23 @@ class MiniBatchGenerator:
 
 
     def batch(self, bid):
+        if bid >= self.nbatches():
+            print("Invalid batch id {}, only {} batches available".format(bid,self.nbatches()))
         labels = []
         ids = []
         # add first element outside of loop to determine shape of tensor
         i = bid * self.batchsize()
-        sample = self.transformation(self.data.sample(self.indices[i]))
-        samples = np.expand_dims(sample[0],axis = 0)
+        sample = self.data.sample(self.indices[i])
+        vector = self.transformation.apply(sample[0])
+        samples = np.expand_dims(vector,axis=0)
         labels.append(sample[1])
         ids.append(self.indices[i])
         # add remaning bs - 1 elements
         for i in range(bid * self.batchsize() + 1 , (bid + 1) * self.batchsize()):
             if i < len(self.indices):
-                sample = self.transformation(self.data.sample(self.indices[i]))
-                samples = np.append(samples,np.expand_dims(sample[0],axis=0),axis= 0)
+                sample = self.data.sample(self.indices[i])
+                vector = self.transformation.apply(sample[0])
+                samples = np.append(samples,np.expand_dims(vector,axis=0),axis= 0)
                 labels.append(sample[1])
                 ids.append(self.indices[i])
         return (samples,labels,ids)
