@@ -11,7 +11,7 @@ class DivisionTransformation(SampleTransformation):
         # tform is an optional SampleTransformation to apply before computation.
         stdSum = 0.0
         for i in range(0, dataset.size()):
-            sample = dataset.sample(i)[0];    
+            sample = dataset.sample(i)[0];
             if (tform != None):
                 sample = tform.apply(sample)
             stdSum = stdSum + sample.std();
@@ -21,6 +21,9 @@ class DivisionTransformation(SampleTransformation):
     def __init__(self, value):
         # Constructor.
         # value is a scalar divisor != 0.
+        if(value == 0):
+            print("Division by 0 prevented")
+#            value = 1
         self.value = value
 
     def apply(self, sample):

@@ -21,7 +21,6 @@ def dataset_tester(dataset):
     m = mb.MiniBatchGenerator(dataset,60)
     print("Batch generator has {} minibatches, minibatch size: {}".format(m.nbatches(),m.batchsize()))
     print()
-
     minibatch_printer(m,0,True)
     minibatch_printer(m,66)
     print()

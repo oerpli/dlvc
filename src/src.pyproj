@@ -6,14 +6,14 @@
     <ProjectGuid>be0071fd-37cd-4ab2-bfd0-2f88d1b4ba6d</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>test_sample_transformations.py</StartupFile>
+    <StartupFile>softmax_classify_tinycifar10.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>src</Name>
     <RootNamespace>test</RootNamespace>
-    <InterpreterId>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</InterpreterId>
+    <InterpreterId>{9c1820c1-fd91-45dd-8a78-3599813331d4}</InterpreterId>
     <InterpreterVersion>3.5</InterpreterVersion>
     <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
@@ -68,6 +68,8 @@
     <Compile Include="SubtractionTransformation.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="softmax_classify_tinycifar10.py" />
+    <Compile Include="test_minibatchgenerator.py" />
     <Compile Include="test_sample_transformations.py">
       <SubType>Code</SubType>
     </Compile>
@@ -88,7 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\3.5" />
-    <InterpreterReference Include="{cab3f5fd-3059-48df-a236-58af139e8169}\3.4" />
+    <InterpreterReference Include="{9c1820c1-fd91-45dd-8a78-3599813331d4}\3.5" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
