@@ -61,7 +61,8 @@ class MiniBatchGenerator:
         for i in range(bid * self.batchsize() + 1 , (bid + 1) * self.batchsize()):
             if i < len(self.indices):
                 sample = self.data.sample(self.indices[i])
-                vector = self.transformation.apply(sample[0])
+                if (self.transformation != None):
+                    vector = self.transformation.apply(sample[0])   
                 samples = np.append(samples,np.expand_dims(vector,axis=0),axis= 0)
                 labels.append(sample[1])
                 ids.append(self.indices[i])
