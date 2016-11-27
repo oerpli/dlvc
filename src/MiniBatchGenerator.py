@@ -29,7 +29,7 @@ class MiniBatchGenerator:
         if(tform == None):
             self.transformation = IdentityTransformation()
         self.indices = list(range(0,self.data.size()))
-        self.create();
+        self.create()
 
     def batchsize(self):
         return self.size
@@ -46,7 +46,7 @@ class MiniBatchGenerator:
         for i in range(len(self.indices) - 1,0,-1):
             j = randint(0,i)
             self.indices[i],self.indices[j] = self.indices[j], self.indices[i]
-        self.create(); # recreate batches
+        self.create() # recreate batches
 
     # pre process batches
     def create(self):
@@ -56,9 +56,9 @@ class MiniBatchGenerator:
 
         for i in range(0, self.nbatches()):
             sample, label, id = self._batch(i)
-            self.samples.append(sample);
-            self.labels.append(label);
-            self.ids.append(id);
+            self.samples.append(sample)
+            self.labels.append(label)
+            self.ids.append(id)
         return
 
     def batch(self, bid):
@@ -73,8 +73,9 @@ class MiniBatchGenerator:
 
         samples = self.data.sample(0)[0]
         bs = self.batchsize() # default batch size
-        if bid +1 == self.nbatches(): # fix size if it's the last batch
-            bs = self.data.size() % self.batchsize()
+        if bid + 1 == self.nbatches(): # fix size if it's the last batch
+            if self.nbatches * self.batchsize() < self.data.size():
+                bs = self.data.size() % self.batchsize()
         s = (bs,) + samples.shape
         samples = np.resize(samples,s)
         x = samples.shape
