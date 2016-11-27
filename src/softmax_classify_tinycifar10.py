@@ -27,7 +27,7 @@ scale = DivisionTransformation.from_dataset_stddev(train,offset)
 print("Setting up preprocessing ...")
 print(" Adding {}".format(type(float).__name__))
 print(" Adding {} [train] (value: {:02.2f})".format(type(offset).__name__,offset.value))
-print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value)) # WRONG VALUE CURRENTLY (54 instead of 64)
+print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value)) 
 
 print("Initializing minibatch generators ...")
 

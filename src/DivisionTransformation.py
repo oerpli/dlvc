@@ -1,5 +1,6 @@
 from SampleTransformation import SampleTransformation
 from IdentityTransformation import IdentityTransformation
+import numpy as np
 
 class DivisionTransformation(SampleTransformation):
     # Divide all features by a scalar.
@@ -12,10 +13,9 @@ class DivisionTransformation(SampleTransformation):
         # tform is an optional SampleTransformation applied before computation.
         if(tform == None):
             tform = IdentityTransformation()
-        stdSum = 0.0
-        for i in range(0, dataset.size()):
-            stdSum += tform.apply(dataset.sample(i)[0]).std()
-        std = stdSum / dataset.size()
+        wholeData = tform.apply(dataset.sample(0)[0]);
+        for i in range(1, dataset.size()):
+        std = wholeData.std();
         return DivisionTransformation(std)
 
     def __init__(self, value):
