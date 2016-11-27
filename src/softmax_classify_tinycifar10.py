@@ -52,10 +52,8 @@ model.add(Dense(output_dim=10, input_dim=3072))
 model.add(Activation('softmax'))
 
 
-## TODO AB HIER
-
-model.compile(loss='categorical_crossentropy',optimizer='sgd', metrics=["accuracy"])
-
+sgd = SGD(lr=0.01, decay=0.0, momentum=0.9, nesterov=False)
+model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
 
 epochs = 200
 print("Training for {} epochs ...".format(epochs))
@@ -82,6 +80,7 @@ for epoch in range(0,epochs):
         y = model.predict_on_batch(features)
         # store validation accuracy
         acc_v.append(metrics[1])
+
     # compute means over loss & accurracy
     m_loss = np.mean(loss)
     m_acc_t = np.mean(acc_t)
