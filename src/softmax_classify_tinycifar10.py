@@ -33,7 +33,7 @@ transformationSequence.add_transformation(scale)
 print("Setting up preprocessing ...")
 print(" Adding {}".format(type(floatCast).__name__))
 print(" Adding {} [train] (value: {:02.2f})".format(type(offset).__name__,offset.value))
-print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value)) 
+print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value))
 
 print("Initializing minibatch generators ...")
 
@@ -61,6 +61,7 @@ for epoch in range(0,epochs):
     loss = []
     acc_t = []
     acc_v = []
+    train_batch.shuffle()
     for bid in range(0,train_batch.nbatches()):
         # train classifier
         b = train_batch.batch(bid)

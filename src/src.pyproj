@@ -65,6 +65,7 @@
     <Compile Include="SampleTransformation.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="softmax_classify_hog_tinycifar10.py" />
     <Compile Include="SubtractionTransformation.py">
       <SubType>Code</SubType>
     </Compile>
