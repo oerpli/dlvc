@@ -13,10 +13,14 @@ class DivisionTransformation(SampleTransformation):
         # tform is an optional SampleTransformation applied before computation.
         if(tform == None):
             tform = IdentityTransformation()
-        wholeData = tform.apply(dataset.sample(0)[0]);
-        for i in range(1, dataset.size()):
-            wholeData = np.append(wholeData, tform.apply(dataset.sample(i)[0]))  #works, but is very slow TODO:Faster implementation
-        std = wholeData.std();
+        samples = dataset.sample(0)[0];
+        bs = dataset.size();
+        s = (bs,) + samples.shape
+        samples = np.resize(samples,s)
+        for i in range(0, dataset.size()):
+            sample = dataset.sample(i)[0];
+            samples[i,...] = sample
+        std = samples.std();
         return DivisionTransformation(std)
 
     def __init__(self, value):
