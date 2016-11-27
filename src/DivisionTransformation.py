@@ -14,10 +14,10 @@ class DivisionTransformation(SampleTransformation):
         if(tform == None):
             tform = IdentityTransformation()
         samples = dataset.sample(0)[0];
-        bs = dataset.size();
-        s = (bs,) + samples.shape
+        datasetSize = dataset.size();
+        s = (datasetSize,) + samples.shape
         samples = np.resize(samples,s)
-        for i in range(0, dataset.size()):
+        for i in range(0, datasetSize):
             sample = dataset.sample(i)[0];
             samples[i,...] = sample
         std = samples.std();
