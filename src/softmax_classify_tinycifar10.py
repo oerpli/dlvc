@@ -57,7 +57,7 @@ model.add(Activation('softmax'))
 model.compile(loss='categorical_crossentropy',optimizer='sgd', metrics=["accuracy"])
 
 
-epochs = 10
+epochs = 200
 print("Training for {} epochs ...".format(epochs))
 for epoch in range(0,epochs):
     loss = []
@@ -66,13 +66,12 @@ for epoch in range(0,epochs):
     for bid in range(0,train_batch.nbatches()):
         # train classifier
         b = train_batch.batch(bid)
-        # store loss
         features = b[0];
         labels = to_categorical(b[1],10);
         metrics = model.train_on_batch(features, labels)
+        # store loss and accuracy
         loss.append(metrics[0])
         acc_t.append(metrics[1])
-        # store training accurracy ??? where to get this?
 
     for bid in range(0,val_batch.nbatches()):
         b = val_batch.batch(bid)
