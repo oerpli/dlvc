@@ -7,6 +7,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+model_best.h5
+
 # C extensions
 *.so
 

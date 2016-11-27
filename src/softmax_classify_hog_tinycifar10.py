@@ -59,11 +59,14 @@ model = Sequential()
 model.add(Dense(output_dim=10, input_dim=144))
 model.add(Activation('softmax'))
 
-
+fileNameModel = "model_best.h5"
 sgd = SGD(lr=0.001, decay=0.0, momentum=0.9, nesterov=False)
 model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
 
 epochs = 200
+bestAccuracy = 0.0
+bestAccuracyAtEpoch = 0
+maxEpochWithoutImprovement = 20
 print("Training for {} epochs ...".format(epochs))
 for epoch in range(0,epochs):
     loss = []
@@ -86,14 +89,24 @@ for epoch in range(0,epochs):
         labels = to_categorical(b[1],10);
         metrics = model.test_on_batch(features, labels)
         y = model.predict_on_batch(features)
-        # store validation accuracy
+        # store validation accuracy 
         acc_v.append(metrics[1])
 
     # compute means over loss & accurracy
     m_loss = np.mean(loss)
     m_acc_t = np.mean(acc_t)
     m_acc_v = np.mean(acc_v)
+
     print("[Epoch {:0>3}] loss: {:02.3f}, training accuracy: {:02.3f}, validation accuracy: {:02.3f}".format(epoch + 1,m_loss, m_acc_t, m_acc_v))
+
+    if m_acc_v > bestAccuracy:
+        bestAccuracy = m_acc_v
+        bestAccuracyAtEpoch = epoch
+        print("New best validation accuracy, saving model to {}".format(fileNameModel))
+        model.save("../"+fileNameModel);
+    elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement: 
+        print("Validation accuracy did not improve for {} epochs, stopping".format(maxEpochWithoutImprovement))
+        break
 
 
 
