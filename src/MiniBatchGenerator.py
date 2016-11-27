@@ -50,20 +50,20 @@ class MiniBatchGenerator:
             print("Invalid batch id {}, only {} batches available".format(bid,self.nbatches()))
         labels = []
         ids = []
-        # add first element outside of loop to determine shape of tensor
-        i = bid * self.batchsize()
-        sample = self.data.sample(self.indices[i])
-        vector = self.transformation.apply(sample[0])
-        samples = np.expand_dims(vector,axis=0)
-        labels.append(sample[1])
-        ids.append(self.indices[i])
+
+        samples = self.data.sample(0)[0]
+        bs = self.batchsize() # default batch size
+        if bid +1 == self.nbatches(): # fix size if it's the last batch
+            bs = self.data.size() % self.batchsize()
+        s = (bs,) + samples.shape
+        samples = np.resize(samples,s)
+        x = samples.shape
         # add remaning bs - 1 elements
-        for i in range(bid * self.batchsize() + 1 , (bid + 1) * self.batchsize()):
+        for i in range(bid * self.batchsize(), (bid + 1) * self.batchsize()):
             if i < len(self.indices):
                 sample = self.data.sample(self.indices[i])
-                if (self.transformation != None):
-                    vector = self.transformation.apply(sample[0])   
-                samples = np.append(samples,np.expand_dims(vector,axis=0),axis= 0)
+                vector = self.transformation.apply(sample[0])
+                samples[i % self.batchsize(),...] = vector
                 labels.append(sample[1])
                 ids.append(self.indices[i])
         return (samples,labels,ids)
