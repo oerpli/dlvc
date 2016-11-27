@@ -22,18 +22,25 @@ val = ImageVectorizer(TinyCifar10Dataset("../../../datasets/cifar10/cifar-10-bat
 
 
 floatCast = FloatCastTransformation()
-offsetAndCast = SubtractionTransformation.from_dataset_mean(train,floatCast)
-scaleAndOffsetAndCast = DivisionTransformation.from_dataset_stddev(train,offsetAndCast)
+offset = SubtractionTransformation.from_dataset_mean(train)
+scale = DivisionTransformation.from_dataset_stddev(train)
+transformationSequence = TransformationSequence()
+transformationSequence.add_transformation(floatCast)
+transformationSequence.add_transformation(offset)
+transformationSequence.add_transformation(scale)
+
 
 print("Setting up preprocessing ...")
 print(" Adding {}".format(type(floatCast).__name__))
-print(" Adding {} [train] (value: {:02.2f})".format(type(offsetAndCast).__name__,offsetAndCast.value))
-print(" Adding {} [train] (value: {:02.2f})".format(type(scaleAndOffsetAndCast).__name__,scaleAndOffsetAndCast.value)) 
+print(" Adding {} [train] (value: {:02.2f})".format(type(offset).__name__,offset.value))
+print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value)) 
 
 print("Initializing minibatch generators ...")
 
-train_batch = MiniBatchGenerator(train,64,scaleAndOffsetAndCast)
-val_batch = MiniBatchGenerator(val,100,scaleAndOffsetAndCast)
+train_batch = MiniBatchGenerator(train,64,transformationSequence)
+val_batch = MiniBatchGenerator(val,100,transformationSequence)
+
+train_batch.create();
 
 print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
 print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
@@ -62,22 +69,24 @@ for epoch in range(0,epochs):
         # store loss
         features = b[0];
         labels = to_categorical(b[1],10);
-        _loss = model.train_on_batch(features, labels)
-        loss.append(_loss)
+        metrics = model.train_on_batch(features, labels)
+        loss.append(metrics[0])
+        acc_t.append(metrics[1])
         # store training accurracy ??? where to get this?
-        acc_t.append(0)
 
     for bid in range(0,val_batch.nbatches()):
         b = val_batch.batch(bid)
         # test classifier
-        model.test_on_batch(b[0], b[1])
-        model.predict_on_batch(b[0])
+        features = b[0];
+        labels = to_categorical(b[1],10);
+        metrics = model.test_on_batch(features, labels)
+        y = model.predict_on_batch(features)
         # store validation accuracy
-        acc_v.append(0)
+        acc_v.append(metrics[1])
     # compute means over loss & accurracy
-    m_loss = 0 #
-    m_acc_t = 0 #
-    m_acc_v = 0 #
+    m_loss = np.mean(loss)
+    m_acc_t = np.mean(acc_t)
+    m_acc_v = np.mean(acc_v)
     print("[Epoch {:0>3}] loss: {:02.3f}, training accuracy: {:02.3f}, validation accuracy: {:02.3f}".format(epoch + 1,m_loss, m_acc_t, m_acc_v))
 
 
