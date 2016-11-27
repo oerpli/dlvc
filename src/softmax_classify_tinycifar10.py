@@ -1,10 +1,11 @@
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
+from keras.utils.np_utils import to_categorical
 from keras.optimizers import SGD
 from TinyCifar10Dataset import TinyCifar10Dataset
 from ImageVectorizer import ImageVectorizer
 from MiniBatchGenerator import MiniBatchGenerator
-
+import numpy as np
 
 from SubtractionTransformation import SubtractionTransformation
 from DivisionTransformation import DivisionTransformation
@@ -20,19 +21,19 @@ val = ImageVectorizer(TinyCifar10Dataset("../../../datasets/cifar10/cifar-10-bat
 
 
 
-float = FloatCastTransformation()
-offset = SubtractionTransformation.from_dataset_mean(train,float)
-scale = DivisionTransformation.from_dataset_stddev(train,offset)
+floatCast = FloatCastTransformation()
+offsetAndCast = SubtractionTransformation.from_dataset_mean(train,floatCast)
+scaleAndOffsetAndCast = DivisionTransformation.from_dataset_stddev(train,offsetAndCast)
 
 print("Setting up preprocessing ...")
-print(" Adding {}".format(type(float).__name__))
-print(" Adding {} [train] (value: {:02.2f})".format(type(offset).__name__,offset.value))
-print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value)) 
+print(" Adding {}".format(type(floatCast).__name__))
+print(" Adding {} [train] (value: {:02.2f})".format(type(offsetAndCast).__name__,offsetAndCast.value))
+print(" Adding {} [train] (value: {:02.2f})".format(type(scaleAndOffsetAndCast).__name__,scaleAndOffsetAndCast.value)) 
 
 print("Initializing minibatch generators ...")
 
-train_batch = MiniBatchGenerator(train,64,offset)
-val_batch = MiniBatchGenerator(val,100,offset)
+train_batch = MiniBatchGenerator(train,64,scaleAndOffsetAndCast)
+val_batch = MiniBatchGenerator(val,100,scaleAndOffsetAndCast)
 
 print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
 print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
@@ -49,9 +50,9 @@ model.add(Activation('softmax'))
 model.compile(loss='categorical_crossentropy',optimizer='sgd', metrics=["accuracy"])
 
 
-Epochs = 10
-print("Training for {} epochs ...".format(Epochs))
-for epoch in range(0,Epochs):
+epochs = 10
+print("Training for {} epochs ...".format(epochs))
+for epoch in range(0,epochs):
     loss = []
     acc_t = []
     acc_v = []
@@ -59,10 +60,13 @@ for epoch in range(0,Epochs):
         # train classifier
         b = train_batch.batch(bid)
         # store loss
-        _loss = model.train_on_batch(b[0],b[1])
+        features = b[0];
+        labels = to_categorical(b[1],10);
+        _loss = model.train_on_batch(features, labels)
         loss.append(_loss)
         # store training accurracy ??? where to get this?
         acc_t.append(0)
+
     for bid in range(0,val_batch.nbatches()):
         b = val_batch.batch(bid)
         # test classifier
