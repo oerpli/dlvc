@@ -15,6 +15,7 @@ class DivisionTransformation(SampleTransformation):
             tform = IdentityTransformation()
         wholeData = tform.apply(dataset.sample(0)[0]);
         for i in range(1, dataset.size()):
+            wholeData = np.append(wholeData, tform.apply(dataset.sample(i)[0]))  #works, but is very slow TODO:Faster implementation
         std = wholeData.std();
         return DivisionTransformation(std)
 
