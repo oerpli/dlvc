@@ -65,9 +65,9 @@ bestWeightDecay = 0.0
 
 fileNameModelGlobal = "model_best_global.h5"
 
-for learningRate in range(1,10,3):
+for learningRate in range(5,30,5):
     learningRate /= 10000
-    for weightDecay in range(2,30,4):
+    for weightDecay in range(2,20,4):
         weightDecay /= 100
         model = Sequential()
         model.add(Dense(output_dim=10, input_dim=144))
@@ -128,7 +128,7 @@ for learningRate in range(1,10,3):
                     bestWeightDecay = weightDecay
                     model.save("../" + fileNameModelGlobal)
             elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
-                print("\r  learning rate={}, weight decay={}, accuracy: {:02.2f} (epoch {})".format(learningRate,weightDecay,bestAccuracy,bestAccuracyAtEpoch))
+                print("\r  learning rate={}, weight decay={}, accuracy: {:02.3f} (epoch {})".format(learningRate,weightDecay,bestAccuracy,bestAccuracyAtEpoch))
                 break
             print("\r  Epochs={:2.1%} no impr={:0>3.0%}, acc={:02.2f}, acc global={:02.2f}".format((epoch / epochs), ((epoch - bestAccuracyAtEpoch) / maxEpochWithoutImprovement), bestAccuracy, bestAccuracyGlobal),end="", flush=True)
 

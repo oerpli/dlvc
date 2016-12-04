@@ -1,0 +1,37 @@
+Using Theano backend.
+Setting up preprocessing ...
+  Adding FloatCastTransformation
+  Adding SubtractionTransformation [train] (value: 0.01)
+  Adding DivisionTransformation [train] (value: 0.01)
+Initializing minibatch generators ...
+  [train] 4000 samples, 63 minibatches of size 64
+  [val]   1000 samples, 10 minibatches of size 100
+Initializing softmax classifier and optimizer ...
+  learning rate=0.0005, weight decay=0.02, accuracy: 0.217 (epoch 155)
+  learning rate=0.0005, weight decay=0.06, accuracy: 0.146 (epoch 39)
+  learning rate=0.0005, weight decay=0.1, accuracy: 0.133 (epoch 81)
+  learning rate=0.0005, weight decay=0.14, accuracy: 0.145 (epoch 51)
+  learning rate=0.0005, weight decay=0.18, accuracy: 0.126 (epoch 50)
+  learning rate=0.001, weight decay=0.06, accuracy: 0.197 (epoch 70)
+  learning rate=0.001, weight decay=0.1, accuracy: 0.179 (epoch 81)
+  learning rate=0.001, weight decay=0.14, accuracy: 0.113 (epoch 56)
+  learning rate=0.001, weight decay=0.18, accuracy: 0.126 (epoch 41)
+  learning rate=0.0015, weight decay=0.02, accuracy: 0.299 (epoch 114)
+  learning rate=0.0015, weight decay=0.06, accuracy: 0.189 (epoch 116)
+  learning rate=0.0015, weight decay=0.1, accuracy: 0.168 (epoch 41)
+  learning rate=0.0015, weight decay=0.14, accuracy: 0.157 (epoch 38)
+  learning rate=0.0015, weight decay=0.18, accuracy: 0.132 (epoch 67)
+  learning rate=0.002, weight decay=0.02, accuracy: 0.301 (epoch 85)
+  learning rate=0.002, weight decay=0.06, accuracy: 0.258 (epoch 100)
+  learning rate=0.002, weight decay=0.1, accuracy: 0.166 (epoch 115)
+  learning rate=0.002, weight decay=0.14, accuracy: 0.173 (epoch 130)
+  learning rate=0.002, weight decay=0.18, accuracy: 0.166 (epoch 51)
+  learning rate=0.0025, weight decay=0.06, accuracy: 0.246 (epoch 65)
+  learning rate=0.0025, weight decay=0.1, accuracy: 0.256 (epoch 152)
+  learning rate=0.0025, weight decay=0.14, accuracy: 0.191 (epoch 169)
+  learning rate=0.0025, weight decay=0.18, accuracy: 0.170 (epoch 77)
+
+Testing best model (learning rate=0.0025, weight decay=0.02) on test set ...
+  [test] 1000 samples, 10 minibatches of size 100
+  Accuracy: 35.70%
+Done
