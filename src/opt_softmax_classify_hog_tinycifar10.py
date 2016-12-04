@@ -39,9 +39,9 @@ transformationSequence.add_transformation(scale)
 
 
 print("Setting up preprocessing ...")
-print(" Adding {}".format(type(floatCast).__name__))
-print(" Adding {} [train] (value: {:02.2f})".format(type(offset).__name__,offset.value))
-print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value))
+print("  Adding {}".format(type(floatCast).__name__))
+print("  Adding {} [train] (value: {:02.2f})".format(type(offset).__name__,offset.value))
+print("  Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value))
 
 print("Initializing minibatch generators ...")
 
@@ -51,8 +51,8 @@ test_batch = MiniBatchGenerator(test,100,transformationSequence)
 
 train_batch.create()
 
-print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
-print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
+print("  [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
+print("  [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
 
 print("Initializing softmax classifier and optimizer ...")
 
@@ -132,7 +132,7 @@ for learningRate in range(1,10,3):
                 break
 
 print("Testing best model (learning rate={}, weight decay={}) on test set ...".format(bestLearningRate,bestWeightDecay))
-print(" [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
+print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
 model.load_weights("../" + fileNameModelGlobal)
 test_batch.shuffle()
@@ -149,6 +149,6 @@ for bid in range(0,val_batch.nbatches()):
     acc_test.append(metrics[1])
     # compute mean of accurracy
     m_acc_test = np.mean(acc_test)
-print(" Accuracy: {:02.2f%}".format(m_acc_test))
+print("  Accuracy: {:0.2%}".format(m_acc_test))
 
 print("Done")
