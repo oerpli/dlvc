@@ -1,0 +1,124 @@
+[Epoch 001] loss: 2.815, training accuracy: 0.114, validation accuracy: 0.134
+New best validation accuracy, saving model to model_best.h5
+[Epoch 002] loss: 2.475, training accuracy: 0.175, validation accuracy: 0.176
+New best validation accuracy, saving model to model_best.h5
+[Epoch 003] loss: 2.281, training accuracy: 0.216, validation accuracy: 0.203
+New best validation accuracy, saving model to model_best.h5
+[Epoch 004] loss: 2.148, training accuracy: 0.246, validation accuracy: 0.227
+New best validation accuracy, saving model to model_best.h5
+[Epoch 005] loss: 2.050, training accuracy: 0.274, validation accuracy: 0.254
+New best validation accuracy, saving model to model_best.h5
+[Epoch 006] loss: 1.968, training accuracy: 0.299, validation accuracy: 0.278
+New best validation accuracy, saving model to model_best.h5
+[Epoch 007] loss: 1.908, training accuracy: 0.322, validation accuracy: 0.292
+New best validation accuracy, saving model to model_best.h5
+[Epoch 008] loss: 1.855, training accuracy: 0.341, validation accuracy: 0.299
+New best validation accuracy, saving model to model_best.h5
+[Epoch 009] loss: 1.811, training accuracy: 0.354, validation accuracy: 0.307
+New best validation accuracy, saving model to model_best.h5
+[Epoch 010] loss: 1.774, training accuracy: 0.372, validation accuracy: 0.320
+New best validation accuracy, saving model to model_best.h5
+[Epoch 011] loss: 1.743, training accuracy: 0.384, validation accuracy: 0.329
+New best validation accuracy, saving model to model_best.h5
+[Epoch 012] loss: 1.715, training accuracy: 0.396, validation accuracy: 0.340
+New best validation accuracy, saving model to model_best.h5
+[Epoch 013] loss: 1.690, training accuracy: 0.408, validation accuracy: 0.348
+New best validation accuracy, saving model to model_best.h5
+[Epoch 014] loss: 1.670, training accuracy: 0.416, validation accuracy: 0.350
+New best validation accuracy, saving model to model_best.h5
+[Epoch 015] loss: 1.651, training accuracy: 0.427, validation accuracy: 0.350
+[Epoch 016] loss: 1.633, training accuracy: 0.432, validation accuracy: 0.354
+New best validation accuracy, saving model to model_best.h5
+[Epoch 017] loss: 1.619, training accuracy: 0.441, validation accuracy: 0.363
+New best validation accuracy, saving model to model_best.h5
+[Epoch 018] loss: 1.604, training accuracy: 0.447, validation accuracy: 0.365
+New best validation accuracy, saving model to model_best.h5
+[Epoch 019] loss: 1.592, training accuracy: 0.449, validation accuracy: 0.366
+New best validation accuracy, saving model to model_best.h5
+[Epoch 020] loss: 1.577, training accuracy: 0.456, validation accuracy: 0.371
+New best validation accuracy, saving model to model_best.h5
+[Epoch 021] loss: 1.569, training accuracy: 0.456, validation accuracy: 0.377
+New best validation accuracy, saving model to model_best.h5
+[Epoch 022] loss: 1.559, training accuracy: 0.463, validation accuracy: 0.377
+[Epoch 023] loss: 1.548, training accuracy: 0.468, validation accuracy: 0.382
+New best validation accuracy, saving model to model_best.h5
+[Epoch 024] loss: 1.537, training accuracy: 0.473, validation accuracy: 0.384
+New best validation accuracy, saving model to model_best.h5
+[Epoch 025] loss: 1.531, training accuracy: 0.476, validation accuracy: 0.387
+New best validation accuracy, saving model to model_best.h5
+[Epoch 026] loss: 1.524, training accuracy: 0.478, validation accuracy: 0.392
+New best validation accuracy, saving model to model_best.h5
+[Epoch 027] loss: 1.516, training accuracy: 0.483, validation accuracy: 0.392
+[Epoch 028] loss: 1.510, training accuracy: 0.486, validation accuracy: 0.395
+New best validation accuracy, saving model to model_best.h5
+[Epoch 029] loss: 1.505, training accuracy: 0.489, validation accuracy: 0.396
+New best validation accuracy, saving model to model_best.h5
+[Epoch 030] loss: 1.497, training accuracy: 0.493, validation accuracy: 0.397
+New best validation accuracy, saving model to model_best.h5
+[Epoch 031] loss: 1.492, training accuracy: 0.493, validation accuracy: 0.398
+New best validation accuracy, saving model to model_best.h5
+[Epoch 032] loss: 1.488, training accuracy: 0.494, validation accuracy: 0.401
+New best validation accuracy, saving model to model_best.h5
+[Epoch 033] loss: 1.485, training accuracy: 0.498, validation accuracy: 0.402
+New best validation accuracy, saving model to model_best.h5
+[Epoch 034] loss: 1.478, training accuracy: 0.498, validation accuracy: 0.399
+[Epoch 035] loss: 1.475, training accuracy: 0.500, validation accuracy: 0.401
+[Epoch 036] loss: 1.468, training accuracy: 0.501, validation accuracy: 0.401
+[Epoch 037] loss: 1.464, training accuracy: 0.503, validation accuracy: 0.400
+[Epoch 038] loss: 1.458, training accuracy: 0.508, validation accuracy: 0.400
+[Epoch 039] loss: 1.458, training accuracy: 0.507, validation accuracy: 0.402
+[Epoch 040] loss: 1.453, training accuracy: 0.506, validation accuracy: 0.403
+New best validation accuracy, saving model to model_best.h5
+[Epoch 041] loss: 1.449, training accuracy: 0.509, validation accuracy: 0.401
+[Epoch 042] loss: 1.449, training accuracy: 0.510, validation accuracy: 0.402
+[Epoch 043] loss: 1.444, training accuracy: 0.510, validation accuracy: 0.402
+[Epoch 044] loss: 1.443, training accuracy: 0.512, validation accuracy: 0.401
+[Epoch 045] loss: 1.437, training accuracy: 0.512, validation accuracy: 0.400
+[Epoch 046] loss: 1.436, training accuracy: 0.513, validation accuracy: 0.404
+New best validation accuracy, saving model to model_best.h5
+[Epoch 047] loss: 1.435, training accuracy: 0.514, validation accuracy: 0.404
+[Epoch 048] loss: 1.432, training accuracy: 0.516, validation accuracy: 0.404
+[Epoch 049] loss: 1.429, training accuracy: 0.516, validation accuracy: 0.404
+[Epoch 050] loss: 1.429, training accuracy: 0.517, validation accuracy: 0.406
+New best validation accuracy, saving model to model_best.h5
+[Epoch 051] loss: 1.424, training accuracy: 0.518, validation accuracy: 0.409
+New best validation accuracy, saving model to model_best.h5
+[Epoch 052] loss: 1.422, training accuracy: 0.519, validation accuracy: 0.406
+[Epoch 053] loss: 1.418, training accuracy: 0.522, validation accuracy: 0.404
+[Epoch 054] loss: 1.417, training accuracy: 0.523, validation accuracy: 0.401
+[Epoch 055] loss: 1.418, training accuracy: 0.524, validation accuracy: 0.402
+[Epoch 056] loss: 1.417, training accuracy: 0.522, validation accuracy: 0.407
+[Epoch 057] loss: 1.414, training accuracy: 0.522, validation accuracy: 0.401
+[Epoch 058] loss: 1.413, training accuracy: 0.523, validation accuracy: 0.405
+[Epoch 059] loss: 1.409, training accuracy: 0.526, validation accuracy: 0.405
+[Epoch 060] loss: 1.410, training accuracy: 0.526, validation accuracy: 0.405
+[Epoch 061] loss: 1.404, training accuracy: 0.530, validation accuracy: 0.409
+[Epoch 062] loss: 1.402, training accuracy: 0.529, validation accuracy: 0.407
+[Epoch 063] loss: 1.402, training accuracy: 0.529, validation accuracy: 0.403
+[Epoch 064] loss: 1.402, training accuracy: 0.529, validation accuracy: 0.403
+[Epoch 065] loss: 1.401, training accuracy: 0.533, validation accuracy: 0.403
+[Epoch 066] loss: 1.398, training accuracy: 0.531, validation accuracy: 0.403
+[Epoch 067] loss: 1.402, training accuracy: 0.528, validation accuracy: 0.406
+[Epoch 068] loss: 1.398, training accuracy: 0.531, validation accuracy: 0.410
+New best validation accuracy, saving model to model_best.h5
+[Epoch 069] loss: 1.396, training accuracy: 0.532, validation accuracy: 0.409
+[Epoch 070] loss: 1.394, training accuracy: 0.534, validation accuracy: 0.406
+[Epoch 071] loss: 1.393, training accuracy: 0.535, validation accuracy: 0.407
+[Epoch 072] loss: 1.393, training accuracy: 0.532, validation accuracy: 0.405
+[Epoch 073] loss: 1.394, training accuracy: 0.535, validation accuracy: 0.407
+[Epoch 074] loss: 1.389, training accuracy: 0.534, validation accuracy: 0.406
+[Epoch 075] loss: 1.392, training accuracy: 0.533, validation accuracy: 0.409
+[Epoch 076] loss: 1.387, training accuracy: 0.534, validation accuracy: 0.406
+[Epoch 077] loss: 1.387, training accuracy: 0.532, validation accuracy: 0.409
+[Epoch 078] loss: 1.387, training accuracy: 0.534, validation accuracy: 0.407
+[Epoch 079] loss: 1.384, training accuracy: 0.536, validation accuracy: 0.409
+[Epoch 080] loss: 1.384, training accuracy: 0.535, validation accuracy: 0.409
+[Epoch 081] loss: 1.385, training accuracy: 0.534, validation accuracy: 0.409
+[Epoch 082] loss: 1.384, training accuracy: 0.534, validation accuracy: 0.409
+[Epoch 083] loss: 1.382, training accuracy: 0.534, validation accuracy: 0.407
+[Epoch 084] loss: 1.381, training accuracy: 0.536, validation accuracy: 0.408
+[Epoch 085] loss: 1.380, training accuracy: 0.539, validation accuracy: 0.407
+[Epoch 086] loss: 1.377, training accuracy: 0.538, validation accuracy: 0.406
+[Epoch 087] loss: 1.380, training accuracy: 0.535, validation accuracy: 0.408
+[Epoch 088] loss: 1.378, training accuracy: 0.537, validation accuracy: 0.406
+[Epoch 089] loss: 1.379, training accuracy: 0.537, validation accuracy: 0.410

@@ -1,0 +1,30 @@
+% !TeX root = ../dlvc.tex
+\begin{tikzpicture}
+\begin{axis}[
+	height=300pt
+,	xlabel={Epoch}
+,	ylabel={Accuracy (\%)}
+,	width=1\textwidth
+,	xtick={20,40,...,200}
+,	ticks=major
+,	xmajorgrids
+, 	major grid style={line width=0.1pt,draw=gray!30}
+,	xmin = 0
+,	xmax = 200
+%,	ymin=20
+%,	ymax=42
+,	legend cell align=left
+,	legend pos=north west]
+%\addplot[plotA]{sin(x)};
+%\addplot [clickable coords,LplotD]table[x index=0,y index=1, meta index = 0] {./data/a2/softmaxtinycifar10data.txt};\addlegendentry{Loss}
+\addplot [clickable coords,LplotA]table[x index=0,y index=2, meta index = 0] {./data/a2/softmaxtinycifar10data.txt};\addlegendentry{Training accuracy TC10}
+
+%\addplot [clickable coords,LplotC]table[x index=0,y index=4, meta index = 0] {./data/a2/softmaxtinycifar10data.txt};\addlegendentry{L1 norm, raw vector \ \ }
+\addplot [clickable coords,LplotD]table[x index=0,y index=2, meta index = 0] {./data/a2/softmaxhogdata.txt};\addlegendentry{Training accuracy HOG}
+\addplot [clickable coords,LplotE]table[x index=0,y index=3, meta index = 0] {./data/a2/softmaxhogdata.txt};\addlegendentry{Val. accuracy HOG}%\addplot [clickable 
+
+\addplot [clickable coords,LplotB]table[x index=0,y index=3, meta index = 0] {./data/a2/softmaxtinycifar10data.txt};\addlegendentry{Val. accuracy TC10}
+%\addplot[clickable coords,black!30!red,mark=square,ultra thick,only marks,forget plot]table[x index=0,y index=1, meta index = 0] {./data/a1-test.txt};\label{plt:t1}
+%\addplot[clickable coords,black!30!red,mark=pentagon*,thick,only marks,forget plot]table[x index=0,y index=2, meta index = 0] {./data/a1-test.txt};\label{plt:t2}
+\end{axis}
+\end{tikzpicture}
