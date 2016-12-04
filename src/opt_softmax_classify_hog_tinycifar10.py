@@ -132,7 +132,7 @@ for learningRate in range(1,10,3):
                 break
 
 print("Testing best model (learning rate={}, weight decay={}) on test set ...".format(bestLearningRate,bestWeightDecay))
-print(" [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches, test_batch.batchsize()))
+print(" [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
 model.load_weights("../" + fileNameModelGlobal)
 test_batch.shuffle()
