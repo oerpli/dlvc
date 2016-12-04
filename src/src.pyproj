@@ -6,7 +6,7 @@
     <ProjectGuid>be0071fd-37cd-4ab2-bfd0-2f88d1b4ba6d</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>softmax_classify_tinycifar10.py</StartupFile>
+    <StartupFile>opt_softmax_classify_hog_tinycifar10.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -65,6 +65,7 @@
     <Compile Include="SampleTransformation.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="opt_softmax_classify_hog_tinycifar10.py" />
     <Compile Include="softmax_classify_hog_tinycifar10.py" />
     <Compile Include="SubtractionTransformation.py">
       <SubType>Code</SubType>

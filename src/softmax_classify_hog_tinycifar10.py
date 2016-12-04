@@ -41,14 +41,14 @@ transformationSequence.add_transformation(scale)
 print("Setting up preprocessing ...")
 print(" Adding {}".format(type(floatCast).__name__))
 print(" Adding {} [train] (value: {:02.2f})".format(type(offset).__name__,offset.value))
-print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value)) 
+print(" Adding {} [train] (value: {:02.2f})".format(type(scale).__name__,scale.value))
 
 print("Initializing minibatch generators ...")
 
 train_batch = MiniBatchGenerator(train,64,transformationSequence)
 val_batch = MiniBatchGenerator(val,100,transformationSequence)
 
-train_batch.create();
+train_batch.create()
 
 print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
 print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
@@ -72,11 +72,12 @@ for epoch in range(0,epochs):
     loss = []
     acc_t = []
     acc_v = []
+    train_batch.shuffle()
     for bid in range(0,train_batch.nbatches()):
         # train classifier
         b = train_batch.batch(bid)
-        features = b[0];
-        labels = to_categorical(b[1],10);
+        features = b[0]
+        labels = to_categorical(b[1],10)
         metrics = model.train_on_batch(features, labels)
         # store loss and accuracy
         loss.append(metrics[0])
@@ -85,11 +86,11 @@ for epoch in range(0,epochs):
     for bid in range(0,val_batch.nbatches()):
         b = val_batch.batch(bid)
         # test classifier
-        features = b[0];
-        labels = to_categorical(b[1],10);
+        features = b[0]
+        labels = to_categorical(b[1],10)
         metrics = model.test_on_batch(features, labels)
         y = model.predict_on_batch(features)
-        # store validation accuracy 
+        # store validation accuracy
         acc_v.append(metrics[1])
 
     # compute means over loss & accurracy
@@ -103,9 +104,10 @@ for epoch in range(0,epochs):
         bestAccuracy = m_acc_v
         bestAccuracyAtEpoch = epoch
         print("New best validation accuracy, saving model to {}".format(fileNameModel))
-        model.save("../"+fileNameModel);
-    elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement: 
+        model.save("../" + fileNameModel)
+    elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
         print("Validation accuracy did not improve for {} epochs, stopping".format(maxEpochWithoutImprovement))
+        print("Best validation accuracy: {:02.2f} (epoch {})".format(bestAccuracy,bestAccuracyAtEpoch))
         break
 
 
