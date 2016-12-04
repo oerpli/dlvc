@@ -128,9 +128,11 @@ for learningRate in range(1,10,3):
                     bestWeightDecay = weightDecay
                     model.save("../" + fileNameModelGlobal)
             elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
-                print("  learning rate={}, weight decay={}, accuracy: {:02.2f} (epoch {})".format(learningRate,weightDecay,bestAccuracy,bestAccuracyAtEpoch))
+                print("\r  learning rate={}, weight decay={}, accuracy: {:02.2f} (epoch {})".format(learningRate,weightDecay,bestAccuracy,bestAccuracyAtEpoch))
                 break
+            print("\r  Epochs={:2.1%} no impr={:0>3.0%}, acc={:02.2f}, acc global={:02.2f}".format((epoch / epochs), ((epoch - bestAccuracyAtEpoch) / maxEpochWithoutImprovement), bestAccuracy, bestAccuracyGlobal),end="", flush=True)
 
+print("")
 print("Testing best model (learning rate={}, weight decay={}) on test set ...".format(bestLearningRate,bestWeightDecay))
 print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
