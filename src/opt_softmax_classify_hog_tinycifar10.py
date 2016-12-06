@@ -5,6 +5,7 @@ from keras.optimizers import SGD
 from ImageVectorizer import ImageVectorizer
 from MiniBatchGenerator import MiniBatchGenerator
 import numpy as np
+import math
 
 from SubtractionTransformation import SubtractionTransformation
 from DivisionTransformation import DivisionTransformation
@@ -66,9 +67,9 @@ bestWeightDecay = 0.0
 fileNameModelGlobal = "model_best_global.h5"
 
 for learningRate in range(5,30,5):
-    learningRate /= 10000
-    for weightDecay in range(2,20,4):
-        weightDecay /= 100
+    learningRate /= 1000
+    for weightDecayPow in range(10,20,2):
+        weightDecay = 1 / math.pow(2,weightDecayPow)
         model = Sequential()
         model.add(Dense(output_dim=10, input_dim=144))
         model.add(Activation('softmax'))
