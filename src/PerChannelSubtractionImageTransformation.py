@@ -16,7 +16,10 @@ class PerChannelSubtractionImageTransformation(SampleTransformation):
         if tform == None:
             tform = IdentityTransformation()
         meanSums = []
-        channelCount = dataset.data.shape[3]
+        
+        channelPos = len(dataset.data.shape)-1
+        channelCount = dataset.data.shape[channelPos]
+
         for channel in range(0, channelCount):
             meanSums.append(0);
 

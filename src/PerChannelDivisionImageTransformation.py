@@ -1,5 +1,6 @@
 from IdentityTransformation import IdentityTransformation
 from SampleTransformation import SampleTransformation
+import numpy as np
 
 class PerChannelDivisionImageTransformation(SampleTransformation):
     # Perform per-channel division of of image samples with a scalar.
@@ -16,17 +17,24 @@ class PerChannelDivisionImageTransformation(SampleTransformation):
         if(tform == None):
             tform = IdentityTransformation()
 
-        channelCount = dataset.data.shape[3]
+        channelPos = len(dataset.data.shape)-1
+        channelCount = dataset.data.shape[channelPos]
 
         samples = dataset.sample(0)[0]
         datasetSize = dataset.size()
-        s = (datasetSize,) + samples.shape
+        s = (datasetSize,) + dataset.sample(0)[0].shape[0:(channelPos-1)]
         samples = np.resize(samples,s)
-        stds = [] 
+        samples = np.zeros_like(samples)
+        for i in range(0, datasetSize):
+            sample = dataset.sample(i)[0];
+            for channel in range(0, channelCount):
+                samples[i,...] = sample[...,channel]
+
+
         for channel in range(0, channelCount):
-            channelSample = samples[...,channel]
-            stds.append(samples.std())
-        return PerChannelDivisionImageTransformation(std)
+            stds[channel] =samples[...,channel].std
+
+        return PerChannelDivisionImageTransformation(stds)
 
     def __init__(self, values):
         # Constructor.
