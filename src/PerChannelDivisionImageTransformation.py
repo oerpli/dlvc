@@ -4,8 +4,8 @@ import numpy as np
 
 class PerChannelDivisionImageTransformation(SampleTransformation):
     # Perform per-channel division of of image samples with a scalar.
-    value = []
-    channels = int
+    values = []
+
 
     @staticmethod
     def from_dataset_stddev(dataset, tform=None):
@@ -22,17 +22,19 @@ class PerChannelDivisionImageTransformation(SampleTransformation):
 
         samples = dataset.sample(0)[0]
         datasetSize = dataset.size()
-        s = (datasetSize,) + dataset.sample(0)[0].shape[0:(channelPos-1)]
+#        s = (datasetSize,) + dataset.sample(0)[0].shape[0:(channelPos-1)]
+        s = (datasetSize,) + dataset.sample(0)[0].shape
         samples = np.resize(samples,s)
         samples = np.zeros_like(samples)
+        stds = []
         for i in range(0, datasetSize):
             sample = dataset.sample(i)[0];
             for channel in range(0, channelCount):
-                samples[i,...] = sample[...,channel]
+                samples[i,...,channel] = sample[...,channel]
 
 
         for channel in range(0, channelCount):
-            stds[channel] =samples[...,channel].std
+            stds.append(samples[...,channel].std())
 
         return PerChannelDivisionImageTransformation(stds)
 
@@ -41,7 +43,7 @@ class PerChannelDivisionImageTransformation(SampleTransformation):
         # values is a vector of c divisors, one per channel.
         # c can be any value > 0.
         self.values = values;
-        self.channels = len(values)
+
 
     def apply(self, sample):
         # Apply the transformation and return the transformed version.

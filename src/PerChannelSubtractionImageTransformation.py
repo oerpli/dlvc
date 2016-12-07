@@ -4,7 +4,6 @@ from SampleTransformation import SampleTransformation
 class PerChannelSubtractionImageTransformation(SampleTransformation):
     # Perform per-channel subtraction of of image samples with a scalar.
     values = []
-    channelCount = int
 
     @staticmethod
     def from_dataset_mean(dataset, tform=None):
@@ -39,7 +38,6 @@ class PerChannelSubtractionImageTransformation(SampleTransformation):
         # values is a vector of c values to subtract, one per channel.
         # c can be any value > 0.
         self.values = values;
-        self.channels = len(values)
 
     def apply(self, sample):
         # Apply the transformation and return the transformed version.
