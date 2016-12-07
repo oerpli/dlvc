@@ -24,7 +24,6 @@ cifar10_classnames = {  0: 'airplane',
                         7: 'horse',
                         8: 'ship',
                         9: 'truck'}
-
 dir = '../../../datasets/cifar10/tinycifar10-hog/'
 train = ImageVectorizer(HDF5FeatureVectorDataset(dir + 'features_tinycifar10_train.h5',cifar10_classnames))
 val = ImageVectorizer(HDF5FeatureVectorDataset(dir + 'features_tinycifar10_val.h5',cifar10_classnames))
@@ -66,10 +65,11 @@ bestWeightDecay = 0.0
 
 fileNameModelGlobal = "model_best_global.h5"
 
-for learningRate in range(5,30,5):
-    learningRate /= 1000
-    for weightDecayPow in range(10,20,2):
-        weightDecay = 1 / math.pow(2,weightDecayPow)
+for learningRatePow in range(1,5,1): #was 5,30,5
+    learningRate = 1 / math.pow(5,learningRatePow)
+    for weightDecayPow in range(1,5,1):
+        weightDecay = 1 / math.pow(7,weightDecayPow)
+        print("Training with learning rate:{:01.6f} deacy:{:01.6f}".format(learningRate,weightDecay))
         model = Sequential()
         model.add(Dense(output_dim=10, input_dim=144))
         model.add(Activation('softmax'))
@@ -78,7 +78,7 @@ for learningRate in range(5,30,5):
         sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=False)
         model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
 
-        epochs = 200
+        epochs = 200 # TODO CHANGE TO 200
         bestAccuracy = 0.0
         bestAccuracyAtEpoch = 0
         maxEpochWithoutImprovement = 20 # TODO CHANGE TO 20
