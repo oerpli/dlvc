@@ -9,15 +9,18 @@ class PerChannelDivisionImageTransformation(SampleTransformation):
 
     @staticmethod
     def from_dataset_stddev(dataset, tform=None):
-        # Return a transformation that will divide by the global standard deviation
-        # over all samples and features in a dataset, independently for every color channel.
-        # tform is an optional SampleTransformation to apply before computation.
+        # Return a transformation that will divide by the global standard
+        # deviation
+        # over all samples and features in a dataset, independently for every
+        # color channel.
+        # tform is an optional SampleTransformation to apply before
+        # computation.
         # samples must be 3D tensors with shape [rows,cols,channels].
         # rows, cols, channels can be arbitrary values > 0.
         if(tform == None):
             tform = IdentityTransformation()
 
-        channelPos = len(dataset.data.shape)-1
+        channelPos = len(dataset.data.shape) - 1
         channelCount = dataset.data.shape[channelPos]
 
         samples = dataset.sample(0)[0]
@@ -28,7 +31,7 @@ class PerChannelDivisionImageTransformation(SampleTransformation):
         samples = np.zeros_like(samples)
         stds = []
         for i in range(0, datasetSize):
-            sample = dataset.sample(i)[0];
+            sample = dataset.sample(i)[0]
             for channel in range(0, channelCount):
                 samples[i,...,channel] = sample[...,channel]
 
@@ -42,7 +45,7 @@ class PerChannelDivisionImageTransformation(SampleTransformation):
         # Constructor.
         # values is a vector of c divisors, one per channel.
         # c can be any value > 0.
-        self.values = values;
+        self.values = values
 
 
     def apply(self, sample):
