@@ -69,11 +69,11 @@ print("Initializing CNN and optimizer ...")
 model = Sequential()
 model.add(Lay.InputLayer(input_shape = (3,32,32)))
 model.add(Lay.Convolution2D(16, 3 , 3, border_mode='same', activation='relu'))
-model.add(Lay.MaxPooling2D((2,2)))
+model.add(Lay.MaxPooling2D((2,2), strides=(2,2),dim_ordering="th"))
 model.add(Lay.Convolution2D(32,3,3, border_mode='same',activation = 'relu'))
-model.add(Lay.MaxPooling2D((2,2)))
+model.add(Lay.MaxPooling2D((2,2), strides=(2,2),dim_ordering="th"))
 model.add(Lay.Convolution2D(32,3,3, border_mode='same',activation = 'relu'))
-model.add(Lay.MaxPooling2D((2,2)))
+model.add(Lay.MaxPooling2D((2,2), strides=(2,2),dim_ordering="th"))
 model.add(Lay.Flatten())
 model.add(Lay.Dense(output_dim = 10,activation = 'softmax'))
 
@@ -127,7 +127,7 @@ for epoch in range(0,epochs):
         bestAccuracy = m_acc_v
         bestAccuracyAtEpoch = epoch
         print("New best validation accuracy, saving model to {}".format(fileNameModel))
-        model.save("../" + fileNameModel)
+        model.save(fileNameModel)
     elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
         print("Validation accuracy did not improve for {} epochs, stopping".format(maxEpochWithoutImprovement))
         print("Best validation accuracy: {:02.2f} (epoch {})".format(bestAccuracy,bestAccuracyAtEpoch))
