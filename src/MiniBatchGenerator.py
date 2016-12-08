@@ -76,7 +76,7 @@ class MiniBatchGenerator:
         if bid + 1 == self.nbatches(): # fix size if it's the last batch
             if self.data.size() % self.batchsize() != 0:
                 bs = self.data.size() % self.batchsize()
-        s = (bs,) + samples.shape
+        s = (bs,) + self.transformation.apply(samples).shape # use transformed shape
         samples = np.resize(samples,s)
         x = samples.shape
         # add remaning bs - 1 elements
