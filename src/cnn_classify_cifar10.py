@@ -33,9 +33,9 @@ cifar10_classnames = {  0: 'airplane',
 print("Loading Cifar10Dataset ...")
 dir = "../../../datasets/cifar10/cifar-10-batches-py"
 dataSetName = 'train'
-train = TinyCifar10Dataset(dir,dataSetName) # TODO replace with Cifar10 instead of tinycifar
+train = Cifar10Dataset(dir,dataSetName) # TODO replace with Cifar10 instead of tinycifar
 dataSetName = 'val'
-val = TinyCifar10Dataset(dir,dataSetName) # TODO replace with Cifar10 instead of tinycifar
+val = Cifar10Dataset(dir,dataSetName) # TODO replace with Cifar10 instead of tinycifar
 floatCast = FloatCastTransformation()
 offset = PerChannelSubtractionImageTransformation.from_dataset_mean(train)
 scale = PerChannelDivisionImageTransformation.from_dataset_stddev(train)

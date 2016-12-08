@@ -1,6 +1,5 @@
 
 from IdentityTransformation import IdentityTransformation
-import theano.tensor as T
 from SampleTransformation import SampleTransformation
 import numpy as np
 
