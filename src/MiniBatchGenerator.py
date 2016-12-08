@@ -78,7 +78,7 @@ class MiniBatchGenerator:
                 bs = self.data.size() % self.batchsize()
         s = (bs,) + self.transformation.apply(samples).shape # use transformed shape
         samples = np.resize(samples,s)
-        x = samples.shape
+        #x = self.transformation.apply(samples).shape
         # add remaning bs - 1 elements
         for i in range(bid * self.batchsize(), (bid + 1) * self.batchsize()):
             if i < len(self.indices):
