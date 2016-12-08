@@ -6,7 +6,7 @@
     <ProjectGuid>be0071fd-37cd-4ab2-bfd0-2f88d1b4ba6d</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>cnn_classify_cifar10.py</StartupFile>
+    <StartupFile>cnn_classify_image.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -32,9 +32,11 @@
     <Compile Include="ClassificationDataset.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="cnn_classify_image.py" />
     <Compile Include="DivisionTransformation.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ResizeImageTransformation.py" />
     <Compile Include="FloatCastTransformation.py">
       <SubType>Code</SubType>
     </Compile>
