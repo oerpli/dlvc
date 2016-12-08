@@ -60,9 +60,7 @@ floatCast = FloatCastTransformation()
 offset = PerChannelSubtractionImageTransformation(means)
 scale = PerChannelDivisionImageTransformation(stds)
 
-shape = model.input_shape
-shape = (1,) + shape[1:]
-reshape = ToTheanoFormatImageTransformation(shape)
+reshape = ToTheanoFormatImageTransformation()
 transformationSequence = TransformationSequence()
 transformationSequence.add_transformation(resize)
 transformationSequence.add_transformation(floatCast)
@@ -81,8 +79,10 @@ print("    {}".format(tfName(reshape)))
 image = transformationSequence.apply(image)
 print("  Result: shape {}, dtype: {}, mean: {:0.3f}, std: {:0.3f}".format(image.shape, image.dtype, image.mean(), image.std()))
 
+image = np.expand_dims(image,axis =0)
+
 print("Classifying image ...")
-y = model.predict(image,verbose = 1)
+y = model.predict(image,verbose = 1,batch_size = 1)
 import operator
 max_index, max_value = max(enumerate(y[0]), key=operator.itemgetter(1))
 print("  Class scores: [{}]".format(" ".join(["{:0.2f}".format(i) for i in y[0]])))

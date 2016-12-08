@@ -39,7 +39,7 @@ val = TinyCifar10Dataset(dir,dataSetName) # TODO replace with Cifar10 instead of
 floatCast = FloatCastTransformation()
 offset = PerChannelSubtractionImageTransformation.from_dataset_mean(train)
 scale = PerChannelDivisionImageTransformation.from_dataset_stddev(train)
-reshape = ToTheanoFormatImageTransformation((3,32,32))
+reshape = ToTheanoFormatImageTransformation()
 transformationSequence = TransformationSequence()
 transformationSequence.add_transformation(floatCast)
 transformationSequence.add_transformation(offset)
