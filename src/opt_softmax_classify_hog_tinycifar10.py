@@ -122,12 +122,12 @@ for learningRatePow in range(1,5,1): #was 5,30,5
                 bestAccuracyAtEpoch = epoch
                 #print("New best validation accuracy, saving model to
                 #{}".format(fileNameModel))
-                model.save("../" + fileNameModel)
+                model.save("./" + fileNameModel)
                 if bestAccuracy > bestAccuracyGlobal:
                     bestAccuracyGlobal = bestAccuracy
                     bestLearningRate = learningRate
                     bestWeightDecay = weightDecay
-                    model.save("../" + fileNameModelGlobal)
+                    model.save("./" + fileNameModelGlobal)
             elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
                 print("\r  learning rate={}, weight decay={}, accuracy: {:02.3f} (epoch {})".format(learningRate,weightDecay,bestAccuracy,bestAccuracyAtEpoch))
                 break
@@ -137,7 +137,7 @@ print("")
 print("Testing best model (learning rate={}, weight decay={}) on test set ...".format(bestLearningRate,bestWeightDecay))
 print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
-model.load_weights("../" + fileNameModelGlobal)
+model.load_weights("./" + fileNameModelGlobal)
 test_batch.shuffle()
 acc_test = []
 m_acc_test = 0.0

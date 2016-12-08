@@ -104,7 +104,7 @@ for epoch in range(0,epochs):
         bestAccuracy = m_acc_v
         bestAccuracyAtEpoch = epoch
         print("New best validation accuracy, saving model to {}".format(fileNameModel))
-        model.save("../" + fileNameModel)
+        model.save("./" + fileNameModel)
     elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
         print("Validation accuracy did not improve for {} epochs, stopping".format(maxEpochWithoutImprovement))
         print("Best validation accuracy: {:02.2f} (epoch {})".format(bestAccuracy,bestAccuracyAtEpoch))

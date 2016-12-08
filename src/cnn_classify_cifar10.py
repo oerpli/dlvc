@@ -89,7 +89,7 @@ fileNameModel = "model_best.h5"
 epochs = 100
 bestAccuracy = 0.0
 bestAccuracyAtEpoch = 0
-maxEpochWithoutImprovement = 10
+maxEpochWithoutImprovement = 20
 print("Training for {} epochs ...".format(epochs))
 for epoch in range(0,epochs):
     loss = []
