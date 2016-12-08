@@ -6,7 +6,7 @@
     <ProjectGuid>be0071fd-37cd-4ab2-bfd0-2f88d1b4ba6d</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>x_test.py</StartupFile>
+    <StartupFile>cnn_classify_cifar10.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -62,12 +62,14 @@
     <Compile Include="MiniBatchGenerator.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ToTheanoFormatImageTransformation.py" />
     <Compile Include="PerChannelDivisionImageTransformation.py" />
     <Compile Include="PerChannelSubtractionImageTransformation.py" />
     <Compile Include="SampleTransformation.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="opt_softmax_classify_hog_tinycifar10.py" />
+    <Compile Include="cnn_classify_cifar10.py" />
     <Compile Include="softmax_classify_hog_tinycifar10.py" />
     <Compile Include="SubtractionTransformation.py">
       <SubType>Code</SubType>
