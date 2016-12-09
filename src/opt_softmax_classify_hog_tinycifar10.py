@@ -65,7 +65,7 @@ bestAccuracyGlobal = 0.0
 bestLearningRate = 0.0
 bestWeightDecay = 0.0
 
-fileNameModelGlobal = "model_best_global.h5"
+fileNameModelGlobal = "model_best_global_softmax.h5"
 
 for learningRatePow in range(0,5,1): #was 5,30,5
     learningRate = 1 / math.pow(6,learningRatePow)
