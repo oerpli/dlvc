@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.utils.np_utils import to_categorical
@@ -65,11 +67,10 @@ bestWeightDecay = 0.0
 
 fileNameModelGlobal = "model_best_global.h5"
 
-for learningRatePow in range(1,5,1): #was 5,30,5
-    learningRate = 1 / math.pow(5,learningRatePow)
-    for weightDecayPow in range(1,5,1):
-        weightDecay = 1 / math.pow(7,weightDecayPow)
-        print("Training with learning rate:{:01.6f} deacy:{:01.6f}".format(learningRate,weightDecay))
+for learningRatePow in range(0,5,1): #was 5,30,5
+    learningRate = 1 / math.pow(6,learningRatePow)
+    for weightDecayPow in range(0,5,1):
+        weightDecay = 1 / math.pow(6,weightDecayPow)
         model = Sequential()
         model.add(Dense(output_dim=10, input_dim=144))
         model.add(Activation('softmax'))
@@ -129,12 +130,12 @@ for learningRatePow in range(1,5,1): #was 5,30,5
                     bestWeightDecay = weightDecay
                     model.save("./" + fileNameModelGlobal)
             elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
-                print("\r  learning rate={}, weight decay={}, accuracy: {:02.3f} (epoch {})".format(learningRate,weightDecay,bestAccuracy,bestAccuracyAtEpoch))
+                print("\r  learning rate={:01.5f}, weight decay={:01.5f}, accuracy: {:02.3f} (epoch {})".format(learningRate,weightDecay,bestAccuracy,bestAccuracyAtEpoch))
                 break
-            print("\r  Epochs={:2.1%} no impr={:0>3.0%}, acc={:02.2f}, acc global={:02.2f}".format((epoch / epochs), ((epoch - bestAccuracyAtEpoch) / maxEpochWithoutImprovement), bestAccuracy, bestAccuracyGlobal),end="", flush=True)
+           # print("\r  Epochs={:2.1%} no impr={:0>3.0%}, acc={:02.2f}, acc global={:02.2f}".format((epoch / epochs), ((epoch - bestAccuracyAtEpoch) / maxEpochWithoutImprovement), bestAccuracy, bestAccuracyGlobal),end="", flush=True)
 
 print("")
-print("Testing best model (learning rate={}, weight decay={}) on test set ...".format(bestLearningRate,bestWeightDecay))
+print("Testing best model (learning rate={:01.5f}, weight decay={:01.5f}) on test set ...".format(bestLearningRate,bestWeightDecay))
 print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
 model.load_weights("./" + fileNameModelGlobal)
