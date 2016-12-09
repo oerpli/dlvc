@@ -142,8 +142,8 @@ model.load_weights("./" + fileNameModelGlobal)
 test_batch.shuffle()
 acc_test = []
 m_acc_test = 0.0
-for bid in range(0,val_batch.nbatches()):
-    b = val_batch.batch(bid)
+for bid in range(0,test_batch.nbatches()):
+    b = test_batch.batch(bid)
     # test classifier
     features = b[0]
     labels = to_categorical(b[1],10)
