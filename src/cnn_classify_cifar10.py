@@ -33,9 +33,12 @@ cifar10_classnames = {  0: 'airplane',
 print("Loading Cifar10Dataset ...")
 dir = "../../../datasets/cifar10/cifar-10-batches-py"
 dataSetName = 'train'
-train = Cifar10Dataset(dir,dataSetName) # TODO replace with Cifar10 instead of tinycifar
+train = Cifar10Dataset(dir,dataSetName) 
 dataSetName = 'val'
-val = Cifar10Dataset(dir,dataSetName) # TODO replace with Cifar10 instead of tinycifar
+val = Cifar10Dataset(dir,dataSetName)
+dataSetName = 'test'
+test = Cifar10Dataset(dir,dataSetName) 
+
 floatCast = FloatCastTransformation()
 offset = PerChannelSubtractionImageTransformation.from_dataset_mean(train)
 scale = PerChannelDivisionImageTransformation.from_dataset_stddev(train)
@@ -58,8 +61,11 @@ print("Initializing minibatch generators ...")
 
 train_batch = MiniBatchGenerator(train,64,transformationSequence)
 val_batch = MiniBatchGenerator(val,100,transformationSequence)
+test_batch = MiniBatchGenerator(test,100,transformationSequence)
 
-train_batch.create()
+#train_batch.create() not needed?
+#val_batch.create()
+#test_batch.create()
 
 print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
 print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
@@ -84,9 +90,9 @@ learningRate = 0.001
 sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
 
-fileNameModel = "model_best.h5"
+fileNameModel = "model_cnn_best.h5"
 
-epochs = 100
+epochs = 200  #TODO set to 200
 bestAccuracy = 0.0
 bestAccuracyAtEpoch = 0
 maxEpochWithoutImprovement = 20
@@ -133,6 +139,26 @@ for epoch in range(0,epochs):
         print("Best validation accuracy: {:02.2f} (epoch {})".format(bestAccuracy,bestAccuracyAtEpoch))
         break
 
+print("")
+print("Testing model on test set ...")
+print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
+model.load_weights("./" + fileNameModel)
+test_batch.shuffle()
+acc_test = []
+m_acc_test = 0.0
+for bid in range(0,val_batch.nbatches()):
+    b = val_batch.batch(bid)
+    # test classifier
+    features = b[0]
+    labels = to_categorical(b[1],10)
+    metrics = model.test_on_batch(features, labels)
+    y = model.predict_on_batch(features)
+    # store validation accuracy
+    acc_test.append(metrics[1])
+    # compute mean of accurracy
+    m_acc_test = np.mean(acc_test)
+
+print("  Accuracy: {:0.2%}".format(m_acc_test))
 
 print("Done")
