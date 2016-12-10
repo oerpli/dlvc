@@ -79,8 +79,8 @@ model.add(Lay.Flatten())
 model.add(Lay.Dense(output_dim = 10,activation = 'softmax'))
 
 
-weightDecay = 0.001
-learningRate = 0.0001
+weightDecay = 0.0001
+learningRate = 0.001
 
 sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
