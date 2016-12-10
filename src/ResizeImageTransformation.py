@@ -17,8 +17,8 @@ class ResizeImageTransformation(SampleTransformation):
         if rows < cols:
             if rows < self.smallerSize:
                 raise NameError("Invalid image. Size too small")
-            return t.resize(sample, (self.smallerSize, cols * self.smallerSize / rows,x), preserve_range=True)
+            return t.resize(sample, (self.smallerSize, int(cols * self.smallerSize / rows),x), preserve_range=True)
         else:
             if rows < self.smallerSize:
                 raise NameError("Invalid image. Size too small")
-            return t.resize(sample, (rows * self.smallerSize / cols ,self.smallerSize,x), preserve_range=True)
+            return t.resize(sample, (int(rows * self.smallerSize / cols) ,self.smallerSize,x), preserve_range=True)
