@@ -71,7 +71,7 @@ class MiniBatchGenerator:
         labels = []
         ids = []
 
-        samples = self.data.sample(0)[0]
+        samples = self.transformation.apply(self.data.sample(0)[0])
         bs = self.batchsize() # default batch size
         if bid + 1 == self.nbatches(): # fix size if it's the last batch
             if self.data.size() % self.batchsize() != 0:

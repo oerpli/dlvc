@@ -60,9 +60,10 @@ train_batch = MiniBatchGenerator(train,64,transformationSequence)
 val_batch = MiniBatchGenerator(val,100,transformationSequence)
 test_batch = MiniBatchGenerator(test,100,transformationSequence)
 
-#train_batch.create() not needed?
+#train_batch.create()
 #val_batch.create()
 #test_batch.create()
+
 print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
 print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
 print()
@@ -89,7 +90,7 @@ print()
 model.summary()
 print()
 
-fileNameModel = "model_cnn_best_ah.h5"
+fileNameModel = "model_cnn_best.h5"
 
 epochs = 100  #TODO set to 100
 bestAccuracy = 0.0
