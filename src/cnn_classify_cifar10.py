@@ -1,5 +1,7 @@
 from keras.models import Sequential
 import keras.layers as Lay
+import keras as k
+
 
 from keras.utils.np_utils import to_categorical
 from keras.optimizers import SGD
