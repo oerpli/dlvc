@@ -33,11 +33,11 @@ cifar10_classnames = {  0: 'airplane',
 print("Loading Cifar10Dataset ...")
 dir = "../../../datasets/cifar10/cifar-10-batches-py"
 dataSetName = 'train'
-train = Cifar10Dataset(dir,dataSetName) 
+train = Cifar10Dataset(dir,dataSetName)
 dataSetName = 'val'
 val = Cifar10Dataset(dir,dataSetName)
 dataSetName = 'test'
-test = Cifar10Dataset(dir,dataSetName) 
+test = Cifar10Dataset(dir,dataSetName)
 
 floatCast = FloatCastTransformation()
 offset = PerChannelSubtractionImageTransformation.from_dataset_mean(train)
@@ -47,16 +47,13 @@ transformationSequence = TransformationSequence()
 transformationSequence.add_transformation(floatCast)
 transformationSequence.add_transformation(offset)
 transformationSequence.add_transformation(scale)
-transformationSequence.add_transformation(reshape)
-
-
+#transformationSequence.add_transformation(reshape)
 print("Setting up preprocessing ...")
-print(" Adding {}".format(type(floatCast).__name__))
-# TODO add these two lines again and fix bug
-#print(" Adding {} [train] (value:
-#{:02.2f})".format(type(offset).__name__,offset.values()))
-#print(" Adding {} [train] (value:
-#{:02.2f})".format(type(scale).__name__,scale.values()))
+def tfName(tf):
+    return type(tf).__name__
+print(" Adding {}".format(tfName(floatCast)))
+print(" Adding {} [train] (value:{}".format(tfName(offset)," ".join(["{:0.4f}".format(i) for i in offset.values])))
+print(" Adding {} [train] (value:{}".format(tfName(scale)," ".join(["{:0.4f}".format(i) for i in scale.values])))
 print("Initializing minibatch generators ...")
 
 train_batch = MiniBatchGenerator(train,64,transformationSequence)
@@ -66,36 +63,38 @@ test_batch = MiniBatchGenerator(test,100,transformationSequence)
 #train_batch.create() not needed?
 #val_batch.create()
 #test_batch.create()
-
 print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
 print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
-
+print()
 print("Initializing CNN and optimizer ...")
 
 model = Sequential()
-model.add(Lay.InputLayer(input_shape = (3,32,32)))
-model.add(Lay.Convolution2D(16, 3 , 3, border_mode='same', activation='relu'))
-model.add(Lay.MaxPooling2D((2,2), strides=(2,2),dim_ordering="th"))
-model.add(Lay.Convolution2D(32,3,3, border_mode='same',activation = 'relu'))
-model.add(Lay.MaxPooling2D((2,2), strides=(2,2),dim_ordering="th"))
-model.add(Lay.Convolution2D(32,3,3, border_mode='same',activation = 'relu'))
-model.add(Lay.MaxPooling2D((2,2), strides=(2,2),dim_ordering="th"))
+model.add(Lay.Convolution2D(16,3,3,input_shape = (32,32,3),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
+model.add(Lay.Convolution2D(32,3,3,border_mode='same',activation = 'relu',dim_ordering="tf"))
+model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
+model.add(Lay.Convolution2D(32,3,3,border_mode='same',activation = 'relu',dim_ordering="tf"))
+model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
 model.add(Lay.Flatten())
 model.add(Lay.Dense(output_dim = 10,activation = 'softmax'))
 
 
-weightDecay = 0.0001
-learningRate = 0.001
+weightDecay = 0.001
+learningRate = 0.0001
 
 sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
 
-fileNameModel = "model_cnn_best.h5"
+print()
+model.summary()
+print()
 
-epochs = 200  #TODO set to 200
+fileNameModel = "model_cnn_best_ah.h5"
+
+epochs = 100  #TODO set to 100
 bestAccuracy = 0.0
 bestAccuracyAtEpoch = 0
-maxEpochWithoutImprovement = 20
+maxEpochWithoutImprovement = 10
 print("Training for {} epochs ...".format(epochs))
 for epoch in range(0,epochs):
     loss = []
