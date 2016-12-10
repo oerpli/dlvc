@@ -52,8 +52,8 @@ print("Setting up preprocessing ...")
 def tfName(tf):
     return type(tf).__name__
 print(" Adding {}".format(tfName(floatCast)))
-print(" Adding {} [train] (value:{}".format(tfName(offset)," ".join(["{:0.4f}".format(i) for i in offset.values])))
-print(" Adding {} [train] (value:{}".format(tfName(scale)," ".join(["{:0.4f}".format(i) for i in scale.values])))
+print(" Adding {} [train] (value:{})".format(tfName(offset)," ".join(["{:0.2f}".format(i) for i in offset.values])))
+print(" Adding {} [train] (value:{})".format(tfName(scale)," ".join(["{:0.2f}".format(i) for i in scale.values])))
 print("Initializing minibatch generators ...")
 
 train_batch = MiniBatchGenerator(train,64,transformationSequence)
@@ -85,8 +85,6 @@ learningRate = 0.001
 
 sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
-
-print()
 model.summary()
 print()
 
