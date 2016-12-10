@@ -1,6 +1,5 @@
 #!/bin/bash
 #PBS -m bea
-#PBS -M oerpli@outlook.com
 
 # Request free GPU
 export CUDA_VISIBLE_DEVICES=$(getFreeGPU)
