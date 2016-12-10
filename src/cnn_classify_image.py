@@ -14,9 +14,10 @@ from PerChannelSubtractionImageTransformation import PerChannelSubtractionImageT
 from IdentityTransformation import IdentityTransformation
 from FloatCastTransformation import FloatCastTransformation
 from TransformationSequence import TransformationSequence
-from ToTheanoFormatImageTransformation import ToTheanoFormatImageTransformation
+#from ToTheanoFormatImageTransformation import ToTheanoFormatImageTransformation
 from HDF5FeatureVectorDataset import HDF5FeatureVectorDataset
 from ResizeImageTransformation import ResizeImageTransformation
+
 
 
 cifar10_classnames = {  0: 'airplane',
@@ -83,8 +84,8 @@ transformationSequence.add_transformation(resize)
 transformationSequence.add_transformation(floatCast)
 transformationSequence.add_transformation(offset)
 transformationSequence.add_transformation(scale)
-#transformationSequence.add_transformation(reshape) # not needed as we use tf now
 
+#transformationSequence.add_transformation(reshape)
 
 print("Preprocessing image ...")
 print("  Transformations in order:")

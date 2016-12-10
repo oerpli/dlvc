@@ -141,12 +141,18 @@ print("")
 print("Testing model on test set ...")
 print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
-model.load_weights("./" + fileNameModel)
+#model.load_weights("./" + fileNameModel)
+model = k.models.load_model("./" + fileNameModel)
+
 test_batch.shuffle()
 acc_test = []
 m_acc_test = 0.0
-for bid in range(0,val_batch.nbatches()):
-    b = val_batch.batch(bid)
+
+pred = [0] * 10
+classcount = [0] * 10
+
+for bid in range(0,test_batch.nbatches()):
+    b = test_batch.batch(bid)
     # test classifier
     features = b[0]
     labels = to_categorical(b[1],10)
@@ -158,5 +164,9 @@ for bid in range(0,val_batch.nbatches()):
     m_acc_test = np.mean(acc_test)
 
 print("  Accuracy: {:0.2%}".format(m_acc_test))
+acc = []
+for i in range(0,10):
+    acc.append(pred[i]/classcount[i])
+print("  Accuracy per class: {}".format(niceList(acc)))
 
 print("Done")
