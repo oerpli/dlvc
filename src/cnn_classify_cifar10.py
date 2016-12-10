@@ -1,6 +1,7 @@
 from keras.models import Sequential
 import keras.layers as Lay
 import keras as k
+import operator
 
 
 from keras.utils.np_utils import to_categorical
@@ -53,9 +54,12 @@ transformationSequence.add_transformation(scale)
 print("Setting up preprocessing ...")
 def tfName(tf):
     return type(tf).__name__
+def niceList(floatlist):
+    return ", ".join(["{:0.2f}".format(i) for i in floatlist])
+
 print(" Adding {}".format(tfName(floatCast)))
-print(" Adding {} [train] (value:{})".format(tfName(offset)," ".join(["{:0.2f}".format(i) for i in offset.values])))
-print(" Adding {} [train] (value:{})".format(tfName(scale)," ".join(["{:0.2f}".format(i) for i in scale.values])))
+print(" Adding {} [train] (value:{})".format(tfName(offset),niceList(offset.values)))
+print(" Adding {} [train] (value:{})".format(tfName(scale),niceList(scale.values)))
 print("Initializing minibatch generators ...")
 
 train_batch = MiniBatchGenerator(train,64,transformationSequence)
@@ -165,10 +169,18 @@ for bid in range(0,test_batch.nbatches()):
     # compute mean of accurracy
     m_acc_test = np.mean(acc_test)
 
-print("  Accuracy: {:0.2%}".format(m_acc_test))
+    correct = b[1]
+    for i in range(0,features.shape[0]):
+        classcount[correct[i]] += 1
+        max_index, max_value = max(enumerate(y[i]), key = operator.itemgetter(1))
+        if correct[i] == max_index:
+            pred[correct[i]] += 1
+
 acc = []
 for i in range(0,10):
     acc.append(pred[i]/classcount[i])
+
+print("  Accuracy: {:0.2%}".format(m_acc_test))
 print("  Accuracy per class: {}".format(niceList(acc)))
 
 print("Done")

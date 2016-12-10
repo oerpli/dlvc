@@ -1,0 +1,38 @@
+Setting up preprocessing ...
+  Adding FloatCastTransformation
+  Adding SubtractionTransformation [train] (value: 0.01)
+  Adding DivisionTransformation [train] (value: 0.01)
+Initializing minibatch generators ...
+  [train] 4000 samples, 63 minibatches of size 64
+  [val]   1000 samples, 10 minibatches of size 100
+Initializing softmax classifier and optimizer ...
+  learning rate=1.00000, weight decay=1.00000, accuracy: 0.391 (epoch 24)
+  learning rate=1.00000, weight decay=0.16667, accuracy: 0.386 (epoch 4)
+  learning rate=1.00000, weight decay=0.02778, accuracy: 0.410 (epoch 82)
+  learning rate=1.00000, weight decay=0.00463, accuracy: 0.380 (epoch 7)
+  learning rate=1.00000, weight decay=0.00077, accuracy: 0.398 (epoch 25)
+  learning rate=0.16667, weight decay=1.00000, accuracy: 0.379 (epoch 11)
+  learning rate=0.16667, weight decay=0.16667, accuracy: 0.406 (epoch 20)
+  learning rate=0.16667, weight decay=0.02778, accuracy: 0.411 (epoch 18)
+  learning rate=0.16667, weight decay=0.00463, accuracy: 0.415 (epoch 27)
+  learning rate=0.16667, weight decay=0.00077, accuracy: 0.407 (epoch 71)
+  learning rate=0.02778, weight decay=1.00000, accuracy: 0.247 (epoch 59)
+  learning rate=0.02778, weight decay=0.16667, accuracy: 0.380 (epoch 17)
+  learning rate=0.02778, weight decay=0.02778, accuracy: 0.407 (epoch 2)
+  learning rate=0.02778, weight decay=0.00463, accuracy: 0.416 (epoch 1)
+  learning rate=0.02778, weight decay=0.00077, accuracy: 0.411 (epoch 15)
+  learning rate=0.00463, weight decay=1.00000, accuracy: 0.124 (epoch 91)
+  learning rate=0.00463, weight decay=0.16667, accuracy: 0.253 (epoch 105)
+  learning rate=0.00463, weight decay=0.02778, accuracy: 0.377 (epoch 70)
+  learning rate=0.00463, weight decay=0.00463, accuracy: 0.418 (epoch 27)
+  learning rate=0.00463, weight decay=0.00077, accuracy: 0.422 (epoch 30)
+  learning rate=0.00077, weight decay=1.00000, accuracy: 0.139 (epoch 15)
+  learning rate=0.00077, weight decay=0.16667, accuracy: 0.133 (epoch 71)
+  learning rate=0.00077, weight decay=0.02778, accuracy: 0.214 (epoch 170)
+  learning rate=0.00077, weight decay=0.00463, accuracy: 0.355 (epoch 140)
+  learning rate=0.00077, weight decay=0.00077, accuracy: 0.411 (epoch 78)
+
+Testing best model (learning rate=0.00463, weight decay=0.00077) on test set ...
+  [test] 1000 samples, 10 minibatches of size 100
+  Accuracy: 42.50%
+Done

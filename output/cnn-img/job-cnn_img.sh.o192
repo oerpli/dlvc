@@ -1,0 +1,20 @@
+Parsing arguments ...
+  Model: model_cnn_best.h5
+  Image: cat.jpg
+  Means: 125.31, 122.91, 113.80
+  Stds:  63.05, 62.16, 66.74
+Loading image ...
+  Input shape: (78, 78, 3)
+Loading classifier ...
+  Input shape: (32, 32, 3), 10 classes
+Preprocessing image ...
+  Transformations in order:
+    ResizeImageTransformation
+    FloatCastTransformation
+    PerChannelSubtractionImageTransformation (125.31, 122.91, 113.80)
+    PerChannelSubtractionImageTransformation (63.05, 62.16, 66.74)
+  Result: shape (32, 32, 3), dtype: float32, mean: -0.009, std: 1.087
+Classifying image ...
+1/1 [==============================] - 0s
+  Class scores: [0.00, 0.00, 0.00, 0.01, 0.00, 0.00, 0.98, 0.00, 0.00, 0.00]
+  ID of most likely class: 6 (score: 0.984) - frog
