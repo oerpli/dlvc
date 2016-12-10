@@ -68,15 +68,16 @@ bestWeightDecay = 0.0
 bestHiddenLayers = 10
 
 fileNameModelGlobal = "model_best_global_mlp.h5"
-for hiddenLayers in range(10, 80, 15):
-    for learningRatePow in range(0,5,1): #was 5,30,5
+for hiddenLayers in range(30, 150, 20):
+    for learningRatePow in range(1,4,1): 
         learningRate = 1 / math.pow(6,learningRatePow)
-        for weightDecayPow in range(0,5,1):
+        for weightDecayPow in range(1,4,1):
             weightDecay = 1 / math.pow(6,weightDecayPow)
             model = Sequential()
             model.add(InputLayer(input_shape = (144,)))
             model.add(Dense(hiddenLayers, activation='relu')) 
             model.add(Dense(output_dim = 10,activation = 'softmax'))
+
 
             fileNameModel = "model_best_mlp.h5"
             sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=False)
@@ -85,7 +86,7 @@ for hiddenLayers in range(10, 80, 15):
             epochs = 200 # TODO CHANGE TO 200
             bestAccuracy = 0.0
             bestAccuracyAtEpoch = 0
-            maxEpochWithoutImprovement = 20 # TODO CHANGE TO 20
+            maxEpochWithoutImprovement = 10 # TODO CHANGE TO 20
             #print("Training for {} epochs ...".format(epochs))
             for epoch in range(0,epochs):
                 loss = []
@@ -134,7 +135,7 @@ for hiddenLayers in range(10, 80, 15):
                         bestHiddenLayers = hiddenLayers
                         model.save("./" + fileNameModelGlobal)
                 elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
-                    print("\r  learning rate={:01.5f}, weight decay={:01.5f}, accuracy: {:02.3f} (epoch {})".format(learningRate,weightDecay,bestAccuracy,bestAccuracyAtEpoch))
+                    print("\r  learning rate={:01.5f}, weight decay={:01.5f},layers={} accuracy: {:02.3f} (epoch {})".format(learningRate,weightDecay,hiddenLayers,bestAccuracy,bestAccuracyAtEpoch))
                     break
                # print("\r  Epochs={:2.1%} no impr={:0>3.0%}, acc={:02.2f}, acc global={:02.2f}".format((epoch / epochs), ((epoch - bestAccuracyAtEpoch) / maxEpochWithoutImprovement), bestAccuracy, bestAccuracyGlobal),end="", flush=True)
 
@@ -142,7 +143,16 @@ print("")
 print("Testing best model (learning rate={:01.5f}, weight decay={:01.5f}, layers={}) on test set ...".format(bestLearningRate,bestWeightDecay,bestHiddenLayers))
 print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
+model = Sequential()
+model.add(InputLayer(input_shape = (144,)))
+model.add(Dense(bestHiddenLayers, activation='relu')) 
+model.add(Dense(output_dim = 10,activation = 'softmax'))
+sgd = SGD(lr=bestLearningRate, decay=bestWeightDecay, momentum=0.9, nesterov=False) # this is redundant, since we load the weights!?!
+model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
+
 model.load_weights("./" + fileNameModelGlobal)
+model.summary()
+
 test_batch.shuffle()
 acc_test = []
 m_acc_test = 0.0
