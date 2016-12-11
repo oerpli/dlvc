@@ -1,12 +1,12 @@
 % !TeX root = ../dlvc.tex
-\newcommand{\ttitle}{Image Classification using Softmax Classifier and CNN \TODO}
+\newcommand{\ttitle}{Image Classification using Softmax Classifier and CNN}
 \hyphenation{}
 \maketitle
 \keywords{stochastic gradient descent, convolutional neural network}
 
 
 \begin{abstract}
-This is the report for the second assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to build a linear model to classify images of  the CIFAR10 dataset \TODO
+This is the report for the second assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to build a linear softmax classifier, a multilayer perceptron as well as a convolutional neural network to classify images of  the CIFAR10~\cite{CIFAR10} dataset.
 \end{abstract}
 
 
@@ -102,7 +102,7 @@ As expected the softmax classifier without early stopping had a rising training 
 \label{figparam-opt-hog6}
 \end{figure}
 
-We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see Fig.~\ref{figparam-opt-hog6} we were able to show that most combinations yield good results, but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first tests were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy with this simple softmax classifier.
+We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see Fig.~\ref{figparam-opt-hog6}) we were able to show that most combinations yield good results but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first tests were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy with this simple softmax classifier.
 
 \subsection{CNN}
 We more or less followed the task assignmend step by step. We had some problems due to the variable ordering and with outdated libraries on the server (at least it did not recognize the preserve\_range argument with python3) but apart from that everything worked more or less as expected. The classifier had quite good results, reaching 71.3\% validation accuracy and 70.4\% test accuracy (see Fig.~\ref{fig:accuracy}). The model with which we achieved these values is also submitted together with this report.
