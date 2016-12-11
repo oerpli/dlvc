@@ -3,7 +3,7 @@
 \hyphenation{}
 \maketitle
 \keywords{stochastic gradient descent, convolutional neural network}
-
+\begin{document}
 \begin{abstract}
 This is the report for the second assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to build a linear model to classify images of  the CIFAR10 dataset \TODO
 \end{abstract}
@@ -69,7 +69,15 @@ Regularization techniques intend to improve the generality of the model, i.e. pr
 \item Weight decay: A term is added to the loss function to penalize large weights. This ensures that the outcome is not dominated by a single feature. The idea is very similar to shrinkage methods in linear regression (weight decay is basically a direct port of ridge regression for neural networks). 
 \end{itemize}
 \section{Convolutional Neural Networks}
-% Explain what a CNN is, as well as the general layer structure that all CNNs for classification share. Explain the purpose and operation of convolutional, pooling, and fully-connected layers.
+The state of the art architecture for image classifaction are \emph{Convolutional Neural Networks} and they are the main topic of this lecture. The are based on the rather old concept of \emph{Perceptrons} introduced in the 1950s\cite{Rosenblatt1958}. It was based on who neurons in the brain work. The recent success is partly due to the layering of these neurons. A multi-layer-perceptron (MLP) is very powerful because it is an universal approximator.  It is a directed graph, with neurons as vertices who have an activation function and weighted,directed edged between them. We focus on feed-forward networks, that are acyclic and where each level in the hierarchy is called a layer. A MLP has at least on input layer, several hidden layers and an output layer. On the input layer, the features of the dataset are fed into the network. The hidden layers perform the computation, and with at least one hidden layer an MLP becomes non-linear. On the output layers, the network is mapped against the labels, at least for out classification tasks. For training, the output layer get a value of either 1 or 0, representing the classes. An MLP is connected in a dense manner, meaning all neurons of on layer are connected to all neurons of the next layer. This is impractical for image classification, since locally close pixels are more important than pixel far away. 
+In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usually looking only into 3x3 sized grids. But by layering several of these steps, small concepts like edges on lower levels are combined into higher level feature e.g. "cat-like" that finally cover big parts of the image. To achieve that, several specialized layer are needed:
+\begin{itemize}
+\item{convolutional layers} have the same spatial dimensions as their input and each neuron is connected to a grid (eg. 3x3) from the previous layer. They extract a feature, and through parameter sharing they extract the same feature for the whole previous layer. To extract several features, several feature maps are needed.  
+\item{pooling layers} are used to reduce the spatial dimension. They are placed between the convolutional layers and combine the values of several pixels. One common type is the 2x2 max pooling, where the maximum value is taken from a 2x2 grid, and thus reducing the number of features by $1/4$. The final spatial resolution is usually <10 for each dimension. 
+\item{A fully connected layer} is the last layer, where all output layers are connected to the previous layer, so that the influence of each feature to each class is taken into account. This is where also the softmax functionality is added so that the result is a probability distribution predicting the class. 
+\end{itemize}
+
+
 
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
@@ -82,7 +90,7 @@ Regularization techniques intend to improve the generality of the model, i.e. pr
 
 
 
-
-
+\bibliography{references}
+\end{document}
 
 
