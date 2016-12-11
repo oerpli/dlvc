@@ -11,19 +11,45 @@ This is the report for the second assignment of the course ``Deep Learning for V
 
 \section{Deep Learning Libraries}
 % Briefly state which deep learning library you used and if you used the server for training. One or two sentences are sufficient.
-We used Keras with tensorflow as backend for training. We used the server since we could not get the system running on a Windows platform. For development, we used Keras with theano backend which caused a lot of trouble due to the different channel ordering.
+We used Keras with tensorflow as backend for training. We used the server since we could not get the system running on a Windows platform. For development, we used Keras with theano backend which caused a lot of trouble due to the different channel ordering. 
 
 
 \section{Linear Models}
-% Describe what parametric models are and how they differ from the k nearest neighbors classifier we used in Assignment 1. Describe what a linear model is and how these models are used for classification. What to the parameters (weights and biases) of linear classifiers specify?
+In the last assignment we ran into some performance issues as a kNN classifier has to compare each input feature vector to all (at least in the unoptimized version) the feature vectors in the training set. Without further optimization the runtime for each sample is therefore linear in the size of the training set. There are datastructures that improve this proceess (e.g. storing training set in a KDTree) but the performance still remains a limiting factor. A parametric model tries to solve this problem by finding parameters that describe the function that maps  input vectors to the class prediction (output vector).
+% Describe what parametric models are and how they differ from the k nearest neighbors classifier we used in Assignment 1. Describe what a linear model is and how these models are used for classification. What do the parameters (weights and biases) of linear classifiers specify?
+
+A linear model is one of the easiest parametric models --- it consists of a weight matrix $\textbf W$ and a bias vector $b$. The weight matrix maps the input vector to some other vector and the bias is then added to it (Eq.~\eqref{eq:lm}). Therefore $\textbf W$ basically consists of $T$ vectors that give the slope of the decision boundaries whereas $b$ specifies the offset. A linear model for a $N$ dimensional feature vector and $T$ classes therefore has $N \cdot T + T$ parameters (around 30k in our case).
+\begin{align}
+ w = f(x, (\textbf W,  b)) =\textbf  Wx +  b \label{eq:lm}
+\end{align}
+The resulting $T$ (number of classes) dimensional vector $w$ is then normalized with the softmax function (maps values to $(0,1)$ range s.t. they sum up to $1$) and the component with the highest value is used as a class prediction for the the input sample.
+
+As the name already suggests the resulting model linearly seperates the feature space with $T$ decision boundaries (hyper planes) --- one for each class. The distance from an input vector to the decision boundary of class $t$ gives the score for the given class. If the data is linearly separable this can work quite well --- there are improvements to this method, e.g. Support Vector Machines that try to maximize the distance between the two classes. There are also extensions to SVM where a modified ``kernel'' is used to get nonlinear decision boundaries with only constant overhead. Nevertheless this methods aren't really useful for tasks such as image prediction as the decision boundaries are highly complex.
 
 \section{Minibatch Gradient Descent}
+The goal of training parametric models is to find parameters $\theta$ s.t. the function $f(\cdot, \theta)$ is as close as possible to the real underlying distribution. Therefore the training process tries to maximize the similarity of the resulting distribution with the distribution from the trainings set. The cross entropy is a measure for the similarity of two probability vectors which penalizes uncertainty (uniform distributions) as well as misclassification. Summing up the cross entropy for all samples for a given parameter $\theta$ gives the loss value $L(\theta$) which should be minimized by finding the best parameters. Finding the global minimum of a complex function such as $\L(\theta)$ is in general an unsolvable task -- it's therefore necessary to reyl on heuristics, such as gradient descent methods which works as follows:
+\begin{enumerate}
+\item Start at some random position $\theta$ in parameter space (i.e. initalize $\textbf W, b$ with random values)
+\item Calculate gradient of the loss function, i.e. $\theta' = \nabla L(\theta)$ (the result is a vector where each component is equal to the derivation of $L(\theta)$ in the direction of the component) 
+\item Set new parameter as $\theta  - \alpha \theta'$, i.e. move in the direction of the steepest descent with step size proportional to the learning rate $\alpha$.
+\item Repeat until $\theta$ converges (this is the case if the gradient is zero in all directions, i.e. a local/global minimum, or at least a critical point)
+\end{enumerate}
+%Explain the purpose and tasks involved in training parametric models.
+%Give an overview of gradient descent and loss functions in general as well as cross-entropy loss.
+
+%You don't have to use math for this, a summary that is easy to understand is sufficient.
+%For instance, you could explain gradient descent using the hiking analogy I used in the lecture.
+%What is minibatch gradient descent and why is it preferred to batch gradient descent?
+
 
 \section{Preprocessing}
+% Explain what preprocessing is and why normalization (the main operation we used in this assignment) is important. How is preprocessing handled with respect to the different datasets (train,val,test)?
 
 \section{Optimization vs. Machine Learning}
+% Summarize the differences between pure optimization and machine learning. Describe what regularization is and how weight decay and early stopping work (no need to use formulas).
 
 \section{Convolutional Neural Networks}
+% Explain what a CNN is, as well as the general layer structure that all CNNs for classification share. Explain the purpose and operation of convolutional, pooling, and fully-connected layers.
 
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
