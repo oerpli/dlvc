@@ -78,7 +78,9 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 \item A fully connected layer is the last layer, where all output vertices are connected to the previous layer, so that the influence of each feature to each class is taken into account. This is where also the softmax functionality is added, ensuring that the resulting vector is a probability distribution predicting the class. 
 \end{itemize}
 
+\section{Implementation and results}
 
+\subsection{Softmax training}
 
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
@@ -98,28 +100,21 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 
 \end{figure}
 
-
-\begin{figure}[h!t]
-\newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
-\centering
-\input{./img/a2-opt-hog.tex} % TODO - update data files for both lines and add plots for other images
-\caption{Accuracy of Softmax classifier on raw images of TinyCifar10 images and on HOG vectors. Using HOG features instead of the raw images leads to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy). } %\plotref{t1}.
-\label{figparam}
-
-\end{figure}
-
-
+\subsection{Softmax hyperparameter optiomization}
 
 
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
 \input{./img/a2-opt-hog6.tex} % TODO - update data files for both lines and add plots for other images
-\caption{Accuracy of Softmax classifier on raw images of TinyCifar10 images and on HOG vectors. Using HOG features instead of the raw images leads to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy). } %\plotref{t1}.
-\label{figparam}
-
+\caption{Accuracy of Softmax classifier on HOG vectors of TinyCifar10. } %\plotref{t1}.
+\label{figparam-opt-hog6}
 \end{figure}
 
+
+We used a grid search for finding good parameter for weight decay and learning rate. Using \ref{figparam-opt-hog6} HOG features instead of the raw images leads to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy).
+
+\subsection{Missclassification}
 
 
 \begin{figure}[h!t]
@@ -131,9 +126,5 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 
 \end{figure}
 
-
-
-\bibliography{references}
-\end{document}
 
 
