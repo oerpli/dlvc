@@ -143,14 +143,7 @@ print("")
 print("Testing best model (learning rate={:01.5f}, weight decay={:01.5f}, layers={}) on test set ...".format(bestLearningRate,bestWeightDecay,bestHiddenLayers))
 print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
 
-model = Sequential()
-model.add(InputLayer(input_shape = (144,)))
-model.add(Dense(bestHiddenLayers, activation='relu')) 
-model.add(Dense(output_dim = 10,activation = 'softmax'))
-sgd = SGD(lr=bestLearningRate, decay=bestWeightDecay, momentum=0.9, nesterov=False) # this is redundant, since we load the weights!?!
-model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
-
-model.load_weights("./" + fileNameModelGlobal)
+model.load_model("./" + fileNameModelGlobal)
 model.summary()
 
 test_batch.shuffle()
