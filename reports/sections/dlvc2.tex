@@ -92,7 +92,7 @@ As expected the softmax classifier without early stopping had a rising training 
 We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see Fig.~\ref{figparam-opt-hog6}) we were able to show that most combinations yield good results but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first tests were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy with this simple softmax classifier.
 
 \subsubsection{Bonus Task - MLP classifier on HOG Data}
-We replaced the softmax classifier with a MLP classifier with one hidden layer. We then extended the grid search to also include optiomizing the parameter of how many neurons to use in the hidden layer. The best result was a model with 110 neurons and values ... ... wich is better than the softmax classifier, as expected.
+We replaced the softmax classifier with a MLP classifier with one hidden layer. We then extended the grid search to also include optiomizing the parameter of how many neurons to use in the hidden layer. The best result was a model with 110 neurons trained with a leraning rate of $6^{-1}$ and weight decay of $6^{-2}$ that had a classification accuracy of 46.9\% on the test set which is better than the softmax classifier, as expected.
 
 
 \begin{figure}[h!t]
