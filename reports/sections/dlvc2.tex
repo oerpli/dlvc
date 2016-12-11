@@ -112,7 +112,7 @@ The provided image is classified as a frog with a high confidence (of 99.8\%). W
 To analyse why so many of the various cat images we tried were classified as dogs, deer and even frogs we looked at the missclassification rates for the 10 classes and saw, that the classifier has big problems with cats (48\% misclassification rate). If a sample wasn't correctly classified it almost never was classified as an automobile but very often as a cat or a deer, see Fig.~\ref{fig:missrate}.
 
 \subsection{Bonus Task: Multilayer perceptron}
-We also tried to find a multilayer perceptron that squeezes a few more percent accuracy out of the HOG features.  For this purpose we extended our grid search from the optimized softmax classifier with another hyperparameter, the number of vertices in the hidden layer and added this dense layer between the input and output layers. 
+We also tried to find a multilayer perceptron that squeezes a few more percent accuracy out of the HOG features.  For this purpose we extended our grid search from the optimized softmax classifier with another hyperparameter, the number of vertices in the hidden layer and added this dense layer between the input and output layers. With a hidden layer size of 70, a learning rate and weight decay of 0.166 we reached a validation accuracy of 47.9\%.
 
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
