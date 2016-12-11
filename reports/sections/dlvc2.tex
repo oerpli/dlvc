@@ -81,7 +81,7 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 \section{Implementation and results}
 
 \subsection{Softmax training}
-As expected the softmax classifier without early stopping had a rising training accuracy (97.1\% after 200 epochs) though the validation accuracy did not improve much from the initial results after a few epochs and peaked at 30.7\%. Using the HOG feature vectur and early stopping resulted in an accuracy of 40.8\%. For both methods training and validation accuracy are plotted in Fig.~ref{figparam}.
+
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
@@ -111,7 +111,13 @@ As expected the softmax classifier without early stopping had a rising training 
 \label{figparam-opt-hog6}
 \end{figure}
 
-We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see Fig.~\ref{figparam-opt-hog6} we were able to show that most combinations yield good results, but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first tests were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy with this simple softmax classifier.
+We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see\ref{figparam-opt-hog6} we were able to show that most combinations yield in good results, but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first test were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy).
+
+\subsection{Bonus Task - MLP classifier on HOG Data}
+We replaced the softmax classifier with a MLP classifier with one hidden layer. We then extended the grid search to also include optiomizing the parameter of how many neurons to use in the hidden layer. The best result was a model with 110 neurons and values ... ... wich is better than the softmax classifier, as expected.
+
+\subsection{Classify new image}
+We also implememted the manual image identification task. The provided image is classified as a frog with high confidence (99.8\%). To make sure this is not a problem with the model, we tested several images. The image '\textbf{cat\_new.jpg}', which is also provided, depicts a cat and is identified with 68.1\% confidence, thus the setup it sound. 
 
 \subsection{Missclassification}
 
