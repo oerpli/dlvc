@@ -1,14 +1,11 @@
 % !TeX root = ../dlvc.tex
-\newcommand{\ttitle}{Image Classification using Softmax Classifier and CNN \TODO}
+\newcommand{\ttitle}{Image Classification using Softmax Classifier and CNN}
 \hyphenation{}
 \maketitle
-\keywords{stochastic gradient descent, convolutional neural network}
-
-
+%\keywords{stochastic gradient descent, convolutional neural network, softmax, multilayer perceptron}
 \begin{abstract}
-This is the report for the second assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to build a linear model to classify images of  the CIFAR10 dataset \TODO
+This is the report for the second assignment of the course ``Deep Learning for Visual Computing'' in the winter term 2016 at the TU Vienna. The task was to build a linear softmax classifier, a multilayer perceptron as well as a convolutional neural network to classify images of  the CIFAR10~\cite{CIFAR10} dataset.
 \end{abstract}
-
 
 \section{Deep Learning Libraries}
 % Briefly state which deep learning library you used and if you used the server for training. One or two sentences are sufficient.
@@ -81,26 +78,17 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 \section{Implementation and results}
 
 \subsection{Softmax training}
-
+As expected the softmax classifier without early stopping had a rising training accuracy (97.1\% after 200 epochs) though the validation accuracy did not improve much from the initial results after a few epochs and peaked at 30.7\%. Using the HOG feature vectur and early stopping resulted in an accuracy of 40.8\%. For both methods training and validation accuracy are plotted in Fig.~\ref{fig:accuracy}.
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
 \input{./img/a2-softmax-c10.tex} % TODO - update data files for both lines and add plots for other images
-\caption{Accuracy of Softmax classifier on raw images of TinyCifar10 images and on HOG vectors. Using HOG features instead of the raw images leads to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy). } %\plotref{t1}.
-\label{figparam}
-
+\caption{Accuracy of softmax classifier and CNN on raw images of (Tiny)Cifar10 images and on HOG vectors (only softmax classifier). Using HOG features instead of the raw images leads to significantly higher validation accuracy for the softmax classifier. Softmax classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy). Some plots have a smaller range due to early stopping. CNN has by far the best validation accuracy. Results between 120 and 200 epochs ommited} %\plotref{t1}.
+\label{fig:accuracy}
 \end{figure}
 
-\begin{figure}[h!t]
-\newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
-\centering
-\input{./img/a2-softmax-c10.tex} % TODO - update data files for both lines and add plots for other images
-\caption{Accuracy of softmax classifier and CNN on raw images of TinyCifar10 images and on HOG vectors (only softmax classifier). Using HOG features instead of the raw images leads to significantly higher validation accuracy for the softmax classifier. Softmax classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy). Plots only until early stopping (in the case of softmax classifier on raw data  } %\plotref{t1}.
-\label{figparam}
 
-\end{figure}
-
-\subsection{Softmax hyperparameter optiomization}
+\subsection{Softmax hyperparameter optimization}
 
 
 \begin{figure}[h!t]
@@ -111,23 +99,27 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 \label{figparam-opt-hog6}
 \end{figure}
 
-We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see\ref{figparam-opt-hog6} we were able to show that most combinations yield in good results, but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first test were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy).
+We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see Fig.~\ref{figparam-opt-hog6}) we were able to show that most combinations yield good results but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first tests were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy with this simple softmax classifier.
+
+\subsection{CNN}
+We more or less followed the task assignmend step by step. We had some problems due to the variable ordering and with outdated libraries on the server (at least it did not recognize the preserve\_range argument with python3) but apart from that everything worked more or less as expected. The classifier had quite good results, reaching 71.3\% validation accuracy and 70.4\% test accuracy (see Fig.~\ref{fig:accuracy}). The model with which we achieved these values is also submitted together with this report.
 
 \subsection{Bonus Task - MLP classifier on HOG Data}
 We replaced the softmax classifier with a MLP classifier with one hidden layer. We then extended the grid search to also include optiomizing the parameter of how many neurons to use in the hidden layer. The best result was a model with 110 neurons and values ... ... wich is better than the softmax classifier, as expected.
 
-\subsection{Classify new image}
-We also implememted the manual image identification task. The provided image is classified as a frog with high confidence (99.8\%). To make sure this is not a problem with the model, we tested several images. The image '\textbf{cat\_new.jpg}', which is also provided, depicts a cat and is identified with 68.1\% confidence, thus the setup it sound. 
+\subsubsection{Classifying images with CNN}
+The provided image is classified as a frog with a high confidence (of 99.8\%). We submitted another image '\textbf{cat\_new.jpg}' that depicts a cat and is identified correctly with 68.1\% confidence, thus we assume that our image classification script is implemented correctly.
+To analyse why so many of the various cat images we tried were classified as dogs, deer and even frogs we looked at the missclassification rates for the 10 classes and saw, that the classifier has big problems with cats (48\% misclassification rate). If a sample wasn't correctly classified it almost never was classified as an automobile but very often as a cat or a deer, see Fig.~\ref{fig:missrate}.
 
-\subsection{Missclassification}
-
+\subsection{Bonus Task: Multilayer perceptron}
+We also tried to find a multilayer perceptron that squeezes a few more percent accuracy out of the HOG features.  For this purpose we extended our grid search from the optimized softmax classifier with another hyperparameter, the number of vertices in the hidden layer and added this dense layer between the input and output layers. 
 
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
 \input{./img/missrate.tex} % TODO - update data files for both lines and add plots for other images
 \caption{The  blue bars \plotref{mb} are the misclassification rates per class with the CNN classifier. The red bars \plotref{mr} are the chance that a missclassified image ends up in the given class. Usually a confusion matrix would be used for this kind of visualiation to find out which classes are confused by the classifier.} %\plotref{t1}.
-\label{figparam}
+\label{fig:missrate}
 
 \end{figure}
 
