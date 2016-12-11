@@ -27,35 +27,55 @@ The resulting $T$ (number of classes) dimensional vector $w$ is then normalized 
 As the name already suggests the resulting model linearly seperates the feature space with $T$ decision boundaries (hyper planes) --- one for each class. The distance from an input vector to the decision boundary of class $t$ gives the score for the given class. If the data is linearly separable this can work quite well --- there are improvements to this method, e.g. Support Vector Machines that try to maximize the distance between the two classes. There are also extensions to SVM where a modified ``kernel'' is used to get nonlinear decision boundaries with only constant overhead. Nevertheless this methods aren't really useful for tasks such as image prediction as the decision boundaries are highly complex.
 
 \section{Minibatch Gradient Descent}
-The goal of training parametric models is to find parameters $\theta$ s.t. the function $f(\cdot, \theta)$ is as close as possible to the real underlying distribution. Therefore the training process tries to maximize the similarity of the resulting distribution with the distribution from the trainings set. The cross entropy is a measure for the similarity of two probability vectors which penalizes uncertainty (uniform distributions) as well as misclassification. Summing up the cross entropy for all samples for a given parameter $\theta$ gives the loss value $L(\theta$) which should be minimized by finding the best parameters. Finding the global minimum of a complex function such as $\L(\theta)$ is in general an unsolvable task -- it's therefore necessary to reyl on heuristics, such as gradient descent methods which works as follows:
+%Explain the purpose and tasks involved in training parametric models.
+The goal of training parametric models is to find parameters $\theta$ s.t. the function $f(\cdot, \theta)$ is as close as possible to the real underlying distribution. Therefore the training process tries to maximize the similarity of the resulting distribution with the distribution from the trainings set.
+%Give an overview of gradient descent and loss functions in general as well as cross-entropy loss.
+The cross entropy is a measure for the similarity of two probability vectors which penalizes uncertainty (uniform distributions) as well as misclassification. Summing up the cross entropy for all samples for a given parameter $\theta$ gives the loss value $L(\theta$) which should be minimized by finding the best parameters. Finding the global minimum of a complex function such as $\L(\theta)$ is in general an unsolvable task -- it's therefore necessary to rely on heuristics, such as the gradient descent method which works as follows:
 \begin{enumerate}
 \item Start at some random position $\theta$ in parameter space (i.e. initalize $\textbf W, b$ with random values)
 \item Calculate gradient of the loss function, i.e. $\theta' = \nabla L(\theta)$ (the result is a vector where each component is equal to the derivation of $L(\theta)$ in the direction of the component) 
 \item Set new parameter as $\theta  - \alpha \theta'$, i.e. move in the direction of the steepest descent with step size proportional to the learning rate $\alpha$.
-\item Repeat until $\theta$ converges (this is the case if the gradient is zero in all directions, i.e. a local/global minimum, or at least a critical point)
+\item Repeat until $\theta$ converges (this is the case if the gradient is zero in all directions, i.e. a local/global minimum, or at least a critical point) or other stopping criterion is reached
 \end{enumerate}
-%Explain the purpose and tasks involved in training parametric models.
-%Give an overview of gradient descent and loss functions in general as well as cross-entropy loss.
-
-%You don't have to use math for this, a summary that is easy to understand is sufficient.
 %For instance, you could explain gradient descent using the hiking analogy I used in the lecture.
+The idea behind this algorithm is that the Loss function is somewhat smooth (to be precise: differentiable, i.e. at every point there is a linear approximation, meaning that the limes' coming from each side converge to the same value) and therefore following the slope leads to a minimum. This approach has two problems
+\begin{itemize}
+\item It can get stuck in a local optimum
+\item It does not scale well with huge datasets
+\end{itemize}
 %What is minibatch gradient descent and why is it preferred to batch gradient descent?
-
-
+To alleviate this problems stochastic gradient descent\footnote{Or \textit{minibatch gradient descent} as not only one sample is used} is used. For this method the gradient is not calculated with all samples in the dataset but by partitioning the dataset into random subsets of equal size and calculating an estimate of the gradient with each subset and make a step in this direction. In our case we used 64\footnote{We also tried 32 and 128 but the accuracy did not differ significantly. The performance may have been affected though this was difficult to judge as the runtime  fluctuated heavily even when training with the same parameters.} samples per minibatch. This obviously makes calculating the gradient cheaper as only 64 instead of 40000 samples have to be considered each time. Furthermore it adds a random component to the procedure as a local optimum of the loss function of the whole dataset is usually not a local optimum of each subset --- therefore it helps with escaping local optima. To reduce the impact of the learning-rate-parameter we used \textit{momentum}. The idea of this is to accelerate the convergence by increasing the step size if the gradient points in the same direction in successive steps. 
 \section{Preprocessing}
-% Explain what preprocessing is and why normalization (the main operation we used in this assignment) is important. How is preprocessing handled with respect to the different datasets (train,val,test)?
+There are two goals of preprocessing --- helping with the training of the classifer and removing undesired influences from our data. In our case we only applied methods for the first part of this. We applied the following sequence of transformations to our images:
+\begin{itemize}
+\item Resize: If an image has the wrong size it will be scaled down to match the input size of our classifier (does only apply to images not in the dataset that we want to classify)
+\item Casting the RGB values to float -- this has no purpose by itself but enables the following transformations
+\item Subtraction of mean: We calculate the mean of each color channel and subtract this value from the features of this channel  
+\item Division by standard deviation: Calculate the standard deviation of each color chnalle and divide the features of each channel by their respective value. 
+\end{itemize}
+The first one does not have any significance for the training of the model --- it's only used to enable classify images that have not the same size as the training data. The last two transformations are those that help with training the model by adjusting the data in a way that each feature has a mean of zero and standard deviation of one (over the whole dataset). This helps with the training because if the features are normalized a specific feature does not dominate the gradient. This enables using a single value for the learning rate. This can also be done on a per pixel instead of per channel basis.
+
+The other preprocessing methods that remove undesired influences from the input data would have to work on a per image basis. For example the mean of each image could be set to the mean of the whole dataset to get the same level of brightness or the range of the values could be scaled to use the whole spectrum for each image, resulting in a higher contrast. 
+
+After calculating the means and standard deviations from the training set it is important to store those values somewhere because the same transformations (with means and standard dev. from the training set) have to be applied to the other datasets and to images that we want to classify with our model to ensure that they are from the same distribution. 
 
 \section{Optimization vs. Machine Learning}
 % Summarize the differences between pure optimization and machine learning. Describe what regularization is and how weight decay and early stopping work (no need to use formulas).
+In ML we want to use the model trained on some data to classify new data. The goal is not only to find a model that minimizes the loss (by recoginizing each image in the training set) but a model that also works on data it has not seen before. Therefore it is not enough to optimize the values until the model recognizes each image in the training set (this could be achieved easier with a hashmap using the image vectors as keys and their respective classes as value) but to find parameters that work well on new data which usually correlates with working well on the test data (but not necessarily the other way around, see hashmap example).
 
+Regularization techniques intend to improve the generality of the model, i.e. prevent overfitting. We applied two methods to achieve this:
+\begin{itemize}
+\item Early stopping: If the validation accuracy does not increase for a few epochs (we used 10 or 20) the process stops and uses the best model (judged by validation accurracy) found so far	
+\item Weight decay: A term is added to the loss function to penalize large weights. This ensures that the outcome is not dominated by a single feature. The idea is very similar to shrinkage methods in linear regression (weight decay is basically a direct port of ridge regression for neural networks). 
+\end{itemize}
 \section{Convolutional Neural Networks}
 % Explain what a CNN is, as well as the general layer structure that all CNNs for classification share. Explain the purpose and operation of convolutional, pooling, and fully-connected layers.
 
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
-\input{./img/a2-softmax-c10.tex}
-\caption{Accuracy of kNN classification with neighborhood sizes (k) and L1 and L2 norms on raw image and HOG vectors. Classification on HOG consistently outperforms classification on raw data. Furthermore kNN with L1 distance metric is superior to kNN with L2 distance metric. Performance of best parameters ($k=21, \text{L1 norm}$) on test set with raw \plotref{t2} and HOG data \plotref{t1}. }
+\input{./img/a2-softmax-c10.tex} % TODO - update data files for both lines and add plots for other images
+\caption{Accuracy of Softmax classifier on raw images of TinyCifar10 images and on HOG vectors. Using HOG features instead of the raw images leads to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy). } %\plotref{t1}.
 \label{figparam}
 
 \end{figure}
