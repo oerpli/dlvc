@@ -111,8 +111,7 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 \label{figparam-opt-hog6}
 \end{figure}
 
-
-We used a grid search for finding good parameter for weight decay and learning rate. Using \ref{figparam-opt-hog6} HOG features instead of the raw images leads to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy).
+We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see\ref{figparam-opt-hog6} we were able to show that most combinations yield in good results, but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first test were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy).
 
 \subsection{Missclassification}
 
