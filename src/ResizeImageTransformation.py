@@ -4,8 +4,7 @@ import scipy as sp
 from SampleTransformation import SampleTransformation
 
 class ResizeImageTransformation(SampleTransformation):
-    # Casts the sample datatype to single-precision float (e.g.
-    # numpy.float32).
+    # Resize an image array to the needed size
     smallerSize = int
 
     def __init__(self, size):
@@ -23,7 +22,12 @@ class ResizeImageTransformation(SampleTransformation):
             if rows < self.smallerSize:
                 raise NameError("Invalid image. Size too small")
             newsize = (int(rows * self.smallerSize / cols) ,self.smallerSize,x)
+        print("  Input Image: shape {}, dtype: {}, mean: {:0.3f}, std: {:0.3f}".format(sample.shape, sample.dtype, sample.mean(), sample.std()))
 
         # first line is scikit-image, the other scipy
-        return t.resize(sample,newsize, preserve_range=True)
-        #return sp.misc.imresize(sample, newsize) # use this to use other resize library
+        # result = sp.misc.imresize(sample, newsize) # use this to use other resize library, (gives worse results)
+
+        #result = t.resize(sample,newsize, preserve_range=True) # Does not work on server
+        result = t.resize(sample,newsize) * 256 # Does the same, works on server
+        
+        return  result
