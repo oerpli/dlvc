@@ -81,7 +81,7 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 \section{Implementation and results}
 
 \subsection{Softmax training}
-
+As expected the softmax classifier without early stopping had a rising training accuracy (97.1\% after 200 epochs) though the validation accuracy did not improve much from the initial results after a few epochs and peaked at 30.7\%. Using the HOG feature vectur and early stopping resulted in an accuracy of 40.8\%. For both methods training and validation accuracy are plotted in Fig.~ref{figparam}.
 \begin{figure}[h!t]
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
@@ -111,7 +111,7 @@ In contrast, \emph{Convolutional Neural Networks} are sparsely connected, usuall
 \label{figparam-opt-hog6}
 \end{figure}
 
-We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see\ref{figparam-opt-hog6} we were able to show that most combinations yield in good results, but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first test were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy. Classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy).
+We used a grid search for finding good parameters for weight decay and learning rate. Using very extreme values (see Fig.~\ref{figparam-opt-hog6} we were able to show that most combinations yield good results, but that a low learning rate and a high weight decay lead to a model with far too less training and thus bad results. Our first tests were from that range since the assignment depicts them as good values. But in general, it is fair to say that HOG features instead of the raw images lead to significantly higher validation accuracy with this simple softmax classifier.
 
 \subsection{Missclassification}
 
