@@ -28,6 +28,6 @@ class ResizeImageTransformation(SampleTransformation):
         # result = sp.misc.imresize(sample, newsize) # use this to use other resize library, (gives worse results)
 
         #result = t.resize(sample,newsize, preserve_range=True) # Does not work on server
-        result = t.resize(sample,newsize) * 256 # Does the same, works on server
+        result = t.resize(sample,newsize) * 255 # Does the same, works on server
         
         return  result
