@@ -156,6 +156,7 @@ m_acc_test = 0.0
 
 pred = [0] * 10
 classcount = [0] * 10
+wpred = [0] * 10
 
 for bid in range(0,test_batch.nbatches()):
     b = test_batch.batch(bid)
@@ -175,6 +176,8 @@ for bid in range(0,test_batch.nbatches()):
         max_index, max_value = max(enumerate(y[i]), key = operator.itemgetter(1))
         if correct[i] == max_index:
             pred[correct[i]] += 1
+        else:
+            wpred[max_index] += 1
 
 acc = []
 for i in range(0,10):
@@ -182,5 +185,6 @@ for i in range(0,10):
 
 print("  Accuracy: {:0.2%}".format(m_acc_test))
 print("  Accuracy per class: {}".format(niceList(acc)))
+print("  Misclassifications end up in class: {}".format(wpred))
 
 print("Done")
