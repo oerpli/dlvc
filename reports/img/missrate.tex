@@ -8,6 +8,7 @@
 ,	ylabel={Rate (\%)}
 ,	y filter/.code={\pgfmathparse{#1*100}\pgfmathresult}
 ,	xtick = data
+,	ytick={10,20,...,50}
 ,	xticklabels from table={\loadedtable}{class},
 ,	xticklabel style={rotate=60}
 ,	legend cell align=left
