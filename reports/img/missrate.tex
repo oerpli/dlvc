@@ -1,10 +1,10 @@
 % !TeX root = ../dlvc.tex
- \pgfplotstableread{./data/a2/missclass.txt}\loadedtable;
+ \pgfplotstableread{./data/a2/missclass.txt}\loadedtable
 \begin{tikzpicture}[]
   \begin{axis}[width=\textwidth
 ,	height=200pt
 ,	ybar
-,	xlabel={Class}
+%,	xlabel={Class}
 ,	ylabel={Rate (\%)}
 ,	y filter/.code={\pgfmathparse{#1*100}\pgfmathresult}
 ,	xtick = data
@@ -14,7 +14,7 @@
   ,ymin = 0
   ,ymax = 50
   ,bar width=10pt]
-    \addplot[fill= uvblue] table[x=ind, y=missrate] {\loadedtable};\addlegendentry{Misclassified samples from class};\label{plt:mb}
+    \addplot[fill= uvblue] table[x=ind, y=missrate] {\loadedtable};\addlegendentry{Misclassified samples from class}\label{plt:mb}
     \addplot[fill=uvred] table[x=ind, y=endup] {\loadedtable};\addlegendentry{Misclassified samples into class}\label{plt:mr}
   \end{axis}
 \end{tikzpicture}
