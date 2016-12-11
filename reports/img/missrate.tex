@@ -2,17 +2,19 @@
  \pgfplotstableread{./data/a2/missclass.txt}\loadedtable;
 \begin{tikzpicture}[]
   \begin{axis}[width=\textwidth
+,	height=200pt
 ,	ybar
 ,	xlabel={Class}
 ,	ylabel={Rate (\%)}
 ,	y filter/.code={\pgfmathparse{#1*100}\pgfmathresult}
 ,	xtick = data
 ,	xticklabels from table={\loadedtable}{class},
-,	xticklabel style={rotate=60},
+,	xticklabel style={rotate=60}
+,	legend cell align=left
   ,ymin = 0
   ,ymax = 50
   ,bar width=10pt]
-    \addplot[fill= uvblue] table[x=ind, y=missrate] {\loadedtable};\addlegendentry{Missclassification from this class};\label{plt:mb}
-    \addplot[fill=uvred] table[x=ind, y=endup] {\loadedtable};\addlegendentry{Missclassified into this class}\label{plt:mr}
+    \addplot[fill= uvblue] table[x=ind, y=missrate] {\loadedtable};\addlegendentry{Misclassified samples from class};\label{plt:mb}
+    \addplot[fill=uvred] table[x=ind, y=endup] {\loadedtable};\addlegendentry{Misclassified samples into class}\label{plt:mr}
   \end{axis}
 \end{tikzpicture}
