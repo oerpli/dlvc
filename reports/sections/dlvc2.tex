@@ -83,7 +83,7 @@ As expected the softmax classifier without early stopping had a rising training 
 \newcommand{\plotref}[1]{{[~\ref{plt:#1}~]}}
 \centering
 \input{./img/a2-softmax-c10.tex} % TODO - update data files for both lines and add plots for other images
-\caption{Accuracy of softmax classifier and CNN on raw images of (Tiny)Cifar10 images and on HOG vectors (only softmax classifier). Using HOG features instead of the raw images leads to significantly higher validation accuracy for the softmax classifier. Softmax classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy). Some plots have a smaller range due to early stopping. Results between 120 and 200 epochs ommited} %\plotref{t1}.
+\caption{Accuracy of softmax classifier and CNN on raw images of (Tiny)Cifar10 images and on HOG vectors (only softmax classifier). Using HOG features instead of the raw images leads to significantly higher validation accuracy for the softmax classifier. Softmax classifier on raw images primarily overfits (increasing training accuracy but sinking validation accuracy). Some plots have a smaller range due to early stopping. CNN has by far the best validation accuracy. Results between 120 and 200 epochs ommited} %\plotref{t1}.
 \label{fig:accuracy}
 \end{figure}
 
