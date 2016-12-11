@@ -1,0 +1,10 @@
+% !TeX root = ../dlvc.tex
+ \pgfplotstableread{./data/a2/missclass.txt}\loadedtable;
+\begin{tikzpicture}[]
+  \begin{axis}[width=\textwidth
+  ,ybar
+  ,bar width=10pt]
+    \addplot[fill= uvblue] table[x=ind, y=missrate] {\loadedtable};\label{plt:mb}
+    \addplot[fill=uvred] table[x=ind, y=endup] {\loadedtable};\label{plt:mr}
+  \end{axis}
+\end{tikzpicture}
