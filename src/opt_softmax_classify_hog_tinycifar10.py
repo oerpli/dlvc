@@ -65,17 +65,18 @@ bestAccuracyGlobal = 0.0
 bestLearningRate = 0.0
 bestWeightDecay = 0.0
 
-fileNameModelGlobal = "model_best_global_softmax.h5"
+fileNameModelGlobal = "model_best_global_softmax_ah.h5"
+fileNameModel = "model_best_ah.h5"
+
 
 for learningRatePow in range(0,5,1): #was 5,30,5
-    learningRate = 1 / math.pow(6,learningRatePow)
+    learningRate = 1 / math.pow(2,learningRatePow)
     for weightDecayPow in range(0,5,1):
-        weightDecay = 1 / math.pow(6,weightDecayPow)
+        weightDecay = 1 / math.pow(2,weightDecayPow)
         model = Sequential()
         model.add(Dense(output_dim=10, input_dim=144))
         model.add(Activation('softmax'))
 
-        fileNameModel = "model_best.h5"
         sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=False)
         model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
 

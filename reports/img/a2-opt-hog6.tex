@@ -1,0 +1,42 @@
+% !TeX root = ../dlvc.tex
+\begin{tikzpicture}
+\pgfplotsset{select coords between index/.style 2 args={
+    x filter/.code={
+        \ifnum\coordindex<#1\def\pgfmathresult{}\fi
+        \ifnum\coordindex>#2\def\pgfmathresult{}\fi
+    }
+}}
+\begin{axis}[
+	height=200pt
+,	xlabel={Weight decay}
+,	ylabel={Validation Accuracy (\%)}
+,	width=1\textwidth
+,	ticks=major
+,	xmode=log
+,	xmajorgrids
+, 	major grid style={line width=0.1pt,draw=gray!30}
+,	xmin = 0
+,	xtick={0.0001,0.001,0.01,0.1,1}
+,	y filter/.code={\pgfmathparse{#1*100}\pgfmathresult}
+,	xmax = 1
+%,	xtick={20,40,...,200}
+%,	ymin=20
+%,	ymax=42
+,	legend cell align=left
+,	legend pos=south west]
+%\addplot[plotA]{sin(x)};
+%\addplot [clickable coords,LplotD]table[x index=0,y index=1, meta index = 0] {./data/a2/softmaxtinycifar10data.txt};\addlegendentry{Loss}
+\addplot [clickable coords,plotA]table[x index=1,y index=2, meta index = 0,select coords between index={0}{4}] {./data/a2/softmaxhogoptdata6.txt};\addlegendentry{Learning rate $6^{-0}$}
+\addplot [clickable coords,plotB]table[x index=1,y index=2, meta index = 0,select coords between index={5}{9}] {./data/a2/softmaxhogoptdata6.txt};\addlegendentry{Learning rate $6^{-1}$}
+\addplot [clickable coords,plotC]table[x index=1,y index=2, meta index = 0,select coords between index={10}{14}] {./data/a2/softmaxhogoptdata6.txt};\addlegendentry{Learning rate $6^{-2}$}
+\addplot [clickable coords,plotD]table[x index=1,y index=2, meta index = 0,select coords between index={15}{19}] {./data/a2/softmaxhogoptdata6.txt};\addlegendentry{Learning rate $6^{-3}$}
+\addplot [clickable coords,plotE]table[x index=1,y index=2, meta index = 0,select coords between index={20}{24}] {./data/a2/softmaxhogoptdata6.txt};\addlegendentry{Learning rate $6^{-4}$}
+%\addplot [clickable coords,LplotC]table[x index=0,y index=4, meta index = 0] {./data/a2/softmaxtinycifar10data.txt};\addlegendentry{L1 norm, raw vector \ \ }
+%\addplot [clickable coords,LplotD]table[x index=0,y index=2, meta index = 0] {./data/a2/softmaxhogoptdata.txt};\addlegendentry{Training accuracy HOG}
+%\addplot [clickable coords,LplotE]table[x index=0,y index=3, meta index = 0] {./data/a2/softmaxhogoptdata.txt};\addlegendentry{Val. accuracy HOG}%\addplot [clickable 
+
+%\addplot [clickable coords,LplotB]table[x index=0,y index=3, meta index = 0] {./data/a2/softmaxhogoptdata10data.txt};\addlegendentry{Val. accuracy TC10}
+%\addplot[clickable coords,black!30!red,mark=square,ultra thick,only marks,forget plot]table[x index=0,y index=1, meta index = 0] {./data/a1-test.txt};\label{plt:t1}
+%\addplot[clickable coords,black!30!red,mark=pentagon*,thick,only marks,forget plot]table[x index=0,y index=2, meta index = 0] {./data/a1-test.txt};\label{plt:t2}
+\end{axis}
+\end{tikzpicture}
