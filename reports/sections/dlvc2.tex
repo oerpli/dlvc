@@ -117,7 +117,7 @@ We used a grid search for finding good parameters for weight decay and learning 
 We more or less followed the task assignmend step by step. We had some problems due to the variable ordering and with outdated libraries on the server (at least it did not recognize the preserve\_range argument with python3) but apart from that everything worked more or less as expected. The classifier had quite good results, reaching 71.3\% validation accuracy and 70.4\% test accuracy (see Fig.~\ref{fig:accuracy}). The model with which we achieved these values is also submitted together with this report.
 
 \subsubsection{Classifying image with CNN}
-In our testing with various cat images we often got dogs, deer and even frogs as result. To analyse why this is the case we looked at the missclassification rates for the 10 classes and saw, that the classifier has big problems with cats (48\% misclassification rate).
+In our testing with various cat images we often got dogs, deer and even frogs as result. To analyse why this is the case we looked at the missclassification rates for the 10 classes and saw, that the classifier has big problems with cats (48\% misclassification rate). If a sample wasn't correctly classified it almost never was classified as an automobile but very often as a cat or a deer, see Fig.~\ref{fig:missrate}.
 
 
 \begin{figure}[h!t]
@@ -125,7 +125,7 @@ In our testing with various cat images we often got dogs, deer and even frogs as
 \centering
 \input{./img/missrate.tex} % TODO - update data files for both lines and add plots for other images
 \caption{The  blue bars \plotref{mb} are the misclassification rates per class with the CNN classifier. The red bars \plotref{mr} are the chance that a missclassified image ends up in the given class. Usually a confusion matrix would be used for this kind of visualiation to find out which classes are confused by the classifier.} %\plotref{t1}.
-\label{figparam}
+\label{fig:missrate}
 
 \end{figure}
 
