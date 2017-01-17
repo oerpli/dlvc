@@ -5,6 +5,7 @@ from keras.layers import Dense, Dropout, Activation, InputLayer
 
 from keras.utils.np_utils import to_categorical
 from keras.optimizers import SGD
+from keras.regularizers import l2
 from ImageVectorizer import ImageVectorizer
 from MiniBatchGenerator import MiniBatchGenerator
 import numpy as np
@@ -76,12 +77,12 @@ for hiddenLayers in range(30, 150, 20):
             weightDecay = 1 / math.pow(6,weightDecayPow)
             model = Sequential()
             model.add(InputLayer(input_shape = (144,)))
-            model.add(Dense(hiddenLayers, activation='relu')) 
+            model.add(Dense(W_regularizer = l2(weightDecay), hiddenLayers, activation='relu')) 
             model.add(Dense(output_dim = 10,activation = 'softmax'))
 
 
             fileNameModel = "model_best_mlp.h5"
-            sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=False)
+            sgd = SGD(lr=learningRate, decay=0, momentum=0.9, nesterov=False)
             model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
 
             epochs = 200 # TODO CHANGE TO 200

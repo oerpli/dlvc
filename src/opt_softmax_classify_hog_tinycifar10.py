@@ -4,6 +4,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.utils.np_utils import to_categorical
 from keras.optimizers import SGD
+from keras.regularizers import l2
 from ImageVectorizer import ImageVectorizer
 from MiniBatchGenerator import MiniBatchGenerator
 import numpy as np
@@ -69,15 +70,15 @@ fileNameModelGlobal = "model_best_global_softmax_ah.h5"
 fileNameModel = "model_best_ah.h5"
 
 
-for learningRatePow in range(0,5,1): #was 5,30,5
+for learningRatePow in range(0,7,1): #was 5,30,5
     learningRate = 1 / math.pow(2,learningRatePow)
-    for weightDecayPow in range(0,5,1):
+    for weightDecayPow in range(0,7,1):
         weightDecay = 1 / math.pow(2,weightDecayPow)
         model = Sequential()
-        model.add(Dense(output_dim=10, input_dim=144))
+        model.add(Dense(W_regularizer = l2(weightDecay),output_dim=10, input_dim=144))
         model.add(Activation('softmax'))
 
-        sgd = SGD(lr=learningRate, decay=weightDecay, momentum=0.9, nesterov=False)
+        sgd = SGD(lr=learningRate, decay=0, momentum=0.9, nesterov=False)
         model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
 
         epochs = 200 # TODO CHANGE TO 200
