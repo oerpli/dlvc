@@ -31,7 +31,7 @@ class PerChannelDivisionImageTransformation(SampleTransformation):
         samples = np.zeros_like(samples)
         stds = []
         for i in range(0, datasetSize):
-            sample = dataset.sample(i)[0]
+            sample = tform.apply(dataset.sample(i)[0]) # dataset.sample(i)[0]
             for channel in range(0, channelCount):
                 samples[i,...,channel] = sample[...,channel]
 

@@ -18,7 +18,7 @@ class DivisionTransformation(SampleTransformation):
         s = (datasetSize,) + samples.shape
         samples = np.resize(samples,s)
         for i in range(0, datasetSize):
-            sample = dataset.sample(i)[0];
+            sample = tform.apply(dataset.sample(i)[0]) # dataset.sample(i)[0];
             samples[i,...] = sample
         std = samples.std();
         return DivisionTransformation(std)
