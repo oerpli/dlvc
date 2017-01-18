@@ -71,13 +71,13 @@ bestHiddenLayers = 10
 fileNameModelGlobal = "model_best_global_mlp.h5"
 
 for hiddenLayers in range(30, 150, 20):
-    for learningRatePow in range(1,4,1): 
+    for learningRatePow in range(1,4,1):
         learningRate = 1 / math.pow(6,learningRatePow)
         for weightDecayPow in range(1,4,1):
             weightDecay = 1 / math.pow(6,weightDecayPow)
             model = Sequential()
             model.add(InputLayer(input_shape = (144,)))
-            model.add(Dense(W_regularizer = l2(weightDecay), hiddenLayers, activation='relu')) 
+            model.add(Dense(hiddenLayers, W_regularizer = l2(weightDecay), activation='relu'))
             model.add(Dense(output_dim = 10,activation = 'softmax'))
 
 
@@ -147,7 +147,7 @@ print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_
 
 model = Sequential()
 model.add(InputLayer(input_shape = (144,)))
-model.add(Dense(bestHiddenLayers, activation='relu')) 
+model.add(Dense(bestHiddenLayers, activation='relu'))
 model.add(Dense(output_dim = 10,activation = 'softmax'))
 sgd = SGD(lr=bestLearningRate, decay=bestWeightDecay, momentum=0.9, nesterov=False) # this is redundant, since we load the weights!?!
 model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
