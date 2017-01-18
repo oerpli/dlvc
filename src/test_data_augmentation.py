@@ -16,15 +16,16 @@ img = Image.open(imageFileName)
 image = np.array(img)
 print("  Input shape: {}".format(image.shape))
 
-#resize = ResizeImageTransformation(32)
+resize = ResizeImageTransformation(32)
 fliph = HorizontalMirroringTransformation(1)
 flipv = VerticalMirroringTransformation(1)
 
 crop = RandomCropTransformation(20,20)
 
 transformationSequence = TransformationSequence()
-transformationSequence.add_transformation(flipv)
-transformationSequence.add_transformation(fliph)
+transformationSequence.add_transformation(resize)
+#transformationSequence.add_transformation(flipv)
+#transformationSequence.add_transformation(fliph)
 image = transformationSequence.apply(image)
 
 #transformedImage = Image.frombuffer("RGBX", image.shape[0:2], image)
@@ -33,5 +34,5 @@ image = transformationSequence.apply(image)
 
 
 from matplotlib import pyplot as plt
-plt.imshow(image, interpolation='nearest')
+plt.imshow(np.copy(image).astype('uint8'), interpolation='nearest')
 plt.show()
