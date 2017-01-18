@@ -2,7 +2,7 @@ import random
 import numpy as np
 from SampleTransformation import SampleTransformation
 
-class HorizontalMirroringTransformation(SampleTransformation):
+class VerticalMirroringTransformation(SampleTransformation):
     # Perform horizontal mirroring of samples with a given probability.
     prob = float
 
@@ -16,6 +16,6 @@ class HorizontalMirroringTransformation(SampleTransformation):
         # Apply the transformation and return the transformed version.
         # sample must be a 3D tensor with shape [rows,cols,channels].
         if random.random() < self.prob:
-            return np.fliplr(sample)
+            return np.flipud(sample)
         else:
             return sample
