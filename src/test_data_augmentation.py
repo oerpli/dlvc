@@ -4,6 +4,7 @@ from TransformationSequence import TransformationSequence
 from ResizeImageTransformation import ResizeImageTransformation
 from HorizontalMirroringTransformation import HorizontalMirroringTransformation
 from RandomCropTransformation import RandomCropTransformation
+from RandomAffineTransformation import RandomAffineTransformation
 from VerticalMirroringTransformation import VerticalMirroringTransformation
 from PIL import Image
 
@@ -17,13 +18,15 @@ crop = RandomCropTransformation(32,32)
 resize = ResizeImageTransformation(32)
 fliph = HorizontalMirroringTransformation(1)
 flipv = VerticalMirroringTransformation(1)
+affine = RandomAffineTransformation(10,0,0)
 transformationSequence = TransformationSequence()
-transformationSequence.add_transformation(resize)
+#transformationSequence.add_transformation(resize)
 #transformationSequence.add_transformation(flipv)
-transformationSequence.add_transformation(fliph)
-transformationSequence.add_transformation(crop)
+transformationSequence.add_transformation(affine)
+#transformationSequence.add_transformation(fliph)
+#transformationSequence.add_transformation(crop)
 
-for i in range(0,5):
+for i in range(0,1):
     img = Image.open(imageFileName)
     image = np.array(img)
     print("  Input shape: {}".format(image.shape))

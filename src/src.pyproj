@@ -36,13 +36,14 @@
     <Compile Include="DivisionTransformation.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="RandomCropTransformation.py" />
+    <Compile Include="ResizeImageTransformation.py" />
     <Compile Include="VerticalMirroringTransformation.py" />
     <Compile Include="HorizontalMirroringTransformation.py" />
     <Compile Include="opt_mlp_classify_hog_tinycifar10.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RandomCropTransformation.py" />
-    <Compile Include="ResizeImageTransformation.py" />
+    <Compile Include="RandomAffineTransformation.py" />
     <Compile Include="FloatCastTransformation.py">
       <SubType>Code</SubType>
     </Compile>
