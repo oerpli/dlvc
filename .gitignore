@@ -96,3 +96,5 @@ ENV/
 *.pdf
 *.synctex.gz
 model_best_global.h5
+.vs/dlvc/v14/.suo
+*.suo
