@@ -12,27 +12,33 @@ import numpy as np
 imageFileName = "cat.jpg"
 
 print("Loading image ...")
-img = Image.open(imageFileName)
-image = np.array(img)
-print("  Input shape: {}".format(image.shape))
 
+crop = RandomCropTransformation(32,32)
 resize = ResizeImageTransformation(32)
 fliph = HorizontalMirroringTransformation(1)
 flipv = VerticalMirroringTransformation(1)
-
-crop = RandomCropTransformation(20,20)
-
 transformationSequence = TransformationSequence()
 transformationSequence.add_transformation(resize)
 #transformationSequence.add_transformation(flipv)
-#transformationSequence.add_transformation(fliph)
-image = transformationSequence.apply(image)
+transformationSequence.add_transformation(fliph)
+transformationSequence.add_transformation(crop)
 
-#transformedImage = Image.frombuffer("RGBX", image.shape[0:2], image)
+for i in range(0,5):
+    img = Image.open(imageFileName)
+    image = np.array(img)
+    print("  Input shape: {}".format(image.shape))
 
-#transformedImage.save("new_"+imageFileName, "JPEG")
 
 
-from matplotlib import pyplot as plt
-plt.imshow(np.copy(image).astype('uint8'), interpolation='nearest')
-plt.show()
+
+
+    image = transformationSequence.apply(image)
+
+    #transformedImage = Image.frombuffer("RGBX", image.shape[0:2], image)
+
+    #transformedImage.save("new_"+imageFileName, "JPEG")
+
+
+    from matplotlib import pyplot as plt
+    plt.imshow(np.copy(image).astype('uint8'), interpolation='nearest')
+    plt.show()

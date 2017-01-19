@@ -18,4 +18,10 @@ class RandomCropTransformation(SampleTransformation):
         # Apply the transformation and return the transformed version.
         # sample must be a 3D tensor with shape [rows,cols,channels].
         # If rows < height or cols < width, an error is raised.
-        return sample
+        (rows,cols, x) = sample.shape
+        if rows < self.H or cols < self.W:
+                raise NameError("Can't apply crop, image too small")
+        else:
+            x = random.randint(0,rows - self.H)
+            y = random.randint(0,cols - self.W)
+            return sample[x:x + self.H,y:y + self.W,:]
