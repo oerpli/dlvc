@@ -14,17 +14,17 @@ imageFileName = "cat.jpg"
 
 print("Loading image ...")
 
-crop = RandomCropTransformation(32,32)
+crop = RandomCropTransformation(10,10, True)
 resize = ResizeImageTransformation(32)
-fliph = HorizontalMirroringTransformation(1)
-flipv = VerticalMirroringTransformation(1)
+fliph = HorizontalMirroringTransformation(0.5)
+flipv = VerticalMirroringTransformation(0.5)
 affine = RandomAffineTransformation(20,15,15)
 transformationSequence = TransformationSequence()
-#transformationSequence.add_transformation(resize)
 #transformationSequence.add_transformation(flipv)
-transformationSequence.add_transformation(affine)
+#transformationSequence.add_transformation(affine)
 #transformationSequence.add_transformation(fliph)
-#transformationSequence.add_transformation(crop)
+transformationSequence.add_transformation(crop)
+transformationSequence.add_transformation(resize)
 
 for i in range(0,5):
     img = Image.open(imageFileName)
