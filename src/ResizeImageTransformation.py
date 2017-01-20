@@ -15,12 +15,12 @@ class ResizeImageTransformation(SampleTransformation):
 
         (rows,cols, x) = sample.shape
         if rows < cols:
-            if rows < self.smallerSize:
-                raise NameError("Invalid image. Size too small")
+#            if rows < self.smallerSize:
+#                raise NameError("Invalid image. Size too small")
             newsize = (self.smallerSize, int(cols * self.smallerSize / rows),x)
         else:
-            if rows < self.smallerSize:
-                raise NameError("Invalid image. Size too small")
+#            if rows < self.smallerSize:
+#                raise NameError("Invalid image. Size too small")
             newsize = (int(rows * self.smallerSize / cols) ,self.smallerSize,x)
         print("  Input Image: shape {}, dtype: {}, mean: {:0.3f}, std: {:0.3f}".format(sample.shape, sample.dtype, sample.mean(), sample.std()))
 
