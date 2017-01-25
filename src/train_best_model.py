@@ -84,7 +84,7 @@ dropOutProbability = 0.0
 learningRate = 0.001
 allTimeBestAccuracy = 0.0
 
-for _dropOutProbability in range(2,20, 4):
+for _dropOutProbability in range(14,14, 4):   # fixed at 0.14 for the moment
     dropOutProbability = _dropOutProbability / 100.0;
     print("Using values WD:{} LR:{} and DropOut:{}".format(weightDecay,learningRate,dropOutProbability))
 
@@ -113,7 +113,6 @@ for _dropOutProbability in range(2,20, 4):
     print()
 
 
-    epochs = 100  #TODO set to 100
     bestAccuracy = 0.0
     bestAccuracyAtEpoch = 0
     maxEpochWithoutImprovement = 10
