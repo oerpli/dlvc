@@ -29,7 +29,7 @@ class MiniBatchGenerator:
         if(tform == None):
             self.transformation = IdentityTransformation()
         self.indices = list(range(0,self.data.size()))
-        self.create()
+        #self.create()
 
     def batchsize(self):
         return self.size
@@ -46,7 +46,7 @@ class MiniBatchGenerator:
         for i in range(len(self.indices) - 1,0,-1):
             j = randint(0,i)
             self.indices[i],self.indices[j] = self.indices[j], self.indices[i]
-        self.create() # recreate batches
+        #self.create() # recreate batches
 
     # pre process batches
     def create(self):
@@ -61,11 +61,11 @@ class MiniBatchGenerator:
             self.ids.append(id)
         return
 
-    def batch(self, bid):
-        return (self.samples[bid],self.labels[bid],self.ids[bid])
+    #def _batch(self, bid):
+    #    return (self.samples[bid],self.labels[bid],self.ids[bid])
 
     # Crear
-    def _batch(self, bid):
+    def batch(self, bid):
         if bid >= self.nbatches():
             print("Invalid batch id {}, only {} batches available".format(bid,self.nbatches()))
         labels = []
