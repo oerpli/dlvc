@@ -20,19 +20,13 @@ from PerChannelSubtractionImageTransformation import PerChannelSubtractionImageT
 from IdentityTransformation import IdentityTransformation
 from FloatCastTransformation import FloatCastTransformation
 from TransformationSequence import TransformationSequence
-from ToTheanoFormatImageTransformation import ToTheanoFormatImageTransformation
-from HDF5FeatureVectorDataset import HDF5FeatureVectorDataset
+from HorizontalMirroringTransformation import HorizontalMirroringTransformation
+from RandomCropTransformation import RandomCropTransformation
+from RandomAffineTransformation import RandomAffineTransformation
+from ResizeImageTransformation import ResizeImageTransformation
 
-cifar10_classnames = {  0: 'airplane',
-                        1: 'automobile',
-                        2: 'bird',
-                        3: 'cat',
-                        4: 'deer',
-                        5: 'dog',
-                        6: 'frog',
-                        7: 'horse',
-                        8: 'ship',
-                        9: 'truck'}
+from VerticalMirroringTransformation import VerticalMirroringTransformation
+from HDF5FeatureVectorDataset import HDF5FeatureVectorDataset
 
 
 print("Loading Cifar10Dataset ...")
@@ -47,12 +41,17 @@ test = Cifar10Dataset(dir,dataSetName)
 floatCast = FloatCastTransformation()
 offset = PerChannelSubtractionImageTransformation.from_dataset_mean(train)
 scale = PerChannelDivisionImageTransformation.from_dataset_stddev(train)
-reshape = ToTheanoFormatImageTransformation()
+crop = RandomCropTransformation(16,16, True)
+resize = ResizeImageTransformation(32)
+fliph = HorizontalMirroringTransformation(0.5)
+flipv = VerticalMirroringTransformation(0.5)
+
 transformationSequence = TransformationSequence()
+transformationSequence.add_transformation(fliph)
 transformationSequence.add_transformation(floatCast)
 transformationSequence.add_transformation(offset)
 transformationSequence.add_transformation(scale)
-#transformationSequence.add_transformation(reshape)
+
 print("Setting up preprocessing ...")
 def tfName(tf):
     return type(tf).__name__
@@ -84,7 +83,7 @@ dropOutProbability = 0.0
 learningRate = 0.001
 allTimeBestAccuracy = 0.0
 
-for _dropOutProbability in range(14,14, 4):   # fixed at 0.14 for the moment
+for _dropOutProbability in range(14,18, 4):   # fixed at 0.14 for the moment
     dropOutProbability = _dropOutProbability / 100.0;
     print("Using values WD:{} LR:{} and DropOut:{}".format(weightDecay,learningRate,dropOutProbability))
 
@@ -113,6 +112,7 @@ for _dropOutProbability in range(14,14, 4):   # fixed at 0.14 for the moment
     print()
 
 
+    epochs = 150  #TODO set to 100
     bestAccuracy = 0.0
     bestAccuracyAtEpoch = 0
     maxEpochWithoutImprovement = 10
