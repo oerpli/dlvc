@@ -22,7 +22,7 @@ class ResizeImageTransformation(SampleTransformation):
 #            if rows < self.smallerSize:
 #                raise NameError("Invalid image. Size too small")
             newsize = (int(rows * self.smallerSize / cols) ,self.smallerSize,x)
-        print("  Input Image: shape {}, dtype: {}, mean: {:0.3f}, std: {:0.3f}".format(sample.shape, sample.dtype, sample.mean(), sample.std()))
+#        print("  Input Image: shape {}, dtype: {}, mean: {:0.3f}, std: {:0.3f}".format(sample.shape, sample.dtype, sample.mean(), sample.std()))
 
         # first line is scikit-image, the other scipy
         # result = sp.misc.imresize(sample, newsize) # use this to use other resize library, (gives worse results)
