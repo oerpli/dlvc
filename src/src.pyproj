@@ -6,7 +6,7 @@
     <ProjectGuid>be0071fd-37cd-4ab2-bfd0-2f88d1b4ba6d</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>test_data_augmentation.py</StartupFile>
+    <StartupFile>x_test.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -38,6 +38,10 @@
     </Compile>
     <Compile Include="RandomCropTransformation.py" />
     <Compile Include="ResizeImageTransformation.py" />
+    <Compile Include="RGBtoYCCTransformation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="train_best_model.py" />
     <Compile Include="VerticalMirroringTransformation.py" />
     <Compile Include="HorizontalMirroringTransformation.py" />
     <Compile Include="opt_mlp_classify_hog_tinycifar10.py">

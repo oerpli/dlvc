@@ -25,6 +25,7 @@ from RandomCropTransformation import RandomCropTransformation
 from RandomAffineTransformation import RandomAffineTransformation
 from ResizeImageTransformation import ResizeImageTransformation
 from SubtractionTransformation import SubtractionTransformation
+from RGBtoYCCTransformation import RGBtoYCCTransformation
 
 from VerticalMirroringTransformation import VerticalMirroringTransformation
 from HDF5FeatureVectorDataset import HDF5FeatureVectorDataset
@@ -39,23 +40,28 @@ val = Cifar10Dataset(dir,dataSetName)
 dataSetName = 'test'
 test = Cifar10Dataset(dir,dataSetName)
 
+convRGBtoYCC = RGBtoYCCTransformation()
+
 floatCast = FloatCastTransformation()
 offset = PerChannelSubtractionImageTransformation.from_dataset_mean(train)
 scale = PerChannelDivisionImageTransformation.from_dataset_stddev(train)
-crop = RandomCropTransformation(16,16, True)
+crop = RandomCropTransformation(20,20, True, 0.08)
 resize = ResizeImageTransformation(32)
 fliph = HorizontalMirroringTransformation(0.5)
 flipv = VerticalMirroringTransformation(0.5)
 
 trainingTransformationSequence = TransformationSequence()
+#trainingTransformationSequence.add_transformation(flipv)  decreases performance
 trainingTransformationSequence.add_transformation(fliph)
 trainingTransformationSequence.add_transformation(crop)
+trainingTransformationSequence.add_transformation(convRGBtoYCC)
 trainingTransformationSequence.add_transformation(resize)
 trainingTransformationSequence.add_transformation(floatCast)
 trainingTransformationSequence.add_transformation(offset)
 trainingTransformationSequence.add_transformation(scale)
 
 testingTransformationSequence = TransformationSequence()
+testingTransformationSequence.add_transformation(convRGBtoYCC)
 testingTransformationSequence.add_transformation(floatCast)
 testingTransformationSequence.add_transformation(offset) 
 testingTransformationSequence.add_transformation(scale)
@@ -87,9 +93,9 @@ print("Initializing CNN and optimizer ...")
 
 fileNameModel = "best_model.h5"
 
-weightDecay = 0.0001
+weightDecay = 0.0005
 dropOutProbability = 0.0
-learningRate = 0.001
+learningRate = 0.02
 allTimeBestAccuracy = 0.0
 
 for _dropOutProbability in range(14,18, 4):   # fixed at 0.14 for the moment
