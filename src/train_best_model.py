@@ -40,12 +40,17 @@ val = Cifar10Dataset(dir,dataSetName)
 dataSetName = 'test'
 test = Cifar10Dataset(dir,dataSetName)
 
-convRGBtoYCC = RGBtoYCCTransformation()
 
+#RGBtoYCCTransformation.apply(train.data);
+#RGBtoYCCTransformation.apply(val.data);
+#RGBtoYCCTransformation.apply(test.data);
+
+convRGBtoYCC = RGBtoYCCTransformation()
 floatCast = FloatCastTransformation()
 offset = PerChannelSubtractionImageTransformation.from_dataset_mean(train)
 scale = PerChannelDivisionImageTransformation.from_dataset_stddev(train)
-crop = RandomCropTransformation(20,20, True, 0.08)
+affine = RandomAffineTransformation(20,0,0,0.04)
+crop = RandomCropTransformation(20,20, True, 0.04)
 resize = ResizeImageTransformation(32)
 fliph = HorizontalMirroringTransformation(0.5)
 flipv = VerticalMirroringTransformation(0.5)
@@ -54,14 +59,15 @@ trainingTransformationSequence = TransformationSequence()
 #trainingTransformationSequence.add_transformation(flipv)  decreases performance
 trainingTransformationSequence.add_transformation(fliph)
 trainingTransformationSequence.add_transformation(crop)
-trainingTransformationSequence.add_transformation(convRGBtoYCC)
+trainingTransformationSequence.add_transformation(affine)
+#trainingTransformationSequence.add_transformation(convRGBtoYCC)
 trainingTransformationSequence.add_transformation(resize)
 trainingTransformationSequence.add_transformation(floatCast)
 trainingTransformationSequence.add_transformation(offset)
 trainingTransformationSequence.add_transformation(scale)
 
 testingTransformationSequence = TransformationSequence()
-testingTransformationSequence.add_transformation(convRGBtoYCC)
+#testingTransformationSequence.add_transformation(convRGBtoYCC)
 testingTransformationSequence.add_transformation(floatCast)
 testingTransformationSequence.add_transformation(offset) 
 testingTransformationSequence.add_transformation(scale)
@@ -82,10 +88,6 @@ train_batch = MiniBatchGenerator(train,64,trainingTransformationSequence)
 val_batch = MiniBatchGenerator(val,100,testingTransformationSequence)
 test_batch = MiniBatchGenerator(test,100,testingTransformationSequence)
 
-#train_batch.create()
-#val_batch.create()
-#test_batch.create()
-
 print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
 print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
 print()
@@ -95,11 +97,12 @@ fileNameModel = "best_model.h5"
 
 weightDecay = 0.0005
 dropOutProbability = 0.0
-learningRate = 0.02
-allTimeBestAccuracy = 0.0
+learningRate = 0.003
 
-for _dropOutProbability in range(14,18, 4):   # fixed at 0.14 for the moment
-    dropOutProbability = _dropOutProbability / 100.0;
+for modelNo in range(0,10, 1):   # fixed at 0.14 for the moment
+    fileNameModel = "best_model_{}.h5".format(modelNo)
+    allTimeBestAccuracy = 0.0
+    dropOutProbability = 0.14;
     print("Using values WD:{} LR:{} and DropOut:{}".format(weightDecay,learningRate,dropOutProbability))
 
     model = Sequential()
