@@ -24,6 +24,7 @@ from HorizontalMirroringTransformation import HorizontalMirroringTransformation
 from RandomCropTransformation import RandomCropTransformation
 from RandomAffineTransformation import RandomAffineTransformation
 from ResizeImageTransformation import ResizeImageTransformation
+from SubtractionTransformation import SubtractionTransformation
 
 from VerticalMirroringTransformation import VerticalMirroringTransformation
 from HDF5FeatureVectorDataset import HDF5FeatureVectorDataset
@@ -47,18 +48,18 @@ fliph = HorizontalMirroringTransformation(0.5)
 flipv = VerticalMirroringTransformation(0.5)
 
 trainingTransformationSequence = TransformationSequence()
-#trainingTransformationSequence.add_transformation(fliph)
+trainingTransformationSequence.add_transformation(fliph)
+trainingTransformationSequence.add_transformation(crop)
+trainingTransformationSequence.add_transformation(resize)
 trainingTransformationSequence.add_transformation(floatCast)
 trainingTransformationSequence.add_transformation(offset)
 trainingTransformationSequence.add_transformation(scale)
 
 testingTransformationSequence = TransformationSequence()
-testingTransformationSequence.add_transformation( FloatCastTransformation())
-#testingTransformationSequence.add_transformation(PerChannelSubtractionImageTransformation.from_dataset_mean(train)) TROUBLEMAKER
-#testingTransformationSequence.add_transformation(PerChannelDivisionImageTransformation.from_dataset_stddev(train))
+testingTransformationSequence.add_transformation(floatCast)
+testingTransformationSequence.add_transformation(offset) 
+testingTransformationSequence.add_transformation(scale)
 
-trainingTransformationSequence.add_transformation(offset)
-#trainingTransformationSequence.add_transformation(scale)
 
 print("Setting up preprocessing ...")
 def tfName(tf):
@@ -72,8 +73,8 @@ print(" Adding {} [train] (value:{})".format(tfName(scale),niceList(scale.values
 print("Initializing minibatch generators ...")
 
 train_batch = MiniBatchGenerator(train,64,trainingTransformationSequence)
-val_batch = MiniBatchGenerator(val,100,trainingTransformationSequence)
-test_batch = MiniBatchGenerator(test,100,trainingTransformationSequence)
+val_batch = MiniBatchGenerator(val,100,testingTransformationSequence)
+test_batch = MiniBatchGenerator(test,100,testingTransformationSequence)
 
 #train_batch.create()
 #val_batch.create()

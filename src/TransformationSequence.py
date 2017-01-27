@@ -3,7 +3,10 @@ from SampleTransformation import SampleTransformation
 class TransformationSequence(SampleTransformation):
     # Applies a sequence of transformations
     # in the order they were added via add_transformation().
-    transformations = []
+
+
+    def __init__(self):
+        self.transformations = []
 
     def add_transformation(self, transformation):
         # Add a transformation (type SampleTransformation) to the sequence.
