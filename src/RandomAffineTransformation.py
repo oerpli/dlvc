@@ -13,12 +13,13 @@ class RandomAffineTransformation(SampleTransformation):
     # Randomly crop samples to a given size.
 
 
-    def __init__(self, max_angle, max_shear_x, max_shear_y):
+    def __init__(self, max_angle, max_shear_x, max_shear_y, prob):
         # Constructor.
         # Affine transformation is applied to images.
         self.max_angle = np.deg2rad(max_angle)
         self.max_shear_x = np.deg2rad(max_shear_x)
         self.max_shear_y = np.deg2rad(max_shear_y)
+        self.prob = prob
 
     # rotate
     def rot(self,angle,x,y):
@@ -46,17 +47,20 @@ class RandomAffineTransformation(SampleTransformation):
         # Apply the transformation and return the transformed version.
         # sample must be a 3D tensor
 
-        # get random angles
-        angle = self.max_angle * random.uniform(-1,1)
-        shear_x = self.max_shear_x * random.uniform(-1,1)
-        shear_y = self.max_shear_y * random.uniform(-1,1)
+        if random.random() < self.prob:
+            # get random angles
+            angle = self.max_angle * random.uniform(-1,1)
+            shear_x = self.max_shear_x * random.uniform(-1,1)
+            shear_y = self.max_shear_y * random.uniform(-1,1)
 
-        # center of image
-        y, x = np.array(sample.shape[:2]) / 2.
+            # center of image
+            y, x = np.array(sample.shape[:2]) / 2.
 
-        # build transformation from parts
-        tf = self.shearx(shear_x,x,y)
-        tf += self.sheary(shear_y,x,y)
-        tf += self.rot(angle,x,y)
+            # build transformation from parts
+            tf = self.shearx(shear_x,x,y)
+            tf += self.sheary(shear_y,x,y)
+            tf += self.rot(angle,x,y)
 
-        return transform.warp(sample,(tf).inverse, preserve_range = True)
+            return transform.warp(sample,(tf).inverse, preserve_range = True)
+        else:
+            return sample
