@@ -3,7 +3,6 @@ from SampleTransformation import SampleTransformation
 
 class PerChannelSubtractionImageTransformation(SampleTransformation):
     # Perform per-channel subtraction of of image samples with a scalar.
-    values = []
 
     @staticmethod
     def from_dataset_mean(dataset, tform=None):

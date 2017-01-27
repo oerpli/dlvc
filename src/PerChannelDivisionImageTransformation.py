@@ -4,7 +4,6 @@ import numpy as np
 
 class PerChannelDivisionImageTransformation(SampleTransformation):
     # Perform per-channel division of of image samples with a scalar.
-    values = []
 
 
     @staticmethod

@@ -7,9 +7,6 @@ from ClassificationDataset import ClassificationDataset
 class ImageDataset(ClassificationDataset):
     # A dataset, consisting of multiple samples/images
     # and corresponding class labels.
-    data = np.ndarray
-    labels = list
-    label_names = list
 
     def split(s, ratio, drop):
         indices = []

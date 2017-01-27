@@ -6,7 +6,6 @@ from ClassificationDataset import ClassificationDataset
 class FeatureVectorDataset(ClassificationDataset):
     # A dataset, consisting of multiple feature vectors
     # and corresponding class labels.
-    data = ImageDataset
 
     def size(self):
         return self.data.size()

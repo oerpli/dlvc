@@ -8,13 +8,7 @@ import numpy as np
 class MiniBatchGenerator:
     # Create minibatches of a given size from a dataset.
     # Preserves the original sample order unless shuffle() is used.
-    data = cd.ClassificationDataset
-    size = int
-    transformation = st.SampleTransformation
-    indices = list(range(0,1))
-    samples = []
-    labels = []
-    ids = []
+
 
 
     def __init__(self, dataset, bs, tform=None):

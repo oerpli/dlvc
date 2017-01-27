@@ -5,7 +5,6 @@ from SampleTransformation import SampleTransformation
 
 class ResizeImageTransformation(SampleTransformation):
     # Resize an image array to the needed size
-    smallerSize = int
 
     def __init__(self, size):
         self.smallerSize = size
@@ -14,6 +13,10 @@ class ResizeImageTransformation(SampleTransformation):
         # Apply the transformation and return the transformed version.
 
         (rows,cols, x) = sample.shape
+
+        if rows == cols and rows == self.smallerSize:
+            return sample
+        
         if rows < cols:
 #            if rows < self.smallerSize:
 #                raise NameError("Invalid image. Size too small")

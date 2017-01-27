@@ -3,7 +3,6 @@ from IdentityTransformation import IdentityTransformation
 
 class SubtractionTransformation(SampleTransformation):
     # Subtract a scalar from all features.
-    value = float
 
     @staticmethod
     def from_dataset_mean(dataset, tform=None):

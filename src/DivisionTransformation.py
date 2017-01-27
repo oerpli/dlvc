@@ -4,7 +4,6 @@ import numpy as np
 
 class DivisionTransformation(SampleTransformation):
     # Divide all features by a scalar.
-    value = float
 
     @staticmethod
     def from_dataset_stddev(dataset, tform=None):

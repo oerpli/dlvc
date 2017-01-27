@@ -4,7 +4,6 @@ from SampleTransformation import SampleTransformation
 
 class VerticalMirroringTransformation(SampleTransformation):
     # Perform horizontal mirroring of samples with a given probability.
-    prob = float
 
     def __init__(self, proba):
         # Constructor.

@@ -11,9 +11,7 @@ from skimage import transform
 
 class RandomAffineTransformation(SampleTransformation):
     # Randomly crop samples to a given size.
-    max_angle = float
-    max_shear_x = float
-    max_shear_y = float
+
 
     def __init__(self, max_angle, max_shear_x, max_shear_y):
         # Constructor.
