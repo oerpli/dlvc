@@ -54,14 +54,14 @@ trainingTransformationSequence = TransformationSequence()
 #trainingTransformationSequence.add_transformation(flipv)  # decreases performance
 trainingTransformationSequence.add_transformation(fliph)
 trainingTransformationSequence.add_transformation(crop)
-trainingTransformationSequence.add_transformation(convRGBtoYCC)
+#trainingTransformationSequence.add_transformation(convRGBtoYCC) should only be used static as preprocessing
 trainingTransformationSequence.add_transformation(resize)
 trainingTransformationSequence.add_transformation(floatCast)
 trainingTransformationSequence.add_transformation(offset)
 trainingTransformationSequence.add_transformation(scale)
 
 testingTransformationSequence = TransformationSequence()
-testingTransformationSequence.add_transformation(convRGBtoYCC)
+#testingTransformationSequence.add_transformation(convRGBtoYCC) should only be used static as preprocessing
 testingTransformationSequence.add_transformation(floatCast)
 testingTransformationSequence.add_transformation(offset)
 testingTransformationSequence.add_transformation(scale)
@@ -91,7 +91,7 @@ print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_ba
 print()
 print("Initializing CNN and optimizer ...")
 
-fileNameModel = "m_N0qmxfG_best_model.h5"
+fileNameModel = "m_x1_best_model.h5"
 
 weightDecay = 0.0005
 dropOutProbability = 10.0

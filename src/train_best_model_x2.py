@@ -53,18 +53,18 @@ affine = RandomAffineTransformation(5,5,5,0.2)
 
 trainingTransformationSequence = TransformationSequence()
 #trainingTransformationSequence.add_transformation(flipv)  # decreases performance
+#trainingTransformationSequence.add_transformation(convRGBtoYCC) should only be used static as preprocessing
 trainingTransformationSequence.add_transformation(fliph)
-trainingTransformationSequence.add_transformation(affine)
-trainingTransformationSequence.add_transformation(crop)
-#trainingTransformationSequence.add_transformation(convRGBtoYCC)
-trainingTransformationSequence.add_transformation(resize)
+#trainingTransformationSequence.add_transformation(affine)
+#trainingTransformationSequence.add_transformation(crop)
+#trainingTransformationSequence.add_transformation(resize)
 trainingTransformationSequence.add_transformation(floatCast)
 trainingTransformationSequence.add_transformation(offset)
 trainingTransformationSequence.add_transformation(scale)
 
 
 testingTransformationSequence = TransformationSequence()
-#testingTransformationSequence.add_transformation(convRGBtoYCC)
+#testingTransformationSequence.add_transformation(convRGBtoYCC) should only be used static as preprocessing
 testingTransformationSequence.add_transformation(floatCast)
 testingTransformationSequence.add_transformation(offset)
 testingTransformationSequence.add_transformation(scale)
