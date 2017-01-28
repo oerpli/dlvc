@@ -5,13 +5,13 @@ from SampleTransformation import SampleTransformation
 class RandomCropTransformation(SampleTransformation):
     # Randomly crop samples to a given size.
 
-    def __init__(self, width, height, varyCrop, prob):
+    def __init__(self, width, height, prob, varyCrop = True):
         # Constructor.
         # Images are cropped randomly to the specified width and height.
         self.W = width
         self.H = height
         self.varyCrop = varyCrop # varying instead of fixed crop
-        self.prob = prob;       #probabilit of applying crop
+        self.prob = prob;       #probability of applying crop
         if varyCrop and self.H != self.W:
                 raise NameError("Can't apply vary crop, width and height values differ")
 
