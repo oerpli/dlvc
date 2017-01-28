@@ -2,12 +2,14 @@ from keras.models import Sequential
 import keras.layers as Lay
 import keras as k
 from keras.regularizers import l2
-from keras.layers import Dropout
+from keras.layers import Dropout, InputLayer, Activation
 import operator
 
 
 from keras.utils.np_utils import to_categorical
 from keras.optimizers import SGD
+from keras.layers.normalization import BatchNormalization
+
 from ImageVectorizer import ImageVectorizer
 from MiniBatchGenerator import MiniBatchGenerator
 from TinyCifar10Dataset import TinyCifar10Dataset
@@ -48,23 +50,20 @@ scale = PerChannelDivisionImageTransformation.from_dataset_stddev(train)
 crop = RandomCropTransformation(25,25, 0.08, True)
 resize = ResizeImageTransformation(32)
 fliph = HorizontalMirroringTransformation(0.5)
-affine = RandomAffineTransformation(5,5,5,0.2)
 #flipv = VerticalMirroringTransformation(0.5) # bad for performance
-
 trainingTransformationSequence = TransformationSequence()
-#trainingTransformationSequence.add_transformation(flipv)  # decreases performance
-#trainingTransformationSequence.add_transformation(convRGBtoYCC) should only be used static as preprocessing
+#trainingTransformationSequence.add_transformation(flipv) # decreases
+#performance
 trainingTransformationSequence.add_transformation(fliph)
-#trainingTransformationSequence.add_transformation(affine)
 #trainingTransformationSequence.add_transformation(crop)
-#trainingTransformationSequence.add_transformation(resize)
+#trainingTransformationSequence.add_transformation(convRGBtoYCC)
+trainingTransformationSequence.add_transformation(resize)
 trainingTransformationSequence.add_transformation(floatCast)
 trainingTransformationSequence.add_transformation(offset)
 trainingTransformationSequence.add_transformation(scale)
 
-
 testingTransformationSequence = TransformationSequence()
-#testingTransformationSequence.add_transformation(convRGBtoYCC) should only be used static as preprocessing
+#testingTransformationSequence.add_transformation(convRGBtoYCC)
 testingTransformationSequence.add_transformation(floatCast)
 testingTransformationSequence.add_transformation(offset)
 testingTransformationSequence.add_transformation(scale)
@@ -88,42 +87,48 @@ test_batch = MiniBatchGenerator(test,100,testingTransformationSequence)
 #train_batch.create()
 #val_batch.create()
 #test_batch.create()
-
 print(" [train] {} samples, {} minibatches of size {}".format(train.size(), train_batch.nbatches(), train_batch.batchsize()))
 print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_batch.nbatches(), val_batch.batchsize()))
 print()
 print("Initializing CNN and optimizer ...")
 
-fileNameModel = "m_x2_best_model.h5"
+fileNameModel = "m_x1_best_model.h5"
 
 weightDecay = 0.0005
-dropOutProbability = 10.0
-learningRate = 0.02
+dropOutProbability = 0.05
+learningRate = 0.1
 allTimeBestAccuracy = 0.0
 
+#for _dropOutProbability in range(10,12, 4): # fixed at 0.14 for the moment
+    #dropOutProbability = _dropOutProbability / 100.0;
 print("Using values WD:{} LR:{} and DropOut:{}".format(weightDecay,learningRate,dropOutProbability))
 
 model = Sequential()
-#Trying to add dropout to input - no improvement, sinse it basically adding noise to the image
+#Trying to add dropout to input - no improvement, sinse it basically adding
+#noise to the image
 #model.add(Dropout(dropOutProbability,input_shape = (32,32,3)))
-#model.add(Lay.Convolution2D(16,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+#model.add(Lay.Convolution2D(16,3,3,W_regularizer =
+#l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
 
-model.add(Lay.Convolution2D(64,5,5,input_shape = (32,32,3),W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-model.add(Lay.Convolution2D(64,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
-model.add(Dropout(dropOutProbability))
-model.add(Lay.Convolution2D(128,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-model.add(Lay.Convolution2D(128,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
-model.add(Dropout(dropOutProbability*2))
-model.add(Lay.Convolution2D(256,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-model.add(Lay.Convolution2D(256,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
-model.add(Dropout(dropOutProbability*3))
-model.add(Lay.Convolution2D(512,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-model.add(Lay.Convolution2D(512,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
-model.add(Dropout(dropOutProbability*2))
+def AddConv(n,r):
+    model.add(Lay.Convolution2D(n,r,r,W_regularizer = l2(weightDecay),border_mode='same',dim_ordering="tf",init='he_normal', activation='relu'))
+def AddPool(n,s):
+    model.add(Lay.MaxPooling2D((n,n),strides=(s,s),dim_ordering="tf"))
+    model.add(BatchNormalization())
+    #model.add(Dropout(dropOutProbability)
+
+
+model.add(InputLayer((32,32,3)))
+AddConv(64,3)
+#model.add(Lay.Convolution2D(64,3,3,W_regularizer = l2(weightDecay),border_mode='same',dim_ordering="tf",init='he_normal',input_shape = (32,32,3)))
+AddConv(64,3)
+AddPool(2,2)
+AddConv(128,3)
+AddPool(2,2)
+AddConv(256,3)
+AddPool(2,2)
+AddConv(256,3)
+AddPool(2,2)
 model.add(Lay.Flatten())
 model.add(Lay.Dense(output_dim = 10,W_regularizer = l2(weightDecay),activation = 'softmax'))
 
@@ -186,7 +191,6 @@ for epoch in range(0,epochs):
 
 
 #Testing need to be removed
-
 print("")
 print("Testing model on test set ...")
 print("  [test] {} samples, {} minibatches of size {}".format(test.size(), test_batch.nbatches(), test_batch.batchsize()))
@@ -225,7 +229,7 @@ for bid in range(0,test_batch.nbatches()):
 
 acc = []
 for i in range(0,10):
-    acc.append(pred[i]/classcount[i])
+    acc.append(pred[i] / classcount[i])
 
 print("  Accuracy: {:0.2%}".format(m_acc_test))
 print("  Accuracy per class: {}".format(niceList(acc)))
