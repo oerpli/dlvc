@@ -21,6 +21,18 @@ class RGBtoYCCTransformation(SampleTransformation):
         return  _sample
 
     @staticmethod
+    def apply(data): # in (0,255) range
+        (ids,rows,cols, x) = data.shape
+        for id in range(0, ids):
+            for row in range(0, rows):
+                for col in range(0, cols):
+                     y,cb,cr = RGBtoYCCTransformation._ycc(data[id,row,col,0],data[id,row,col,1],data[id,row,col,2])
+                     data[id,row,col,0] = y
+                     data[id,row,col,1] = cb
+                     data[id,row,col,2] = cr
+    
+
+    @staticmethod
     def _ycc(r, g, b): # in (0,255) range
         y = .299*r + .587*g + .114*b
         cb = 128 -.168736*r -.331364*g + .5*b
