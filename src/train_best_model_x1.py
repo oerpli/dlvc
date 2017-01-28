@@ -54,14 +54,14 @@ trainingTransformationSequence = TransformationSequence()
 #trainingTransformationSequence.add_transformation(flipv)  # decreases performance
 trainingTransformationSequence.add_transformation(fliph)
 trainingTransformationSequence.add_transformation(crop)
-trainingTransformationSequence.add_transformation(convRGBtoYCC)
+#trainingTransformationSequence.add_transformation(convRGBtoYCC) should only be used static as preprocessing
 trainingTransformationSequence.add_transformation(resize)
 trainingTransformationSequence.add_transformation(floatCast)
 trainingTransformationSequence.add_transformation(offset)
 trainingTransformationSequence.add_transformation(scale)
 
 testingTransformationSequence = TransformationSequence()
-testingTransformationSequence.add_transformation(convRGBtoYCC)
+#testingTransformationSequence.add_transformation(convRGBtoYCC) should only be used static as preprocessing
 testingTransformationSequence.add_transformation(floatCast)
 testingTransformationSequence.add_transformation(offset)
 testingTransformationSequence.add_transformation(scale)
@@ -91,97 +91,95 @@ print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_ba
 print()
 print("Initializing CNN and optimizer ...")
 
-fileNameModel = "m_N0qmxfG_best_model.h5"
+fileNameModel = "m_x1_best_model.h5"
 
 weightDecay = 0.0005
 dropOutProbability = 10.0
 learningRate = 0.02
 allTimeBestAccuracy = 0.0
 
-for _dropOutProbability in range(14,18, 4):   # fixed at 0.14 for the moment
-    dropOutProbability = _dropOutProbability / 100.0;
-    print("Using values WD:{} LR:{} and DropOut:{}".format(weightDecay,learningRate,dropOutProbability))
+print("Using values WD:{} LR:{} and DropOut:{}".format(weightDecay,learningRate,dropOutProbability))
 
-    model = Sequential()
-    #Trying to add dropout to input - no improvement, sinse it basically adding noise to the image
-    #model.add(Dropout(dropOutProbability,input_shape = (32,32,3)))
-    #model.add(Lay.Convolution2D(16,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model = Sequential()
+#Trying to add dropout to input - no improvement, sinse it basically adding noise to the image
+#model.add(Dropout(dropOutProbability,input_shape = (32,32,3)))
+#model.add(Lay.Convolution2D(16,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
 
-    model.add(Lay.Convolution2D(64,3,3,input_shape = (32,32,3),W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-    model.add(Lay.Convolution2D(64,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-    model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
-    model.add(Dropout(dropOutProbability))
-    model.add(Lay.Convolution2D(128,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-    model.add(Lay.Convolution2D(128,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-    model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
-    model.add(Dropout(dropOutProbability*2))
-    model.add(Lay.Convolution2D(256,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-    model.add(Lay.Convolution2D(256,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-    model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
-    model.add(Dropout(dropOutProbability*3))
-    model.add(Lay.Convolution2D(512,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-    model.add(Lay.Convolution2D(512,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
-    model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
-    model.add(Dropout(dropOutProbability*2))
-    model.add(Lay.Flatten())
-    model.add(Lay.Dense(output_dim = 10,W_regularizer = l2(weightDecay),activation = 'softmax'))
+model.add(Lay.Convolution2D(64,3,3,input_shape = (32,32,3),W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.Convolution2D(64,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
+model.add(Dropout(dropOutProbability))
+model.add(Lay.Convolution2D(128,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.Convolution2D(128,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
+model.add(Dropout(dropOutProbability*2))
+model.add(Lay.Convolution2D(256,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.Convolution2D(256,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
+model.add(Dropout(dropOutProbability*3))
+model.add(Lay.Convolution2D(512,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.Convolution2D(512,3,3,W_regularizer = l2(weightDecay),border_mode='same',activation='relu',dim_ordering="tf"))
+model.add(Lay.MaxPooling2D((2,2),strides=(2,2),dim_ordering="tf"))
+model.add(Dropout(dropOutProbability*2))
+model.add(Lay.Flatten())
+model.add(Lay.Dense(output_dim = 10,W_regularizer = l2(weightDecay),activation = 'softmax'))
 
 
 
-    sgd = SGD(lr=learningRate, decay=0, momentum=0.9, nesterov=True)
-    model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
-    model.summary()
-    print()
+sgd = SGD(lr=learningRate, decay=0, momentum=0.9, nesterov=True)
+model.compile(loss='categorical_crossentropy',optimizer=sgd, metrics=["accuracy"])
+model.summary()
+print()
 
 
-    epochs = 100  #TODO set to 100
-    bestAccuracy = 0.0
-    bestAccuracyAtEpoch = 0
-    maxEpochWithoutImprovement = 10
-    print("Training for {} epochs ...".format(epochs))
-    for epoch in range(0,epochs):
-        loss = []
-        acc_t = []
-        acc_v = []
-        train_batch.shuffle()
-        for bid in range(0,train_batch.nbatches()):
-            # train classifier
-            b = train_batch.batch(bid)
-            features = b[0]
-            labels = to_categorical(b[1],10)
-            metrics = model.train_on_batch(features, labels)
-            # store loss and accuracy
-            loss.append(metrics[0])
-            acc_t.append(metrics[1])
+epochs = 100  #TODO set to 100
+bestAccuracy = 0.0
+bestAccuracyAtEpoch = 0
+maxEpochWithoutImprovement = 10
+print("Training for {} epochs ...".format(epochs))
+for epoch in range(0,epochs):
+    loss = []
+    acc_t = []
+    acc_v = []
+    train_batch.shuffle()
+    for bid in range(0,train_batch.nbatches()):
+        # train classifier
+        b = train_batch.batch(bid)
+        features = b[0]
+        labels = to_categorical(b[1],10)
+        metrics = model.train_on_batch(features, labels)
+        # store loss and accuracy
+        loss.append(metrics[0])
+        acc_t.append(metrics[1])
 
-        for bid in range(0,val_batch.nbatches()):
-            b = val_batch.batch(bid)
-            # test classifier
-            features = b[0]
-            labels = to_categorical(b[1],10)
-            metrics = model.test_on_batch(features, labels)
-            y = model.predict_on_batch(features)
-            # store validation accuracy
-            acc_v.append(metrics[1])
+    for bid in range(0,val_batch.nbatches()):
+        b = val_batch.batch(bid)
+        # test classifier
+        features = b[0]
+        labels = to_categorical(b[1],10)
+        metrics = model.test_on_batch(features, labels)
+        y = model.predict_on_batch(features)
+        # store validation accuracy
+        acc_v.append(metrics[1])
 
-        # compute means over loss & accurracy
-        m_loss = np.mean(loss)
-        m_acc_t = np.mean(acc_t)
-        m_acc_v = np.mean(acc_v)
+    # compute means over loss & accurracy
+    m_loss = np.mean(loss)
+    m_acc_t = np.mean(acc_t)
+    m_acc_v = np.mean(acc_v)
 
-        print("[Epoch {:0>3}] loss: {:02.3f}, training accuracy: {:02.3f}, validation accuracy: {:02.3f}".format(epoch + 1,m_loss, m_acc_t, m_acc_v))
+    print("[Epoch {:0>3}] loss: {:02.3f}, training accuracy: {:02.3f}, validation accuracy: {:02.3f}".format(epoch + 1,m_loss, m_acc_t, m_acc_v))
 
-        if m_acc_v > bestAccuracy:
-            bestAccuracy = m_acc_v
-            bestAccuracyAtEpoch = epoch
-            if (bestAccuracy > allTimeBestAccuracy):
-                print("New best validation accuracy, saving model to {}".format(fileNameModel))
-                model.save(fileNameModel)
-                allTimeBestAccuracy = bestAccuracy
-        elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
-            print("Validation accuracy did not improve for {} epochs, stopping".format(maxEpochWithoutImprovement))
-            print("Best validation accuracy: {:02.2f} (epoch {})".format(bestAccuracy,bestAccuracyAtEpoch))
-            break
+    if m_acc_v > bestAccuracy:
+        bestAccuracy = m_acc_v
+        bestAccuracyAtEpoch = epoch
+        if (bestAccuracy > allTimeBestAccuracy):
+            print("New best validation accuracy, saving model to {}".format(fileNameModel))
+            model.save(fileNameModel)
+            allTimeBestAccuracy = bestAccuracy
+    elif epoch - bestAccuracyAtEpoch > maxEpochWithoutImprovement:
+        print("Validation accuracy did not improve for {} epochs, stopping".format(maxEpochWithoutImprovement))
+        print("Best validation accuracy: {:02.2f} (epoch {})".format(bestAccuracy,bestAccuracyAtEpoch))
+        break
 
 
 #Testing need to be removed
