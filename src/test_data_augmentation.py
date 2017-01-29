@@ -47,5 +47,10 @@ for i in range(0,20):
     #transformedImage = Image.frombuffer("RGBX", image.shape[0:2], image)
     im = Image.fromarray(np.copy(image).astype('uint8'))
     #im = Image.frombuffer("RGBX", image.shape[0:2], image)
-    path = os.getcwd() + "\\augmented_samples\\" + str(i) + "_" +imageFileName
+    path = os.path.join(os.getcwd(), "augmented_samples" , str(i) + "_" +imageFileName)
+
+    dir = os.path.join(os.getcwd(), "augmented_samples")
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    print("  Saving to: {}".format(path))
     im.save(path, "JPEG")
