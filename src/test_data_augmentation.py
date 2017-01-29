@@ -6,6 +6,8 @@ from HorizontalMirroringTransformation import HorizontalMirroringTransformation
 from RandomCropTransformation import RandomCropTransformation
 from RandomAffineTransformation import RandomAffineTransformation
 from VerticalMirroringTransformation import VerticalMirroringTransformation
+from RandomGrayScaleTransformation import RandomGrayScaleTransformation
+
 from PIL import Image
 
 import numpy as np
@@ -20,10 +22,11 @@ resize = ResizeImageTransformation(32)
 fliph = HorizontalMirroringTransformation(0.5)
 flipv = VerticalMirroringTransformation(0.5)
 affine = RandomAffineTransformation(15,10,10,0.2)
-
+gray = RandomGrayScaleTransformation(0.2)
 transformationSequence = TransformationSequence()
 transformationSequence.add_transformation(resize)
 #transformationSequence.add_transformation(flipv)
+transformationSequence.add_transformation(gray)
 transformationSequence.add_transformation(fliph)
 transformationSequence.add_transformation(affine)
 transformationSequence.add_transformation(crop)
