@@ -49,9 +49,9 @@ class RandomAffineTransformation(SampleTransformation):
 
         if random.random() < self.prob:
             # get random angles
-            angle = self.max_angle * random.uniform(-1,1)
-            shear_x = self.max_shear_x * random.uniform(-1,1)
-            shear_y = self.max_shear_y * random.uniform(-1,1)
+            angle =  random.gauss(0,self.max_angle/2)
+            shear_x = random.gauss(0,max_shear_x/2)
+            shear_y = random.uniform(0,max_shear_y/2)
 
             # center of image
             y, x = np.array(sample.shape[:2]) / 2.
