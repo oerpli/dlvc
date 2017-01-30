@@ -6,7 +6,7 @@
     <ProjectGuid>be0071fd-37cd-4ab2-bfd0-2f88d1b4ba6d</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>train_best_model_z2.py</StartupFile>
+    <StartupFile>test_best_model.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -50,6 +50,7 @@
     <Compile Include="train_best_model_x3.py" />
     <Compile Include="train_best_model_x2.py" />
     <Compile Include="train_best_model_x1.py" />
+    <Compile Include="train_best_model_a1.py" />
     <Compile Include="train_best_model_z2.py" />
     <Compile Include="train_best_model_z1.py" />
     <Compile Include="train_best_model_y2.py" />
