@@ -6,8 +6,8 @@ from SampleTransformation import SampleTransformation
 class ResizeImageTransformation(SampleTransformation):
     # Resize an image array to the needed size
 
-    def __init__(self, size, keepRatio = True):
-        self.smallerSize = size
+    def __init__(self, size, keepRatio = False):
+        self.size = size
         self.keepRatio = keepRatio
 
     def apply(self, sample):
@@ -15,19 +15,19 @@ class ResizeImageTransformation(SampleTransformation):
 
         (rows,cols, x) = sample.shape
 
-        if rows == cols and rows == self.smallerSize:
+        if rows == cols and rows == self.size:
             return sample
         if (self.keepRatio):
             if rows < cols:
     #            if rows < self.smallerSize:
     #                raise NameError("Invalid image. Size too small")
-                newsize = (self.smallerSize, int(cols * self.smallerSize / rows),x)
+                newsize = (self.size, int(cols * self.size / rows),x)
             else:
     #            if rows < self.smallerSize:
     #                raise NameError("Invalid image. Size too small")
-                newsize = (int(rows * self.smallerSize / cols) ,self.smallerSize,x)
+                newsize = (int(rows * self.size / cols) ,self.size,x)
         else:
-            newsize = (self.smallerSize,self.smallerSize)
+            newsize = (self.size,self.size)
 #        print("  Input Image: shape {}, dtype: {}, mean: {:0.3f}, std: {:0.3f}".format(sample.shape, sample.dtype, sample.mean(), sample.std()))
 
         # first line is scikit-image, the other scipy
