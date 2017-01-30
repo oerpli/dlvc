@@ -98,11 +98,11 @@ print(" [val]   {} samples, {} minibatches of size {}".format(val.size(), val_ba
 print()
 print("Initializing CNN and optimizer ...")
 
-fileNameModel = "m_y2_best_model.h5"
+fileNameModel = "m_z2_best_model.h5"
 
 weightDecay = 0.0005
 dropOutProbability = 0.25
-learningRate = 0.05
+learningRate = 0.02
 allTimeBestAccuracy = 0.0
 
 #for _dropOutProbability in range(10,12, 4): # fixed at 0.14 for the moment
@@ -132,13 +132,13 @@ AddPool(2,2)
 AddConv(256,3)
 AddConv(256,3)
 AddPool(2,2)
-AddConv(128,3)
-#AddConv(256,3)
+#AddConv(128,3)
+AddConv(256,3)
+AddConv(256,3)
 #AddConv(512,3)
-#AddConv(512,3)
-#AddPool(2,2)
+AddPool(2,2)
 model.add(Lay.Flatten())
-model.add(Lay.Dense(2048,W_regularizer = l2(weightDecay),activation = 'relu',init='he_normal'))
+#model.add(Lay.Dense(512,activation = 'relu',init='he_normal'))
 model.add(Dropout(dropOutProbability))
 model.add(Lay.Dense(output_dim = 10,W_regularizer = l2(weightDecay),activation = 'softmax'))
 
