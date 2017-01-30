@@ -23,11 +23,13 @@ class RandomCropTransformation(SampleTransformation):
         if rows < self.H or cols < self.W:
                 raise NameError("Can't apply crop, image too small")
         else:
-            if random.random() < self.prob:
+            r = random.random()
+            if r < self.prob:
                 if (self.varyCrop):
                     sizeMax = min(rows,cols)
-                    sizeX = random.randint(self.W, sizeMax);
-                    sizeY = sizeX
+                    sizeX = random.randint(self.W, rows);
+                    sizeY = random.randint(self.H, cols);
+#                    sizeY = sizeX
                 else:
                    sizeX = self.H
                    sizeY = self.W

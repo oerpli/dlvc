@@ -23,3 +23,6 @@ class TransformationSequence(SampleTransformation):
         for i in range(0, len(self.transformations)):
             sample = self.get_transformation(i).apply(sample)
         return sample
+
+    def size(self):
+        return len(self.transformations)
