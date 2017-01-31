@@ -64,8 +64,8 @@ We also tried applying dropout to the input layer, as this was recommended in th
 
 In the end we used a dropout layer in the backend after the fully connected layer though we didn't tune the parameter there, due to time constraints. 
 \subsection{Batch Normalization}
-While weight are usually initialized unbaiased from a standard normal distrubution, and also the input is normalized, this can change during training. Because the parameter change over time, the network can become unbalanced and this complicates training.
-Batch normalization can realign this by calculating the current mean and variance using the current batch. One benefit of doing this is faster learning, as it allows for larger learning rates and results in higher accuracy. So we applied in some of our networks as well.
+Weights are usually initialized unbiased from a standard normal distrubution and also the input is normalized. This can change during training. Because the parameters change over time, the network can become unbalanced and this complicates training.
+Batch normalization can realign this by calculating the current mean and variance using the current batch. One benefit of doing this is faster learning, as it allows for larger learning rates and results in higher accuracy. So we applied  it in some of our networks as well.
 \subsection{Initialization}
 We changed the random initialization to \lstinline{`he_normal'} \cite{he} as suggested in the lecture. The effect of this was negligible, we think this is due to small depth of our network. It may had a bigger role on a deeper network as ours only has a few layers (see section \ref{sec:a})
 \subsection{Architectures}\label{sec:a}
