@@ -35,8 +35,8 @@ The Idea of this approach was to change the color space from the standard RGB Mo
 \left[\begin{array}{c}R'_d \\ G'_d \\ B'_d\end{array}\right]\label{eq:ycc}
 \end{align}
 
-\begin{figure}
-\includegraphics[width=0.9\textwidth]{./img/barn_rgb_ycc.jpg}
+\begin{figure}\centering
+\includegraphics[width=1\textwidth]{./img/barn_rgb_ycc.jpg}
 \captionof{figure}{Left RGB image, right the luminance and the 2 chrominance 
 channels\cite{YCCWiki}}
 
@@ -54,15 +54,33 @@ Unfortunately, the results were discouraging, the performance improved only slig
 
 
 \section{Training the model}
-After increasing the number of convolutional filters from the previous exercise we quickly had an improvement by $\approx 10\%$ in our validation accuracy. We employed different techniques to improve the validation accuracy from there but all efforts fell flat. 
+After increasing the number of convolutional filters from the previous exercise we quickly had an improvement by $\approx 10\%$ in our validation accuracy. We employed different techniques to improve the validation accuracy from there but all efforts fell more or less flat. 
 
-\subsection{Dropout}
+\subsection{Dropout \TODO}
 Dropout is a technique that counteracts overfitting in a model. It sets values of random neurons in the affected layer to zero with the specified probability. This forces the model to consider different features in the input to assign a certain class to the output (e.g. if the ``fur'' feature is dropped the model could predict that a cat is not a human based on features like ``has four legs'' combined with ``has a tail''). 
 
+\subsection{Batch Normalization \TODO}
 
-We first tried the same neural net architecture as in the previous assignment and quickly got a validation accuracy of approximately $80\%$ with a training accuracy of $>90\%$ -- we thought that applying measures to coutneract overfitting should increase the validation accuracy so we added dropout to the convolutional layers with varying probabilities (between $10\%$ and $30\%$) though this did not improve results.
-though further modifications resulted in worse ($75\% - 80\%$) or even horrible results (all samples classified as the same class). 
+\subsection{Initialization}
+We changed the random initialization to \lstinline{`he_normal'} \cite{he} as suggested in the lecture. The effect of this was negligible, we think this is due to small depth of our network. It may had a bigger role on a deeper network as ours only has a few layers (see section \ref{sec:a})
+\subsection{Architectures}\label{sec:a}
+We tried a few approaches but settled for a simple model in the end as there were some strange bugs problems with the sophisticated models. We looked for inspiration in the literature and found a few models (similar to VGGNet) that seemed to be promising but resulted in a timeout on the server. Therefore we settled for less layers and, fewer convolutional filters and simpler backends. 
+Our final model which we used to test the different strategies had the following layers (activation unless specified otherwise was ReLU, initialization wherever it applies was \lstinline{`he_normal'}.
+\begin{enumerate}
+\item conv $3\times 3@32$
+\item pool $2\times 2, \text{stride} 2, \max$
+\item conv $3\times 3@64$
+\item pool $2\times 2, \text{stride} 2, \max$
+\item conv $3\times 3@128$
+\item conv $3\times 3@256$
+\item pool $2\times 2, \text{stride} 2, \max$
+\item flatten
+\item FC 512
+\item dropout
+\item FC 10, softmax
+\end{enumerate}
 
+Adding additional pooling filters or a second dense layer in the backend strangely resulted in a completely useless classifier (all samples ended up in the same class).
 
 
 
