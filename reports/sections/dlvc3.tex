@@ -88,4 +88,6 @@ Adding additional pooling filters or a second dense layer in the backend strange
 \section{Testing the model}
 For the testing script, we applied a variant of the oversampling method described in the lecture. We test different versions of the image (flipped, cropped, rotated) against our model an added up the probabilities. For that we used the same transformation we already applied in the data augmentation part. To get the final class, we chose the one with the highest combined probability. We could not assess the quality improvements of this method, because by the time we implemented that the long queues on the server permitted experiments (we tried to do the inference locally with the models trained on the server but this did not work -- the same test script produced $\approx 35\%$ accuracy instead of $78\%$ on the server). Though we assumed that it won't worsen the results, so it is part of our testing method. We would also have liked to choose only those top results, that differ the most from each other, but again, without experimenting, this part was scraped.
 
+\section{Discussion}
+All things considered we would say that we failed this task rather spectacularly. 
 
