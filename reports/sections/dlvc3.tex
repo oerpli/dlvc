@@ -11,8 +11,16 @@ This is the report for the third assignment of the course ``Deep Learning for Vi
 % Briefly state which deep learning library you used and if you used the server for training. One or two sentences are sufficient.
 We used Keras with tensorflow as backend for training. We used the server since we could not get the system running on a Windows platform. 
 
-\section{Data augmentation}
-\subsection{\TODO[Titel überlegen]}
+\section{Image Transformations}
+\subsection{Preprocessing}
+\subsubsection{RGB to $YC_bC_r$}
+The Idea of this approach was to change the color space from the standard RGB Model to the $YC_bC_r$ model, that has also three channel, but instead of three colors, one channel has the luminance information, while the other two have the chrominance information. This seems a more plausible input for an image classifier, since the luminance (similar to a B/W version) carries very different information than the chrominance, so seperating this early should benefit the process. 
+
+\subsubsection{Other transformations}
+Apart from this we only used the transformations already used for the last assignment. We thought about normalizing per color or similar, but we assumed that the improvement as well as performance impact would be in the same ballpark as the color space transformation and therefore didn't prioritize this highly and in the end we skipped it altogether to meet the deadline.
+
+
+\subsection{Data augmentation}
 As a neural network profits from a huge amount of training data we used data augmentation to generate additional samples from the CIFAR10 data by applying various transformations to it. We implemented a handful of transformations but in the end only used the subset which we though should work with the classification task at hand. All transformations had a parameter  for the probability that the transformation is applied. 
 \subsubsection{Horizontal mirroring} Mirror the images along a vertical axis. Should not be used for tasks where this could be a problem (e.g. steering a a car is not a task that is invariant under this transformation)
 \subsubsection{Vertical mirroring} We implemented this to test whether more training data is always better---our correct hypothesis was that this is not the case. The reason why this increases the missclassification ratio is that pictures usually have a correct up/down orientation and our validation set does not contain (much) vertically flipped images where it would be beneficial to train the classifier with samples that are augmented in this way. 
@@ -20,10 +28,6 @@ As a neural network profits from a huge amount of training data we used data aug
 \subsubsection{Gray scale} We calculated the mean of every pixel along the channel axis and assign this mean to all three channels to get identical images in grayscale. The idea here was that a cat/dog/car/\ldots could have various colors and it would therefore be a good idea to train the classifier on some images without the color information. We thought about extending this to not only have the original images and their b/w version but also something in between but it would have been computationally way more expensive and we assumed that it's not worth the computational overhead as the server was running at peak capacity most of the time and all groups would suffer from too many test runs.
 \subsubsection{Random crop} This transformation takes three arguments, the desired minimum height and width as well as a probability. It returns an image with a size that is sampled from the uniform distribution between the minimum height/width and the original height/width. To get samples with consistent dimensions we upscaled the image back to $32\times 32$ with the resize transformation after applying the crop. 
 
-
-\subsection{Preprocessing}
-\subsubsection{RGB to $YC_bC_r$}
-The Idea of this approach was to change the color space from the standard RGB Model to the $YC_bC_r$ model, that has also three channel, but instead of three colors, one channel has the luminance information, while the other two have the chrominance information. This seems a more plausible input for an image classifier, since the luminance (similar to a B/W version) carries very different information than the chrominance, so seperating this early should benefit the process. 
 
 \begin{align}
 \left[\begin{array}{c}Y' \\ C_b \\ C_r\end{array}\right]
@@ -77,12 +81,7 @@ Our final model which we used to test the different strategies had the following
 
 Adding additional pooling filters or a second dense layer in the backend strangely resulted in a completely useless classifier (all samples ended up in the same class).
 
-
-We first tried the same neural net architecture as in the previous assignment and quickly got a validation accuracy of approximately $80\%$ with a training accuracy of $>90\%$ -- we thought that applying measures to coutneract overfitting should increase the validation accuracy so we added dropout to the convolutional layers with varying probabilities (between $10\%$ and $30\%$) though this did not improve results.
-though further modifications resulted in worse ($75\% - 80\%$) or even horrible results (all samples classified as the same class). 
-
 We also tried applying dropout to the input layer, as this was recommended in the keras documentation. This will remove some of the input neurons. In our case, it did worsen the results and that seems plausible, since the input neurons are highly correlated and this is the same as adding random noise to the image, which of course will weaken the classification task. A better approach would be darkening whole parts of the image to simulate occlusion.
->>>>>>> 38efd97c9ba5fa56f4c46bdd1e1ae3c50da6cf0f
 
 \section{Testing the model}
 For the testing script, we applied a variant of the oversampling method described in the lecture. We test different versions of the image (flipped, cropped, rotated) against our model an added up the probabilities. For that we used the same transformation we already applied in the data augmentation part. To get the final class, we chose the one with the highest combined probability. We could not assess the quality improvements of this method, because by the time we implemented that the long queues on the server permitted experiments. But it is safe to say, that it wont worsen the results, so it is part of our testing method. We would also have liked to choose only those top results, that differ the most from each other, but again, without experimenting, this part was scraped.
