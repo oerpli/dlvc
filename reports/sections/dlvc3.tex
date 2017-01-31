@@ -92,12 +92,12 @@ We made some tests with our best network, with the architecture from above and t
 \begin{center}
   \begin{tabular}{ | l | r |}
     \hline
-    Description & Validation accuracy  \\ \hline
+    Description & val.  acc. \\ \hline
     Standard model & 78.0 \% \\ \hline
-    Dense Network (1024) & 79.5 \%  \\ \hline
+    FC 1024 instead of FC 512& 79.5 \%  \\ \hline
     w/o data augmentation & 77.8 \%  \\ \hline
-    DropOut(25\%) in final layer & 80.5 \%  \\ \hline
-    Batch Norm & ??  \\
+    DropOut(25\%) in final layer & 80.5 \% \\with 0.05 learning rate &  \\ \hline
+    Batch normalization &  did not finish in time\\
     \hline
   \end{tabular}
 \end{center}
