@@ -24,6 +24,15 @@ As a neural network profits from a huge amount of training data we used data aug
 
 
 
+\section{Training the model}
+After increasing the number of convolutional filters from the previous exercise we quickly had an improvement by $\approx 10\%$ in our validation accuracy. We employed different techniques to improve the validation accuracy from there but all efforts fell flat. 
+
+\subsection{Dropout}
+Dropout is a technique that counteracts overfitting in a model. It sets values of random neurons in the affected layer to zero with the specified probability. This forces the model to consider different features in the input to assign a certain class to the output (e.g. if the ``fur'' feature is dropped the model could predict that a cat is not a human based on features like ``has four legs'' combined with ``has a tail''). 
+
+
+We first tried the same neural net architecture as in the previous assignment and quickly got a validation accuracy of approximately $80\%$ with a training accuracy of $>90\%$ -- we thought that applying measures to coutneract overfitting should increase the validation accuracy so we added dropout to the convolutional layers with varying probabilities (between $10\%$ and $30\%$) though this did not improve results.
+though further modifications resulted in worse ($75\% - 80\%$) or even horrible results (all samples classified as the same class). 
 
 
 %%% old stuff below
