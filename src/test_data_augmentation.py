@@ -32,7 +32,7 @@ transformationSequence.add_transformation(affine)
 transformationSequence.add_transformation(crop)
 transformationSequence.add_transformation(resize)
 
-for i in range(0,20):
+for i in range(0,10):
     img = Image.open(imageFileName)
     image = np.array(img)
     print("  Input shape: {}".format(image.shape))
