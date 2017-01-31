@@ -55,15 +55,19 @@ Unfortunately, the results were discouraging, the performance improved only slig
 \section{Training the model}
 After increasing the number of convolutional filters from the previous exercise we quickly had an improvement by $\approx 10\%$ in our validation accuracy. We employed different techniques to improve the validation accuracy from there but all efforts fell more or less flat. 
 
-\subsection{Dropout \TODO}
+\subsection{Dropout}
 Dropout is a technique that counteracts overfitting in a model. It sets values of random neurons in the affected layer to zero with the specified probability. This forces the model to consider different features in the input to assign a certain class to the output (e.g. if the ``fur'' feature is dropped the model could predict that a cat is not a human based on features like ``has four legs'' combined with ``has a tail''). 
 
+In our first few tries we added a dropout after every pooling layer and measured the improvements for different values of the hyperparameter for the dropout probability. There the optimum was with $p=0.14$.
+We also tried applying dropout to the input layer, as this was recommended in the keras documentation. This will remove some of the input neurons. In our case, it did worsen the results and that seems plausible, since the input neurons are highly correlated and this is the same as adding random noise to the image, which of course will weaken the classification task. A better approach would be darkening whole parts of the image to simulate occlusion.
+
+In the end we used a dropout layer in the backend after the fully connected layer though we didn't tune the parameter there, due to time constraints. 
 \subsection{Batch Normalization \TODO}
 
 \subsection{Initialization}
 We changed the random initialization to \lstinline{`he_normal'} \cite{he} as suggested in the lecture. The effect of this was negligible, we think this is due to small depth of our network. It may had a bigger role on a deeper network as ours only has a few layers (see section \ref{sec:a})
 \subsection{Architectures}\label{sec:a}
-We tried a few approaches but settled for a simple model in the end as there were some strange bugs problems with the sophisticated models. We looked for inspiration in the literature and found a few models (similar to VGGNet) that seemed to be promising but resulted in a timeout on the server. Therefore we settled for less layers and, fewer convolutional filters and simpler backends. 
+We tried a few approaches but settled for a simple model in the end as there were some strange bugs problems with the sophisticated models. We looked for inspiration from submissions to previous contests on the CIFAR10 datase as well as in the literature and found a few models that seemed to be promising  (e.g. \cite{ref})  but resulted in a timeout on the server. Therefore we settled for less layers and, fewer convolutional filters and simpler backends. 
 Our final model which we used to test the different strategies had the following layers (activation unless specified otherwise was ReLU, initialization wherever it applies was \lstinline{`he_normal'}.
 \begin{enumerate}
 \item conv $3\times 3@32$
@@ -81,9 +85,7 @@ Our final model which we used to test the different strategies had the following
 
 Adding additional pooling filters or a second dense layer in the backend strangely resulted in a completely useless classifier (all samples ended up in the same class).
 
-We also tried applying dropout to the input layer, as this was recommended in the keras documentation. This will remove some of the input neurons. In our case, it did worsen the results and that seems plausible, since the input neurons are highly correlated and this is the same as adding random noise to the image, which of course will weaken the classification task. A better approach would be darkening whole parts of the image to simulate occlusion.
-
 \section{Testing the model}
-For the testing script, we applied a variant of the oversampling method described in the lecture. We test different versions of the image (flipped, cropped, rotated) against our model an added up the probabilities. For that we used the same transformation we already applied in the data augmentation part. To get the final class, we chose the one with the highest combined probability. We could not assess the quality improvements of this method, because by the time we implemented that the long queues on the server permitted experiments. But it is safe to say, that it wont worsen the results, so it is part of our testing method. We would also have liked to choose only those top results, that differ the most from each other, but again, without experimenting, this part was scraped.
+For the testing script, we applied a variant of the oversampling method described in the lecture. We test different versions of the image (flipped, cropped, rotated) against our model an added up the probabilities. For that we used the same transformation we already applied in the data augmentation part. To get the final class, we chose the one with the highest combined probability. We could not assess the quality improvements of this method, because by the time we implemented that the long queues on the server permitted experiments (we tried to do the inference locally with the models trained on the server but this did not work -- the same test script produced $\approx 35\%$ accuracy instead of $78\%$ on the server). Though we assumed that it won't worsen the results, so it is part of our testing method. We would also have liked to choose only those top results, that differ the most from each other, but again, without experimenting, this part was scraped.
 
 
