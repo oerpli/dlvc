@@ -42,12 +42,7 @@ channels\cite{YCCWiki}}
 
 \end{figure}
 
-It is done using the transformation in \eqref{eq:ycc} and since our implemantation was very inefficent, we used it as a preprocessing step rather than an online transformation. 
-\begin{figure}
-\includegraphics[width=0.9\textwidth]{./img/rgb-ycc.png}
-\captionof{figure}{Tranfomation formula \cite{YCCWiki}}
-\label{YCCformula}
-\end{figure}
+It is done using the transformation in \eqref{eq:ycc} and since our implementation was very inefficent, we used it as a preprocessing step rather than an online transformation. 
 Unfortunately, the results were discouraging, the performance improved only slightly (below 1\%), which is below the fluctuations (due to random initalization and early stopping) we observed in various runs of identical models during the last assignment. Our explanation is that this is just a rather simple linear transformation of the input values, the network may already have done something similar on the first level. 
 
 
@@ -82,5 +77,14 @@ Our final model which we used to test the different strategies had the following
 
 Adding additional pooling filters or a second dense layer in the backend strangely resulted in a completely useless classifier (all samples ended up in the same class).
 
+
+We first tried the same neural net architecture as in the previous assignment and quickly got a validation accuracy of approximately $80\%$ with a training accuracy of $>90\%$ -- we thought that applying measures to coutneract overfitting should increase the validation accuracy so we added dropout to the convolutional layers with varying probabilities (between $10\%$ and $30\%$) though this did not improve results.
+though further modifications resulted in worse ($75\% - 80\%$) or even horrible results (all samples classified as the same class). 
+
+We also tried applying dropout to the input layer, as this was recommended in the keras documentation. This will remove some of the input neurons. In our case, it did worsen the results and that seems plausible, since the input neurons are highly correlated and this is the same as adding random noise to the image, which of course will weaken the classification task. A better approach would be darkening whole parts of the image to simulate occlusion.
+>>>>>>> 38efd97c9ba5fa56f4c46bdd1e1ae3c50da6cf0f
+
+\section{Testing the model}
+For the testing script, we applied a variant of the oversampling method described in the lecture. We test different versions of the image (flipped, cropped, rotated) against our model an added up the probabilities. For that we used the same transformation we already applied in the data augmentation part. To get the final class, we chose the one with the highest combined probability. We could not assess the quality improvements of this method, because by the time we implemented that the long queues on the server permitted experiments. But it is safe to say, that it wont worsen the results, so it is part of our testing method. We would also have liked to choose only those top results, that differ the most from each other, but again, without experimenting, this part was scraped.
 
 
