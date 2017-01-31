@@ -65,7 +65,7 @@ We also tried applying dropout to the input layer, as this was recommended in th
 In the end we used a dropout layer in the backend after the fully connected layer though we didn't tune the parameter there, due to time constraints. 
 \subsection{Batch Normalization}
 While weight are usually initialized unbaiased from a standard normal distrubution, and also the input is normalized, this can change during training. Because the parameter change over time, the network can become unbalanced and this complicates training.
-Batch normalization can realign this by calculating the current mean and variance using the current batch. One benefit of doing this is faster learning, as it allows for larger learning rates and results in higher accuracy. So we applied in some of our networks as well.
+Batch normalization can realign this by calculating the current mean and variance using the current batch. One benefit of doing this is faster learning, as it allows for larger learning rates and results in higher accuracy. So we applied in some of our networks as well, but so far without success, as displayed in the experimental section.
 \subsection{Initialization}
 We changed the random initialization to \lstinline{`he_normal'} \cite{he} as suggested in the lecture. The effect of this was negligible, we think this is due to small depth of our network. It may had a bigger role on a deeper network as ours only has a few layers (see section \ref{sec:a})
 \subsection{Architectures}\label{sec:a}
@@ -88,7 +88,7 @@ Our final model which we used to test the different strategies had the following
 Adding additional pooling filters or a second dense layer in the backend strangely resulted in a completely useless classifier (all samples ended up in the same class).
 
 \section{Experimental results}
-We made some tests with our best network, with the architecture from above and these are the reported validation accuracies.
+We made some tests with our best network, with the architecture from above and these are the reported validation accuracies. In this case, learning rate was fixed at 0.02, while weight decay had a value of 0.001.
 \begin{center}
   \begin{tabular}{ | l | r |}
     \hline
@@ -97,8 +97,7 @@ We made some tests with our best network, with the architecture from above and t
     Dense Network (1024) & 79.5 \%  \\ \hline
     w/o data augmentation & 77.8 \%  \\ \hline
     DropOut(25\%) in final layer & 80.5 \%  \\ \hline
-    Batch Norm & ??  \\
-    \hline
+    Batch Normalization & 73.8 \%  \\ \hline
   \end{tabular}
 \end{center}
 
@@ -112,3 +111,4 @@ For this task, since it is graded on performance, we were unhappy with the final
 \\
 The testing part is more or less missing as we wanted to implement this in the last two days but did not have a functioning model at the time. Using a model trained on the server to do inference on our local machines turned out to be impossible. We already suspected this when testing the classifier with $70\%$ from the previous assignment almost always misclassified test images on our machines though we assumed that this could be due to bad luck as we only tried a few images. This time we ran the identical testing script on the server and locally and got completely different results.  
 
+\newpage
