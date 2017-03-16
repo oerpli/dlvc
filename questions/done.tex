@@ -1,0 +1,20 @@
+% !TeX root = ./DLVCQuestions.tex
+\section{Image classification}
+\subsection{What is the task definition of image classification?}
+Predict the label of an image, i.e.: what is visible on the image. Output could also be a distribution over labels to indicate confidence in result.
+
+\subsection{Explain at least 5 challenges and give examples.}
+\begin{itemize}
+\item Viewpoint variation: A single instance of an object can be oriented in many ways with respect to the camera.
+\item Scale variation: Visual classes often exhibit variation in their size (size in the real world, not only in terms of their extent in the image).
+\item Deformation: Many objects of interest are not rigid bodies and can be deformed in extreme ways, e.g. water
+\item Occlusion: Only a small portion of an object (as little as few pixels) could be visible.
+\item Illumination conditions: The effects of illumination are drastic on the pixel level.
+\item Background clutter: The objects of interest may blend into their environment, making them hard to identify.
+\item Intra-class variation: The classes of interest can often be relatively broad, such as chair. There are many different types of these objects, each with their own appearance.
+\item Abstraction (human able to recognize some doodle as the correct object usually---difficult to recognize for machines as e.g. difference between cow and dog in a doodle may be the presence of grass
+\item Invariants (an object may be the same object if it's rotated by some degree. Other objects (e.g. ``6'' and ``9'') are not invariant under rotation
+\end{itemize}
+
+\subsection{What is object detection and how does it differ from classification?}
+Object detection tries to find all objects present in an image whereas in image classification a label is assigned to the whole image. Object detection can be reduced to image classification (classify various parts of the image and combine results)
