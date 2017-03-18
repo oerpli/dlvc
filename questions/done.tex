@@ -1,4 +1,5 @@
 % !TeX root = ./DLVCQuestions.tex
+%
 \section{Image classification}
 \subsection{What is the task definition of image classification?}
 Predict the label (picked from a set of possible labels) of an image, i.e.: what is visible on the image. Output could also be a distribution over labels to indicate confidence in result.
@@ -19,12 +20,11 @@ Predict the label (picked from a set of possible labels) of an image, i.e.: what
 \subsection{What is object detection and how does it differ from classification?}
 Object detection tries to find all objects present in an image whereas in image classification a label is assigned to the whole image. Object detection can be reduced to image classification (classify various parts of the image and combine results)
 
+%
 \section{Datasets}
-
-\subsection{Why do we need datasets?}Data required for training and testing of model. 
-	
+\subsection{Why do we need datasets?}
+Data required for training and testing of model. 
 \subsection{What are the challenges of dataset collection and annotation in deep learning?}Datasets should be sampled from the same distribution as images which are then classified, i.e. it should span the whole space of possible features associated with each class. For example if dataset contains only cats run over by car a model trained with this set will have difficulties recognizing healthy cats.
-
 \subsection{Explain the purpose of the different subsets.}
 \begin{itemize}
 \item Training set: Used to train the model
@@ -37,8 +37,8 @@ Model is trained with training set and then evaluated with validation set. Then 
 Approximately 1000 per class---more usually does not hurt though.
 
 
+%
 \section{Case study}
-
 \begin{quote}
 Assume a company asks you to develop an application that is able to predict which kind of bird is depicted in a given image. List and explain the individual steps you’d follow to solve this problem using deep learning.
 \end{quote}
@@ -55,12 +55,12 @@ Assume a company asks you to develop an application that is able to predict whic
 \item Find hyperparameters and tune them until accuracy is good enough
 \end{itemize}
 \end{enumerate}
-
 %: DL Motivation
 %: Classification \& Regression/ Supervised vs unsupervised learning
 %: Testdata
 %: Performance measures
 %: Capacity, bias, variance
+%
 \section{Hyperparameter}
 \subsection{What is a hyperparameter?}
 In ML we try to find parameters for a model from datasets. This learning process may have its own parameters, these are called hyperparameters. They govern behaviour of the model learning, .e.g. the capacity of the resulting model.
@@ -76,8 +76,7 @@ In ML we try to find parameters for a model from datasets. This learning process
 Purpose is finding optimal settings to train the model. Gridsearch and random search are two common approaches, random search is usually preferred as one parameter may be insignificant for the result and much time would be wasted optimizing this parameter whereas with random search all HP spaces are explored independently. See picture below.
 
 \includegraphics[width=\textwidth]{./img/gridsearchbad.jpeg}
-
-
+%
 \section{kNN}
 \subsection{How does the k nearest neighbor classifier work?}
 Find the k samples in the training set that are most similar to the current sample according to some similarity measure
@@ -137,6 +136,7 @@ Image on right is kNN with two classes and $k=1$.
 %: Linear model
 %: Loss function
 %: Optimization in ML
+%
 \section{Local/global optimum}
 \subsection{What is the difference between a local and a global optimum?}
 A function has only one global optimum but may have many local optima. Finding the global optimum is not trivial whereas finding a local optimum is usually easy (calculate derivation at current point and move in direction of steepest descent). When a local optimum is found it's nontrivial how to escape it again. Simulated annealing is an approach inspired from material physics.
@@ -157,6 +157,7 @@ There is no definite consensus though it is believed, that the search landscape 
 %: Locally connected layers for image analysis
 %: Conv Layer
 %: Receptive field
+%
 \section{Pooling}
 \subsection{What is the purpose of pooling layers?}
 Reduce spatial size to reduce amount of parameters and computation. Also helps against overfitting. Consolidate features learned in convolutional layers before the pooling layer.
@@ -175,6 +176,7 @@ pool\left(\begin{bmatrix}
 %: CNN depth
 %: CNN backend
 %: ResNets
+%
 \section{Back Propagation}
 \subsection{What is the purpose of the backpropagation algorithm?}
 \begin{itemize}
@@ -225,9 +227,19 @@ pool\left(\begin{bmatrix}
 \item{ Multiply every path from an input to output (chain rule $g(f)' = g'(f)\cdot f'$}
 \item { Sum up all paths from input to output (product rule: $(g\cdot f)' = g'\cdot f + f'\cdot g$}
 \end{itemize}
-%: Data Agumentation
+%
+\section{Data Augmentation}
+\subsection{What is the purpose of data augmentation?}
+The bigger the training set the better the resulting NN can be. As obtaining huge datasets is not easy a good approach to circumvent this is extending the dataset at hand by various transformations such as mirroring, changing lighting, rotations, affine transformations, croppping, \ldots
+\subsection{What transformations work /don't work for a digit classifier}
+\begin{itemize}
+\item Everything related to color/lighting does more or less not apply here as digits may be written by a pen of any color and therefore transforming the b/w should be the best approach
+\item Mirroring does not work on either axis
+\item Rotating the samples is a good idea as people may have a different skew in their writing. Though the rotation angle should be in a range between $\pm 10-20^\circ$. Using arbitrary rotations is a bad idea as e.g. a ``6'' would then be mixed up with a ``9''.
+\end{itemize}
 %: Dropout
 %: Batch normalization
+%
 \section{Learning rate}
 \subsection{What does the learning rate hyperparameter specify?}
 The direction of steepest decrease can be calculated with the gradient, the size of the optimal stepsize is unknown and instead the stepsize given by the learning rate hyperparameter is used. The choice of this parameter is critical. 
