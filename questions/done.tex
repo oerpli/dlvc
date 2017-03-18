@@ -55,3 +55,103 @@ Assume a company asks you to develop an application that is able to predict whic
 \item Find hyperparameters and tune them until accuracy is good enough
 \end{itemize}
 \end{enumerate}
+
+%DL Motivation
+%Classification \& Regression/ Supervised vs unsupervised learning
+%Testdata
+%Performance measures
+%Capacity, bias, variance
+%Hyperparameter
+%kNN
+\section{kNN}
+\subsection{How does the k nearest neighbor classifier work?}
+Find the k samples in the training set that are most similar to the current sample according to some similarity measure
+\begin{itemize}
+\item Transform images to vectors ($32\times 32\times 3 \text{ image }\to 32\cdot 32\cdot 3 = 3072$D vector) or use extracted feature vector
+\item Apply the same transformation to the image that should be classified
+\item Find the k images that are most similar and use the sample with the most images as prediction (or output the distribution)
+\end{itemize}
+
+\subsection{Sketch of kNN}
+\begin{minipage}{0.65\textwidth}
+%\begin{quote}
+{Create a sketch for illustration, assuming a two-dimensional feature space and two different classes, Draw at least three training samples per class (must not lie on a line) as well as (roughly) the resulting decision boundaries.}
+
+Image on right is kNN with two classes and $k=1$.
+%\end{quote}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+
+\begin{tikzpicture}[scale=1.4]
+\draw[white] (-0.5,-0.1) rectangle(2,2);
+\fill[blue] (0,0)circle(2pt);
+\fill[blue] (1,0)circle(2pt);
+\fill[blue] (0,1)circle(2pt);
+\fill[red] (0.5,0.5)circle(2pt);
+\fill[red] (1.5,0.5)circle(2pt);
+\fill[red] (0.5,1.5)circle(2pt);
+\def\pointset{(-0.1,1.5),(0.4,1.1),(0,0.5),(0.5,0),(1.1,0.4),(1.5,-0.1),(2,-0.1),(2,2),(-0.1,2)}
+\foreach \x[count=\i] in \pointset
+  \fill [opacity=0.1] \x circle(0.25pt) coordinate (mark-\i);
+% Join them up
+\fill [opacity=0.25,red]
+  (mark-1) \foreach \x[count=\i] in \pointset{ -- (mark-\i) } -- cycle;
+
+\def\pointset{(-0.1,1.5),(0.4,1.1),(0,0.5),(0.5,0),(1.1,0.4),(1.5,-0.1),(-0.1,-0.1)}
+\foreach \x[count=\i] in \pointset
+  \fill [opacity=0.5] \x circle(0.25pt) coordinate (mark-\i);
+% Join them up
+\fill [opacity=0.25,blue]
+  (mark-1) \foreach \x[count=\i] in \pointset{ -- (mark-\i) } -- cycle;
+\end{tikzpicture}
+\end{minipage}
+\subsection{What are the limitations of this classifier?}
+\begin{itemize}
+\item Classification performance is rather bad as sample has to be compared to all/most of the samples in the training set (can be improved with KDTree from $O(n)$ to $O(log(n)^d)$ or similar)
+\item Does not recognize higher order features, e.g. ``presence of wheels'' but only uses similarity of features (pixels). Completely thrown off the track by e.g. different lighting or position of object in image (e.g. off center in sample and only centered pictures in training set)
+\item \ldots
+\end{itemize}
+
+%Image Classification
+%Parametric model
+%Linear model
+%Loss function
+%Optimization in ML
+%Local/global optimum
+%Gradient descent
+%Batch Gradient descent
+%Weight and bias parameters
+%Preprocessing
+%Optimization vs ML
+%Regularization
+%Feedforward NN
+%MLP
+%MLP for VC
+%Representation learning
+%Locally connected layers for image analysis
+%Conv Layer
+%Receptive field
+%Pooling
+%CNN
+%CNN depth
+%CNN backend
+%ResNets
+%BackProp
+%Data Agumentation
+%Dropout
+%Batch normalization
+%Learning rate
+%22:40
+%Oversampling
+%Model ensembles
+%Model ensembles
+%Medical tasks
+%2-3D deep CNN
+%??
+%CNNs in medical imaging
+%Labelling
+%RNNs
+%LSTMs
+%What is the main advantage of LSTMs over traditional RNNs?
+%Draw a sketch that illustrates the dataflow within a LSTM block.
+%List and explain the purpose of the different LSTM gates.
