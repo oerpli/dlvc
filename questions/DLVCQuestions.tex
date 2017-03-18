@@ -1,0 +1,95 @@
+%\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[11pt,a4paper]{article}
+%\usepackage[sc]{mathpazo}
+%\usepackage{termpaper}
+%\usepackage{natbib}   
+%\bibliographystyle{plainnat}
+%\bibliographystyle{apalike}   % Or any other style you like
+%\bibliographystyle{natbib} % kürzt automatisch vornamen ab und so zeug 
+
+\usepackage[english]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsbsy,amsmath,amssymb,amsthm}
+\usepackage{bbm}
+\usepackage{bbold}
+%\usepackage{bm}
+\usepackage{braket}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage{framed}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{listings}
+%\usepackage{natbib}
+\usepackage{scalefnt}
+\usepackage{setspace}
+\usepackage{textcomp}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{esdiff}
+
+\usepackage{xifthen}
+\usepackage{subcaption}
+\usepackage{fancyref} % add page number to references
+\usepackage[kerning=true,tracking=true]{microtype} % better readability
+\usepackage{todonotes}%\todo 
+\usepackage{mathtools} % no idea 
+\usepackage{nicefrac}%nicefrac allows typesetting fractions like 1/2. It is sometimes more readable than \frac.
+\usepackage{paralist}%better itemize/enumerate
+%\usepackage{savetrees} 
+\usepackage{float} % use H to force float position
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\evdel}{\langle}{\rangle}
+\newcommand{\ev}{\operatorname{E}\evdel}
+
+\usetikzlibrary{shapes,shapes.multipart,calc}
+
+%\addto\captionsngerman{
+%\renewcommand{\figurename}{Figure}%
+%\renewcommand{\tablename}{Tab.}%
+%}
+\setlength{\parskip}{1.5ex plus0.5ex minus0.5ex}
+\setlength{\parindent}{0em} 
+
+%\sloppy \frenchspacing \raggedbottom 
+
+
+%\usetikzlibrary{shapes,decorations,calc,arrows}
+%\usetikzlibrary{external}
+%\tikzexternalize[prefix=external]
+
+
+\usepackage{pgfplots, pgfplotstable}
+\usetikzlibrary{arrows,calc}
+
+%opening
+\def\authorname#1{{\large#1}}
+\def\studentnumber#1{{\large Matr.: #1}}
+\def\curriculum#1{{\large Curriculum: #1}}
+\def\email#1{\texttt{#1}}
+
+
+\title{DLVC Questions}
+\author{ \authorname{Abraham Hinteregger} \\
+% \studentnumber{1025914} \\
+% \curriculum{066876} \\
+% \email{oerpli@outlook.com}
+}
+\setcounter{tocdepth}{3}
+
+
+\begin{document}
+\maketitle
+\listoftodos
+%\tableofcontents
+\part{Done}\input{done}
+\setcounter{section}{0}
+\clearpage\part{Todo}\input{todo}
+\todo{\ref{sec:done} done, \ref{sec:todo} questions remaining}
+\end{document}
