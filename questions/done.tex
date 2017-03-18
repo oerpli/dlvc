@@ -61,16 +61,39 @@ Assume a company asks you to develop an application that is able to predict whic
 %Testdata
 %Performance measures
 %Capacity, bias, variance
-%Hyperparameter
+\section{Hyperparameter}
+\subsection{What is a hyperparameter?}
+In ML we try to find parameters for a model from datasets. This learning process may have its own parameters, these are called hyperparameters. They govern behaviour of the model learning, .e.g. the capacity of the resulting model.
+\subsection{Name at least 3 hyperparameters in the context of deep learning using convolutional neural networks.}
+\todo{maybe explain what these hyperparameters do}
+\begin{enumerate}
+\item Initial learning rate
+\item Learning rate decay
+\item Regularization strength
+\item Momentum settings
+\end{enumerate}
+\subsection{What is the purpose of hyperparameter selection, which search strategies exist, and how do they work?}
+Purpose is finding optimal settings to train the model. Gridsearch and random search are two common approaches, random search is usually preferred as one parameter may be insignificant for the result and much time would be wasted optimizing this parameter whereas with random search all HP spaces are explored independently. See picture below.
+
+\includegraphics[width=\textwidth]{./img/gridsearchbad.jpeg}
 
 
 \section{kNN}
 \subsection{How does the k nearest neighbor classifier work?}
 Find the k samples in the training set that are most similar to the current sample according to some similarity measure
+
 \begin{itemize}
+\item Training
+\begin{itemize}
+\item Preprocess data 
 \item Transform images to vectors ($32\times 32\times 3 \text{ image }\to 32\cdot 32\cdot 3 = 3072$D vector) or use extracted feature vector
-\item Apply the same transformation to the image that should be classified
-\item Find the k images that are most similar and use the sample with the most images as prediction (or output the distribution)
+\item Split into training and validation data and optimize the hyperparameters (distance measure and $k$)
+\end{itemize}
+\item Classification
+\begin{itemize}
+\item Apply the same preprocessing  transformations as before
+\item Find the k images that are most similar and use the most common label as prediction (or output the distribution of labels)
+\end{itemize}
 \end{itemize}
 
 \subsection{Sketch of kNN}
@@ -108,7 +131,7 @@ Image on right is kNN with two classes and $k=1$.
 \begin{itemize}
 \item Classification performance is rather bad as sample has to be compared to all/most of the samples in the training set (can be improved with KDTree from $O(n)$ to $O(log(n)^d)$ or similar)
 \item Does not recognize higher order features, e.g. ``presence of wheels'' but only uses similarity of features (pixels). Completely thrown off the track by e.g. different lighting or position of object in image (e.g. off center in sample and only centered pictures in training set)
-\item \ldots
+\item Very sensitive to background
 \end{itemize}
 
 %Image Classification
