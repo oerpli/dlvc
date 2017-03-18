@@ -1,4 +1,5 @@
 % !TeX root = ./DLVCQuestions.tex
+%
 \section{Image classification}
 \subsection{What is the task definition of image classification?}
 Predict the label (picked from a set of possible labels) of an image, i.e.: what is visible on the image. Output could also be a distribution over labels to indicate confidence in result.
@@ -19,12 +20,11 @@ Predict the label (picked from a set of possible labels) of an image, i.e.: what
 \subsection{What is object detection and how does it differ from classification?}
 Object detection tries to find all objects present in an image whereas in image classification a label is assigned to the whole image. Object detection can be reduced to image classification (classify various parts of the image and combine results)
 
+%
 \section{Datasets}
-
-\subsection{Why do we need datasets?}Data required for training and testing of model. 
-	
+\subsection{Why do we need datasets?}
+Data required for training and testing of model. 
 \subsection{What are the challenges of dataset collection and annotation in deep learning?}Datasets should be sampled from the same distribution as images which are then classified, i.e. it should span the whole space of possible features associated with each class. For example if dataset contains only cats run over by car a model trained with this set will have difficulties recognizing healthy cats.
-
 \subsection{Explain the purpose of the different subsets.}
 \begin{itemize}
 \item Training set: Used to train the model
@@ -37,10 +37,10 @@ Model is trained with training set and then evaluated with validation set. Then 
 Approximately 1000 per class---more usually does not hurt though.
 
 
+%
 \section{Case study}
-
 \begin{quote}
-Assume a company asks you to develop an application that is able to predict which kind of bird is depicted in a given image. List and explain the individual steps youíd follow to solve this problem using deep learning.
+Assume a company asks you to develop an application that is able to predict which kind of bird is depicted in a given image. List and explain the individual steps you‚Äôd follow to solve this problem using deep learning.
 \end{quote}
 \begin{enumerate}
 \item (Set up some machine that allows to train the model with hardware acceleration)
@@ -55,12 +55,12 @@ Assume a company asks you to develop an application that is able to predict whic
 \item Find hyperparameters and tune them until accuracy is good enough
 \end{itemize}
 \end{enumerate}
-
-%DL Motivation
-%Classification \& Regression/ Supervised vs unsupervised learning
-%Testdata
-%Performance measures
-%Capacity, bias, variance
+%: DL Motivation
+%: Classification \& Regression/ Supervised vs unsupervised learning
+%: Testdata
+%: Performance measures
+%: Capacity, bias, variance
+%
 \section{Hyperparameter}
 \subsection{What is a hyperparameter?}
 In ML we try to find parameters for a model from datasets. This learning process may have its own parameters, these are called hyperparameters. They govern behaviour of the model learning, .e.g. the capacity of the resulting model.
@@ -76,8 +76,7 @@ In ML we try to find parameters for a model from datasets. This learning process
 Purpose is finding optimal settings to train the model. Gridsearch and random search are two common approaches, random search is usually preferred as one parameter may be insignificant for the result and much time would be wasted optimizing this parameter whereas with random search all HP spaces are explored independently. See picture below.
 
 \includegraphics[width=\textwidth]{./img/gridsearchbad.jpeg}
-
-
+%
 \section{kNN}
 \subsection{How does the k nearest neighbor classifier work?}
 Find the k samples in the training set that are most similar to the current sample according to some similarity measure
@@ -98,11 +97,9 @@ Find the k samples in the training set that are most similar to the current samp
 
 \subsection{Sketch of kNN}
 \begin{minipage}{0.65\textwidth}
-%\begin{quote}
 {Create a sketch for illustration, assuming a two-dimensional feature space and two different classes, Draw at least three training samples per class (must not lie on a line) as well as (roughly) the resulting decision boundaries.}
 
 Image on right is kNN with two classes and $k=1$.
-%\end{quote}
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
 
@@ -134,29 +131,37 @@ Image on right is kNN with two classes and $k=1$.
 \item Very sensitive to background
 \end{itemize}
 
-%Image Classification
-%Parametric model
-%Linear model
-%Loss function
-%Optimization in ML
-%Local/global optimum
-%Gradient descent
-%Batch Gradient descent
-%Weight and bias parameters
-%Preprocessing
-%Optimization vs ML
-%Regularization
-%Feedforward NN
-%MLP
-%MLP for VC
-%Representation learning
-%Locally connected layers for image analysis
-%Conv Layer
-%Receptive field
+%: Image Classification
+%: Parametric model
+%: Linear model
+%: Loss function
+%: Optimization in ML
+%
+\section{Local/global optimum}
+\subsection{What is the difference between a local and a global optimum?}
+A function has only one global optimum but may have many local optima. Finding the global optimum is not trivial whereas finding a local optimum is usually easy (calculate derivation at current point and move in direction of steepest descent). When a local optimum is found it's nontrivial how to escape it again. Simulated annealing is an approach inspired from material physics.
+
+\includegraphics[width=\textwidth]{./img/localopt.jpeg}
+\subsection{Are local minima a problem in deep learning?  Why (not)?}
+There is no definite consensus though it is believed, that the search landscape is similar to an egg carton with many almost identical local optima where the hit on the performance is not critical if the model finds any of them. It was also proposed that many local optima (as found by having a derivation of 0) in the search landscape are in reality saddle points where it should be possible to improve the results further. Calculating the full Hessian is too costly therefore an approximation may be enough. (see here: \url{https://blog.terminal.com/no-more-local-minima/})
+%: Gradient descent
+%: Batch Gradient descent
+%: Weight and bias parameters
+%: Preprocessing
+%: Optimization vs ML
+%: Regularization
+%: Feedforward NN
+%: MLP
+%: MLP for VC
+%: Representation learning
+%: Locally connected layers for image analysis
+%: Conv Layer
+%: Receptive field
+%
 \section{Pooling}
 \subsection{What is the purpose of pooling layers?}
 Reduce spatial size to reduce amount of parameters and computation. Also helps against overfitting. Consolidate features learned in convolutional layers before the pooling layer.
-\subsection{Calculate the output of a 2 ◊ 2 max-pooling layer with stride 2 assuming the following input.}
+\subsection{Calculate the output of a 2 √ó 2 max-pooling layer with stride 2 assuming the following input.}
 \begin{equation}
 pool\left(\begin{bmatrix}
 1 & 1 & 2 & 4\\
@@ -165,12 +170,13 @@ pool\left(\begin{bmatrix}
 1&2&3&4
 \end{bmatrix}\right) = \begin{bmatrix}6 & 8 \\3 & 4\end{bmatrix}
 \end{equation}
-\subsection{How many pooling layers with stride 2 should a CNN have assuming an input resolution of 64 ◊ 64 and convolutional layers that do not change the resolution, and why?}
+\subsection{How many pooling layers with stride 2 should a CNN have assuming an input resolution of 64 √ó 64 and convolutional layers that do not change the resolution, and why?}
 \todo{How many pooling layers should CNN have?}
-%CNN
-%CNN depth
-%CNN backend
-%ResNets
+%: CNN
+%: CNN depth
+%: CNN backend
+%: ResNets
+%
 \section{Back Propagation}
 \subsection{What is the purpose of the backpropagation algorithm?}
 \begin{itemize}
@@ -180,7 +186,7 @@ pool\left(\begin{bmatrix}
 \end{itemize}
 \subsection{Example}
 \begin{quote}
-{Assume the following computational graph. Insert digits from your Matrikelnummer into the empty input nodes, going from right to left both in terms of nodes and digits. Then compute the partial derivative of the topmost node with respect to all input nodes via  backpropagation. Write computation node values after the forward pass left of the nodes, local gradients left of the edge connecting the corresponding nodes, and ìcachedî partial derivatives of the topmost node right to the nodes.}
+{Assume the following computational graph. Insert digits from your Matrikelnummer into the empty input nodes, going from right to left both in terms of nodes and digits. Then compute the partial derivative of the topmost node with respect to all input nodes via  backpropagation. Write computation node values after the forward pass left of the nodes, local gradients left of the edge connecting the corresponding nodes, and ‚Äúcached‚Äù partial derivatives of the topmost node right to the nodes.}
 \end{quote}
 \tikzset{
   treenode/.style = {align=center, inner sep=0pt, text centered,font=\sffamily},
@@ -221,9 +227,19 @@ pool\left(\begin{bmatrix}
 \item{ Multiply every path from an input to output (chain rule $g(f)' = g'(f)\cdot f'$}
 \item { Sum up all paths from input to output (product rule: $(g\cdot f)' = g'\cdot f + f'\cdot g$}
 \end{itemize}
-%Data Agumentation
-%Dropout
-%Batch normalization
+%
+\section{Data Augmentation}
+\subsection{What is the purpose of data augmentation?}
+The bigger the training set the better the resulting NN can be. As obtaining huge datasets is not easy a good approach to circumvent this is extending the dataset at hand by various transformations such as mirroring, changing lighting, rotations, affine transformations, croppping, \ldots
+\subsection{What transformations work /don't work for a digit classifier}
+\begin{itemize}
+\item Everything related to color/lighting does more or less not apply here as digits may be written by a pen of any color and therefore transforming the b/w should be the best approach
+\item Mirroring does not work on either axis
+\item Rotating the samples is a good idea as people may have a different skew in their writing. Though the rotation angle should be in a range between $\pm 10-20^\circ$. Using arbitrary rotations is a bad idea as e.g. a ``6'' would then be mixed up with a ``9''.
+\end{itemize}
+%: Dropout
+%: Batch normalization
+%
 \section{Learning rate}
 \subsection{What does the learning rate hyperparameter specify?}
 The direction of steepest decrease can be calculated with the gradient, the size of the optimal stepsize is unknown and instead the stepsize given by the learning rate hyperparameter is used. The choice of this parameter is critical. 
@@ -239,21 +255,21 @@ If learning rate is:
 \item low: Finds minimum as well but very slow (progress looks linear whereas in the beginning almost exponential decay of error should be possible)
 \end{itemize}
 \end{minipage}\begin{minipage}{0.4\textwidth}
-\includegraphics[width=\textwidth]{./img/learningRate.jpeg}
+\includegraphics[width=\textwidth]{./img/learningRates.jpeg}
 \end{minipage}
-\subsection{Explain a heuristic for adapting the learning rate during training and why doing can be beneficial.}
+\subsection{Explain a heuristic for adapting the learning rate during training and why doing so can be beneficial.}
 Learning rate decay can be used to tune the learning rate to the optimal choice at each step. First start with a rather high learning rate and when there is no improvement for a few epochs scale the learning rate with a constant factor (e.g. $\nicefrac 1 2$).
 Alternatively scale the learning rate every 5-20 epochs with a factor ($\nicefrac 1 2$ to $\nicefrac 1 {10}$). This ensures that big steps are taken by the algorithm when it is possible but the stepsize is reduced when further improvements can only be made by smaller steps.
 
-%Oversampling
-%Model ensembles
-%Model ensembles
-%Medical tasks
-%2-3D deep CNN
-%??
-%CNNs in medical imaging
-%Labelling
-
+%: Oversampling
+%: Model ensembles
+%: Model ensembles
+%: Medical tasks
+%: 2-3D deep CNN
+%: ??
+%: CNNs in medical imaging
+%: Labelling
+%
 \section{RNNs}
 \subsection{Describe the main purpose of RNNs and give an example application.}
 RNNs are suited for temporal machine learning task, where not a single instance has to be taken into account, but a number of instances where the order is importent. One example would be text generation, where the task is to create a single character or word, but the previous characters/words are very important for the next item. Video analysis, e.g. classification would be another example, where the isn't just a single image, but a whole video stream of several frames.
@@ -265,6 +281,7 @@ The main feature of RNNS are loops, that information can be passed from on tempo
 \subsection{What is the main limitation of traditional RNNs (as opposed to LSTMs)?}
 A problem arises, when the important information is not only one or at least a few (defined) steps before t, but when it could be from an arbitrarly far away step. In the given example
 "I grew up in Italy ... I speak fluent\textit{italian}" the important word to inference the language is Italy.  The larger the potential gap, the more complicated the problem becomes. 
+%
 \section{LSTMs}
 \subsection{What is the main advantage of LSTMs over traditional RNNs?}
 LSTMs are designed for rememembering informations for long periods of time. So they solve above mentioned problem
@@ -281,3 +298,4 @@ The middle gate is the input layer. It decides which values to update and create
 
 The right gate is the output gate, which takes the updated and filtered state C, the previuous output and the input to create a new output.
 
+\addtocounter{section}{-1}\section{}\label{sec:done}

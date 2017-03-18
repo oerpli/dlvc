@@ -99,3 +99,7 @@ model_best_global.h5
 .vs/dlvc/v14/.suo
 *.suo
 src/augmented_samples/*
+*.toc
+*.aux
+*.tdo
+*.out
