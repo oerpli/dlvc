@@ -1,0 +1,196 @@
+% !TeX root = ./DLVCQuestions.tex
+\section{DL Motivation}
+\subsection{What is the motivation for solving vision tasks via machine learning?}
+\subsection{What is a machine learning algorithm and how are they used for solving image classification problems?}
+
+\section{Classification \& Regression/ Supervised vs unsupervised learning}
+\subsection{Explain the differences between classification and regression }
+\subsection{as well as supervised learning and unsupervised learning }
+\subsection{What do discriminative and generative models learn }
+\subsection{How can generative models be used for classification?}
+
+\section{Testdata}
+\todo{improve testdata answers}
+\subsection{Why are machine learning algorithms tested on data unseen during training?}
+The goal is to have a general model. Therefore it's necessary to test on unseen data as testing on data used during training would 
+\subsection{How can such algorithms perform well on unseen data?}
+If the model is not overfitted it should recognize general features (``wheels in the lower left corner'') of the sample but not very specific features (e.g.: hash of the image). 
+\subsection{What does dataset bias mean? }
+
+\section{Performance measures}
+\subsection{How is the performance of a classifier measured?}
+\subsection{Which factors determine the performance, and how is underfitting and overfitting related to these factors?}
+\subsection{Draw sketches that illustrate underfitting and overfitting.}
+
+\section{Capacity, bias, variance}
+\subsection{Explain the terms algorithm capacity, bias, and variance.}
+\subsection{Draw a sketch that illustrates how the capacity, training error, and test error are related.}
+\subsection{Why does the training set size affect the optimal capacity of a model?}
+
+\section{Image Classification}
+\subsection{Why do general machine learning algorithms (those expecting vector input) perform poorly on images?}
+\subsection{What is a feature, and what is the purpose of feature extraction?}
+\subsection{Explain the terms low-level feature and high-level feature.}
+
+\section{Parametric model}
+\subsection{What is the definition of a parametric model?}
+\subsection{What do the parameters of such models control (what effect do they have?), and how are they set?}
+
+\section{Linear model}
+\subsection{What is a linear model, which types of parameters does it have, and what do they specify?}
+\subsection{Draw a sketch assuming two-dimensional feature space and three different classes. Draw a few samples per class so that the classes are linearly separable. Draw the decision boundaries a linear classifier might learn and explain how the individual boundaries are related to the classifier output (no need to calculate anything).}
+
+\section{Loss function}
+\subsection{What is the purpose of a loss function?}
+\subsection{What does the cross-entropy loss on a dataset D measure?}
+\subsection{Which criteria must the ground-truth labels and predicted class-scores fulfill to support the cross-entropy loss, and how is this ensured?}
+
+\section{Optimization in ML}
+\subsection{What is the purpose of optimization in the context of machine learning?}
+\subsection{How does the gradient descent algorithm work?}
+\subsection{What is the gradient of a function? }
+
+\section{Local/global optimum}
+\subsection{What is the difference between a local and a global optimum?}
+\subsection{Draw a sketch that illustrates the difference.}
+\subsection{Are local minima a problem in deep learning?  Why (not)?}
+
+\section{Gradient descent}
+\subsection{Consider the following contour plot of a function with two parameters. How might gradient descent proceed in this case, assuming the circle in the bottom-left corner as the starting point?}
+\subsection{Mark the individual steps and connect them using lines.}
+\subsection{Give a brief explanation of momentum.}
+\subsection{How would momentum affect the training progress in the example case?}
+\subsection{Mark the individual steps gradient descent with momentum might take, assuming the bottom-left square as the starting point}
+
+\section{Batch Gradient descent}
+\subsection{Explain the differences between batch, minibatch, and stochastic gradient descent.}
+\subsection{Which version is most commonly used in deep learning and why?}
+\subsection{What effects has the minibatch size?}
+\subsection{Write pseudo-code that illustrates the overall structure of minibatch-based training and validation with early stopping, continuing below the following line. A high-level overview is sufficient, no need to use math.}
+
+\section{Weight and bias parameters}
+\subsection{How do weight and bias parameters affect the input x?}
+\subsection{What must be considered when initializing these parameters?}
+\subsection{What happens if the weights are set too large or too small?}
+\subsection{We discussed a heuristic for controlling the magnitude of weights. What is the intention behind this heuristic (no math required)?}
+
+\section{Preprocessing}
+\subsection{Explain the purpose of preprocessing.}
+\subsection{How do per-sample normalization and per-trainingset normalization differ in terms of operation and purpose?}
+\subsection{In the latter case, which (if any) preprocessing is applied during validation and testing?}
+
+\section{Optimization vs ML}
+\subsection{What are the goals of optimization and machine learning?}
+\subsection{Why do they differ?}
+\subsection{Create two sketches with each showing the training progress over time in terms of both training and test error; one that is good from an optimization perspective but bad from a machine learning perspective, and one that is worse from an optimization perspective but better from a machine learning perspective. Explain both sketches.}
+
+\section{Regularization}
+\subsection{What is the purpose of regularization?}
+\subsection{What is weight decay and what is its purpose?}
+\subsection{What is early stopping and how does it work?}
+\subsection{In deep learning, is it better to increase regularization or to decrease the model capacity by other means, and why?}
+
+\section{Feedforward NN}
+\subsection{What is the definition of a feedforward neural network?}
+\subsection{Which types of units do such networks have?}
+\subsection{Draw a graph of such a network.}
+
+\section{MLP}
+\subsection{What is the definition of a multilayer perceptron?}
+\subsection{What operation do (non-input) units perform?}
+\subsection{What is an activation function and which functions are common?}
+\subsection{Draw a sketch that shows the layers of such networks and how the individual units are connected.}
+
+\section{MLP for VC}
+\subsection{Why are multilayer perceptrons not suitable for deep learning for image analysis?}
+
+\section{Representation learning}
+\subsection{What is the motivation and purpose for representation learning?}
+\subsection{How is deep learning related to representation learning, and what is its definition?}
+
+\section{Locally connected layers for image analysis}
+\subsection{What is the motivation for using locally connected layers for image analysis?}
+\subsection{What does sparse connectivity mean?}
+\subsection{Assume input data of dimension W × H × D. How many many weight and bias parameters does a locally connected (but not convolutional) layer have, assuming 3 × 3 connectivity and W × H × 2 output data dimension, and why?}
+
+\section{Conv Layer}
+\subsection{What is the purpose of a convolutional layer?}
+\subsection{How do such layers differ from locally connected layers, and why are they almost always preferred?}
+\subsection{Assume input data of dimension W × H × D. How many weight and bias parameters does a convolutional layer have, assuming 3 × 3 connectivity and W × H × F output data dimension, and why? Why are such layers called convolutional layers?}
+\subsection{What are feature maps?}
+
+\section{Receptive field}
+\subsection{What is the receptive field of a neuron?}
+\subsection{Assume a network consisting of two convolutional layers with 3 × 3 connectivity followed by a 2 × 2 max-pooling with stride 2 and again two convolutional layers with 3 × 3 connectivity. What is the receptive field of neurons in the final convolutional layer? How does the receptive field affect feature extraction? }
+\subsection{Why do convolutional layers usually use 3 × 3 connectivity?}
+
+
+\section{CNN}
+\subsection{Give a general overview of convolutional neural networks and their purpose}
+\subsection{Draw a sketch that illustrates their overall structure (typical layer types and their arrangement).}
+\subsection{What are the two overall stages of such networks?}
+
+\section{CNN depth}
+\subsection{How is the depth of a CNN defined?}
+\subsection{What effect does increasing the depth have?}
+\subsection{How does one choose a suitable network depth to solve a given image classification problem?}
+
+\section{CNN backend}
+\subsection{What is the backend of a CNN?}
+\subsection{Discuss the backends of VGGNet and GoogLeNet/ResNet and their pros and cons.}
+
+\section{ResNets}
+\subsection{What are residual networks (ResNets) and which problem do they overcome?}
+\subsection{Explain what a residual block computes and create a sketch of such a block.}
+
+
+
+\section{Data Agumentation}
+\subsection{What is the purpose of data augmentation?}
+\subsection{Assume that the task is to train a digit classifier.}
+\subsection{Think of and explain data transformations that are applicable in this case, and at least one that is not.}
+
+\section{Dropout}
+\subsection{What is the purpose of dropout, how does it work, and why is it effective?}
+\subsection{Why do “dropped” neurons have no effect on the output of the next layer?}
+\subsection{To which CNN layers is dropout commonly applied?}
+
+\section{Batch normalization}
+\subsection{What is the purpose and aim of batch normalization?}
+\subsection{Why does it have a regularizing effect?}
+\subsection{To which CNN layers is batch normalization applied and where?}
+
+\section{Oversampling}
+\subsection{What is the purpose of oversampling and how does it work?}
+\subsection{What is ten-crop oversampling?}
+\subsection{Assume the task of dog breed classification.}
+\subsection{Think of and explain transformations that are applicable in this case. What about ten-crop oversampling?}
+
+\section{Model ensembles}
+\subsection{What is the purpose and intuition behind using model ensembles?}
+\subsection{How might the individual models differ from each other?}
+\subsection{How is the output of these models combined?}
+
+\section{Medical tasks}
+\subsection{What are the challenges in using medical imaging data?}
+\subsection{Can deep networks be used effectively for medical tasks (give 3 examples)?}
+\subsection{How can we use the training data most efficiently?}
+
+\section{2-3D deep CNN}
+\subsection{What is the difference between 2D, 2.5D and 3D deep CNN networks?}
+\subsection{What approaches are key components to use deep CNNs in medical imaging applications, especially when data for training is not available?}
+
+\section{??}
+\subsection{Give an explanation of the methodologies fine tuning and transfer learning and the benefit using them in medical imaging. }
+\subsection{Are there alternative methods for acquiring and annotating medical data for deep learning approaches?}
+
+\section{CNNs in medical imaging}
+\subsection{What approaches are key components to use deep CNNs in medical imaging applications, especially when data for training is not or sparsely available?}
+\subsection{Describe two approaches and the benefit of using them in medical imaging.}
+
+\section{Labelling}
+\subsection{Explain the challenges, benefits and drawbacks of using expert vs. non-experts to obtain labels of medical image data?}
+\subsection{Give  an example of an alternative method to expert-based manual labeling of medical data for deep learning approaches.}
+
+
+\section{Last}\label{sec:ref}
