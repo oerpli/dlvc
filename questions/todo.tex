@@ -128,10 +128,6 @@
 \subsection{Assume a network consisting of two convolutional layers with 3 × 3 connectivity followed by a 2 × 2 max-pooling with stride 2 and again two convolutional layers with 3 × 3 connectivity. What is the receptive field of neurons in the final convolutional layer? How does the receptive field affect feature extraction? }
 \subsection{Why do convolutional layers usually use 3 × 3 connectivity?}
 
-\section{Pooling}
-\subsection{What is the purpose of pooling layers?}
-\subsection{Calculate the output of a 2 × 2 max-pooling layer with stride 2 assuming the following input.}
-\subsection{How many pooling layers with stride 2 should a CNN have assuming an input resolution of 64 × 64 and convolutional layers that do not change the resolution, and why?}
 
 \section{CNN}
 \subsection{Give a general overview of convolutional neural networks and their purpose}
@@ -153,11 +149,8 @@
 
 \section{BackProp}
 \subsection{What is the purpose of the backpropagation algorithm?}
-
 \subsubsection{ Compute gradient of computation graph given by NN and current parameters}
-
 \subsubsection{ Starting from input calculate derivatives of all nodes by their children. Sum up derivatives multiplied over all paths from output to input node to get derivation of output by input node. }
-
 \subsubsection{ Gets inefficient really fast if multiple paths from input to output exist. Reverse accumulation strategies help in this case (reverse mode differentation)}
 \subsection{Assume the following computational graph. First insert digits from your Matrikelnummer into the empty input nodes, going from right to left both in terms of nodes and digits. (Assuming Matrikelnummer 0123456, the values of the rightmost node would be 6, that of the node left of it would be 5, and so on.) Then compute the partial derivative of the topmost node with respect to all input nodes via  backpropagation. Write computation node values after the forward pass left of the nodes, local gradients left of the edge connecting the corresponding nodes, and “cached” partial derivatives of the topmost node right to the nodes.}
 \subsection{Explain the steps of the algorithm at a given node.}
@@ -184,13 +177,8 @@
 \subsection{Why does it have a regularizing effect?}
 \subsection{To which CNN layers is batch normalization applied and where?}
 
-\section{Learning rate}
-\subsection{What does the learning rate hyperparameter specify?}
-\subsection{Draw a sketch that shows how training progresses over time (epochs) when setting the learning rate much too high, too high, properly, and too low, and explain the sketch.}
 
-\subsubsection{ }
-\section{22:40}
-\subsection{Explain a heuristic for adapting the learning rate during training and why doing can be beneficial.}
+\clearpage
 
 \section{Oversampling}
 \subsection{What is the purpose of oversampling and how does it work?}

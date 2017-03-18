@@ -62,7 +62,8 @@ Assume a company asks you to develop an application that is able to predict whic
 %Performance measures
 %Capacity, bias, variance
 %Hyperparameter
-%kNN
+
+
 \section{kNN}
 \subsection{How does the k nearest neighbor classifier work?}
 Find the k samples in the training set that are most similar to the current sample according to some similarity measure
@@ -93,14 +94,12 @@ Image on right is kNN with two classes and $k=1$.
 \def\pointset{(-0.1,1.5),(0.4,1.1),(0,0.5),(0.5,0),(1.1,0.4),(1.5,-0.1),(2,-0.1),(2,2),(-0.1,2)}
 \foreach \x[count=\i] in \pointset
   \fill [opacity=0.1] \x circle(0.25pt) coordinate (mark-\i);
-% Join them up
 \fill [opacity=0.25,red]
   (mark-1) \foreach \x[count=\i] in \pointset{ -- (mark-\i) } -- cycle;
 
 \def\pointset{(-0.1,1.5),(0.4,1.1),(0,0.5),(0.5,0),(1.1,0.4),(1.5,-0.1),(-0.1,-0.1)}
 \foreach \x[count=\i] in \pointset
   \fill [opacity=0.5] \x circle(0.25pt) coordinate (mark-\i);
-% Join them up
 \fill [opacity=0.25,blue]
   (mark-1) \foreach \x[count=\i] in \pointset{ -- (mark-\i) } -- cycle;
 \end{tikzpicture}
@@ -131,7 +130,20 @@ Image on right is kNN with two classes and $k=1$.
 %Locally connected layers for image analysis
 %Conv Layer
 %Receptive field
-%Pooling
+\section{Pooling}
+\subsection{What is the purpose of pooling layers?}
+Reduce spatial size to reduce amount of parameters and computation. Also helps against overfitting. Consolidate features learned in convolutional layers before the pooling layer.
+\subsection{Calculate the output of a 2 × 2 max-pooling layer with stride 2 assuming the following input.}
+\begin{equation}
+pool\left(\begin{bmatrix}
+1 & 1 & 2 & 4\\
+5&6&7&8\\
+3&2&1&0\\
+1&2&3&4
+\end{bmatrix}\right) = \begin{bmatrix}6 & 8 \\3 & 4\end{bmatrix}
+\end{equation}
+\subsection{How many pooling layers with stride 2 should a CNN have assuming an input resolution of 64 × 64 and convolutional layers that do not change the resolution, and why?}
+\todo{How many pooling layers should CNN have?}
 %CNN
 %CNN depth
 %CNN backend
@@ -140,8 +152,27 @@ Image on right is kNN with two classes and $k=1$.
 %Data Agumentation
 %Dropout
 %Batch normalization
-%Learning rate
-%22:40
+\section{Learning rate}
+\subsection{What does the learning rate hyperparameter specify?}
+The direction of steepest decrease can be calculated with the gradient, the size of the optimal stepsize is unknown and instead the stepsize given by the learning rate hyperparameter is used. The choice of this parameter is critical. 
+
+If learning rate is:
+\begin{itemize}
+\item very high: Gradient descent algorithm jumps over minima and is more or less a random walk in configuration space
+\item high: Finds a better configuration then the random starting configuration but gets stuck there as it ``oscillates'' around minimum (e.g. minimum is in a circle with radius 2 and algorithm makes steps with size 5
+\end{itemize}
+\begin{minipage}{0.6\textwidth}
+\begin{itemize}
+\item properly: First missclassification rate quickly decreases and then slowly converges to some minimum
+\item low: Finds minimum as well but very slow (progress looks linear whereas in the beginning almost exponential decay of error should be possible)
+\end{itemize}
+\end{minipage}\begin{minipage}{0.4\textwidth}
+\includegraphics[width=\textwidth]{./img/learningRate.jpeg}
+\end{minipage}
+\subsection{Explain a heuristic for adapting the learning rate during training and why doing can be beneficial.}
+Learning rate decay can be used to tune the learning rate to the optimal choice at each step. First start with a rather high learning rate and when there is no improvement for a few epochs scale the learning rate with a constant factor (e.g. $\nicefrac 1 2$).
+Alternatively scale the learning rate every 5-20 epochs with a factor ($\nicefrac 1 2$ to $\nicefrac 1 {10}$). This ensures that big steps are taken by the algorithm when it is possible but the stepsize is reduced when further improvements can only be made by smaller steps.
+
 %Oversampling
 %Model ensembles
 %Model ensembles
