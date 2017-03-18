@@ -148,7 +148,56 @@ pool\left(\begin{bmatrix}
 %CNN depth
 %CNN backend
 %ResNets
-%BackProp
+\section{Back Propagation}
+\subsection{What is the purpose of the backpropagation algorithm?}
+\begin{itemize}
+\item { Compute gradient of computation graph given by NN and current parameters}
+\item { Starting from input calculate derivatives of all nodes by their children. Sum up derivatives multiplied over all paths from output to input node to get derivation of output by input node. }
+\item { Gets inefficient really fast if multiple paths from input to output exist. Reverse accumulation strategies help in this case (reverse mode differentation)}
+\end{itemize}
+\subsection{Example}
+\begin{quote}
+{Assume the following computational graph. Insert digits from your Matrikelnummer into the empty input nodes, going from right to left both in terms of nodes and digits. Then compute the partial derivative of the topmost node with respect to all input nodes via  backpropagation. Write computation node values after the forward pass left of the nodes, local gradients left of the edge connecting the corresponding nodes, and “cached” partial derivatives of the topmost node right to the nodes.}
+\end{quote}
+\tikzset{
+  treenode/.style = {align=center, inner sep=0pt, text centered,font=\sffamily},
+  calc/.style = {treenode, circle, draw=black, black,fill=green!25, text width=1.5em},
+  numbr/.style = {treenode, circle, draw=black, black,fill=red!25, text width=1.5em},
+  input/.style = {treenode, circle, draw=black, black,fill=blue!25, text width=1.5em},
+}
+\begin{minipage}{0.7\textwidth}
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 5cm/#1,
+  level distance = 1.5cm}] 
+\node [calc] {* 455}
+    child{ node [calc] {+ 35} 
+            child{ node [numbr] {5}  edge from parent node[above left]{$1$}}
+            child{ node [calc] {* 30 } 
+		child{ node [input] {5}edge from parent node[left]{$5$}}
+		child{ node [input] {6} coordinate (AA) edge from parent node[right]{$6$}}
+		edge from parent node[above right]{$1$}
+            }            edge from parent node[above]{$13$}                
+    }
+            	child{ node [calc] {+ 13}   coordinate (BB)
+			child{ node [input] {7}edge from parent node[below right]{$1$}}
+			edge from parent node[right]{$35$}
+	            }    
+; 
+\draw[->,>=stealth']( $ (BB)!15pt!(AA) $ )--( $ (AA)!10pt!(BB) $ );
+\end{tikzpicture}
+\end{minipage}\begin{minipage}{0.3\textwidth}
+\begin{align*}
+\partial a &= 13\cdot 1 \cdot 5 = 65\\
+\partial b &=  13\cdot 1 \cdot 6 + 35\cdot 1 = 113\\
+\partial c &= 35 \cdot 1 = 35
+\end{align*}
+\end{minipage}
+\subsection{Explain the steps of the algorithm at a given node.}
+\begin{itemize}
+\item { First calculate values at every node}
+\item{ Then derive each node by input parameters to get partial derivatives}
+\item{ Multiply every path from an input to output (chain rule $g(f)' = g'(f)\cdot f'$}
+\item { Sum up all paths from input to output (product rule: $(g\cdot f)' = g'\cdot f + f'\cdot g$}
+\end{itemize}
 %Data Agumentation
 %Dropout
 %Batch normalization

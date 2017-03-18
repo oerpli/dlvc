@@ -147,21 +147,8 @@
 \subsection{What are residual networks (ResNets) and which problem do they overcome?}
 \subsection{Explain what a residual block computes and create a sketch of such a block.}
 
-\section{BackProp}
-\subsection{What is the purpose of the backpropagation algorithm?}
-\subsubsection{ Compute gradient of computation graph given by NN and current parameters}
-\subsubsection{ Starting from input calculate derivatives of all nodes by their children. Sum up derivatives multiplied over all paths from output to input node to get derivation of output by input node. }
-\subsubsection{ Gets inefficient really fast if multiple paths from input to output exist. Reverse accumulation strategies help in this case (reverse mode differentation)}
-\subsection{Assume the following computational graph. First insert digits from your Matrikelnummer into the empty input nodes, going from right to left both in terms of nodes and digits. (Assuming Matrikelnummer 0123456, the values of the rightmost node would be 6, that of the node left of it would be 5, and so on.) Then compute the partial derivative of the topmost node with respect to all input nodes via  backpropagation. Write computation node values after the forward pass left of the nodes, local gradients left of the edge connecting the corresponding nodes, and “cached” partial derivatives of the topmost node right to the nodes.}
-\subsection{Explain the steps of the algorithm at a given node.}
 
-\subsubsection{ First calculate values at every node}
 
-\subsubsection{ Then derive each node by input parameters to get partial derivatives}
-
-\subsubsection{ Multiply every path from an input to output (chain rule $g(f)' = g'(f)\cdot f'$}
-
-\subsubsection{ Sum up all paths from input to output (product rule: $(g\cdot f)' = g'\cdot f + f'\cdot g$}
 \section{Data Agumentation}
 \subsection{What is the purpose of data augmentation?}
 \subsection{Assume that the task is to train a digit classifier.}
@@ -185,11 +172,6 @@
 \subsection{What is ten-crop oversampling?}
 \subsection{Assume the task of dog breed classification.}
 \subsection{Think of and explain transformations that are applicable in this case. What about ten-crop oversampling?}
-
-\section{Model ensembles}
-\subsection{What is the purpose and intuiting behind using model ensembles?}
-\subsection{How might the individual models differ from each other?}
-\subsection{How is the output of these models combined?}
 
 \section{Model ensembles}
 \subsection{What is the purpose and intuition behind using model ensembles?}
@@ -223,10 +205,7 @@
 \subsection{What is the main limitation of traditional RNNs (as opposed to LSTMs)?}
 
 \section{LSTMs}
-
-\section{What is the main advantage of LSTMs over traditional RNNs?}
-
-\section{Draw a sketch that illustrates the dataflow within a LSTM block.}
-
-\section{List and explain the purpose of the different LSTM gates.}
+\subsection{What is the main advantage of LSTMs over traditional RNNs?}
+\subsection{Draw a sketch that illustrates the dataflow within a LSTM block.}
+\subsection{List and explain the purpose of the different LSTM gates.}
 
