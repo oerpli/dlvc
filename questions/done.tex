@@ -56,11 +56,11 @@ Assume a company asks you to develop an application that is able to predict whic
 \end{itemize}
 \end{enumerate}
 
-%DL Motivation
-%Classification \& Regression/ Supervised vs unsupervised learning
-%Testdata
-%Performance measures
-%Capacity, bias, variance
+%: DL Motivation
+%: Classification \& Regression/ Supervised vs unsupervised learning
+%: Testdata
+%: Performance measures
+%: Capacity, bias, variance
 \section{Hyperparameter}
 \subsection{What is a hyperparameter?}
 In ML we try to find parameters for a model from datasets. This learning process may have its own parameters, these are called hyperparameters. They govern behaviour of the model learning, .e.g. the capacity of the resulting model.
@@ -98,11 +98,9 @@ Find the k samples in the training set that are most similar to the current samp
 
 \subsection{Sketch of kNN}
 \begin{minipage}{0.65\textwidth}
-%\begin{quote}
 {Create a sketch for illustration, assuming a two-dimensional feature space and two different classes, Draw at least three training samples per class (must not lie on a line) as well as (roughly) the resulting decision boundaries.}
 
 Image on right is kNN with two classes and $k=1$.
-%\end{quote}
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
 
@@ -134,25 +132,31 @@ Image on right is kNN with two classes and $k=1$.
 \item Very sensitive to background
 \end{itemize}
 
-%Image Classification
-%Parametric model
-%Linear model
-%Loss function
-%Optimization in ML
-%Local/global optimum
-%Gradient descent
-%Batch Gradient descent
-%Weight and bias parameters
-%Preprocessing
-%Optimization vs ML
-%Regularization
-%Feedforward NN
-%MLP
-%MLP for VC
-%Representation learning
-%Locally connected layers for image analysis
-%Conv Layer
-%Receptive field
+%: Image Classification
+%: Parametric model
+%: Linear model
+%: Loss function
+%: Optimization in ML
+\section{Local/global optimum}
+\subsection{What is the difference between a local and a global optimum?}
+A function has only one global optimum but may have many local optima. Finding the global optimum is not trivial whereas finding a local optimum is usually easy (calculate derivation at current point and move in direction of steepest descent). When a local optimum is found it's nontrivial how to escape it again. Simulated annealing is an approach inspired from material physics.
+
+\includegraphics[width=\textwidth]{./img/localopt.jpeg}
+\subsection{Are local minima a problem in deep learning?  Why (not)?}
+There is no definite consensus though it is believed, that the search landscape is similar to an egg carton with many almost identical local optima where the hit on the performance is not critical if the model finds any of them. It was also proposed that many local optima (as found by having a derivation of 0) in the search landscape are in reality saddle points where it should be possible to improve the results further. Calculating the full Hessian is too costly therefore an approximation may be enough. (see here: \url{https://blog.terminal.com/no-more-local-minima/})
+%: Gradient descent
+%: Batch Gradient descent
+%: Weight and bias parameters
+%: Preprocessing
+%: Optimization vs ML
+%: Regularization
+%: Feedforward NN
+%: MLP
+%: MLP for VC
+%: Representation learning
+%: Locally connected layers for image analysis
+%: Conv Layer
+%: Receptive field
 \section{Pooling}
 \subsection{What is the purpose of pooling layers?}
 Reduce spatial size to reduce amount of parameters and computation. Also helps against overfitting. Consolidate features learned in convolutional layers before the pooling layer.
@@ -167,10 +171,10 @@ pool\left(\begin{bmatrix}
 \end{equation}
 \subsection{How many pooling layers with stride 2 should a CNN have assuming an input resolution of 64 × 64 and convolutional layers that do not change the resolution, and why?}
 \todo{How many pooling layers should CNN have?}
-%CNN
-%CNN depth
-%CNN backend
-%ResNets
+%: CNN
+%: CNN depth
+%: CNN backend
+%: ResNets
 \section{Back Propagation}
 \subsection{What is the purpose of the backpropagation algorithm?}
 \begin{itemize}
@@ -221,9 +225,9 @@ pool\left(\begin{bmatrix}
 \item{ Multiply every path from an input to output (chain rule $g(f)' = g'(f)\cdot f'$}
 \item { Sum up all paths from input to output (product rule: $(g\cdot f)' = g'\cdot f + f'\cdot g$}
 \end{itemize}
-%Data Agumentation
-%Dropout
-%Batch normalization
+%: Data Agumentation
+%: Dropout
+%: Batch normalization
 \section{Learning rate}
 \subsection{What does the learning rate hyperparameter specify?}
 The direction of steepest decrease can be calculated with the gradient, the size of the optimal stepsize is unknown and instead the stepsize given by the learning rate hyperparameter is used. The choice of this parameter is critical. 
@@ -245,16 +249,13 @@ If learning rate is:
 Learning rate decay can be used to tune the learning rate to the optimal choice at each step. First start with a rather high learning rate and when there is no improvement for a few epochs scale the learning rate with a constant factor (e.g. $\nicefrac 1 2$).
 Alternatively scale the learning rate every 5-20 epochs with a factor ($\nicefrac 1 2$ to $\nicefrac 1 {10}$). This ensures that big steps are taken by the algorithm when it is possible but the stepsize is reduced when further improvements can only be made by smaller steps.
 
-%Oversampling
-%Model ensembles
-%Model ensembles
-%Medical tasks
-%2-3D deep CNN
-%??
-%CNNs in medical imaging
-%Labelling
-%RNNs
-%LSTMs
-%What is the main advantage of LSTMs over traditional RNNs?
-%Draw a sketch that illustrates the dataflow within a LSTM block.
-%List and explain the purpose of the different LSTM gates.
+%: Oversampling
+%: Model ensembles
+%: Model ensembles
+%: Medical tasks
+%: 2-3D deep CNN
+%: ??
+%: CNNs in medical imaging
+%: Labelling
+%: RNNs
+%: LSTMs
