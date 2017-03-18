@@ -1,7 +1,7 @@
 % !TeX root = ./DLVCQuestions.tex
 \section{Image classification}
 \subsection{What is the task definition of image classification?}
-Predict the label of an image, i.e.: what is visible on the image. Output could also be a distribution over labels to indicate confidence in result.
+Predict the label (picked from a set of possible labels) of an image, i.e.: what is visible on the image. Output could also be a distribution over labels to indicate confidence in result.
 
 \subsection{Explain at least 5 challenges and give examples.}
 \begin{itemize}
@@ -18,3 +18,40 @@ Predict the label of an image, i.e.: what is visible on the image. Output could 
 
 \subsection{What is object detection and how does it differ from classification?}
 Object detection tries to find all objects present in an image whereas in image classification a label is assigned to the whole image. Object detection can be reduced to image classification (classify various parts of the image and combine results)
+
+\section{Datasets}
+
+\subsection{Why do we need datasets?}Data required for training and testing of model. 
+	
+\subsection{What are the challenges of dataset collection and annotation in deep learning?}Datasets should be sampled from the same distribution as images which are then classified, i.e. it should span the whole space of possible features associated with each class. For example if dataset contains only cats run over by car a model trained with this set will have difficulties recognizing healthy cats.
+
+\subsection{Explain the purpose of the different subsets.}
+\begin{itemize}
+\item Training set: Used to train the model
+\item Validation set: Used to train hyperparameters
+\item Test set: Final performance analysis. 
+\end{itemize}
+Model is trained with training set and then evaluated with validation set. Then some other hyperparameters are chosen (e.g. lower learning rate, \ldots) and the step is repeated until there is no further improvement to the model. The datasets have to be disjunct as else it would be ``learning to the test'' (e.g. model is a hashmap containing the hash of the image and the correct class. Would work if testset is contained in training set but completely useless for new data)
+
+\subsection{What is the rule of thumb about how many images per classes are needed for CNNs to perform well?}
+Approximately 1000 per class---more usually does not hurt though.
+
+
+\section{Case study}
+
+\begin{quote}
+Assume a company asks you to develop an application that is able to predict which kind of bird is depicted in a given image. List and explain the individual steps you’d follow to solve this problem using deep learning.
+\end{quote}
+\begin{enumerate}
+\item (Set up some machine that allows to train the model with hardware acceleration)
+\item Ask what kind of birds should be distinguished from each other (e.g. is ``parrot'' enough or should it be ``macaw parrot'' or even ``Ara'' or ``Military macaw'')
+\item Only sitting birds or also while they're flying? 
+\item Look for dataset that fulfills the conditions resulting from the above questions
+\item Proceed in the usual order to train a model:
+\begin{itemize}
+\item Set up training process
+\item Find suitable NN architecture
+\item Augment dataset 
+\item Find hyperparameters and tune them until accuracy is good enough
+\end{itemize}
+\end{enumerate}
