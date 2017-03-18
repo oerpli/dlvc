@@ -274,13 +274,14 @@ Alternatively scale the learning rate every 5-20 epochs with a factor ($\nicefra
 \subsection{Describe the main purpose of RNNs and give an example application.}
 RNNs are suited for temporal machine learning task, where not a single instance has to be taken into account, but a number of instances where the order is importent. One example would be text generation, where the task is to create a single character or word, but the previous characters/words are very important for the next item. Video analysis, e.g. classification would be another example, where the isn't just a single image, but a whole video stream of several frames.
 \subsection{Draw and explain a sketch illustrating the overall  architecture of such networks.}
-\begin{minipage}{0.4\textwidth}
-\includegraphics[width=\textwidth]{./img/rnn.png}
+\begin{minipage}{0.3\textwidth}
+\hspace*{1cm}\includegraphics[width=0.6\textwidth]{./img/rnn.png}
 \end{minipage}
-The main feature of RNNS are loops, that information can be passed from on temporal step to the next. Thus, the next state of A does not only depend on input $x_t$, for the step t, but also on the previous state of $A_{t-1}$. $h_t$ is the output of the network at step t.
+\begin{minipage}{0.7\textwidth}
+The main feature of RNNS are loops sucht that information can be passed from one temporal step to the next. Thus, the next state of A does not only depend on input $x_t$, for the step $t$, but also on the previous state of $A_{t-1}$. $h_t$ is the output of the network at step $t$.
+\end{minipage}
 \subsection{What is the main limitation of traditional RNNs (as opposed to LSTMs)?}
-A problem arises, when the important information is not only one or at least a few (defined) steps before t, but when it could be from an arbitrarly far away step. In the given example
-"I grew up in Italy ... I speak fluent\textit{italian}" the important word to inference the language is Italy.  The larger the potential gap, the more complicated the problem becomes. 
+A problem arises, when the important information is not only one or at least a few (defined) steps before t, but when it could be from an arbitrarily far away step. In the given example ``I grew up in Italy ... I speak fluent \textit{italian}'' the important word to inference the language is Italy.  The larger the potential gap, the more complicated the problem becomes. 
 %
 \section{LSTMs}
 \subsection{What is the main advantage of LSTMs over traditional RNNs?}
@@ -292,10 +293,10 @@ LSTMs are designed for rememembering informations for long periods of time. So t
 The Cell state C, the upper line, contains the core information. It is controlled by several
 sigmoid gates. 
 \subsection{List and explain the purpose of the different LSTM gates.}
-The left gate is the forgert layer, which takes information from the prevouis output and the current input to get a multiplicative value between 0 and 1 for each information in C.
+The left gate is the forget layer, which takes information from the previous output and the current input to get a multiplicative value between 0 and 1 for each information in C.
 
 The middle gate is the input layer. It decides which values to update and create new candidate values for C.
 
-The right gate is the output gate, which takes the updated and filtered state C, the previuous output and the input to create a new output.
+The right gate is the output gate, which takes the updated and filtered state C, the previous output and the input to create a new output.
 
 \addtocounter{section}{-1}\section{}\label{sec:done}
