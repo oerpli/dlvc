@@ -1,11 +1,5 @@
 % !TeX root = ./DLVCQuestions.tex
-\section{Testdata}
-\todo{improve testdata answers}
-\subsection{Why are machine learning algorithms tested on data unseen during training?}
-The goal is to have a general model. Therefore it's necessary to test on unseen data as testing on data used during training would 
-\subsection{How can such algorithms perform well on unseen data?}
-If the model is not overfitted it should recognize general features (``wheels in the lower left corner'') of the sample but not very specific features (e.g.: hash of the image). 
-\subsection{What does dataset bias mean? }
+
 
 \section{Performance measures}
 \subsection{How is the performance of a classifier measured?}
@@ -43,6 +37,7 @@ If the model is not overfitted it should recognize general features (``wheels in
 
 \section{Optimization vs ML}
 \subsection{What are the goals of optimization and machine learning?}
+In optimization the goal is to find an optimal value for a function, 
 \subsection{Why do they differ?}
 \subsection{Create two sketches with each showing the training progress over time in terms of both training and test error; one that is good from an optimization perspective but bad from a machine learning perspective, and one that is worse from an optimization perspective but better from a machine learning perspective. Explain both sketches.}
 
@@ -79,6 +74,9 @@ If the model is not overfitted it should recognize general features (``wheels in
 \subsection{What is the purpose of a convolutional layer?}
 
 \subsection{How do such layers differ from locally connected layers, and why are they almost always preferred?}
+Convolutional layers share their parameters, i.e. a kernel with a given size (often $3\times 3$) is applied starting from the top left and then moved in stepsizes corresponding to the stride. 
+This differs from locally connected layers that don't share the parameters and have a set of weights for every output pixel. 
+
 \subsection{Assume input data of dimension $W \times H \times D$. How many weight and bias parameters does a convolutional layer have, assuming $3 \times 3$ connectivity and $W \times H \times  F$ output data dimension, and why? Why are such layers called convolutional layers?}
 \subsection{What are feature maps?}
 
