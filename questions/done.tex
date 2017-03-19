@@ -106,7 +106,18 @@ The performance of an algorithm is determined by two factors
 \includegraphics[width=\textwidth]{./img/overfit.png}
 From left to right: underfit (low capacity), good model, overfit (high capacity)
 %
-%: Capacity, bias, variance
+\section{Capacity, bias, variance}
+\todo{Improve rather weak capacity answers}
+\subsection{Explain the terms algorithm capacity, bias, and variance.}
+\begin{itemize}
+\item Algorithm capacity: the capacity is the ability to compute complex decision boundaries. If two models have the same validation error the model with lower capacity is usually preferred (``most parsimonious model'', AIC and BIC are formalizations of this notion in the context of linear regression)
+\item Bias: If the capacity is too low the model struggles to fit the training set. This results in a high bias. 
+\item Variance: If the capacity is too high the model fits the data too well which results in high variance and bigger generalization error
+\end{itemize}
+\includegraphics[width=\textwidth]{./img/capacity.jpeg}
+Until the point of optimal capacity decreasing the training error results in a better test error. From then on the test error increases again, due to overfitting. The difference between training and test error is the generalization gap that results from tailoring the model too strongly to the training/validation data.
+\subsection{Why does the training set size affect the optimal capacity of a model?}
+When more training data is available the performance of the model will increase as the data reflects the problem better. This also results in a higher optimal performance
 %
 \section{Hyperparameter}
 \subsection{What is a hyperparameter?}
