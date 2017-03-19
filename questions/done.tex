@@ -72,7 +72,20 @@ This is applied for image classification by providing a dataset of labelled imag
 
 Applying rule based systems would be completely overwhelming (e.g. if there are 45\% blue pixels and 55\% white pixels it's a boat \ldots)
 %
-%: Classification \& Regression/ Supervised vs unsupervised learning
+\section{Classification \& Regression/ Supervised vs unsupervised learning}
+\subsection{Explain the differences between classification and regression and supervised vs. unsupervised learning}
+Classification is used to predict discrete outputs (e.g. an animal is a dog or a cat but not some 50:50 mixture of both) whereas regression is used to predict continuous values (e.g. IQ, height, time \ldots).
+
+Supervised learning uses a training dataset where the desired prediction is already known and the algorithm tries to find a model that would come to the same conclusions. 
+
+Unsupervised learning only uses a dataset and the algorithm tries to find some structure in it (e.g. SOMs, EM-algorithm, PCA)
+\subsection{What do discriminative and generative models learn }
+Discriminative models learn the boundary between classes $P(y|x)$ (estimate response $y$ when given input $x$ whereas generative models learn the underlying distribution $P(x,y)$.
+
+SVN and NN are discriminative, Naive Bayes and Hidden Markov models are generative.
+\subsection{How can generative models be used for classification?}
+It uses the distribution $P(x,y)$ to estimate which response $y$ is most likely to cause the given input $x$. Though generative models can be used for classification discriminative models usually perform better. 
+%
 %: Testdata
 %: Performance measures
 %: Capacity, bias, variance
@@ -163,7 +176,7 @@ There is no definite consensus though it is believed, that the search landscape 
 %: Gradient descent
 %
 \section{Batch Gradient descent}
-\subsection{Explain the differences between batch, minibatch, and stochastic gradient descent.}
+\subsection{Batch, minibatch, and stochastic gradient descent:}
 The gradient descent algorithm starts at some point, looks for the direction of steepest descent and makes a step proportional to the learning rate in this direction to get to a (at least local) minimum (or critical point). Calculating this gradient on the whole dataset is computationally expensive, therefore usually only a subset of the training samples are used for each step. 
 
 The following schemes exist\footnote{Source: \url{http://sebastianruder.com/optimizing-gradient-descent/index.html\#batchgradientdescent}}
@@ -177,7 +190,7 @@ Therefore MBGD is most commonly used.
 %\subsection{Which version is most commonly used in deep learning and why?}
 \subsection{What effects has the minibatch size?}
 The size of the minibatch isn't a critical parameter. A bigger minibatch results in a smoother descent of the objective function but makes leaving local minima more difficult and is also computationally more expensive. 
-\subsection{Write pseudo-code that illustrates the overall structure of minibatch-based training and validation with early stopping}
+\subsection{Pseudo-code of minibatch-based training and validation with early stopping}
 \begin{lstlisting}
 for each of 200 epochs:
     for each minibatch in training set:
