@@ -35,8 +35,6 @@ Model is trained with training set and then evaluated with validation set. Then 
 
 \subsection{What is the rule of thumb about how many images per classes are needed for CNNs to perform well?}
 Approximately 1000 per class---more usually does not hurt though.
-
-
 %
 \section{Case study}
 \begin{quote}
@@ -55,7 +53,25 @@ Assume a company asks you to develop an application that is able to predict whic
 \item Find hyperparameters and tune them until accuracy is good enough
 \end{itemize}
 \end{enumerate}
-%: DL Motivation
+%
+\section{DL Motivation}
+\subsection{What is the motivation for solving vision tasks via machine learning?}
+\begin{minipage}{0.6\textwidth}
+\begin{itemize}
+\item Rule based system: handwritten AI where an expert implements all rules (decision boundaries)
+\item Machine learning: The features are designed and the algorithm then maps the features to the boundaries
+\item Representation learning: The features are trained and mapped on the data
+\item Deep learning: There are low and high level features and the algorithm learns how to train the features, how to combine them to higher level features and how to map the to the output
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}\hspace{0.25cm}\includegraphics[width=1.5\textwidth]{./img/motivation.png}
+\end{minipage}
+\subsection{What is a machine learning algorithm and how are they used for solving image classification problems?}
+A machine learning algorithm is a method of statistical analysis that automates analytical model building. Their aim is to find hidden insights without being programmed where to look. 
+This is applied for image classification by providing a dataset of labelled images which are then used to extract features which are used to infer the class of an image. 
+
+Applying rule based systems would be completely overwhelming (e.g. if there are 45\% blue pixels and 55\% white pixels it's a boat \ldots)
+%
 %: Classification \& Regression/ Supervised vs unsupervised learning
 %: Testdata
 %: Performance measures
