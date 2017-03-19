@@ -169,8 +169,25 @@ Features are used to classify something. If it has four wheels and 5 people can 
 Feature extraction is used to get the features of a sample, e.g. are there eyes on the image, is the object curved, \ldots. These extracted features can then be used to classify an image.
 \subsection{Explain the terms low-level feature and high-level feature.}
 A low level feature would be the existence of edges in a certain direction or some color gradient. A high level feature is then built from a set of low level features, e.g. a face consists of a certain arrangment of strokes (the outline and nose and mouth) and round objects (eyes). An even higher level feature would then be a person consisting of various features such as ``face'', ``body'' and ``limbs''. 
-%: Parametric model
-%: Linear model
+%
+\section{Parametric model}
+\subsection{What is the definition of a parametric model?}
+A model is a function that maps from the input space to the output space: $f:\mathbb R^D \to \mathbb R^T$. A parametric model also takes a finite vector of parameters $\theta$ to get from input $x$ to output $y$: $f(x,\theta) = y$.
+
+Whereas the model for a kNN classifier (a non-parametric model) gets more complex the bigger the training set is a parametric model only has parameters that are better chosen if the training set gets larger. 
+\subsection{What do the parameters of such models control (what effect do they have?), and how are they set?}
+The parameters are determined by training the model with a trainingset which can be discarded afterwards. In a linear model the weight matrix and bias vector are the parameters and they govern the decision boundary $Wx + b$. 
+%
+\section{Linear model}
+\subsection{What is a linear model, which types of parameters does it have, and what do they specify?}
+A linear model tries to seperate the samples with linear functions. The samples are in a $D$-dimensional space and there are $T$ classes. The model then consists of $T$ decision boundaries of the form $y_t = \sum_i^D W_{ti} x_i + b_t$ or in short $y = Wx + b$. The weight matrix $W$ and the bias vector $b$ are the parameters. The resulting model is a set of decision boundaries where each boundary provides a value for each class. Usually the class with the highest score is then chosen as prediction. 
+
+\begin{minipage}{0.32\textwidth}
+\includegraphics[width=0.95\textwidth]{./img/lclass.jpeg}
+\end{minipage}\begin{minipage}{0.7\textwidth}
+The output value of $f(x, \theta)$ has a score for each class where a positive number corresponds to the sample being on the side indicated with an arrow, meaning, that the sample is more likely than not a member of this class. The class with the highest score is then chosen as prediction. 
+\end{minipage}
+%
 %: Loss function
 %: Optimization in ML
 %
