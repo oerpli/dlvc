@@ -145,7 +145,34 @@ A function has only one global optimum but may have many local optima. Finding t
 \subsection{Are local minima a problem in deep learning?  Why (not)?}
 There is no definite consensus though it is believed, that the search landscape is similar to an egg carton with many almost identical local optima where the hit on the performance is not critical if the model finds any of them. It was also proposed that many local optima (as found by having a derivation of 0) in the search landscape are in reality saddle points where it should be possible to improve the results further. Calculating the full Hessian is too costly therefore an approximation may be enough. (see here: \url{https://blog.terminal.com/no-more-local-minima/})
 %: Gradient descent
-%: Batch Gradient descent
+%
+\section{Batch Gradient descent}
+\subsection{Explain the differences between batch, minibatch, and stochastic gradient descent.}
+The gradient descent algorithm starts at some point, looks for the direction of steepest descent and makes a step proportional to the learning rate in this direction to get to a (at least local) minimum (or critical point). Calculating this gradient on the whole dataset is computationally expensive, therefore usually only a subset of the training samples are used for each step. 
+
+The following schemes exist\footnote{Source: \url{http://sebastianruder.com/optimizing-gradient-descent/index.html\#batchgradientdescent}}
+\begin{itemize}
+\item Stochastic gradient descent: Use only one sample --- the resulting path in the search space may be rather erratic
+\item Batch gradient descent: Calculate gradient on the whole training data set. This is expensive and usually not necessary
+\item Minibatch gradient descent: Middle path between SGD and BGD---calculate gradient on a subset of medium size (32 to 128 samples are used usually). The resulting behaviour is smoother than SGD and faster as BGD. 
+\end{itemize}
+
+Therefore MBGD is most commonly used.
+%\subsection{Which version is most commonly used in deep learning and why?}
+\subsection{What effects has the minibatch size?}
+The size of the minibatch isn't a critical parameter. A bigger minibatch results in a smoother descent of the objective function but makes leaving local minima more difficult and is also computationally more expensive. 
+\subsection{Write pseudo-code that illustrates the overall structure of minibatch-based training and validation with early stopping}
+\begin{lstlisting}
+for each of 200 epochs:
+    for each minibatch in training set:
+        train classifier, store loss and training accuracy
+    for each minibatch in validation set:
+        test classifier, store validation accuracy
+    compute and report means over loss and accuracies
+    if accuracy is better then best model so far store model
+    if accuracy did not improve in the last n (5-20) epochs restore best model and stop
+\end{lstlisting}
+%
 %: Weight and bias parameters
 %: Preprocessing
 %: Optimization vs ML
@@ -251,11 +278,11 @@ If learning rate is:
 \end{itemize}
 \begin{minipage}{0.6\textwidth}
 \begin{itemize}
-\item properly: First missclassification rate quickly decreases and then slowly converges to some minimum
+\item proper: First missclassification rate quickly decreases and then slowly converges to some minimum
 \item low: Finds minimum as well but very slow (progress looks linear whereas in the beginning almost exponential decay of error should be possible)
 \end{itemize}
 \end{minipage}\begin{minipage}{0.4\textwidth}
-\includegraphics[width=\textwidth]{./img/learningRates.jpeg}
+\hspace{0.2cm}\includegraphics[width=\textwidth]{./img/learningRates.jpeg}
 \end{minipage}
 \subsection{Explain a heuristic for adapting the learning rate during training and why doing so can be beneficial.}
 Learning rate decay can be used to tune the learning rate to the optimal choice at each step. First start with a rather high learning rate and when there is no improvement for a few epochs scale the learning rate with a constant factor (e.g. $\nicefrac 1 2$).
