@@ -32,7 +32,6 @@
 \usepackage{tikz}
 \usepackage{verbatim}
 \usepackage{esdiff}
-
 \usepackage{xifthen}
 \usepackage{subcaption}
 \usepackage{fancyref} % add page number to references
@@ -83,10 +82,13 @@
 }
 \setcounter{tocdepth}{3}
 
-
+\usepackage{progressbar}
+\usepackage{fp}
 \begin{document}
 \maketitle
 \listoftodos
+\edef\Total{48}\FPeval\result{\getrefnumber{sec:done}/\Total}
+\progressbar[width= \textwidth , heighta=1cm , filledcolor=red , emptycolor=green , borderwidth=1pt , tickswidth=1pt , roundnessr=0.1 , subdivisions =\Total]{\result}
 %\tableofcontents
 \part{Done}\input{done}
 \setcounter{section}{0}
