@@ -84,7 +84,7 @@ Discriminative models learn the boundary between classes $P(y|x)$ (estimate resp
 
 SVN and NN are discriminative, Naive Bayes and Hidden Markov models are generative.
 \subsection{How can generative models be used for classification?}
-It uses the distribution $P(x,y)$ to estimate which response $y$ is most likely to cause the given input $x$. Though generative models can be used for classification discriminative models usually perform better. 
+It uses the distribution $P(x,y)$ to estimate which response $y$ is most likely to cause the given input $x$ ($\text{argmax}_y P(x|y)P(y)$). Though generative models can be used for classification discriminative models usually perform better. 
 %
 %: Testdata
 %: Performance measures
@@ -159,8 +159,16 @@ Image on right is kNN with two classes and $k=1$.
 \item Does not recognize higher order features, e.g. ``presence of wheels'' but only uses similarity of features (pixels). Completely thrown off the track by e.g. different lighting or position of object in image (e.g. off center in sample and only centered pictures in training set)
 \item Very sensitive to background
 \end{itemize}
+%
+\section{Image Classification}
+\subsection{Why do general machine learning algorithms (those expecting vector input) perform poorly on images?}
+Images have spatial information, i.e. a pixel is correlated with the pixels in its surrounding. This additional information is not leveraged with general ML algorithms and thus the resulting performance is subpar.
+\subsection{What is a feature, and what is the purpose of feature extraction?}
+Features are used to classify something. If it has four wheels and 5 people can sit in it it is most likely a car. If it has four legs it's most likely not a human etc.
 
-%: Image Classification
+Feature extraction is used to get the features of a sample, e.g. are there eyes on the image, is the object curved, \ldots. These extracted features can then be used to classify an image.
+\subsection{Explain the terms low-level feature and high-level feature.}
+A low level feature would be the existence of edges in a certain direction or some color gradient. A high level feature is then built from a set of low level features, e.g. a face consists of a certain arrangment of strokes (the outline and nose and mouth) and round objects (eyes). An even higher level feature would then be a person consisting of various features such as ``face'', ``body'' and ``limbs''. 
 %: Parametric model
 %: Linear model
 %: Loss function
