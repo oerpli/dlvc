@@ -188,7 +188,14 @@ A linear model tries to seperate the samples with linear functions. The samples 
 The output value of $f(x, \theta)$ has a score for each class where a positive number corresponds to the sample being on the side indicated with an arrow, meaning, that the sample is more likely than not a member of this class. The class with the highest score is then chosen as prediction. 
 \end{minipage}
 %
-%: Loss function
+\section{Loss function}
+\subsection{What is the purpose of a loss function?}
+When training a parametric model an optimization algorithm the minimizes a loss function is used. The loss function has the parameters as input and the global minimum of $L(\theta)$ corresponds to the parameter setting that is optimal for the task at hand (classifying images).
+\subsection{What does the cross-entropy loss on a dataset D measure?}
+For classification usually cross-entropy loss used. CEL measures the dissimilarity of the real distribution from the predicted distribution. $H(p,q) = -\sum_x p(x) \ln q(x)$. $p,q$ are discrete probability distributions $p(x)\leq 0, \sum_x p(x) = 1$. The CEL of a dataset is then the sum of the CEL of all samples divided by the size of the dataset. 
+\subsection{Which criteria must the ground-truth labels and predicted class-scores fulfill to support the cross-entropy loss, and how is this ensured?}
+Both must be probability distributions, therefore the class $i$ is encoded as a vector $p_t = \delta_{it}$ ($\delta$ is the Kronecker symbol with $\delta_{ij} = 1$ iff $i = j$) and the predicted vector of class scores is normalized with the softmax function $w_k =  \frac{\exp(w_k)}{\sum_t^T \exp(w_t)}$
+%
 %: Optimization in ML
 %
 \section{Local/global optimum}
@@ -266,16 +273,13 @@ pool\left(\begin{bmatrix}
 \item { Gets inefficient really fast if multiple paths from input to output exist. Reverse accumulation strategies help in this case (reverse mode differentation)}
 \end{itemize}
 \subsection{Example}
-\begin{quote}
-{Assume the following computational graph. Insert digits from your Matrikelnummer into the empty input nodes, going from right to left both in terms of nodes and digits. Then compute the partial derivative of the topmost node with respect to all input nodes via  backpropagation. Write computation node values after the forward pass left of the nodes, local gradients left of the edge connecting the corresponding nodes, and “cached” partial derivatives of the topmost node right to the nodes.}
-\end{quote}
 \tikzset{
   treenode/.style = {align=center, inner sep=0pt, text centered,font=\sffamily},
   calc/.style = {treenode, circle, draw=black, black,fill=green!25, text width=1.5em},
   numbr/.style = {treenode, circle, draw=black, black,fill=red!25, text width=1.5em},
   input/.style = {treenode, circle, draw=black, black,fill=blue!25, text width=1.5em},
 }
-\begin{minipage}{0.7\textwidth}
+\begin{minipage}{0.6\textwidth}
 \begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 5cm/#1,
   level distance = 1.5cm}] 
 \node [calc] {* 455}
@@ -294,7 +298,7 @@ pool\left(\begin{bmatrix}
 ; 
 \draw[->,>=stealth']( $ (BB)!15pt!(AA) $ )--( $ (AA)!10pt!(BB) $ );
 \end{tikzpicture}
-\end{minipage}\begin{minipage}{0.3\textwidth}
+\end{minipage}\begin{minipage}{0.4\textwidth}
 \begin{align*}
 \partial a &= 13\cdot 1 \cdot 5 = 65\\
 \partial b &=  13\cdot 1 \cdot 6 + 35\cdot 1 = 113\\
