@@ -93,7 +93,19 @@ The goal is to have a model that can predict new data. Therefore it's a good ide
 If the model is not overfitted it should recognize general features (``wheels in the lower left corner'') of the sample but not very specific features (e.g.: hash of the image). 
 \subsection{What does dataset bias mean? }
 When a model was trained on a dataset the model will usually be applied to new problems (samples not yet found in the dataset). As the model will only take into consideration information from the training set this dataset should be sampled without bias from the same distribution as the samples that are then used in production. If this is not the case the model won't perform well. For example a model trained on whales and bees will have difficulties to predict whether a cow is an insect or a mammal.
-%: Performance measures
+%
+\section{Performance measures}
+\subsection{How is the performance of a classifier measured?}
+For classification the accuracy is used to measure the performance. The predictions are compared with the target labels and the accuracy is defined as the fraction of correctly classified samples (the error rate is the complement of this).
+\subsection{Which factors determine the performance, and how is underfitting and overfitting related to these factors?}
+The performance of an algorithm is determined by two factors
+\begin{itemize}
+\item Ability to minimize training error (if this fails: underfitting)
+\item Ability to minimize gap between training and test error (if the first succeeds but this fails: overfitting)
+\end{itemize}
+\includegraphics[width=\textwidth]{./img/overfit.png}
+From left to right: underfit (low capacity), good model, overfit (high capacity)
+%
 %: Capacity, bias, variance
 %
 \section{Hyperparameter}
