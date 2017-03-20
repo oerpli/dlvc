@@ -377,12 +377,64 @@ Alternatively scale the learning rate every 5-20 epochs with a factor ($\nicefra
 
 %: Oversampling
 %: Model ensembles
-%: Model ensembles
-%: Medical tasks
-%: 2-3D deep CNN
-%: ??
+%
+\section{Medical tasks}
+\subsection{What are the challenges in using medical imaging data?}
+\begin{itemize}
+\item Small datasets/study populations
+\item Heterogenity of pathology
+\item Treatment response
+\item Subject specific variances
+\item Developmental differences
+\item Annotation needs experts
+\end{itemize}
+\subsection{Can deep networks be used effectively for medical tasks (give 3 examples)?}
+\todo{Describe medical applications for CNNs}
+\begin{itemize}
+\item Pathology detection: Input are e.g. images from MRT and network is used to assist diagnosis
+\item Segmentation:
+\item Shape modelling:
+\item Classification: 
+\item Action recognition: Use RNNs to recognize surgical activities from robot kinematics
+\end{itemize}
+\subsection{How can we use the training data most efficiently?}
+\todo{Medical appl.: How can we use the training data most efficiently?}
+\subsection{Give an explanation of the methodologies fine tuning and transfer learning and the benefit using them in medical imaging. }
+\begin{itemize}
+\item Transfer learning: Train a CNN on huge dataset (ImageNet) and use the intermediate feature layers (up to the FC layer which connects to the 1000 classes) as feature extractor for the medical dataset. 
+\item Fine-tuning: This method extends transfer learning. The idea is to retrain some of the deeper layers trained on ImageNet with the medical dataset as many features may be relevant for certain classes that are not present in the medical domain. It is usually a good idea to use different learning rates for the untrained and the pretrained layers.
+\end{itemize}
+
+%
+\section{2-3D deep CNN}
+\todo{Maybe provide additional information here}
+\subsection{What is the difference between 2D, 2.5D and 3D deep CNN networks?}
+\begin{itemize}
+\item 2D: Takes image as input (X-Ray)
+\item 2.5D: Takes 3 images from orthogonal directions (3 X-Rays)
+\item 3D: Take many images, for example with MRT. Then either take Z 2 dimensional kernels or one three dimensional kernel.
+\end{itemize}
+
 %: CNNs in medical imaging
-%: Labelling
+\section{Labelling}
+\todo{Non-expert annotation information is very sparse in slides}
+\subsection{Explain the challenges, benefits and drawbacks of using expert vs. non-experts to obtain labels of medical image data?}
+\begin{itemize}
+\item Expert labelling:
+\begin{itemize}
+\item Expensive
+\item Time consuming
+\item Publicly availabe ground truth data may not be available
+\end{itemize}
+\item Non-expert labelling
+\begin{itemize}
+\item Annotations from single non-experts noisy
+\item Disagreements
+\item Crowd of non-experts can perform as well as medical experts
+\end{itemize}
+\end{itemize}
+\subsection{Give  an example of an alternative method to expert-based manual labeling of medical data for deep learning approaches.}
+Crowdsourcing labels: Instead of using experts for annotation use a crowd of non experts. Add additional layer that aggregates the input from the crowd.
 %
 \section{RNNs}
 \subsection{Describe the main purpose of RNNs and give an example application.}
