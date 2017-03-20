@@ -234,7 +234,14 @@ A function has only one global optimum but may have many local optima. Finding t
 \includegraphics[width=\textwidth]{./img/localopt.jpeg}
 \subsection{Are local minima a problem in deep learning?  Why (not)?}
 There is no definite consensus though it is believed, that the search landscape is similar to an egg carton with many almost identical local optima where the hit on the performance is not critical if the model finds any of them. It was also proposed that many local optima (as found by having a derivation of 0) in the search landscape are in reality saddle points where it should be possible to improve the results further. Calculating the full Hessian is too costly therefore an approximation may be enough. (see here: \url{https://blog.terminal.com/no-more-local-minima/})
-%: Gradient descent
+%
+\section{Gradient descent}
+\subsection{How does gradient descent (red) /with momentum (green) work? }
+\begin{minipage}{0.4\textwidth}
+\includegraphics[width=0.95\textwidth]{./img/gradient.png}
+\end{minipage}\begin{minipage}{0.6\textwidth}The normal gradient descent takes the gradient at the current position and then takes a step ($\propto$ learning rate) in this direction. This leads to unnecessary small steps when following a valley and too large steps at the end. GD with nesterov momentum first takes a step in direction of the momentum (approx. the same direction and length as the previous step) and then evaluates the gradient there and then takes a step with this ``lookahead''-gradient.
+\end{minipage}
+\includegraphics[width=\textwidth]{./img/nesterov.jpeg}
 %
 \section{Batch Gradient descent}
 \subsection{Batch, minibatch, and stochastic gradient descent:}
