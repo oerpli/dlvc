@@ -272,8 +272,41 @@ for each of 200 epochs:
 %: MLP for VC
 %: Representation learning
 %: Locally connected layers for image analysis
-%: Conv Layer
-%: Receptive field
+%
+\section{Convolutional Layer}
+\subsection{What is the purpose of a convolutional layer?}
+A convolutional layer is trained to extract features from the input. Early in the NN they aggregate information from input pixels in their receptive field (e.g. ``a stroke in this direction''). Deeper in the network such low level features are then combined again to form higher level features (``a stroke in this and in that direction'')\ldots.
+
+They use spatial structure of the input by applying their filter kernel to a pixel and its neighbours. 
+\subsection{How do such layers differ from locally connected layers, and why are they almost always preferred?}
+Convolutional layers share their parameters, i.e. a kernel with a given size (often $3\times 3$) is applied starting from the top left and then moved in stepsizes corresponding to the stride. 
+This differs from locally connected layers that don't share the parameters and have a set of weights for every output pixel.  As the features learned somewhere on the input are more often than not also useful on other parts of the input sharing the learned weights drastically reduces parameters while still maintaining accuracy.
+
+\subsection{How many parameters does a convolutional layer have?}
+A convolutional layer maps the $W \times H \times D$ input to $W' \times H' \times D'$ and has four hyperparameters:
+\begin{itemize}
+\item Number of filter $K$ -- this is then the output depth $D_o$
+\item Spatial extent $F$
+\item Stride $S$
+\item Amount of zero padding $P$
+\end{itemize}
+and must learn a $F\times F$ kernel for each of the $K$ filter and each of the $D$ input layers as well as a bias parameter for every layer in the output, therefore $F\cdot  F\cdot  D' \cdot  D$ weight parameters and $K$ bias parameters. 
+
+\subsection{What are feature maps?}
+A feature map is obtained by applying a filter to the input. This is done by dragging the kernel in stepsizes corresponding to the stride over the input and calculate a new value for every step. The resulting filter map size depends on stride and zero padding as well as the size of the input: $W' = (W-F+2P)/S +1$ (same for height).
+%
+\section{Receptive field}
+\subsection{What is the receptive field of a neuron?}
+The receptive field is the region of the input that is seen by a certain neuron (directly or indirectly connected).
+\subsection{Assume a network consisting of two convolutional layers with $3 \times 3$ connectivity followed by a $2 \times 2$ max-pooling with stride 2 and again two convolutional layers with $3 \times 3$ connectivity. What is the receptive field of neurons in the final convolutional layer? How does the receptive field affect feature extraction? }
+Each $3\times 3$ conv. Layer increases the receptive field by two neurons. A pooling layer with stride two increases the receptive field by a factor of 2. Starting from the final layer we have:
+\begin{align*}
+\text{Receptive field increase} = (1+2+2) \cdot 2 + 2+ 2 = 14
+\end{align*}
+This is the increase in one dimension, therefore the receptive field of one final neuron is an area of $14\times 14$ neurons (input pixels).
+A neuron can only extract a feature if it is in the receptive field. Therefore the higher level features in the final layers of the NN should have a receptive field that spans the whole (or at least almost the whole) input.
+\subsection{Why do convolutional layers usually use $3 \times 3$ connectivity?}
+As the number of parameters depends with $O(n^2)$ on the filter size a stack of 3 $3\times 3$ layer has approximately as much weights to learn as a single $5\times 5$ layer. Therefore more smaller filters are usually preferred as additional layers improve the modelling of nonlinearity.
 %
 \section{Pooling}
 \subsection{What is the purpose of pooling layers?}

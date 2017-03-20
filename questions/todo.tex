@@ -59,20 +59,6 @@ In optimization the goal is to find an optimal value for a function,
 \subsection{What does sparse connectivity mean?}
 \subsection{Assume input data of dimension $W \times H \times D$. How many many weight and bias parameters does a locally connected (but not convolutional) layer have, assuming $3 \times 3$ connectivity and $W \times H \times 2$ output data dimension, and why?}
 
-\section{Conv Layer}
-\subsection{What is the purpose of a convolutional layer?}
-
-\subsection{How do such layers differ from locally connected layers, and why are they almost always preferred?}
-Convolutional layers share their parameters, i.e. a kernel with a given size (often $3\times 3$) is applied starting from the top left and then moved in stepsizes corresponding to the stride. 
-This differs from locally connected layers that don't share the parameters and have a set of weights for every output pixel. 
-
-\subsection{Assume input data of dimension $W \times H \times D$. How many weight and bias parameters does a convolutional layer have, assuming $3 \times 3$ connectivity and $W \times H \times  F$ output data dimension, and why? Why are such layers called convolutional layers?}
-\subsection{What are feature maps?}
-
-\section{Receptive field}
-\subsection{What is the receptive field of a neuron?}
-\subsection{Assume a network consisting of two convolutional layers with $3 \times 3$ connectivity followed by a $2 \times 2$ max-pooling with stride 2 and again two convolutional layers with $3 \times 3$ connectivity. What is the receptive field of neurons in the final convolutional layer? How does the receptive field affect feature extraction? }
-\subsection{Why do convolutional layers usually use $3 \times 3$ connectivity?}
 
 
 \section{CNN}
