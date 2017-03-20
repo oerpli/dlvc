@@ -271,7 +271,15 @@ for each of 200 epochs:
 %: MLP
 %: MLP for VC
 %: Representation learning
-%: Locally connected layers for image analysis
+%
+\section{Locally connected layers for image analysis}
+\subsection{What is the motivation for using locally connected layers for image analysis? What is sparse connectivity}
+An image consists of several features, some are local and some are global. In most cases, the global features are a combination of several local features in a certain arrangement.
+The idea of locally connected layers is to train each layer only to extract features from some part of the image and then use additional layers to combine those. 
+
+This is called sparse connectivity. Instead of connecting the $N$ input neurons with $N\times M$ connections (and corresponding weight) to the $M$ output neurons only connect each of the $M$ output neurons to some small subset of the input neurons. 
+\subsection{Assume input data of dimension $W \times H \times D$. How many many weight and bias parameters does a locally connected (but not convolutional) layer have, assuming $3 \times 3$ connectivity and $W \times H \times 2$ output data dimension, and why?}
+Every output neuron is connected to $9$ input neurons per channel, therefore $W\cdot H\cdot 2 \cdot 9 \cdot D$ weight parameters and $2$ bias parameters (one per feature map).\todo{not entirely sure that the number of bias params is correct}
 %
 \section{Convolutional Layer}
 \subsection{What is the purpose of a convolutional layer?}
