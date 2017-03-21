@@ -301,11 +301,11 @@ The so called Xavier initialization measures the variance of the input D (usuall
 \subsection{What is the definition of a feedforward neural network?}
 A FF NN does not have cycles (as a RNN for example has). The samples get passed to the input layer and the values are then passed forward until they reach the output layer where the result is evaluated.
 \subsection{Which types of units do such networks have?}
-\begin{minipage}{0.4\textwidth}
-\includegraphics[width=0.96\textwidth]{./img/ffnn1.jpeg}
-\includegraphics[width=0.96\textwidth]{./img/ffnn2.jpeg}
+\begin{minipage}{0.3\textwidth}
+\includegraphics[width=\textwidth]{./img/ffnn1.jpeg}
+\includegraphics[width=\textwidth]{./img/ffnn2.jpeg}
 \end{minipage}
-\begin{minipage}{0.6\textwidth}
+\begin{minipage}{0.7\textwidth}
 \begin{itemize}
 \item Input units: Provide values, no computations, form the input layer
 \item Hidden units: Are connected to previous layer (either input or a hidden layer) and calculate a linear combination of the inputs (sum of value of connected units times weight of connection) which is then passed through an activation function (identity for regression, ReLU or tanh for classification)
@@ -313,8 +313,15 @@ A FF NN does not have cycles (as a RNN for example has). The samples get passed 
 \end{itemize}
 \end{minipage}
 %
-%: MLP
-%: MLP for VC
+\section{MLP}
+\subsection{What is the definition of a multilayer perceptron?}
+A MLP is a FF NN with input and output layer as well as some hidden layers. Neurons in layer $l$ are connected to all neurons in layer $l-1$ (dense/fully connected layers).
+\subsection{What operation do (non-input) units perform?}
+Each neuron at layer $l$ gets the output from the previous layer as input $x_l$ and calculates the input $x_{l+1}$ for the next layer by calculating $n_i(a_i^\top x_l + b_i)$ where $b_i$ is the bias, $n_i$ is the activation function and $a_i$ is the vector of weights of neuron $i$.
+\subsection{What is an activation function and which functions are common?}
+After calculating the linear combination $a_i^\top x_l$ (scalar product of input and weight vectors) the resulting value is passed to the input function. For regression the identity function is 	used whereas for classification task a nonlinear function such as $\mathrm{tanh}$ or ReLU ($\mathrm{max}(0,x)$ is used to enable nonlinearities.
+\subsection{Why are multilayer perceptrons not suitable for deep learning for image analysis?}
+MLP usually don't improve their performance with 3 or more layers. This makes it impossible to learn a hierarchy of features as DL does.
 %: Representation learning
 %
 \section{Locally connected layers for image analysis}
