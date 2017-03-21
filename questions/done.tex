@@ -224,9 +224,19 @@ When training a parametric model an optimization algorithm the minimizes a loss 
 For classification usually cross-entropy loss used. CEL measures the dissimilarity of the real distribution from the predicted distribution. $H(p,q) = -\sum_x p(x) \ln q(x)$. $p,q$ are discrete probability distributions $p(x)\leq 0, \sum_x p(x) = 1$. The CEL of a dataset is then the sum of the CEL of all samples divided by the size of the dataset. 
 \subsection{Which criteria must the ground-truth labels and predicted class-scores fulfill to support the cross-entropy loss, and how is this ensured?}
 Both must be probability distributions, therefore the class $i$ is encoded as a vector $p_t = \delta_{it}$ ($\delta$ is the Kronecker symbol with $\delta_{ij} = 1$ iff $i = j$) and the predicted vector of class scores is normalized with the softmax function $w_k =  \frac{\exp(w_k)}{\sum_t^T \exp(w_t)}$
-%
-%: Optimization in ML
-%
+
+\section{Optimization in ML}
+\subsection{What is the purpose of optimization in the context of machine learning?}
+
+When training a parametric model using machine learning, we need a loss function to measure the quality of the model. In this case, it is the cross-entropy loss called $L(\Theta)$ which measure the performance of a ML classifier on some dataset. The outcome changes if we change the parameter of $\Theta$. To change the parameters in a way to minimize the loss, we need an optimization algorithm, and because $L(\Theta)$ is non-linear, the algorithm need to be non linear as well. For deep learning, gradient descent is the most popular.
+
+\subsection{How does the gradient descent algorithm work?}
+For better imagination, think of a rugged terrain, whithout sight. To get to the lowset/highest point, one will just follow the steepest slope. 
+
+IN ML setting, the algorithm will compute the current gradients $\Theta'$ using the derivative and then go a certain amount $\alpha*||\Theta'||$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
+\subsection{What is the gradient of a function? }
+A function f, that is differentiable, can have partial derivatives for all input parameters so that $F_{x_i}(x)$ encodes how fast f changes with argument $x_i$ at pouint x.  The gradient ist a vector of all these partial derivatives. It point in the direction of greatest increase. If the value is 0, L is flat and we have to stop (local/global minimum).
+
 \section{Local/global optimum}
 \subsection{What is the difference between a local and a global optimum?}
 A function has only one global optimum but may have many local optima. Finding the global optimum is not trivial whereas finding a local optimum is usually easy (calculate derivation at current point and move in direction of steepest descent). When a local optimum is found it's nontrivial how to escape it again. Simulated annealing is an approach inspired from material physics.
