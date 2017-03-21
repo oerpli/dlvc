@@ -321,7 +321,14 @@ Each neuron at layer $l$ gets the output from the previous layer as input $x_l$ 
 After calculating the linear combination $a_i^\top x_l$ (scalar product of input and weight vectors) the resulting value is passed to the input function. For regression the identity function is 	used whereas for classification task a nonlinear function such as $\mathrm{tanh}$ or ReLU ($\mathrm{max}(0,x)$ is used to enable nonlinearities.
 \subsection{Why are multilayer perceptrons not suitable for deep learning for image analysis?}
 MLP usually don't improve their performance with 3 or more layers. This makes it impossible to learn a hierarchy of features as DL does.
-%: Representation learning
+Also the number of parameters increases quickly with image dimensions.
+%
+\section{Representation learning}
+\subsection{What is the motivation and purpose for representation learning?}
+The idea behind representation learning is to extract features from images which are then used to train a model. Designing such features by hand is difficult though, therefore a two layer MLP approach is used: The first stage learns to extract features from the input and another stage then trains a linear classifier on these features.
+\subsection{How is deep learning related to representation learning, and what is its definition?}
+The problem with the outlined approach is that it must learn high level features in a single step. Deep learning is the idea to solve this problem in a divide and conquer way. 
+Simple features that are easy to learn are combined to higher level features. The name DL is due to the many layers of this feature-hierarchy.
 %
 \section{Locally connected layers for image analysis}
 \subsection{What is the motivation for using locally connected layers for image analysis? What is sparse connectivity}
