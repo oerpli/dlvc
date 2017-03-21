@@ -280,7 +280,19 @@ for each of 200 epochs:
     if accuracy did not improve in the last n (5-20) epochs restore best model and stop
 \end{lstlisting}
 %
-%: Weight and bias parameters
+
+\section{Weight and bias parameters}
+\subsection{How do weight and bias parameters affect the input x?}
+The weight parameter is applied multiplicative to x, and the bias is added. $w = Wx+b$
+\subsection{What must be considered when initializing these parameters?}
+The bias is less critical and can be set to for initializetion.
+
+the weights are critical because of the multiplication and the gradient descent converges very different depending on the initialization. Extremely important is a difference in the weight matrix to break symmetry. A good  initialization is $Norm(0,1)\gamma$, the standard normal distribution times a hyper parameter $\gamma$ that control the magnitude of the weights.
+\subsection{What happens if the weights are set too large or too small?}
+The hyper parameter $\gamma$ control the magnitude of gradient and step size, so if set too large, the activation explodes, and if to small, the activation vanishes. In both cases, the algorithm most likely won't converge on a good model. 
+\subsection{We discussed a heuristic for controlling the magnitude of weights. What is the intention behind this heuristic (no math required)?}
+The so called Xavier initialization measures the variance of the input D (usually1) and sets $\gamma$ in a way that it preserves this variance: $\gamma= 1/\sqrt{D}$. It is very popular in DL.
+
 %: Preprocessing
 %: Optimization vs ML
 %: Regularization
