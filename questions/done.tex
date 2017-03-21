@@ -228,14 +228,14 @@ Both must be probability distributions, therefore the class $i$ is encoded as a 
 \section{Optimization in ML}
 \subsection{What is the purpose of optimization in the context of machine learning?}
 
-When training a parametric model using machine learning, we need a loss function to measure the quality of the model. In this case, it is the cross-entropy loss called $L(\Theta)$ which measure the performance of a ML classifier on some dataset. The outcome changes if we change the parameter of $\Theta$. To change the parameters in a way to minimize the loss, we need an optimization algorithm, and because $L(\Theta)$ is non-linear, the algorithm need to be non linear as well. For deep learning, gradient descent is the most popular.
+When training a parametric model using machine learning, we need a loss function to measure the quality of the model. In this case, it is the cross-entropy loss called $L(\Theta)$ which measure the performance of a ML classifier on some dataset. The outcome changes if we change the parameter of $\Theta$. To change the parameters in a way to minimize the loss, we need an optimization algorithm, and because $L(\Theta)$ is non-linear, the algorithm need to be non linear as well. For deep learning, gradient descent is the most popular approach.
 
 \subsection{How does the gradient descent algorithm work?}
-For better imagination, think of a rugged terrain, whithout sight. To get to the lowset/highest point, one will just follow the steepest slope. 
+For better imagination, think of a rugged terrain, without sight. To get to the lowest/highest point, one will just follow the steepest slope. 
 
-IN ML setting, the algorithm will compute the current gradients $\Theta'$ using the derivative and then go a certain amount $\alpha*||\Theta'||$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
+In  ML setting, the algorithm will compute the current gradient $\Theta' = \nabla L(\Theta)$ and then go a certain amount $\alpha*||\Theta'||$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
 \subsection{What is the gradient of a function? }
-A function f, that is differentiable, can have partial derivatives for all input parameters so that $F_{x_i}(x)$ encodes how fast f changes with argument $x_i$ at pouint x.  The gradient ist a vector of all these partial derivatives. It point in the direction of greatest increase. If the value is 0, L is flat and we have to stop (local/global minimum).
+A function $f$ that represents a scalar field $f: \mathbb R^n \to \mathbb R$ that is differentiable, has partial derivatives for all input parameters so that $f_{x_i}(x)$ encodes how fast $f$ changes with argument $x_i$ at point $x$.  The gradient is a vector that is obtained by applying the differential operator $\nabla$ to $f$ ($\nabla_i = \nicefrac{\partial}{\partial x_i}$) to get a vector containing the partial derivatives of $f$. It points in the direction of greatest increase. If all entries of $\nabla f$ are $0$ at some point $L$ is flat there and we have to stop (local/global minimum or saddle point).
 
 \section{Local/global optimum}
 \subsection{What is the difference between a local and a global optimum?}
