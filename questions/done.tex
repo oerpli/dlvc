@@ -342,12 +342,10 @@ Every output neuron is connected to $9$ input neurons per channel, therefore $W\
 \section{Convolutional Layer}
 \subsection{What is the purpose of a convolutional layer?}
 A convolutional layer is trained to extract features from the input. Early in the NN they aggregate information from input pixels in their receptive field (e.g. ``a stroke in this direction''). Deeper in the network such low level features are then combined again to form higher level features (``a stroke in this and in that direction'')\ldots.
-
 They use spatial structure of the input by applying their filter kernel to a pixel and its neighbours. 
 \subsection{How do such layers differ from locally connected layers, and why are they almost always preferred?}
 Convolutional layers share their parameters, i.e. a kernel with a given size (often $3\times 3$) is applied starting from the top left and then moved in stepsizes corresponding to the stride. 
 This differs from locally connected layers that don't share the parameters and have a set of weights for every output pixel.  As the features learned somewhere on the input are more often than not also useful on other parts of the input sharing the learned weights drastically reduces parameters while still maintaining accuracy.
-
 \subsection{How many parameters does a convolutional layer have?}
 A convolutional layer maps the $W \times H \times D$ input to $W' \times H' \times D'$ and has four hyperparameters:
 \begin{itemize}
@@ -357,7 +355,6 @@ A convolutional layer maps the $W \times H \times D$ input to $W' \times H' \tim
 \item Amount of zero padding $P$
 \end{itemize}
 and must learn a $F\times F$ kernel for each of the $K$ filter and each of the $D$ input layers as well as a bias parameter for every layer in the output, therefore $F\cdot  F\cdot  D' \cdot  D$ weight parameters and $K$ bias parameters. 
-
 \subsection{What are feature maps?}
 A feature map is obtained by applying a filter to the input. This is done by dragging the kernel in stepsizes corresponding to the stride over the input and calculate a new value for every step. The resulting filter map size depends on stride and zero padding as well as the size of the input: $W' = (W-F+2P)/S +1$ (same for height).
 %
@@ -387,11 +384,43 @@ pool\left(\begin{bmatrix}
 \end{bmatrix}\right) = \begin{bmatrix}6 & 8 \\3 & 4\end{bmatrix}
 \end{equation}
 \subsection{How many pooling layers with stride 2 should a CNN have assuming an input resolution of 64 × 64 and convolutional layers that do not change the resolution, and why?}
+The highest level features should have a receptive field that spans more or less the entire image. 4 to 5 pooling layers should therefore be a good choice. Exact number may vary based on the overall architecture.
 \todo{How many pooling layers should CNN have?}
-%: CNN
+%
+\section{CNN}
+\subsection{Give a general overview of convolutional neural networks and their purpose}
+A convolutional neural network is a NN that consists of an input layer and several convolutional layers with many filters. Often convolutional layers are mixed with pooling layers to reduce the input size and the amount of parameters to learn. 
+
+\includegraphics[width=\textwidth]{./img/cnn.png}
+\subsection{What are the two overall stages of such networks?}
+\begin{itemize}
+\item Frontend: Consists of convolutional and pooling layers and is used to extract features
+\item Backend: Usually consists of one or two dense (fc) layers and is used to combine features learned in previous layers to make class predictions. 
+\end{itemize}
+\subsection{How is the depth of a CNN defined?}
+Depth is defined as the number of layers with parameters to learn and is thus mainly determined by the number of convolutional layers.
+\subsection{What effect does increasing the depth have?}
+A higher depth allows higher levels of abstraction. At least $6$ conv layers should be used according to slides. Networks with higher depth may result in better performance, though with diminishing returns. In the case of ResNet the performance gains obtained by going from depth 50 to 100 is approx. twice as large as from going from 100 to 200. Without ResNet like architecture training more than 30 layers may be difficult though (increasing layers on VGGNet from 20 to 50 increases error rate as optimization algorithm doesn't find good parameters any more).
+\subsection{How does one choose a suitable network depth to solve a given image classification problem?}
+Current state of the art networks use many layers that learn features that achieve linear separability which allows simpler backends consisting of only one dense layer. When choosing higher depths additional measures must be used to still be able to efficiently train the model:
+\begin{itemize}
+\item Better initialization algorithms: Prevents signal from exploding or vanishing. Necessary that model with 30 ReLU layers even converges
+\item Batch normalization: Normalize output of layers to zero mean and std 1. Means and scaling factors are learned during training and should then be applied in testing mode. 
+\item Residual learning: Propagte input to output before computing activation function. If optimal mapping is closer to identity small fluctuations are easier to find
+\end{itemize}
+\todo{how to choose network depth for image classification problem}
 %: CNN depth
 %: CNN backend
-%: ResNets
+\section{ResNets}
+\subsection{What are residual networks (ResNets) and which problem do they overcome?}
+\begin{minipage}{0.4\textwidth}
+\includegraphics[width=\textwidth]{./img/residual.png}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+ResNets are the current state of the art architecture. They consist of residual blocks which are composed of two $3\times 3$ conv layers. An additional additive residual function $\mathcal F$ is learned that decides what should be added or removed from the input. 
+\end{minipage}
+
+The output from a layer is added to all subsequent layers instead of propagated by multiplication with the weights from deeper layers. This makes the partial derivations also additive and prevents vanishing of the signal during backpropagation and enables efficient learning of nets with higher depth. 
 %
 \section{Back Propagation}
 \subsection{What is the purpose of the backpropagation algorithm?}
