@@ -439,14 +439,15 @@ Alternatively scale the learning rate every 5-20 epochs with a factor ($\nicefra
 \subsection{Can deep networks be used effectively for medical tasks (give 3 examples)?}
 \todo{Describe medical applications for CNNs}
 \begin{itemize}
-\item Pathology detection: Input are e.g. images from MRT and network is used to assist diagnosis
+\item Pathology detection: Images of possible pathogens, 2D/2.5D/3D, Using CNNs. Input are e.g. images from MRT and network is used to assist diagnosis
 \item Segmentation:
-\item Shape modelling:
+\item Shape modelling: Vessel detection in images with deep CNNs
 \item Classification: 
 \item Action recognition: Use RNNs to recognize surgical activities from robot kinematics
 \end{itemize}
 \subsection{How can we use the training data most efficiently?}
 \todo{Medical appl.: How can we use the training data most efficiently?}
+Train traditional CNN with negative and positive samples. Use the false positives as extra instances for training the fine-tuned CNN.
 \subsection{Give an explanation of the methodologies fine tuning and transfer learning and the benefit using them in medical imaging. }
 \begin{itemize}
 \item Transfer learning: Train a CNN on huge dataset (ImageNet) and use the intermediate feature layers (up to the FC layer which connects to the 1000 classes) as feature extractor for the medical dataset. 
@@ -483,6 +484,8 @@ Alternatively scale the learning rate every 5-20 epochs with a factor ($\nicefra
 \end{itemize}
 \subsection{Give  an example of an alternative method to expert-based manual labeling of medical data for deep learning approaches.}
 Crowdsourcing labels: Instead of using experts for annotation use a crowd of non experts. Add additional layer that aggregates the input from the crowd.
+
+Example: Agg-Net (Deep Learning From Crowds for Mitosis Detection) had an aggregation layer, using CNN to weigh the votes of the different users with varying precision. The result are of the same quality as the ones from experts.
 %
 \section{RNNs}
 \subsection{Describe the main purpose of RNNs and give an example application.}
