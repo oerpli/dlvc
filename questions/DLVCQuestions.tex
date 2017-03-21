@@ -80,7 +80,7 @@
 % \curriculum{066876} \\
 % \email{oerpli@outlook.com}
 }
-\setcounter{tocdepth}{3}
+\setcounter{tocdepth}{1}
 
 \usepackage{progressbar}
 \usepackage{fp}
@@ -89,10 +89,10 @@
 \listoftodos
 \edef\Total{46}\FPeval\result{\getrefnumber{sec:done}/\Total}
 \progressbar[width= \textwidth , heighta=1cm , filledcolor=green , emptycolor=red, borderwidth=1pt , tickswidth=1pt , roundnessr=0.1 , subdivisions =\Total]{\result}
-%\tableofcontents
+\tableofcontents
 \clearpage
-\part{Done}\input{done}
+\part*{Done}\input{done}
 \setcounter{section}{0}
-\clearpage\part{Todo}\input{todo}
+\clearpage\part*{Todo}\input{todo}
 \todo{\ref{sec:done} done, \ref{sec:todo} questions remaining}
 \end{document}
