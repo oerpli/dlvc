@@ -274,7 +274,23 @@ for each of 200 epochs:
 %: Preprocessing
 %: Optimization vs ML
 %: Regularization
-%: Feedforward NN
+%
+\section{Feedforward NN}
+\subsection{What is the definition of a feedforward neural network?}
+A FF NN does not have cycles (as a RNN for example has). The samples get passed to the input layer and the values are then passed forward until they reach the output layer where the result is evaluated.
+\subsection{Which types of units do such networks have?}
+\begin{minipage}{0.4\textwidth}
+\includegraphics[width=0.96\textwidth]{./img/ffnn1.jpeg}
+\includegraphics[width=0.96\textwidth]{./img/ffnn2.jpeg}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+\begin{itemize}
+\item Input units: Provide values, no computations, form the input layer
+\item Hidden units: Are connected to previous layer (either input or a hidden layer) and calculate a linear combination of the inputs (sum of value of connected units times weight of connection) which is then passed through an activation function (identity for regression, ReLU or tanh for classification)
+\item Output units: Last layer, may perform the same calculations as hidden layer.
+\end{itemize}
+\end{minipage}
+%
 %: MLP
 %: MLP for VC
 %: Representation learning
