@@ -233,7 +233,7 @@ When training a parametric model using machine learning, we need a loss function
 \subsection{How does the gradient descent algorithm work?}
 For better imagination, think of a rugged terrain, without sight. To get to the lowest/highest point, one will just follow the steepest slope. 
 
-In  ML setting, the algorithm will compute the current gradient $\Theta' = \nabla L(\Theta)$ and then go a certain amount $\alpha*||\Theta'||$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
+In  ML setting, the algorithm will compute the current gradient $\Theta' = \nabla L(\Theta)$ and then go a certain amount $\alpha*\norm{\Theta'}$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
 \subsection{What is the gradient of a function? }
 A function $f$ that represents a scalar field $f: \mathbb R^n \to \mathbb R$ that is differentiable, has partial derivatives for all input parameters so that $f_{x_i}(x)$ encodes how fast $f$ changes with argument $x_i$ at point $x$.  The gradient is a vector that is obtained by applying the differential operator $\nabla$ to $f$ ($\nabla_i = \nicefrac{\partial}{\partial x_i}$) to get a vector containing the partial derivatives of $f$. It points in the direction of greatest increase. If all entries of $\nabla f$ are $0$ at some point $L$ is flat there and we have to stop (local/global minimum or saddle point).
 
@@ -297,34 +297,27 @@ He initialization is an adaption of this scheme with $\gamma = \sqrt{\nicefrac 2
 \section{Preprocessing}
 \subsection{Explain the purpose of preprocessing.}
 
-The purpose is to cancel out variations that have a random cause(not related to class) thus should be neglected. For images, this are variations in brightness and contrast. Brightness can be normalized by mean subtraction. Contrast can be nromalized by division with standard deviation or by histogram equalization. The final image will have zero main and unit variance, which is the preferred input for ML settings.
+The purpose is to cancel out variations that have a random cause (not related to class) thus should be neglected. For images, this are variations in brightness and contrast. Brightness can be normalized by mean subtraction. Contrast can be normalized by division with standard deviation or by histogram equalization. The final image will have zero mean and unit variance, which is the preferred input for ML settings.
 
 \subsection{How do per-sample normalization and per-trainingset normalization differ in terms of operation and purpose?}
-
-per sample normalization takes statistic for mean and variance over one image, while per trainingset normalization consider all images in the training set.
-
+Per sample normalization takes statistic for mean and variance over one image, while per-trainingset normalization considers all images in the training set.
 While per sample normalization has the benefit of cancelling out under/overexposed pictures or the ones with different contrast.
 
 \todo{just a guess, not covered in lecture, can't find it in book}
-Per sample normalization makes sure, that each sample has zero main and unit variance, but espacially for color image and per channel operation, this might yield in unwanted result (eg underwater picture will have almost 0 black channel, and this IS important).
+Per sample normalization makes sure, that each sample has zero main and unit variance, but espacially for color image and per channel operation, this might yield an unwanted result (eg underwater picture will have almost 0 black channel, and this IS important).
 
 Thus, per sample normalization should only be applied for all channels or B/W pictures.
 
 \subsection{In the latter case, which (if any) preprocessing is applied during validation and testing?}
 
-For the statistics, only the training set is used, but the normalization operations must be applied to the test and validation set.
+For the statistics, only the training set is used, but the normalization operations must be applied to the test and validation set and also during inference.
 
 \section{Optimization vs ML}
 \subsection{What are the goals of optimization and machine learning?}
-
 In optimization, the goal is to find optimal parameters that minimize the loss on the training set.  
-
-For machine learning, we need an general model that works well on unseen data. 
-
+For machine learning, we need a general model that works well on unseen data. 
 \subsection{Why do they differ?}
-A model with minimal loss on the training data is usualla an overfitting model that will not generalize well, and have worse results on unseen data. There are usually less specific parameters that have a higher loss on the training set, but work better on the test set.
-
-\subsection{Create two sketches with each showing the training progress over time in terms of both training and test error; one that is good from an optimization perspective but bad from a machine learning perspective, and one that is worse from an optimization perspective but better from a machine learning perspective. Explain both sketches.}
+A model with minimal loss on the training data is usually an overfitted model that will not generalize well and have worse results on unseen data. There are usually less specific parameters that have a higher loss on the training set, but work better on the test set.
 
 \begin{minipage}{0.5\textwidth}
 \begin{tikzpicture}
@@ -405,25 +398,25 @@ Case B is the desired outcome for ML, where we allow the training loss to stall 
 \section{Regularization}
 \subsection{What is the purpose of regularization?}
 
-As stated above, in ML we are interested in a low test error, not necessarely a low training error. Regularization is a method to achieve a better test error, but with a possible higher training error, by getting a more general model that has decreased model veriance (with increased biases) and is less prone to overfitting. 
+As stated above, in ML we are interested in a low test error, not necessarely a low training error. Regularization is a method to achieve a better test error, but with a possible higher training error, by getting a more general model that has decreased model variance (with increased biases) and is less prone to overfitting. 
 
 \subsection{What is weight decay and what is its purpose?}
-Weight decay is a common regulization technique, it penalizes too large weights (but leaves biases unaffected) which avoids that certain inputs have to much influence and allows the model to take all inputs into account. 
+Weight decay is a common regularization technique that penalizes too large weights (but leaves biases unaffected). This avoids that certain inputs have to much influence and forces the model to take all inputs into account. 
 
 Weight must be initialized with 0 mean, and in each step, the weights are adjusted in a regulization step:
 
-$L_{reg}(\Theta) = \frac{\delta}{2}||w||^2 + L(\Theta)$
+$L_{reg}(\Theta) = \nicefrac{\delta}{2}\norm{w}^2 + L(\Theta)$
 
-where W is a vector of all weights and $\delta$ is the hyper parameter regulization strength(if too small: no effect, if too big: dominates data loss).
+where W is a vector of all weights and $\delta$ is the regularization-strength hyperparameter (if too small: no effect, if too big: dominates data loss).
 This way, all weights shrink in each update and decay to zero.  
 
 \subsection{What is early stopping and how does it work?}
 For early stopping a validation set is needed. It works on the observation, that when training overfitting-prone models, the training error will always decrease, while at some point the validation error will start to increase. 
 
-So early stopping, a easy to implemnt and very common method, will store the model with the lowest validation error, and if the above situation occurs(no improvement or even higher error on validation after some iterations), stop and return the stored model.
+So early stopping, a easy to implement and commonly used method, will store the model with the lowest validation error, and if the above situation occurs (no improvement or even higher error on validation set after some iterations), stop and return the stored model.
 
 \subsection{In deep learning, is it better to increase regularization or to decrease the model capacity by other means, and why?}
-You should increase regulization, because in deep learning, models work best if they have enough capacity to overfit, but are regulized properly.
+It's better to increase regularization, because in deep learning models work best if they have enough capacity to overfit, but are regularized properly.
 
 \section{Feedforward NN}
 \subsection{What is the definition of a feedforward neural network?}
