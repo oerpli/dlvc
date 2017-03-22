@@ -34,7 +34,7 @@ Data required for training and testing of model.
 Model is trained with training set and then evaluated with validation set. Then some other hyperparameters are chosen (e.g. lower learning rate, \ldots) and the step is repeated until there is no further improvement to the model. The datasets have to be disjunct as else it would be ``learning to the test'' (e.g. model is a hashmap containing the hash of the image and the correct class. Would work if testset is contained in training set but completely useless for new data)
 
 \subsection{What is the rule of thumb about how many images per classes are needed for CNNs to perform well?}
-Approximately 1000 per class---more usually does not hurt though.
+At least 5000 per class---more is better though.
 %
 \section{Case study}
 \begin{quote}
@@ -517,7 +517,16 @@ Ten-crop oversampling is a common technique which consists of making five crops 
 \item Skewing images
 \item Adapting brightness
 \end{itemize}
-%: Model ensembles
+%
+\section{Model ensembles}
+\subsection{What is the purpose and intuition behind using model ensembles?}
+As a CNN is trained starting from a random initialization different models may perform well on different samples. Model ensembles try to exploit this by taking a set of models (at most 10 models) that are trained independently and let each of the models classify the sample and then average over their predictions.
+\subsection{How might the individual models differ from each other?}
+\begin{itemize}
+\item Various architectures
+\item Employing different data augmentation techniques
+\item Different initial weights
+\end{itemize}
 %
 \section{Medical tasks}
 \subsection{What are the challenges in using medical imaging data?}
