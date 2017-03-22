@@ -480,7 +480,21 @@ The bigger the training set the better the resulting NN can be. As obtaining hug
 \item Mirroring does not work on either axis
 \item Rotating the samples is a good idea as people may have a different skew in their writing. Though the rotation angle should be in a range between $\pm 10-20^\circ$. Using arbitrary rotations is a bad idea as e.g. a ``6'' would then be mixed up with a ``9''.
 \end{itemize}
-%: Dropout
+%
+\section{Dropout}
+\todo{dropout section is rather weak}
+\subsection{What is the purpose of dropout, how does it work, and why is it effective?}
+\begin{minipage}{0.4\textwidth}
+\includegraphics[width=\textwidth]{./img/dropout.jpeg}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+Dropout sets the output of a neuron to 0 with probability $p$ during training. This temporarily discards certain neurons which helps with regularization because the net tries to prevent depending too much on certain features. 
+\end{minipage}
+\subsection{Why do ``dropped'' neurons have no effect on the output of the next layer?}
+The outputs are scaled with the dropout probability to prevent an effect from the dropout.\todo{this is almost certainly wrong}
+\subsection{To which CNN layers is dropout commonly applied?}
+\todo{where to apply dropout?}
+%
 %: Batch normalization
 %
 \section{Learning rate}
