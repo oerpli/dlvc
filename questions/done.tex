@@ -294,7 +294,6 @@ The hyper parameter $\gamma$ controls the magnitude of gradient and step size, s
 The so called Xavier initialization tries to set the weights in way to preserve the variance of the input which is usually $1$ with a mean of $0$ (due to normalization). When each neuron is connected to $D$ input neurons with weights sampled from $\gamma N(0,1)$ the resulting variance would be $\gamma^2 D\cdot 1$. Therefore $\gamma$ is set to $\gamma= 1/\sqrt{D}$ s.t. the variance of the result is $1$ again. 
 
 He initialization is an adaption of this scheme with $\gamma = \sqrt{\nicefrac 2 D}$ that is optimized for ReLU activations.
-
 \section{Preprocessing}
 \subsection{Explain the purpose of preprocessing.}
 
@@ -327,11 +326,79 @@ A model with minimal loss on the training data is usualla an overfitting model t
 
 \subsection{Create two sketches with each showing the training progress over time in terms of both training and test error; one that is good from an optimization perspective but bad from a machine learning perspective, and one that is worse from an optimization perspective but better from a machine learning perspective. Explain both sketches.}
 
-\includegraphics[width=\textwidth]{./img/optvsML.jpg}
+\begin{minipage}{0.5\textwidth}
+\begin{tikzpicture}
+\begin{axis}[
+width=1.2\textwidth,
+height=150pt,
+legend pos=north east,
+axis y line=left, 
+axis x line=bottom,
+xlabel= {\scriptsize Epochs },
+ylabel = {Loss},
+ylabel style = {yshift=-1cm,xshift =1.25cm},
+xlabel style = {yshift=0.5cm},
+%xtick={0.7,1,1.5,2.2},
+%xticklabels={$t_1$,$t_2$,$t_3$,$t_4$},
+%xmajorgrids,
+%grid style={thick, black!80},
+xticklabels={,,},
+yticklabels={,,},
+tick style={draw=none},
+line join=bevel,
+no markers,
+xmin=0,
+enlarge x limits=false,
+%ymin=-0.2,
+%ymax = 0.2
+samples=300,
+xmax = 5,
+ymin = -0.1
+,title={Case A}
+]
+\addplot{1/(x+0.1)+1 + 0.5*x}; \addlegendentry{Test}
+\addplot{1/(x+0.1)}; \addlegendentry{Train}
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{tikzpicture}
+\begin{axis}[
+width=1.2\textwidth,
+height=150pt,
+legend pos=north east,
+axis y line=left, 
+axis x line=bottom,
+xlabel= {\scriptsize Epochs },
+ylabel = {Loss},
+ylabel style = {yshift=-1cm,xshift =1.25cm},
+xlabel style = {yshift=0.5cm},
+%xtick={0.7,1,1.5,2.2},
+%xticklabels={$t_1$,$t_2$,$t_3$,$t_4$},
+%xmajorgrids,
+%grid style={thick, black!80},
+xticklabels={,,},
+yticklabels={,,},
+tick style={draw=none},
+line join=bevel,
+no markers,
+xmin=0,
+enlarge x limits=false,
+%ymin=-0.2,
+%ymax = 0.2
+samples=300,
+xmax = 5,
+ymin = -0.3
+,title={Case B}
+]
+\addplot{1/(x+0.1)+1}; \addlegendentry{Test}
+\addplot{1/(x+0.1) + 0.1*x};\addlegendentry{Train}
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+Case A is the one with the focus on optimization, where the test set loss increases after a while, because the model overfits to the training data.
 
-Case A is the one with the focus on optimization, where the test set loss increases after w while, because the model overfits to the training data.
-
-Case B is the desired outcome for ML, where we allow the training loss to stalls or even increases, as long as the test set loss decreases. This will yield a more general model as in Case A.
+Case B is the desired outcome for ML, where we allow the training loss to stall or even increase, as long as the test set loss decreases. This will yield a more general model as in Case A.
 
 \section{Regularization}
 \subsection{What is the purpose of regularization?}
