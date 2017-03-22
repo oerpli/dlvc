@@ -59,12 +59,12 @@ Assume a company asks you to develop an application that is able to predict whic
 \begin{minipage}{0.6\textwidth}
 \begin{itemize}
 \item Rule based system: handwritten AI where an expert implements all rules (decision boundaries)
-\item Machine learning: The features are designed and the algorithm then maps the features to the boundaries
-\item Representation learning: The features are trained and mapped on the data
+\item Classic machine learning: The features are designed and the algorithm then maps the features to the boundaries
+\item Representation learning: The features are trained on the data and mapped to output.
 \item Deep learning: There are low and high level features and the algorithm learns how to train the features, how to combine them to higher level features and how to map the to the output
 \end{itemize}
 \end{minipage}
-\begin{minipage}{0.4\textwidth}\hspace{0.25cm}\includegraphics[width=1.5\textwidth]{./img/motivation.png}
+\begin{minipage}{0.4\textwidth}\hspace{0.25cm}\includegraphics[width=1.25\textwidth]{./img/motivation.png}
 \end{minipage}
 \subsection{What is a machine learning algorithm and how are they used for solving image classification problems?}
 A machine learning algorithm is a method of statistical analysis that automates analytical model building. Their aim is to find hidden insights without being programmed where to look. 
@@ -292,6 +292,8 @@ The weights are critical because of the multiplication and the gradient descent 
 The hyper parameter $\gamma$ controls the magnitude of gradient and step size, so if set too large, the activation explodes, and if to small, the activation vanishes. In both cases, the algorithm most likely won't converge to a good model. 
 \subsection{We discussed a heuristic for controlling the magnitude of weights. What is the intention behind this heuristic (no math required)?}
 The so called Xavier initialization tries to set the weights in way to preserve the variance of the input which is usually $1$ with a mean of $0$ (due to normalization). When each neuron is connected to $D$ input neurons with weights sampled from $\gamma N(0,1)$ the resulting variance would be $\gamma^2 D\cdot 1$. Therefore $\gamma$ is set to $\gamma= 1/\sqrt{D}$ s.t. the variance of the result is $1$ again. 
+
+He initialization is an adaption of this scheme with $\gamma = \sqrt{\nicefrac 2 D}$ that is optimized for ReLU activations.
 %: Preprocessing
 %: Optimization vs ML
 %: Regularization
@@ -493,6 +495,7 @@ Dropout sets the output of a neuron to 0 with probability $p$ during training. T
 \subsection{Why do ``dropped'' neurons have no effect on the output of the next layer?}
 The outputs are scaled with the dropout probability to prevent an effect from the dropout.\todo{this is almost certainly wrong}
 \subsection{To which CNN layers is dropout commonly applied?}
+GoogLeNet applies dropout to the final pooling layer. ResNet does not use dropout. 
 \todo{where to apply dropout?}
 %
 %: Batch normalization
