@@ -575,8 +575,8 @@ The output from a layer is added to all subsequent layers instead of propagated 
     child{ node [calc] {+ 35} 
             child{ node [numbr] {5}  edge from parent node[above left]{$1$}}
             child{ node [calc] {* 30 } 
-		child{ node [input] {5}edge from parent node[left]{$5$}}
-		child{ node [input] {6} coordinate (AA) edge from parent node[right]{$6$}}
+		child{ node [input] {5}edge from parent node[left]{$6$}}
+		child{ node [input] {6} coordinate (AA) edge from parent node[right]{$5$}}
 		edge from parent node[above right]{$1$}
             }            edge from parent node[above]{$13$}                
     }
@@ -585,7 +585,7 @@ The output from a layer is added to all subsequent layers instead of propagated 
 			edge from parent node[right]{$35$}
 	            }    
 ; 
-\draw[->,>=stealth']( $ (BB)!15pt!(AA) $ )--( $ (AA)!10pt!(BB) $ );
+\draw[->,>=stealth']( $ (BB)!15pt!(AA) $ )--( $ (AA)!10pt!(BB) $ ) node[below,pos=.4]{$1$};
 \end{tikzpicture}
 \end{minipage}\begin{minipage}{0.4\textwidth}
 \begin{align*}
