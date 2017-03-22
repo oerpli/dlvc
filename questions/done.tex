@@ -233,7 +233,7 @@ When training a parametric model using machine learning, we need a loss function
 \subsection{How does the gradient descent algorithm work?}
 For better imagination, think of a rugged terrain, without sight. To get to the lowest/highest point, one will just follow the steepest slope. 
 
-In  ML setting, the algorithm will compute the current gradient $\Theta' = \nabla L(\Theta)$ and then go a certain amount $\alpha*\norm{\Theta'}$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
+In  ML setting, the algorithm will compute the current gradient $\Theta' = \nabla L(\Theta)$ and then go a certain amount $\alpha\Theta'}$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
 \subsection{What is the gradient of a function? }
 A function $f$ that represents a scalar field $f: \mathbb R^n \to \mathbb R$ that is differentiable, has partial derivatives for all input parameters so that $f_{x_i}(x)$ encodes how fast $f$ changes with argument $x_i$ at point $x$.  The gradient is a vector that is obtained by applying the differential operator $\nabla$ to $f$ ($\nabla_i = \nicefrac{\partial}{\partial x_i}$) to get a vector containing the partial derivatives of $f$. It points in the direction of greatest increase. If all entries of $\nabla f$ are $0$ at some point $L$ is flat there and we have to stop (local/global minimum or saddle point).
 
@@ -622,9 +622,10 @@ The bigger the training set the better the resulting NN can be. As obtaining hug
 Dropout sets the output of a neuron to 0 with probability $p$ during training. This temporarily discards certain neurons which helps with regularization because the net tries to prevent depending too much on certain features. 
 \end{minipage}
 \subsection{Why do ``dropped'' neurons have no effect on the output of the next layer?}
+With very high probability, there will be enough paths left to allow backpropagation. There are ways for weights scaling. eg:
 The outputs are scaled with the dropout probability to prevent an effect from the dropout.\todo{this is almost certainly wrong}
 \subsection{To which CNN layers is dropout commonly applied?}
-GoogLeNet applies dropout to the final pooling layer. ResNet does not use dropout. 
+GoogLeNet applies dropout to the final pooling layer. ResNet does not use dropout. Generic CNNs can benefit from dropout on all layers.
 \todo{where to apply dropout?}
 %
 \section{Batch normalization}
