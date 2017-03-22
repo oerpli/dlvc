@@ -304,7 +304,7 @@ Per sample normalization takes statistic for mean and variance over one image, w
 While per sample normalization has the benefit of cancelling out under/overexposed pictures or the ones with different contrast.
 
 \todo{just a guess, not covered in lecture, can't find it in book}
-Per sample normalization makes sure, that each sample has zero main and unit variance, but espacially for color image and per channel operation, this might yield an unwanted result (eg underwater picture will have almost 0 red channel, and this IS important).
+Per sample normalization makes sure that each sample has zero mean and unit variance. For color images and per channel operation, this might yield unwanted results (e.g. underwater picture will have almost 0 red channel, and this IS important).
 
 Thus, per sample normalization should only be applied for all channels or B/W pictures.
 
