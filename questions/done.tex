@@ -233,7 +233,7 @@ When training a parametric model using machine learning, we need a loss function
 \subsection{How does the gradient descent algorithm work?}
 For better imagination, think of a rugged terrain, without sight. To get to the lowest/highest point, one will just follow the steepest slope. 
 
-In  ML setting, the algorithm will compute the current gradient $\Theta' = \nabla L(\Theta)$ and then go a certain amount $\alpha\Theta'}$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
+In  ML setting, the algorithm will compute the current gradient $\Theta' = \nabla L(\Theta)$ and then go a certain amount $\alpha\Theta'$ into that direction. The hyperparameter $\alpha$ is called the learning rate.
 \subsection{What is the gradient of a function? }
 A function $f$ that represents a scalar field $f: \mathbb R^n \to \mathbb R$ that is differentiable, has partial derivatives for all input parameters so that $f_{x_i}(x)$ encodes how fast $f$ changes with argument $x_i$ at point $x$.  The gradient is a vector that is obtained by applying the differential operator $\nabla$ to $f$ ($\nabla_i = \nicefrac{\partial}{\partial x_i}$) to get a vector containing the partial derivatives of $f$. It points in the direction of greatest increase. If all entries of $\nabla f$ are $0$ at some point $L$ is flat there and we have to stop (local/global minimum or saddle point).
 
