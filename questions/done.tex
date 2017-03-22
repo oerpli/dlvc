@@ -72,7 +72,7 @@ This is applied for image classification by providing a dataset of labelled imag
 
 Applying rule based systems would be completely overwhelming (e.g. if there are 45\% blue pixels and 55\% white pixels it's a boat \ldots)
 %
-\section{Classification \& regression, un-/supervised learning}
+\section[Regression, (un)supervised]{Classification \& regression, un-/supervised learning}
 \subsection{Explain the differences between classification and regression and supervised vs. unsupervised learning}
 Classification is used to predict discrete outputs (e.g. an animal is a dog or a cat but not some 50:50 mixture of both) whereas regression is used to predict continuous values (e.g. IQ, height, time \ldots).
 
@@ -281,7 +281,7 @@ for each of 200 epochs:
 \end{lstlisting}
 %
 
-\section{Weight and bias parameters}
+\section[Weight and bias]{Weight and bias parameters}
 \subsection{How do weight and bias parameters affect the input x?}
 The weight parameter is applied multiplicative to x, and the bias is added. $w = Wx+b$
 \subsection{What must be considered when initializing these parameters?}
@@ -452,7 +452,7 @@ The idea behind representation learning is to extract features from images which
 The problem with the outlined approach is that it must learn high level features in a single step. Deep learning is the idea to solve this problem in a divide and conquer way. 
 Simple features that are easy to learn are combined to higher level features. The name DL is due to the many layers of this feature-hierarchy.
 %
-\section{Locally connected layers for image analysis}
+\section{Locally connected layers}
 \subsection{What is the motivation for using locally connected layers for image analysis? What is sparse connectivity}
 An image consists of several features, some are local and some are global. In most cases, the global features are a combination of several local features in a certain arrangement.
 The idea of locally connected layers is to train each layer only to extract features from some part of the image and then use additional layers to combine those. 
@@ -627,7 +627,15 @@ The outputs are scaled with the dropout probability to prevent an effect from th
 GoogLeNet applies dropout to the final pooling layer. ResNet does not use dropout. 
 \todo{where to apply dropout?}
 %
-%: Batch normalization
+\section{Batch normalization}
+\subsection{What is the purpose and aim of batch normalization?}
+The weights are initialized such that the signal progresses through the net with more or less the same strength. During training this changes due to updating of weights. The idea of batch normalization is to calculate mean and variance of every feature per minibatch and normalize the output.
+
+It allows higher learning rates and increases robustness to bad initialization.
+\subsection{Why does it have a regularizing effect?}
+When using minibatch gradient descent (which is usually always the case), each sample is seen with several other (changing, due to shuffling every epoch) samples and therefore the normalization is nondeterministic for every sample which is advantageous for the generalization of the network. This may alleviate the need for dropout.
+\subsection{To which CNN layers is batch normalization applied and where?}
+CNN is applied to the activation (which is the argument of the activation function) in conv and fc layers, i.e. before the non-linearity. In convolutional layers the same normalization is applied to all neurons in one same feature map (the mean and variance per minibatch per feature map is used for this).
 %
 \section{Learning rate}
 \subsection{What does the learning rate hyperparameter specify?}

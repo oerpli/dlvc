@@ -86,12 +86,27 @@
 
 \usepackage{progressbar}
 \usepackage{fp}
+\usepackage{setspace}
+\usepackage{multicol}
+\makeatletter
+\renewcommand\tableofcontents{%
+    \@starttoc{toc}%
+}
+\let\latexl@section\l@section
+\def\l@section#1#2{\begingroup\let\numberline\@gobble\latexl@section{#1}{#2}\endgroup}
+\makeatother
 \begin{document}
 \maketitle
 \listoftodos
 \edef\Total{45}\FPeval\result{\getrefnumber{sec:done}/\Total}
 \progressbar[width= \textwidth , heighta=1cm , filledcolor=green , emptycolor=red, borderwidth=1pt , tickswidth=1pt , roundnessr=0.1 , subdivisions =\Total]{\result}
-\tableofcontents
+
+\clearpage
+\begin{spacing}{0.01}
+\begin{multicols}{2}
+  \tableofcontents
+\end{multicols}
+\end{spacing}
 \clearpage
 \part*{Done}\input{done}
 \setcounter{section}{0}
