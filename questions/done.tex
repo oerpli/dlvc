@@ -412,7 +412,17 @@ Current state of the art networks use many layers that learn features that achie
 \end{itemize}
 \todo{how to choose network depth for image classification problem}
 %: CNN depth
-%: CNN backend
+%
+\section{CNN backends}
+\subsection{What is the backend of a CNN?}
+In the backend the features extracted by the frontend are used to classify the samples. The last layer is therefore usually a dense (fc) layer with neuron count corresponding to the number of classes. 
+\subsection{Discuss the backends of VGGNet and GoogLeNet/ResNet and their pros and cons.}
+\begin{itemize}
+\item VGGNet: Uses two fc 4096 layers followed by a fc $T$ ($T= \text{number of classes}$).  Many parameters due to this MLP with two large hidden layers (later research revealed that these could be omitted with no performance downgrade)
+\item GoogLeNet: Average (instead of max as usual) pooling layer over the whole width and height of the previous layer, reducing the dimension from $W\times H\times D$ to $D$ (number of filters of previous layer). These $D$ features are then mapped to the classes with a single fc layer.
+\item ResNet: Same backend as GoogLeNet
+\end{itemize}
+%
 \section{ResNets}
 \url{http://kaiminghe.com/icml16tutorial/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf}
 \subsection{What are residual networks (ResNets) and which problem do they overcome?}
