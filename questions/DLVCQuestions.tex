@@ -84,8 +84,13 @@
 }
 \setcounter{tocdepth}{1}
 
-\usepackage{progressbar}
-\usepackage{fp}
+% \usepackage{progressbar,fp}
+%\edef\Total{45}\FPeval\result{\getrefnumber{sec:done}/\Total} 
+%\progressbar[width= \textwidth , heighta=1cm , filledcolor=green , emptycolor=red, borderwidth=1pt , tickswidth=1pt , roundnessr=0.1 , subdivisions =\Total]{\result}
+%\addtocounter{section}{-1}\section{}\label{sec:done} % add this after done part
+%\setcounter{section}{0} % add after done part
+%\addtocounter{section}{-1}\section{}\label{sec:todo} % add this after todo part
+
 \usepackage{setspace}
 \usepackage{multicol}
 \makeatletter
@@ -98,18 +103,19 @@
 \begin{document}
 \maketitle
 \listoftodos
-\edef\Total{45}\FPeval\result{\getrefnumber{sec:done}/\Total}
-\progressbar[width= \textwidth , heighta=1cm , filledcolor=green , emptycolor=red, borderwidth=1pt , tickswidth=1pt , roundnessr=0.1 , subdivisions =\Total]{\result}
 
 \clearpage
-\begin{spacing}{0.01}
-\begin{multicols}{2}
+\begin{spacing}{-1}
+\begin{multicols}{2}\small
   \tableofcontents
 \end{multicols}
 \end{spacing}
 \clearpage
-\part*{Done}\input{done}
-\setcounter{section}{0}
-\clearpage\part*{Todo}\input{todo}
-\todo{\ref{sec:done} done, \ref{sec:todo} questions remaining}
+%\part*{Done}
+\input{done}
+
+
+
+%\clearpage\part*{Todo}
+%\input{todo}
 \end{document}
