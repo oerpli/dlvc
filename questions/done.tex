@@ -355,6 +355,7 @@ samples=300,
 xmax = 5,
 ymin = -0.1
 ,title={Case A}
+,every axis plot/.append style={very thick, xshift = 0.1cm}
 ]
 \addplot{1/(x+0.1)+1 + 0.5*x}; \addlegendentry{Test}
 \addplot{1/(x+0.1)}; \addlegendentry{Train}
@@ -382,14 +383,15 @@ yticklabels={,,},
 tick style={draw=none},
 line join=bevel,
 no markers,
-xmin=0,
 enlarge x limits=false,
 %ymin=-0.2,
 %ymax = 0.2
 samples=300,
+xmin=0,
 xmax = 5,
 ymin = -0.3
 ,title={Case B}
+,every axis plot/.append style={very thick, xshift = 0.1cm}
 ]
 \addplot{1/(x+0.1)+1}; \addlegendentry{Test}
 \addplot{1/(x+0.1) + 0.1*x};\addlegendentry{Train}
