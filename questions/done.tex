@@ -84,11 +84,11 @@ Discriminative models learn the boundary between classes $P(y|x)$ (estimate resp
 
 SVN and NN are discriminative, Naive Bayes and Hidden Markov models are generative.
 \subsection{How can generative models be used for classification?}
-It uses the distribution $P(x,y)$ to estimate which response $y$ is most likely to cause the given input $x$ ($\text{argmax}_y P(x|y)P(y)$). Though generative models can be used for classification discriminative models usually perform better. 
+It uses the distribution $P(x,y)$ to estimate which response $y$ is most likely to cause the given input $x$ ($\text{argmax}_y P(x|y)P(y)$). Though generative models can be used for classification, discriminative models usually perform better. 
 %
 \section{Testdata}
 \subsection{Why are machine learning algorithms tested on data unseen during training?}
-The goal is to have a model that can predict new data. Therefore it's a good idea to measure exactly this as quality criterion by using unseen data for testing purposes. The same applies to the validation data---optimize the model to perform well on data not seen during training. If this would not be done model after training would be completely overfitted and would perform well on the training data (which is useless) but not necessarily well or even good on new data.
+The goal is to have a model that can predict new data. Therefore it's a good idea to measure exactly this as quality criterion. This is done by using unseen data for testing purposes. The same applies to the validation data---optimize the model to perform well on data not seen during training. If this would not be done, the model after training would be completely overfitted and would perform well on the training data (which is useless) but not necessarily well or even good on new data.
 \subsection{How can such algorithms perform well on unseen data?}
 If the model is not overfitted it should recognize general features (``wheels in the lower left corner'') of the sample but not very specific features (e.g.: hash of the image). 
 \subsection{What does dataset bias mean? }
