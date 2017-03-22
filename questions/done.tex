@@ -486,7 +486,7 @@ The receptive field is the region of the input that is seen by a certain neuron 
 \subsection{Assume a network consisting of two convolutional layers with $3 \times 3$ connectivity followed by a $2 \times 2$ max-pooling with stride 2 and again two convolutional layers with $3 \times 3$ connectivity. What is the receptive field of neurons in the final convolutional layer? How does the receptive field affect feature extraction? }
 Each $3\times 3$ conv. Layer increases the receptive field by two neurons. A pooling layer with stride two increases the receptive field by a factor of 2. Starting from the final layer we have:
 \begin{align*}
-\text{Receptive field increase} = (1+2+2) \cdot 2 + 2+ 2 = 14
+\text{Receptive field increase} = (1+2) \cdot 2 + 2+ 2 = 10
 \end{align*}
 This is the increase in one dimension, therefore the receptive field of one final neuron is an area of $14\times 14$ neurons (input pixels).
 A neuron can only extract a feature if it is in the receptive field. Therefore the higher level features in the final layers of the NN should have a receptive field that spans the whole (or at least almost the whole) input.
