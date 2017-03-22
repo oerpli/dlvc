@@ -294,10 +294,68 @@ The hyper parameter $\gamma$ controls the magnitude of gradient and step size, s
 The so called Xavier initialization tries to set the weights in way to preserve the variance of the input which is usually $1$ with a mean of $0$ (due to normalization). When each neuron is connected to $D$ input neurons with weights sampled from $\gamma N(0,1)$ the resulting variance would be $\gamma^2 D\cdot 1$. Therefore $\gamma$ is set to $\gamma= 1/\sqrt{D}$ s.t. the variance of the result is $1$ again. 
 
 He initialization is an adaption of this scheme with $\gamma = \sqrt{\nicefrac 2 D}$ that is optimized for ReLU activations.
-%: Preprocessing
-%: Optimization vs ML
-%: Regularization
-%
+
+\section{Preprocessing}
+\subsection{Explain the purpose of preprocessing.}
+
+The purpose is to cancel out variations that have a random cause(not related to class) thus should be neglected. For images, this are variations in brightness and contrast. Brightness can be normalized by mean subtraction. Contrast can be nromalized by division with standard deviation or by histogram equalization. The final image will have zero main and unit variance, which is the preferred input for ML settings.
+
+\subsection{How do per-sample normalization and per-trainingset normalization differ in terms of operation and purpose?}
+
+per sample normalization takes statistic for mean and variance over one image, while per trainingset normalization consider all images in the training set.
+
+While per sample normalization has the benefit of cancelling out under/overexposed pictures or the ones with different contrast.
+
+\todo{just a guess, not covered in lecture, can't find it in book}
+Per sample normalization makes sure, that each sample has zero main and unit variance, but espacially for color image and per channel operation, this might yield in unwanted result (eg underwater picture will have almost 0 black channel, and this IS important).
+
+Thus, per sample normalization should only be applied for all channels or B/W pictures.
+
+\subsection{In the latter case, which (if any) preprocessing is applied during validation and testing?}
+
+For the statistics, only the training set is used, but the normalization operations must be applied to the test and validation set.
+
+\section{Optimization vs ML}
+\subsection{What are the goals of optimization and machine learning?}
+
+In optimization, the goal is to find optimal parameters that minimize the loss on the training set.  
+
+For machine learning, we need an general model that works well on unseen data. 
+
+\subsection{Why do they differ?}
+A model with minimal loss on the training data is usualla an overfitting model that will not generalize well, and have worse results on unseen data. There are usually less specific parameters that have a higher loss on the training set, but work better on the test set.
+
+\subsection{Create two sketches with each showing the training progress over time in terms of both training and test error; one that is good from an optimization perspective but bad from a machine learning perspective, and one that is worse from an optimization perspective but better from a machine learning perspective. Explain both sketches.}
+
+\includegraphics[width=\textwidth]{./img/optvsML.jpg}
+
+Case A is the one with the focus on optimization, where the test set loss increases after w while, because the model overfits to the training data.
+
+Case B is the desired outcome for ML, where we allow the training loss to stalls or even increases, as long as the test set loss decreases. This will yield a more general model as in Case A.
+
+\section{Regularization}
+\subsection{What is the purpose of regularization?}
+
+As stated above, in ML we are interested in a low test error, not necessarely a low training error. Regularization is a method to achieve a better test error, but with a possible higher training error, by getting a more general model that has decreased model veriance (with increased biases) and is less prone to overfitting. 
+
+\subsection{What is weight decay and what is its purpose?}
+Weight decay is a common regulization technique, it penalizes too large weights (but leaves biases unaffected) which avoids that certain inputs have to much influence and allows the model to take all inputs into account. 
+
+Weight must be initialized with 0 mean, and in each step, the weights are adjusted in a regulization step:
+
+$L_{reg}(\Theta) = \frac{\delta}{2}||w||^2 + L(\Theta)$
+
+where W is a vector of all weights and $\delta$ is the hyper parameter regulization strength(if too small: no effect, if too big: dominates data loss).
+This way, all weights shrink in each update and decay to zero.  
+
+\subsection{What is early stopping and how does it work?}
+For early stopping a validation set is needed. It works on the observation, that when training overfitting-prone models, the training error will always decrease, while at some point the validation error will start to increase. 
+
+So early stopping, a easy to implemnt and very common method, will store the model with the lowest validation error, and if the above situation occurs(no improvement or even higher error on validation after some iterations), stop and return the stored model.
+
+\subsection{In deep learning, is it better to increase regularization or to decrease the model capacity by other means, and why?}
+You should increase regulization, because in deep learning, models work best if they have enough capacity to overfit, but are regulized properly.
+
 \section{Feedforward NN}
 \subsection{What is the definition of a feedforward neural network?}
 A FF NN does not have cycles (as a RNN for example has). The samples get passed to the input layer and the values are then passed forward until they reach the output layer where the result is evaluated.
