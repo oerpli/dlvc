@@ -503,8 +503,20 @@ If learning rate is:
 \subsection{Explain a heuristic for adapting the learning rate during training and why doing so can be beneficial.}
 Learning rate decay can be used to tune the learning rate to the optimal choice at each step. First start with a rather high learning rate and when there is no improvement for a few epochs scale the learning rate with a constant factor (e.g. $\nicefrac 1 2$).
 Alternatively scale the learning rate every 5-20 epochs with a factor ($\nicefrac 1 2$ to $\nicefrac 1 {10}$). This ensures that big steps are taken by the algorithm when it is possible but the stepsize is reduced when further improvements can only be made by smaller steps.
-
-%: Oversampling
+%
+\section{Oversampling}
+\subsection{What is the purpose of oversampling and how does it work?}
+A sampled passed to the neural net may depict something know but the viewpoint may be slightly off or the lighting may be unusual. Oversampling tries to overcome this challenge by applying various transformations to the image, classifying all transformed versions separately and average the class scores of the results. 
+\subsection{What is ten-crop oversampling?}
+Ten-crop oversampling is a common technique which consists of making five crops of the image, one in the center and in all four corners and then using the 5 resulting images as well as their mirrored versions for classification. 
+\subsection{What transformation could be applied for dog breed classification.}
+\begin{itemize}
+\item Ten-crop oversampling
+\item Mirroring
+\item Rotation
+\item Skewing images
+\item Adapting brightness
+\end{itemize}
 %: Model ensembles
 %
 \section{Medical tasks}
