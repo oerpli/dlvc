@@ -459,7 +459,7 @@ The idea of locally connected layers is to train each layer only to extract feat
 
 This is called sparse connectivity. Instead of connecting the $N$ input neurons with $N\times M$ connections (and corresponding weight) to the $M$ output neurons only connect each of the $M$ output neurons to some small subset of the input neurons. 
 \subsection{Assume input data of dimension $W \times H \times D$. How many many weight and bias parameters does a locally connected (but not convolutional) layer have, assuming $3 \times 3$ connectivity and $W \times H \times 2$ output data dimension, and why?}
-Every output neuron is connected to $9$ input neurons per channel, therefore $W\cdot H\cdot 2 \cdot 9 \cdot D$ weight parameters and $2$ bias parameters (one per feature map).\todo{not entirely sure that the number of bias params is correct}
+Every output neuron is connected to $9$ input neurons per channel, therefore $W\cdot H\cdot 2 \cdot 9 \cdot D$ weight parameters and $W\cdot H\cdot2$ bias parameters (one per output unit).
 %
 \section{Convolutional Layer}
 \subsection{What is the purpose of a convolutional layer?}
@@ -705,6 +705,8 @@ As a CNN is trained starting from a random initialization different models may p
 \subsection{How can we use the training data most efficiently?}
 \todo{Medical appl.: How can we use the training data most efficiently?}
 Train traditional CNN with negative and positive samples. Use the false positives as extra instances for training the fine-tuned CNN.
+
+Stacked autoencoders are another approach where first unlabeled data is used to pretrain the network layer by layer to get ``a feeling'' for the underlying distribution. Then use labelled data to fine tune the network for the desired purpose.
 \subsection{Give an explanation of the methodologies fine tuning and transfer learning and the benefit using them in medical imaging. }
 \begin{itemize}
 \item Transfer learning: Train a CNN on huge dataset (ImageNet) and use the intermediate feature layers (up to the FC layer which connects to the 1000 classes) as feature extractor for the medical dataset. 
