@@ -64,7 +64,7 @@ Assume a company asks you to develop an application that is able to predict whic
 \item Deep learning: There are low and high level features and the algorithm learns how to train the features, how to combine them to higher level features and how to map the to the output
 \end{itemize}
 \end{minipage}
-\begin{minipage}{0.4\textwidth}\hspace{0.25cm}\includegraphics[width=1.25\textwidth]{./img/motivation.png}
+\begin{minipage}{0.4\textwidth}\hspace{0.25cm}\includegraphics[width=\textwidth]{./img/motivation.png}
 \end{minipage}
 \subsection{What is a machine learning algorithm and how are they used for solving image classification problems?}
 A machine learning algorithm is a method of statistical analysis that automates analytical model building. Their aim is to find hidden insights without being programmed where to look. 
@@ -123,17 +123,23 @@ When more training data is available the performance of the model will increase 
 \subsection{What is a hyperparameter?}
 In ML we try to find parameters for a model from datasets. This learning process may have its own parameters, these are called hyperparameters. They govern behaviour of the model learning, .e.g. the capacity of the resulting model.
 \subsection{Name at least 3 hyperparameters in the context of deep learning using convolutional neural networks.}
-\todo{maybe explain what these hyperparameters do}
-\begin{enumerate}
+\begin{multicols}{2}
+\begin{itemize}
 \item Initial learning rate
 \item Learning rate decay
 \item Regularization strength
 \item Momentum settings
-\end{enumerate}
+\end{itemize}
+\end{multicols}
 \subsection{What is the purpose of hyperparameter selection, which search strategies exist, and how do they work?}
+\begin{minipage}{0.5\textwidth}
 Purpose is finding optimal settings to train the model. Gridsearch and random search are two common approaches, random search is usually preferred as one parameter may be insignificant for the result and much time would be wasted optimizing this parameter whereas with random search all HP spaces are explored independently. See picture below.
-
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
 \includegraphics[width=\textwidth]{./img/gridsearchbad.jpeg}
+\end{minipage}
+
+
 %
 \section{kNN}
 \subsection{How does the k nearest neighbor classifier work?}
@@ -209,11 +215,12 @@ The parameters are determined by training the model with a trainingset which can
 %
 \section{Linear model}
 \subsection{What is a linear model, which types of parameters does it have, and what do they specify?}
-A linear model tries to seperate the samples with linear functions. The samples are in a $D$-dimensional space and there are $T$ classes. The model then consists of $T$ decision boundaries of the form $y_t = \sum_i^D W_{ti} x_i + b_t$ or in short $y = Wx + b$. The weight matrix $W$ and the bias vector $b$ are the parameters. The resulting model is a set of decision boundaries where each boundary provides a value for each class. Usually the class with the highest score is then chosen as prediction. 
-
 \begin{minipage}{0.32\textwidth}
 \includegraphics[width=0.95\textwidth]{./img/lclass.jpeg}
 \end{minipage}\begin{minipage}{0.7\textwidth}
+A linear model tries to seperate the samples with linear functions. The samples are in a $D$-dimensional space and there are $T$ classes. The model then consists of $T$ decision boundaries of the form $y_t = \sum_i^D W_{ti} x_i + b_t$ or in short $y = Wx + b$. The weight matrix $W$ and the bias vector $b$ are the parameters. The resulting model is a set of decision boundaries where each boundary provides a value for each class. Usually the class with the highest score is then chosen as prediction. 
+
+
 The output value of $f(x, \theta)$ has a score for each class where a positive number corresponds to the sample being on the side indicated with an arrow, meaning, that the sample is more likely than not a member of this class. The class with the highest score is then chosen as prediction. 
 \end{minipage}
 %
@@ -239,20 +246,26 @@ A function $f$ that represents a scalar field $f: \mathbb R^n \to \mathbb R$ tha
 
 \section{Local/global optimum}
 \subsection{What is the difference between a local and a global optimum?}
+\begin{minipage}{0.5\textwidth}
 A function has only one global optimum but may have many local optima. Finding the global optimum is not trivial whereas finding a local optimum is usually easy (calculate derivation at current point and move in direction of steepest descent). When a local optimum is found it's nontrivial how to escape it again. Simulated annealing is an approach inspired from material physics.
-
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
 \includegraphics[width=\textwidth]{./img/localOpt.jpeg}
+\end{minipage}
+
 \subsection{Are local minima a problem in deep learning?  Why (not)?}
 There is no definite consensus though it is believed, that the search landscape is similar to an egg carton with many almost identical local optima where the hit on the performance is not critical if the model finds any of them. It was also proposed that many local optima (as found by having a derivation of 0) in the search landscape are in reality saddle points where it should be possible to improve the results further. Calculating the full Hessian is too costly therefore an approximation may be enough. (see here: \url{https://blog.terminal.com/no-more-local-minima/})
 %
 \section{Gradient descent}
 \subsection{How does gradient descent (red) /with momentum (green) work? }
-\begin{minipage}{0.4\textwidth}
-\includegraphics[width=0.95\textwidth]{./img/gradient.PNG}
-\end{minipage}\begin{minipage}{0.6\textwidth}The normal gradient descent takes the gradient at the current position and then takes a step ($\propto$ learning rate) in this direction. This leads to unnecessary small steps when following a valley and too large steps at the end. GD with nesterov momentum first takes a step in direction of the momentum (approx. the same direction and length as the previous step) and then evaluates the gradient there and then takes a step with this ``lookahead''-gradient.
-\end{minipage}
+\begin{minipage}{0.35\textwidth}
+\includegraphics[width=0.98\textwidth]{./img/gradient.PNG}
+\end{minipage}\begin{minipage}{0.65\textwidth}The normal gradient descent takes the gradient at the current position and then takes a step ($\propto$ learning rate) in this direction. This leads to unnecessary small steps when following a valley and too large steps at the end. GD with nesterov momentum first takes a step in direction of the momentum (approx. the same direction and length as the previous step) and then evaluates the gradient there and then takes a step with this ``lookahead''-gradient.
+
 \includegraphics[width=\textwidth]{./img/nesterov.jpeg}
-%
+\end{minipage}
+
+
 \section{Batch Gradient descent}
 \subsection{Batch, minibatch, and stochastic gradient descent:}
 The gradient descent algorithm starts at some point, looks for the direction of steepest descent and makes a step proportional to the learning rate in this direction to get to a (at least local) minimum (or critical point). Calculating this gradient on the whole dataset is computationally expensive, therefore usually only a subset of the training samples are used for each step. 
@@ -322,7 +335,7 @@ A model with minimal loss on the training data is usually an overfitted model th
 \begin{minipage}{0.5\textwidth}
 \begin{tikzpicture}
 \begin{axis}[
-width=1.2\textwidth,
+width=\textwidth,
 height=150pt,
 legend pos=north east,
 axis y line=left, 
@@ -358,7 +371,7 @@ ymin = -0.1
 \begin{minipage}{0.5\textwidth}
 \begin{tikzpicture}
 \begin{axis}[
-width=1.2\textwidth,
+width=1\textwidth,
 height=150pt,
 legend pos=north east,
 axis y line=left, 
@@ -391,6 +404,7 @@ ymin = -0.3
 \end{axis}
 \end{tikzpicture}
 \end{minipage}
+
 Case A is the one with the focus on optimization, where the test set loss increases after a while, because the model overfits to the training data.
 
 Case B is the desired outcome for ML, where we allow the training loss to stall or even increase, as long as the test set loss decreases. This will yield a more general model as in Case A.
@@ -424,7 +438,7 @@ A FF NN does not have cycles (as a RNN for example has). The samples get passed 
 \subsection{Which types of units do such networks have?}
 \begin{minipage}{0.3\textwidth}
 \includegraphics[width=\textwidth]{./img/ffnn1.jpeg}
-\includegraphics[width=\textwidth]{./img/ffnn2.jpeg}
+%\includegraphics[width=\textwidth]{./img/ffnn2.jpeg}
 \end{minipage}
 \begin{minipage}{0.7\textwidth}
 \begin{itemize}
@@ -494,17 +508,21 @@ A neuron can only extract a feature if it is in the receptive field. Therefore t
 As the number of parameters depends with $O(n^2)$ on the filter size a stack of 3 $3\times 3$ layer has approximately as much weights to learn as a single $5\times 5$ layer. Therefore more smaller filters are usually preferred as additional layers improve the modelling of nonlinearity.
 %
 \section{Pooling}
+\begin{minipage}{0.5\textwidth}
 \subsection{What is the purpose of pooling layers?}
 Reduce spatial size to reduce amount of parameters and computation. Also helps against overfitting. Consolidate features learned in convolutional layers before the pooling layer.
-\subsection{Calculate the output of a 2 × 2 max-pooling layer with stride 2 assuming the following input.}
-\begin{equation}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\subsection{Example:  $2 \times 2$ max-pooling, stride 2}
+\begin{equation*}
 pool\left(\begin{bmatrix}
 1 & 1 & 2 & 4\\
 5&6&7&8\\
 3&2&1&0\\
 1&2&3&4
 \end{bmatrix}\right) = \begin{bmatrix}6 & 8 \\3 & 4\end{bmatrix}
-\end{equation}
+\end{equation*}
+\end{minipage}
 \subsection{How many pooling layers with stride 2 should a CNN have assuming an input resolution of 64 × 64 and convolutional layers that do not change the resolution, and why?}
 The highest level features should have a receptive field that spans more or less the entire image. 4 to 5 pooling layers should therefore be a good choice. Exact number may vary based on the overall architecture.
 \todo{How many pooling layers should CNN have?}
@@ -512,13 +530,17 @@ The highest level features should have a receptive field that spans more or less
 \section{CNN}
 \subsection{Give a general overview of convolutional neural networks and their purpose}
 A convolutional neural network is a NN that consists of an input layer and several convolutional layers with many filters. Often convolutional layers are mixed with pooling layers to reduce the input size and the amount of parameters to learn. 
-
+\begin{minipage}{0.5\textwidth}
 \includegraphics[width=\textwidth]{./img/cnn.PNG}
-\subsection{What are the two overall stages of such networks?}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\subsection{What are the two stages of CNNs?}
 \begin{itemize}
 \item Frontend: Consists of convolutional and pooling layers and is used to extract features
 \item Backend: Usually consists of one or two dense (fc) layers and is used to combine features learned in previous layers to make class predictions. 
 \end{itemize}
+\end{minipage}
+
 \subsection{How is the depth of a CNN defined?}
 Depth is defined as the number of layers with parameters to learn and is thus mainly determined by the number of convolutional layers.
 \subsection{What effect does increasing the depth have?}
@@ -545,14 +567,16 @@ In the backend the features extracted by the frontend are used to classify the s
 \section{ResNets}
 \url{http://kaiminghe.com/icml16tutorial/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf}
 \subsection{What are residual networks (ResNets) and which problem do they overcome?}
-\begin{minipage}{0.4\textwidth}
+\begin{minipage}{0.35\textwidth}
 \includegraphics[width=\textwidth]{./img/residual.png}
 \end{minipage}
-\begin{minipage}{0.6\textwidth}
-ResNets are the current state of the art architecture. They consist of residual blocks which are composed of two $3\times 3$ conv layers. An additional additive residual function $\mathcal F$ is learned that decides what should be added or removed from the input. 
-\end{minipage}
+\begin{minipage}{0.65\textwidth}
+ResNets are the current state of the art architecture. They consist of residual blocks which are composed of two $3\times 3$ conv layers. An additional additive residual function $\mathcal F$ is learned that decides what should be added or removed from the input. \\
+
 
 The output from a layer is added to all subsequent layers instead of propagated by multiplication with the weights from deeper layers. This makes the partial derivations also additive and prevents vanishing of the signal during backpropagation and enables efficient learning of nets with higher depth. 
+\end{minipage}
+
 %
 \section{Back Propagation}
 \subsection{What is the purpose of the backpropagation algorithm?}
@@ -568,8 +592,8 @@ The output from a layer is added to all subsequent layers instead of propagated 
   numbr/.style = {treenode, circle, draw=black, black,fill=red!25, text width=1.5em},
   input/.style = {treenode, circle, draw=black, black,fill=blue!25, text width=1.5em},
 }
-\begin{minipage}{0.6\textwidth}
-\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 5cm/#1,
+\begin{minipage}{0.23\textwidth}
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 3cm/#1,
   level distance = 1.5cm}] 
 \node [calc] {* 455}
     child{ node [calc] {+ 35} 
@@ -587,20 +611,22 @@ The output from a layer is added to all subsequent layers instead of propagated 
 ; 
 \draw[->,>=stealth']( $ (BB)!15pt!(AA) $ )--( $ (AA)!10pt!(BB) $ ) node[below,pos=.4]{$1$};
 \end{tikzpicture}
-\end{minipage}\begin{minipage}{0.4\textwidth}
+\end{minipage}\begin{minipage}{0.15\textwidth}
 \begin{align*}
 \partial a &= 13\cdot 1 \cdot 5 = 65\\
 \partial b &=  13\cdot 1 \cdot 6 + 35\cdot 1 = 113\\
 \partial c &= 35 \cdot 1 = 35
 \end{align*}
 \end{minipage}
-\subsection{Explain the steps of the algorithm at a given node.}
+\begin{minipage}{0.55\textwidth}
+\subsection{Explain algorithm at a given node.}
 \begin{itemize}
 \item { First calculate values at every node}
 \item{ Then derive each node by input parameters to get partial derivatives}
 \item{ Multiply every path from an input to output (chain rule $g(f)' = g'(f)\cdot f'$}
-\item { Sum up all paths from input to output (product rule: $(g\cdot f)' = g'\cdot f + f'\cdot g$}
+\item  Sum up all paths from input to output {(product rule: $(g\cdot f)' = g'\cdot f + f'\cdot g$}
 \end{itemize}
+\end{minipage}
 %
 \section{Data Augmentation}
 \subsection{What is the purpose of data augmentation?}
@@ -643,16 +669,16 @@ CNN is applied to the activation (which is the argument of the activation functi
 The direction of steepest decrease can be calculated with the gradient, the size of the optimal stepsize is unknown and instead the stepsize given by the learning rate hyperparameter is used. The choice of this parameter is critical. 
 
 If learning rate is:
+
+\begin{minipage}{0.7\textwidth}
 \begin{itemize}
 \item very high: Gradient descent algorithm jumps over minima and is more or less a random walk in configuration space
 \item high: Finds a better configuration then the random starting configuration but gets stuck there as it ``oscillates'' around minimum (e.g. minimum is in a circle with radius 2 and algorithm makes steps with size 5
-\end{itemize}
-\begin{minipage}{0.6\textwidth}
-\begin{itemize}
+
 \item proper: First missclassification rate quickly decreases and then slowly converges to some minimum
 \item low: Finds minimum as well but very slow (progress looks linear whereas in the beginning almost exponential decay of error should be possible)
 \end{itemize}
-\end{minipage}\begin{minipage}{0.4\textwidth}
+\end{minipage}\begin{minipage}{0.3\textwidth}
 \hspace{0.2cm}\includegraphics[width=\textwidth]{./img/learningrates.jpeg}
 \end{minipage}
 \subsection{Explain a heuristic for adapting the learning rate during training and why doing so can be beneficial.}
@@ -665,13 +691,12 @@ A sampled passed to the neural net may depict something know but the viewpoint m
 \subsection{What is ten-crop oversampling?}
 Ten-crop oversampling is a common technique which consists of making five crops of the image, one in the center and in all four corners and then using the 5 resulting images as well as their mirrored versions for classification. 
 \subsection{What transformation could be applied for dog breed classification.}
-\begin{itemize}
-\item Ten-crop oversampling
-\item Mirroring
-\item Rotation
-\item Skewing images
-\item Adapting brightness
-\end{itemize}
+%\begin{itemize}
+Ten-crop oversampling
+, Mirroring
+, Rotation
+, Skewing images
+, Adapting brightness
 %
 \section{Model ensembles}
 \subsection{What is the purpose and intuition behind using model ensembles?}
@@ -685,6 +710,7 @@ As a CNN is trained starting from a random initialization different models may p
 %
 \section{Medical tasks}
 \subsection{What are the challenges in using medical imaging data?}
+\begin{multicols}{2}
 \begin{itemize}
 \item Small datasets/study populations
 \item Heterogenity of pathology
@@ -693,8 +719,8 @@ As a CNN is trained starting from a random initialization different models may p
 \item Developmental differences
 \item Annotation needs experts
 \end{itemize}
+\end{multicols}
 \subsection{Can deep networks be used effectively for medical tasks (give 3 examples)?}
-\todo{Describe medical applications for CNNs}
 \begin{itemize}
 \item Pathology detection: Images of possible pathogens, 2D/2.5D/3D, Using CNNs. Input are e.g. images from MRT and network is used to assist diagnosis
 \item Segmentation:
@@ -715,7 +741,6 @@ Stacked autoencoders are another approach where first unlabeled data is used to 
 
 %
 \section{2-3D deep CNN}
-\todo{Maybe provide additional information here}
 \subsection{What is the difference between 2D, 2.5D and 3D deep CNN networks?}
 \begin{itemize}
 \item 2D: Takes image as input (X-Ray)
@@ -725,22 +750,23 @@ Stacked autoencoders are another approach where first unlabeled data is used to 
 
 %: CNNs in medical imaging
 \section{Labelling}
-\todo{Non-expert annotation information is very sparse in slides}
 \subsection{Explain the challenges, benefits and drawbacks of using expert vs. non-experts to obtain labels of medical image data?}
-\begin{itemize}
-\item Expert labelling:
+\begin{minipage}{0.5\textwidth}
+Expert labelling:
 \begin{itemize}
 \item Expensive
 \item Time consuming
 \item Publicly availabe ground truth data may not be available
 \end{itemize}
-\item Non-expert labelling
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+Non-expert labelling
 \begin{itemize}
 \item Annotations from single non-experts noisy
 \item Disagreements
 \item Crowd of non-experts can perform as well as medical experts
 \end{itemize}
-\end{itemize}
+\end{minipage}
 \subsection{Give  an example of an alternative method to expert-based manual labeling of medical data for deep learning approaches.}
 Crowdsourcing labels: Instead of using experts for annotation use a crowd of non experts. Add additional layer that aggregates the input from the crowd.
 
@@ -750,27 +776,30 @@ Example: Agg-Net (Deep Learning From Crowds for Mitosis Detection) had an aggreg
 \subsection{Describe the main purpose of RNNs and give an example application.}
 RNNs are suited for temporal machine learning task, where not a single instance has to be taken into account, but a number of instances where the order is importent. One example would be text generation, where the task is to create a single character or word, but the previous characters/words are very important for the next item. Video analysis, e.g. classification would be another example, where the isn't just a single image, but a whole video stream of several frames.
 \subsection{Draw and explain a sketch illustrating the overall  architecture of such networks.}
-\begin{minipage}{0.3\textwidth}
-\hspace*{1cm}\includegraphics[width=0.6\textwidth]{./img/rnn.png}
+\begin{minipage}{0.2\textwidth}
+\hspace*{0.5cm}\includegraphics[width=0.8\textwidth]{./img/rnn.png}
 \end{minipage}
-\begin{minipage}{0.7\textwidth}
+\begin{minipage}{0.8\textwidth}
 The main feature of RNNS are loops sucht that information can be passed from one temporal step to the next. Thus, the next state of A does not only depend on input $x_t$, for the step $t$, but also on the previous state of $A_{t-1}$. $h_t$ is the output of the network at step $t$.
-\end{minipage}
-\subsection{What is the main limitation of traditional RNNs (as opposed to LSTMs)?}
+\subsection{What is main limitation of traditional RNNs (opposed to LSTMs)?}
 A problem arises, when the important information is not only one or at least a few (defined) steps before t, but when it could be from an arbitrarily far away step. In the given example ``I grew up in Italy ... I speak fluent \textit{italian}'' the important word to inference the language is Italy.  The larger the potential gap, the more complicated the problem becomes. 
+\end{minipage}
 %
 \section{LSTMs}
-\subsection{What is the main advantage of LSTMs over traditional RNNs?}
+\vspace{-0.4cm}
 LSTMs are designed for rememembering informations for long periods of time. So they solve above mentioned problem
-\subsection{Draw a sketch that illustrates the dataflow within a LSTM block.}
-\begin{minipage}{\textwidth}
+\vspace{-0.4cm}
+\subsection{List and explain the purpose of the different LSTM gates.}
+\begin{minipage}{0.4\textwidth}
 \includegraphics[width=\textwidth]{./img/lstm.png}
 \end{minipage}
+\begin{minipage}{0.6\textwidth}
 The Cell state C, the upper line, contains the core information. It is controlled by several
 sigmoid gates. 
-\subsection{List and explain the purpose of the different LSTM gates.}
+
 The left gate is the forget layer, which takes information from the previous output and the current input to get a multiplicative value between 0 and 1 for each information in C.
 
 The middle gate is the input layer. It decides which values to update and create new candidate values for C.
 
 The right gate is the output gate, which takes the updated and filtered state C, the previous output and the input to create a new output.
+\end{minipage}
