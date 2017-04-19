@@ -1,134 +1,0 @@
-Setting up preprocessing ...
-  Adding FloatCastTransformation
-  Adding SubtractionTransformation [train] (value: 0.01)
-  Adding DivisionTransformation [train] (value: 0.01)
-Initializing minibatch generators ...
-  [train] 4000 samples, 63 minibatches of size 64
-  [val]   1000 samples, 10 minibatches of size 100
-Initializing mlp classifier and optimizer ...
-  learning rate=1.00000, weight decay=1.00000, accuracy: 0.263 (epoch 110)
-  learning rate=1.00000, weight decay=0.16667, accuracy: 0.301 (epoch 62)
-  learning rate=1.00000, weight decay=0.02778, accuracy: 0.268 (epoch 77)
-  learning rate=1.00000, weight decay=0.00463, accuracy: 0.112 (epoch 0)
-  learning rate=1.00000, weight decay=0.00077, accuracy: 0.106 (epoch 0)
-  learning rate=0.16667, weight decay=1.00000, accuracy: 0.251 (epoch 132)
-  learning rate=0.16667, weight decay=0.16667, accuracy: 0.399 (epoch 57)
-  learning rate=0.16667, weight decay=0.02778, accuracy: 0.425 (epoch 23)
-  learning rate=0.16667, weight decay=0.00463, accuracy: 0.402 (epoch 13)
-  learning rate=0.16667, weight decay=0.00077, accuracy: 0.365 (epoch 21)
-  learning rate=0.02778, weight decay=1.00000, accuracy: 0.180 (epoch 5)
-  learning rate=0.02778, weight decay=0.16667, accuracy: 0.337 (epoch 157)
-  learning rate=0.02778, weight decay=0.02778, accuracy: 0.394 (epoch 32)
-  learning rate=0.02778, weight decay=0.00463, accuracy: 0.424 (epoch 9)
-  learning rate=0.02778, weight decay=0.00077, accuracy: 0.397 (epoch 13)
-  learning rate=0.00463, weight decay=1.00000, accuracy: 0.127 (epoch 13)
-  learning rate=0.00463, weight decay=0.16667, accuracy: 0.188 (epoch 35)
-  learning rate=0.00463, weight decay=0.02778, accuracy: 0.259 (epoch 59)
-  learning rate=0.00463, weight decay=0.00463, accuracy: 0.393 (epoch 116)
-  learning rate=0.00463, weight decay=0.00077, accuracy: 0.420 (epoch 61)
-  learning rate=0.00077, weight decay=1.00000, accuracy: 0.101 (epoch 4)
-  learning rate=0.00077, weight decay=0.16667, accuracy: 0.075 (epoch 21)
-  learning rate=0.00077, weight decay=0.02778, accuracy: 0.149 (epoch 30)
-  learning rate=0.00077, weight decay=0.00077, accuracy: 0.374 (epoch 116)
-  learning rate=1.00000, weight decay=1.00000, accuracy: 0.319 (epoch 89)
-  learning rate=1.00000, weight decay=0.16667, accuracy: 0.340 (epoch 39)
-  learning rate=1.00000, weight decay=0.02778, accuracy: 0.204 (epoch 37)
-  learning rate=1.00000, weight decay=0.00463, accuracy: 0.117 (epoch 0)
-  learning rate=1.00000, weight decay=0.00077, accuracy: 0.123 (epoch 0)
-  learning rate=0.16667, weight decay=1.00000, accuracy: 0.396 (epoch 95)
-  learning rate=0.16667, weight decay=0.16667, accuracy: 0.431 (epoch 43)
-  learning rate=0.16667, weight decay=0.02778, accuracy: 0.427 (epoch 9)
-  learning rate=0.16667, weight decay=0.00463, accuracy: 0.414 (epoch 3)
-  learning rate=0.16667, weight decay=0.00077, accuracy: 0.384 (epoch 10)
-  learning rate=0.02778, weight decay=1.00000, accuracy: 0.198 (epoch 34)
-  learning rate=0.02778, weight decay=0.16667, accuracy: 0.307 (epoch 30)
-  learning rate=0.02778, weight decay=0.02778, accuracy: 0.423 (epoch 11)
-  learning rate=0.02778, weight decay=0.00463, accuracy: 0.411 (epoch 15)
-  learning rate=0.02778, weight decay=0.00077, accuracy: 0.434 (epoch 9)
-  learning rate=0.00463, weight decay=1.00000, accuracy: 0.107 (epoch 19)
-  learning rate=0.00463, weight decay=0.16667, accuracy: 0.215 (epoch 38)
-  learning rate=0.00463, weight decay=0.02778, accuracy: 0.319 (epoch 130)
-  learning rate=0.00463, weight decay=0.00463, accuracy: 0.410 (epoch 84)
-  learning rate=0.00463, weight decay=0.00077, accuracy: 0.444 (epoch 40)
-  learning rate=0.00077, weight decay=1.00000, accuracy: 0.094 (epoch 3)
-  learning rate=0.00077, weight decay=0.16667, accuracy: 0.127 (epoch 41)
-  learning rate=0.00077, weight decay=0.02778, accuracy: 0.166 (epoch 107)
-  learning rate=0.00077, weight decay=0.00463, accuracy: 0.270 (epoch 64)
-  learning rate=0.00077, weight decay=0.00077, accuracy: 0.385 (epoch 90)
-  learning rate=1.00000, weight decay=1.00000, accuracy: 0.391 (epoch 76)
-  learning rate=1.00000, weight decay=0.16667, accuracy: 0.380 (epoch 73)
-  learning rate=1.00000, weight decay=0.02778, accuracy: 0.371 (epoch 63)
-  learning rate=1.00000, weight decay=0.00463, accuracy: 0.155 (epoch 36)
-  learning rate=1.00000, weight decay=0.00077, accuracy: 0.125 (epoch 0)
-  learning rate=0.16667, weight decay=1.00000, accuracy: 0.370 (epoch 123)
-  learning rate=0.16667, weight decay=0.16667, accuracy: 0.426 (epoch 17)
-  learning rate=0.16667, weight decay=0.02778, accuracy: 0.464 (epoch 13)
-  learning rate=0.16667, weight decay=0.00463, accuracy: 0.421 (epoch 7)
-  learning rate=0.16667, weight decay=0.00077, accuracy: 0.396 (epoch 4)
-  learning rate=0.02778, weight decay=1.00000, accuracy: 0.230 (epoch 99)
-  learning rate=0.02778, weight decay=0.16667, accuracy: 0.365 (epoch 97)
-  learning rate=0.02778, weight decay=0.02778, accuracy: 0.428 (epoch 29)
-  learning rate=0.02778, weight decay=0.00463, accuracy: 0.461 (epoch 8)
-  learning rate=0.02778, weight decay=0.00077, accuracy: 0.457 (epoch 2)
-  learning rate=0.00463, weight decay=1.00000, accuracy: 0.141 (epoch 19)
-  learning rate=0.00463, weight decay=0.16667, accuracy: 0.203 (epoch 109)
-  learning rate=0.00463, weight decay=0.02778, accuracy: 0.353 (epoch 107)
-  learning rate=0.00463, weight decay=0.00463, accuracy: 0.407 (epoch 97)
-  learning rate=0.00463, weight decay=0.00077, accuracy: 0.452 (epoch 37)
-  learning rate=0.00077, weight decay=1.00000, accuracy: 0.122 (epoch 23)
-  learning rate=0.00077, weight decay=0.16667, accuracy: 0.146 (epoch 30)
-  learning rate=0.00077, weight decay=0.02778, accuracy: 0.207 (epoch 146)
-  learning rate=1.00000, weight decay=1.00000, accuracy: 0.381 (epoch 117)
-  learning rate=1.00000, weight decay=0.16667, accuracy: 0.380 (epoch 65)
-  learning rate=1.00000, weight decay=0.02778, accuracy: 0.297 (epoch 34)
-  learning rate=1.00000, weight decay=0.00463, accuracy: 0.143 (epoch 0)
-  learning rate=1.00000, weight decay=0.00077, accuracy: 0.159 (epoch 0)
-  learning rate=0.16667, weight decay=1.00000, accuracy: 0.396 (epoch 94)
-  learning rate=0.16667, weight decay=0.16667, accuracy: 0.442 (epoch 15)
-  learning rate=0.16667, weight decay=0.02778, accuracy: 0.452 (epoch 19)
-  learning rate=0.16667, weight decay=0.00463, accuracy: 0.440 (epoch 4)
-  learning rate=0.16667, weight decay=0.00077, accuracy: 0.417 (epoch 5)
-  learning rate=0.02778, weight decay=1.00000, accuracy: 0.216 (epoch 51)
-  learning rate=0.02778, weight decay=0.16667, accuracy: 0.375 (epoch 93)
-  learning rate=0.02778, weight decay=0.02778, accuracy: 0.452 (epoch 39)
-  learning rate=0.02778, weight decay=0.00463, accuracy: 0.449 (epoch 7)
-  learning rate=0.02778, weight decay=0.00077, accuracy: 0.442 (epoch 7)
-  learning rate=0.00463, weight decay=1.00000, accuracy: 0.155 (epoch 65)
-  learning rate=0.00463, weight decay=0.16667, accuracy: 0.244 (epoch 64)
-  learning rate=0.00463, weight decay=0.02778, accuracy: 0.379 (epoch 154)
-  learning rate=0.00463, weight decay=0.00463, accuracy: 0.435 (epoch 57)
-  learning rate=0.00463, weight decay=0.00077, accuracy: 0.469 (epoch 24)
-  learning rate=0.00077, weight decay=1.00000, accuracy: 0.105 (epoch 13)
-  learning rate=0.00077, weight decay=0.16667, accuracy: 0.125 (epoch 77)
-  learning rate=0.00077, weight decay=0.02778, accuracy: 0.213 (epoch 92)
-  learning rate=0.00077, weight decay=0.00077, accuracy: 0.441 (epoch 142)
-  learning rate=1.00000, weight decay=1.00000, accuracy: 0.361 (epoch 70)
-  learning rate=1.00000, weight decay=0.16667, accuracy: 0.383 (epoch 67)
-  learning rate=1.00000, weight decay=0.02778, accuracy: 0.347 (epoch 61)
-  learning rate=1.00000, weight decay=0.00463, accuracy: 0.170 (epoch 0)
-  learning rate=1.00000, weight decay=0.00077, accuracy: 0.144 (epoch 0)
-  learning rate=0.16667, weight decay=1.00000, accuracy: 0.398 (epoch 41)
-  learning rate=0.16667, weight decay=0.16667, accuracy: 0.479 (epoch 23)
-  learning rate=0.16667, weight decay=0.02778, accuracy: 0.462 (epoch 6)
-  learning rate=0.16667, weight decay=0.00463, accuracy: 0.435 (epoch 2)
-  learning rate=0.16667, weight decay=0.00077, accuracy: 0.430 (epoch 34)
-  learning rate=0.02778, weight decay=1.00000, accuracy: 0.232 (epoch 84)
-  learning rate=0.02778, weight decay=0.16667, accuracy: 0.381 (epoch 32)
-  learning rate=0.02778, weight decay=0.02778, accuracy: 0.459 (epoch 52)
-  learning rate=0.02778, weight decay=0.00463, accuracy: 0.459 (epoch 23)
-  learning rate=0.02778, weight decay=0.00077, accuracy: 0.450 (epoch 13)
-  learning rate=0.00463, weight decay=1.00000, accuracy: 0.144 (epoch 54)
-  learning rate=0.00463, weight decay=0.16667, accuracy: 0.216 (epoch 124)
-  learning rate=0.00463, weight decay=0.02778, accuracy: 0.351 (epoch 73)
-  learning rate=0.00463, weight decay=0.00463, accuracy: 0.425 (epoch 108)
-  learning rate=0.00463, weight decay=0.00077, accuracy: 0.444 (epoch 25)
-  learning rate=0.00077, weight decay=1.00000, accuracy: 0.141 (epoch 13)
-  learning rate=0.00077, weight decay=0.16667, accuracy: 0.120 (epoch 54)
-  learning rate=0.00077, weight decay=0.02778, accuracy: 0.219 (epoch 151)
-  learning rate=0.00077, weight decay=0.00463, accuracy: 0.326 (epoch 135)
-  learning rate=0.00077, weight decay=0.00077, accuracy: 0.411 (epoch 117)
-
-Testing best model (learning rate=0.16667, weight decay=0.16667, layers=70) on test set ...
-  [test] 1000 samples, 10 minibatches of size 100
-  Accuracy: 44.60%
-Done

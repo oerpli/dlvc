@@ -1,0 +1,85 @@
+\documentclass{llncs}
+\usepackage{listings}
+%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[hidelinks]{hyperref}
+\usepackage{listings}             % Include the listings-package
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+\usepackage[margin=1.5in]{geometry}
+
+\usepackage{nicefrac}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\definecolor{uvred}{RGB}{255,31,0}
+\definecolor{uvblue}{RGB}{0,105,170}
+\colorlet{uvblue}{uvblue}
+\colorlet{uvbluedark}{black!40!uvblue}
+\colorlet{uvbluelight}{white!40!uvblue}
+
+%\usetikzlibrary{pgfplots.clickable}\pgfplotsset{/pgfplots/annot/printable=false}
+\pgfplotsset{compat=1.14}
+\pgfplotsset{
+%%%%
+clickable coords/.style={}, %% comment this line out if coords should be clickable
+%%%%
+plotl/.style={uvbluelight,no marks,ultra thick,samples=500},
+plott/.style={uvblue,no marks,ultra thick,samples=500},
+plotd/.style={uvbluedark,no marks,ultra thick,samples=500},
+%%
+plotA/.style={white!10!uvbluelight,ultra thick,mark=otimes*},
+plotB/.style={uvbluelight,ultra thick,mark=triangle*},
+plotC/.style={uvblue,ultra thick,mark=pentagon*},
+plotD/.style={uvbluedark,ultra thick,mark=diamond*},
+plotE/.style={black!40!uvbluedark,ultra thick,mark=square*},
+%
+LplotA/.style={white!10!uvbluelight,ultra thick,},
+LplotB/.style={uvbluelight,ultra thick,},
+LplotC/.style={uvblue,ultra thick},
+LplotD/.style={uvbluedark,ultra thick},
+LplotE/.style={black!40!uvbluedark,ultra thick},
+%
+asdfas/.style={}
+}
+
+%commondefs
+%\sloppy
+%\allowdisplaybreaks[2]
+\newcommand{\Binit}{B_{\mathrm{init}}}
+\newcommand{\Pbest}{P_{\mathrm{best}}}
+\newcommand{\random}{\mathrm{random}}
+\newcommand{\freeff}{\mathit{freeff}}
+\newcommand{\neededff}{\mathit{neededff}}
+%
+
+
+\newcommand{\TODO}[1][\empty]{\textcolor{red}{TODO}#1}
+
+\title{\ttitle}
+\subtitle{183.663 - Deep Learning for Visual Computing}
+\date{\today}
+
+\author{
+% \vspace{3.5cm}
+Abraham Hinteregger (1025914) \and Christof Schmidt (0627958) }
+\institute{
+    \email{oerpli@outlook.com}\\
+    \email{e0627958@student.tuwien.ac.at}
+}
+
+\begin{document}
+\input{./sections/dlvc3.tex}
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+\end{document}
